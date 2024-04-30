@@ -1,0 +1,95 @@
+.pamp-wrapper .overlay {
+    background-image: url("../images/image.jpeg");
+    background-attachment: fixed;   
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* .back {
+    background-image: url("../images/image.jpeg") !important;
+    background-attachment: fixed;   
+    background-position: center center;
+    background-size: cover;
+    background-repeat:no-repeat!important;
+} */
+#v-pills-tab {
+    /* background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 46%, rgba(0,0,0,1) 10%) !important; */
+    /* background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important; */
+   background-image: linear-gradient(rgba(18,76,103,1), rgba(0, 0, 0, 0.6)),url("../images/image.jpeg");
+   background-repeat: no-repeat;
+   /* background-attachment: fixed;    */
+   background-position: center center;
+   background-size: cover;
+    height: 580px;
+    padding: 10px;
+  
+}
+.list-submit {
+    /* background: #0a272b!important; */
+    /* background: #12b6cb!important; */
+    background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
+    color: white;
+    border: 0px;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.list-submit:hover {
+    background: #190fd3 !important;
+}
+
+.list-submit:active {
+    background: #340cc6 !important;
+}
+.card-header{
+    background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
+    color:white;
+}
+
+.tab-pane{
+    border : solid 1px rgba(18,76,103,1);
+}
+
+#network_type_dropdown, #interaction_type_dropdown, #network_name_dropdown
+{
+    padding: 9px 9px;
+margin-top: 10px !important;
+margin-bottom: 8px !important;
+border: 1px solid #39b5ca !important;
+}
+
+#string_db_input {
+    border: 1px solid #39b5ca !important;
+}
+
+#genefile{
+border: 1px solid #39b5ca !important;
+}
+.waiting_loading
+{
+    background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
+    border-radius: 10px;
+}
+#ttt th{
+    /* background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important; */
+    color: rgb(17, 15, 15);
+    background-color: white;
+    
+}
+
+.exists {
+    /* background: white; */
+   color: white;
+    background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
+}
+
+.dont_exists {
+    background: rgb(175, 155, 155);
+}
+.buttons button {
+ 
+    background:  linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
+    color: white;
+}

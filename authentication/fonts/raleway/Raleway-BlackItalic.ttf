@@ -1,0 +1,8409 @@
+"L"
+    },
+    {
+      "alpha_3": "krf",
+      "name": "Koro (Vanuatu)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krh",
+      "name": "Kurama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kri",
+      "name": "Krio",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krj",
+      "name": "Kinaray-A",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krk",
+      "name": "Kerek",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "krl",
+      "name": "Karelian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krm",
+      "name": "Krim",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krn",
+      "name": "Sapo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krp",
+      "name": "Korop",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krr",
+      "name": "Kru'ng 2",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krs",
+      "name": "Gbaya (Sudan)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krt",
+      "inverted_name": "Kanuri, Tumari",
+      "name": "Tumari Kanuri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kru",
+      "name": "Kurukh",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krv",
+      "name": "Kavet",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krw",
+      "inverted_name": "Krahn, Western",
+      "name": "Western Krahn",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krx",
+      "name": "Karon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kry",
+      "name": "Kryts",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "krz",
+      "inverted_name": "Kanum, Sota",
+      "name": "Sota Kanum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksa",
+      "name": "Shuwa-Zamani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksb",
+      "name": "Shambala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksc",
+      "inverted_name": "Kalinga, Southern",
+      "name": "Southern Kalinga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksd",
+      "name": "Kuanua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kse",
+      "name": "Kuni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksf",
+      "name": "Bafia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksg",
+      "name": "Kusaghe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksh",
+      "name": "Kölsch",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksi",
+      "name": "Krisa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksj",
+      "name": "Uare",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksk",
+      "name": "Kansa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksl",
+      "name": "Kumalu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksm",
+      "name": "Kumba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksn",
+      "name": "Kasiguranin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kso",
+      "name": "Kofa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksp",
+      "name": "Kaba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksq",
+      "name": "Kwaami",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksr",
+      "name": "Borong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kss",
+      "inverted_name": "Kisi, Southern",
+      "name": "Southern Kisi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kst",
+      "name": "Winyé",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksu",
+      "name": "Khamyang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksv",
+      "name": "Kusu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksw",
+      "inverted_name": "Karen, S'gaw",
+      "name": "S'gaw Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksx",
+      "name": "Kedang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksy",
+      "name": "Kharia Thar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ksz",
+      "name": "Kodaku",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kta",
+      "name": "Katua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktb",
+      "name": "Kambaata",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktc",
+      "name": "Kholok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktd",
+      "name": "Kokata",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kte",
+      "name": "Nubri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktf",
+      "name": "Kwami",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktg",
+      "name": "Kalkutung",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kth",
+      "name": "Karanga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kti",
+      "inverted_name": "Muyu, North",
+      "name": "North Muyu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktj",
+      "inverted_name": "Krumen, Plapo",
+      "name": "Plapo Krumen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktk",
+      "name": "Kaniet",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "ktl",
+      "name": "Koroshi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktm",
+      "name": "Kurti",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktn",
+      "name": "Karitiâna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kto",
+      "name": "Kuot",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktp",
+      "name": "Kaduo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktq",
+      "name": "Katabaga",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kts",
+      "inverted_name": "Muyu, South",
+      "name": "South Muyu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktt",
+      "name": "Ketum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktu",
+      "name": "Kituba (Democratic Republic of Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktv",
+      "inverted_name": "Katu, Eastern",
+      "name": "Eastern Katu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktw",
+      "name": "Kato",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "ktx",
+      "name": "Kaxararí",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kty",
+      "name": "Kango (Bas-Uélé District)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ktz",
+      "name": "Ju/'hoan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "kj",
+      "alpha_3": "kua",
+      "name": "Kuanyama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kub",
+      "name": "Kutep",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuc",
+      "name": "Kwinsu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kud",
+      "name": "'Auhelawa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kue",
+      "name": "Kuman (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuf",
+      "inverted_name": "Katu, Western",
+      "name": "Western Katu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kug",
+      "name": "Kupa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuh",
+      "name": "Kushi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kui",
+      "name": "Kuikúro-Kalapálo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuj",
+      "name": "Kuria",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuk",
+      "name": "Kepo'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kul",
+      "name": "Kulere",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kum",
+      "name": "Kumyk",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kun",
+      "name": "Kunama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuo",
+      "name": "Kumukio",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kup",
+      "name": "Kunimaipa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuq",
+      "name": "Karipuna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ku",
+      "alpha_3": "kur",
+      "name": "Kurdish",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kus",
+      "name": "Kusaal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kut",
+      "name": "Kutenai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuu",
+      "inverted_name": "Kuskokwim, Upper",
+      "name": "Upper Kuskokwim",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuv",
+      "name": "Kur",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuw",
+      "name": "Kpagua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kux",
+      "name": "Kukatja",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuy",
+      "name": "Kuuku-Ya'u",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kuz",
+      "name": "Kunza",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kva",
+      "name": "Bagvalal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvb",
+      "name": "Kubu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvc",
+      "name": "Kove",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvd",
+      "name": "Kui (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kve",
+      "name": "Kalabakan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvf",
+      "name": "Kabalai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvg",
+      "name": "Kuni-Boazi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvh",
+      "name": "Komodo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvi",
+      "name": "Kwang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvj",
+      "name": "Psikye",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvk",
+      "name": "Korean Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvl",
+      "name": "Kayaw",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvm",
+      "name": "Kendem",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvn",
+      "inverted_name": "Kuna, Border",
+      "name": "Border Kuna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvo",
+      "name": "Dobel",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvp",
+      "name": "Kompane",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvq",
+      "inverted_name": "Karen, Geba",
+      "name": "Geba Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvr",
+      "name": "Kerinci",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvt",
+      "inverted_name": "Karen, Lahta",
+      "name": "Lahta Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvu",
+      "inverted_name": "Karen, Yinbaw",
+      "name": "Yinbaw Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvv",
+      "name": "Kola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvw",
+      "name": "Wersing",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvx",
+      "inverted_name": "Koli, Parkari",
+      "name": "Parkari Koli",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvy",
+      "inverted_name": "Karen, Yintale",
+      "name": "Yintale Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kvz",
+      "name": "Tsakwambo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwa",
+      "name": "Dâw",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwb",
+      "name": "Kwa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwc",
+      "name": "Likwala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwd",
+      "name": "Kwaio",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwe",
+      "name": "Kwerba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwf",
+      "name": "Kwara'ae",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwg",
+      "name": "Sara Kaba Deme",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwh",
+      "name": "Kowiai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwi",
+      "name": "Awa-Cuaiquer",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwj",
+      "name": "Kwanga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwk",
+      "name": "Kwakiutl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwl",
+      "name": "Kofyar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwm",
+      "name": "Kwambi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwn",
+      "name": "Kwangali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwo",
+      "name": "Kwomtari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwp",
+      "name": "Kodia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwr",
+      "name": "Kwer",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kws",
+      "name": "Kwese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwt",
+      "name": "Kwesten",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwu",
+      "name": "Kwakum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwv",
+      "name": "Sara Kaba Náà",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kww",
+      "name": "Kwinti",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwx",
+      "name": "Khirwar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwy",
+      "inverted_name": "Kongo, San Salvador",
+      "name": "San Salvador Kongo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kwz",
+      "name": "Kwadi",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kxa",
+      "name": "Kairiru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxb",
+      "name": "Krobu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxc",
+      "name": "Konso",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxd",
+      "name": "Brunei",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxf",
+      "inverted_name": "Karen, Manumanaw",
+      "name": "Manumanaw Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxh",
+      "name": "Karo (Ethiopia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxi",
+      "inverted_name": "Murut, Keningau",
+      "name": "Keningau Murut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxj",
+      "name": "Kulfa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxk",
+      "inverted_name": "Karen, Zayein",
+      "name": "Zayein Karen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxl",
+      "inverted_name": "Kurux, Nepali",
+      "name": "Nepali Kurux",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxm",
+      "inverted_name": "Khmer, Northern",
+      "name": "Northern Khmer",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxn",
+      "inverted_name": "Melanau, Kanowit-Tanjong",
+      "name": "Kanowit-Tanjong Melanau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxo",
+      "name": "Kanoé",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kxp",
+      "inverted_name": "Koli, Wadiyara",
+      "name": "Wadiyara Koli",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxq",
+      "inverted_name": "Kanum, Smärky",
+      "name": "Smärky Kanum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxr",
+      "name": "Koro (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxs",
+      "name": "Kangjia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxt",
+      "name": "Koiwat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxu",
+      "name": "Kui (India)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxv",
+      "name": "Kuvi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxw",
+      "name": "Konai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxx",
+      "name": "Likuba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxy",
+      "name": "Kayong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kxz",
+      "name": "Kerewo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kya",
+      "name": "Kwaya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyb",
+      "inverted_name": "Kalinga, Butbut",
+      "name": "Butbut Kalinga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyc",
+      "name": "Kyaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyd",
+      "name": "Karey",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kye",
+      "name": "Krache",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyf",
+      "name": "Kouya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyg",
+      "name": "Keyagana",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyh",
+      "name": "Karok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyi",
+      "name": "Kiput",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyj",
+      "name": "Karao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyk",
+      "name": "Kamayo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyl",
+      "name": "Kalapuya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kym",
+      "name": "Kpatili",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyn",
+      "inverted_name": "Binukidnon, Northern",
+      "name": "Northern Binukidnon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyo",
+      "name": "Kelon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyp",
+      "name": "Kang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyq",
+      "name": "Kenga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyr",
+      "name": "Kuruáya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kys",
+      "inverted_name": "Kayan, Baram",
+      "name": "Baram Kayan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyt",
+      "name": "Kayagar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyu",
+      "inverted_name": "Kayah, Western",
+      "name": "Western Kayah",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyv",
+      "name": "Kayort",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyw",
+      "name": "Kudmali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyx",
+      "name": "Rapoisi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyy",
+      "name": "Kambaira",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kyz",
+      "name": "Kayabí",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kza",
+      "inverted_name": "Karaboro, Western",
+      "name": "Western Karaboro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzb",
+      "name": "Kaibobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzc",
+      "inverted_name": "Kulango, Bondoukou",
+      "name": "Bondoukou Kulango",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzd",
+      "name": "Kadai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kze",
+      "name": "Kosena",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzf",
+      "inverted_name": "Kaili, Da'a",
+      "name": "Da'a Kaili",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzg",
+      "name": "Kikai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzi",
+      "name": "Kelabit",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzk",
+      "name": "Kazukuru",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kzl",
+      "name": "Kayeli",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzm",
+      "name": "Kais",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzn",
+      "name": "Kokola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzo",
+      "name": "Kaningi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzp",
+      "name": "Kaidipang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzq",
+      "name": "Kaike",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzr",
+      "name": "Karang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzs",
+      "inverted_name": "Dusun, Sugut",
+      "name": "Sugut Dusun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzu",
+      "name": "Kayupulau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzv",
+      "name": "Komyandaret",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzw",
+      "name": "Karirí-Xocó",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "kzx",
+      "name": "Kamarian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzy",
+      "name": "Kango (Tshopo District)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "kzz",
+      "name": "Kalabra",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "laa",
+      "inverted_name": "Subanen, Southern",
+      "name": "Southern Subanen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lab",
+      "name": "Linear A",
+      "scope": "I",
+      "type": "A"
+    },
+    {
+      "alpha_3": "lac",
+      "name": "Lacandon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lad",
+      "name": "Ladino",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lae",
+      "name": "Pattani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "laf",
+      "name": "Lafofa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lag",
+      "name": "Langi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lah",
+      "name": "Lahnda",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lai",
+      "name": "Lambya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "laj",
+      "name": "Lango (Uganda)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lak",
+      "name": "Laka (Nigeria)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lal",
+      "name": "Lalia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lam",
+      "name": "Lamba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lan",
+      "name": "Laru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lo",
+      "alpha_3": "lao",
+      "name": "Lao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lap",
+      "name": "Laka (Chad)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "laq",
+      "name": "Qabiao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lar",
+      "name": "Larteh",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "las",
+      "name": "Lama (Togo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "la",
+      "alpha_3": "lat",
+      "name": "Latin",
+      "scope": "I",
+      "type": "A"
+    },
+    {
+      "alpha_3": "lau",
+      "name": "Laba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lv",
+      "alpha_3": "lav",
+      "name": "Latvian",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "law",
+      "name": "Lauje",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lax",
+      "name": "Tiwa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lay",
+      "inverted_name": "Bai, Lama",
+      "name": "Lama Bai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "laz",
+      "name": "Aribwatsa",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lba",
+      "name": "Lui",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lbb",
+      "name": "Label",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbc",
+      "name": "Lakkia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbe",
+      "name": "Lak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbf",
+      "name": "Tinani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbg",
+      "name": "Laopang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbi",
+      "name": "La'bi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbj",
+      "name": "Ladakhi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbk",
+      "inverted_name": "Bontok, Central",
+      "name": "Central Bontok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbl",
+      "inverted_name": "Bikol, Libon",
+      "name": "Libon Bikol",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbm",
+      "name": "Lodhi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbn",
+      "name": "Lamet",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbo",
+      "name": "Laven",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbq",
+      "name": "Wampar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbr",
+      "name": "Lohorung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbs",
+      "name": "Libyan Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbt",
+      "name": "Lachi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbu",
+      "name": "Labu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbv",
+      "name": "Lavatbura-Lamusong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbw",
+      "name": "Tolaki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lbx",
+      "name": "Lawangan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lby",
+      "name": "Lamu-Lamu",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lbz",
+      "name": "Lardil",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcc",
+      "name": "Legenyem",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcd",
+      "name": "Lola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lce",
+      "name": "Loncong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcf",
+      "name": "Lubu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lch",
+      "name": "Luchazi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcl",
+      "name": "Lisela",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcm",
+      "name": "Tungag",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcp",
+      "inverted_name": "Lawa, Western",
+      "name": "Western Lawa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcq",
+      "name": "Luhu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lcs",
+      "name": "Lisabata-Nuniali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lda",
+      "name": "Kla-Dan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldb",
+      "name": "Dũya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldd",
+      "name": "Luri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldg",
+      "name": "Lenyima",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldh",
+      "name": "Lamja-Dengsa-Tola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldi",
+      "name": "Laari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldj",
+      "name": "Lemoro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldk",
+      "name": "Leelau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldl",
+      "name": "Kaan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldm",
+      "name": "Landoma",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldn",
+      "name": "Láadan",
+      "scope": "I",
+      "type": "C"
+    },
+    {
+      "alpha_3": "ldo",
+      "name": "Loo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldp",
+      "name": "Tso",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ldq",
+      "name": "Lufu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lea",
+      "name": "Lega-Shabunda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "leb",
+      "name": "Lala-Bisa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lec",
+      "name": "Leco",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "led",
+      "name": "Lendu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lee",
+      "name": "Lyélé",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lef",
+      "name": "Lelemi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "leh",
+      "name": "Lenje",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lei",
+      "name": "Lemio",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lej",
+      "name": "Lengola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lek",
+      "name": "Leipon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lel",
+      "name": "Lele (Democratic Republic of Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lem",
+      "name": "Nomaande",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "len",
+      "name": "Lenca",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "leo",
+      "name": "Leti (Cameroon)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lep",
+      "name": "Lepcha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "leq",
+      "name": "Lembena",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ler",
+      "name": "Lenkau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "les",
+      "name": "Lese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "let",
+      "name": "Lesing-Gelimi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "leu",
+      "name": "Kara (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lev",
+      "name": "Lamma",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lew",
+      "inverted_name": "Kaili, Ledo",
+      "name": "Ledo Kaili",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lex",
+      "name": "Luang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ley",
+      "name": "Lemolang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lez",
+      "name": "Lezghian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lfa",
+      "name": "Lefa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lfn",
+      "name": "Lingua Franca Nova",
+      "scope": "I",
+      "type": "C"
+    },
+    {
+      "alpha_3": "lga",
+      "name": "Lungga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgb",
+      "name": "Laghu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgg",
+      "name": "Lugbara",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgh",
+      "name": "Laghuu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgi",
+      "name": "Lengilu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgk",
+      "name": "Lingarak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgl",
+      "name": "Wala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgm",
+      "name": "Lega-Mwenga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgn",
+      "name": "Opuuo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgq",
+      "name": "Logba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgr",
+      "name": "Lengo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgt",
+      "name": "Pahi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgu",
+      "name": "Longgu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lgz",
+      "name": "Ligenza",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lha",
+      "name": "Laha (Viet Nam)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhh",
+      "name": "Laha (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhi",
+      "name": "Lahu Shi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhl",
+      "inverted_name": "Lohar, Lahul",
+      "name": "Lahul Lohar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhm",
+      "name": "Lhomi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhn",
+      "name": "Lahanan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhp",
+      "name": "Lhokpu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhs",
+      "name": "Mlahsö",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lht",
+      "name": "Lo-Toga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lhu",
+      "name": "Lahu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lia",
+      "inverted_name": "Limba, West-Central",
+      "name": "West-Central Limba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lib",
+      "name": "Likum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lic",
+      "name": "Hlai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lid",
+      "name": "Nyindrou",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lie",
+      "name": "Likila",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lif",
+      "name": "Limbu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lig",
+      "name": "Ligbi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lih",
+      "name": "Lihir",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lij",
+      "name": "Ligurian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lik",
+      "name": "Lika",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lil",
+      "name": "Lillooet",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "li",
+      "alpha_3": "lim",
+      "name": "Limburgan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ln",
+      "alpha_3": "lin",
+      "name": "Lingala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lio",
+      "name": "Liki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lip",
+      "name": "Sekpele",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liq",
+      "name": "Libido",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lir",
+      "inverted_name": "English, Liberian",
+      "name": "Liberian English",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lis",
+      "name": "Lisu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lt",
+      "alpha_3": "lit",
+      "name": "Lithuanian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liu",
+      "name": "Logorik",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liv",
+      "name": "Liv",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liw",
+      "name": "Col",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lix",
+      "name": "Liabuku",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liy",
+      "name": "Banda-Bambari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "liz",
+      "name": "Libinza",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lja",
+      "name": "Golpa",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lje",
+      "name": "Rampi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lji",
+      "name": "Laiyolo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ljl",
+      "name": "Li'o",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ljp",
+      "name": "Lampung Api",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ljw",
+      "name": "Yirandali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ljx",
+      "name": "Yuru",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lka",
+      "name": "Lakalei",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkb",
+      "name": "Kabras",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkc",
+      "name": "Kucong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkd",
+      "name": "Lakondê",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lke",
+      "name": "Kenyi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkh",
+      "name": "Lakha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lki",
+      "name": "Laki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkj",
+      "name": "Remun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkl",
+      "name": "Laeko-Libuat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkm",
+      "name": "Kalaamaya",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lkn",
+      "name": "Lakon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lko",
+      "name": "Khayo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkr",
+      "name": "Päri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lks",
+      "name": "Kisa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lkt",
+      "name": "Lakota",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lku",
+      "name": "Kungkari",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lky",
+      "name": "Lokoya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lla",
+      "name": "Lala-Roba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llb",
+      "name": "Lolo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llc",
+      "name": "Lele (Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lld",
+      "name": "Ladin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lle",
+      "name": "Lele (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llf",
+      "name": "Hermit",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "llg",
+      "name": "Lole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llh",
+      "name": "Lamu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lli",
+      "name": "Teke-Laali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llj",
+      "name": "Ladji Ladji",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "llk",
+      "name": "Lelak",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lll",
+      "name": "Lilau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llm",
+      "name": "Lasalimu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lln",
+      "name": "Lele (Chad)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llo",
+      "name": "Khlor",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llp",
+      "inverted_name": "Efate, North",
+      "name": "North Efate",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llq",
+      "name": "Lolak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lls",
+      "name": "Lithuanian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llu",
+      "name": "Lau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "llx",
+      "name": "Lauan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lma",
+      "inverted_name": "Limba, East",
+      "name": "East Limba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmb",
+      "name": "Merei",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmc",
+      "name": "Limilngan",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lmd",
+      "name": "Lumun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lme",
+      "name": "Pévé",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmf",
+      "inverted_name": "Lembata, South",
+      "name": "South Lembata",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmg",
+      "name": "Lamogai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmh",
+      "name": "Lambichhong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmi",
+      "name": "Lombi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmj",
+      "inverted_name": "Lembata, West",
+      "name": "West Lembata",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmk",
+      "name": "Lamkang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lml",
+      "name": "Hano",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmn",
+      "name": "Lambadi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmo",
+      "name": "Lombard",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmp",
+      "name": "Limbum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmq",
+      "name": "Lamatuka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmr",
+      "name": "Lamalera",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmu",
+      "name": "Lamenu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmv",
+      "name": "Lomaiviti",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmw",
+      "inverted_name": "Miwok, Lake",
+      "name": "Lake Miwok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmx",
+      "name": "Laimbue",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmy",
+      "name": "Lamboya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lmz",
+      "name": "Lumbee",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lna",
+      "name": "Langbashe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnb",
+      "name": "Mbalanhu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnd",
+      "name": "Lundayeh",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lng",
+      "name": "Langobardic",
+      "scope": "I",
+      "type": "A"
+    },
+    {
+      "alpha_3": "lnh",
+      "name": "Lanoh",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lni",
+      "name": "Daantanai'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnj",
+      "name": "Leningitij",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lnl",
+      "inverted_name": "Banda, South Central",
+      "name": "South Central Banda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnm",
+      "name": "Langam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnn",
+      "name": "Lorediakarkar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lno",
+      "name": "Lango (Sudan)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lns",
+      "name": "Lamnso'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnu",
+      "name": "Longuda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lnw",
+      "name": "Lanima",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lnz",
+      "name": "Lonzo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loa",
+      "name": "Loloda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lob",
+      "name": "Lobi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loc",
+      "name": "Inonhan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loe",
+      "name": "Saluan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lof",
+      "name": "Logol",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "log",
+      "name": "Logo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loh",
+      "name": "Narim",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loi",
+      "name": "Loma (Côte d'Ivoire)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loj",
+      "name": "Lou",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lok",
+      "name": "Loko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lol",
+      "name": "Mongo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lom",
+      "name": "Loma (Liberia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lon",
+      "inverted_name": "Lomwe, Malawi",
+      "name": "Malawi Lomwe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loo",
+      "name": "Lombo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lop",
+      "name": "Lopa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loq",
+      "name": "Lobala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lor",
+      "name": "Téén",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "los",
+      "name": "Loniu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lot",
+      "name": "Otuho",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lou",
+      "inverted_name": "Creole, Louisiana",
+      "name": "Louisiana Creole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lov",
+      "name": "Lopi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "low",
+      "inverted_name": "Lobu, Tampias",
+      "name": "Tampias Lobu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lox",
+      "name": "Loun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loy",
+      "name": "Loke",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "loz",
+      "name": "Lozi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lpa",
+      "name": "Lelepa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lpe",
+      "name": "Lepki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lpn",
+      "inverted_name": "Naga, Long Phuri",
+      "name": "Long Phuri Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lpo",
+      "name": "Lipo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lpx",
+      "name": "Lopit",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lra",
+      "name": "Rara Bakati'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrc",
+      "inverted_name": "Luri, Northern",
+      "name": "Northern Luri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lre",
+      "name": "Laurentian",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lrg",
+      "name": "Laragia",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "lri",
+      "name": "Marachi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrk",
+      "name": "Loarki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrl",
+      "name": "Lari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrm",
+      "name": "Marama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrn",
+      "name": "Lorang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lro",
+      "name": "Laro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrr",
+      "inverted_name": "Yamphu, Southern",
+      "name": "Southern Yamphu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrt",
+      "inverted_name": "Malay, Larantuka",
+      "name": "Larantuka Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrv",
+      "name": "Larevat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lrz",
+      "name": "Lemerig",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsa",
+      "name": "Lasgerdi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsd",
+      "name": "Lishana Deni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lse",
+      "name": "Lusengo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsg",
+      "name": "Lyons Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsh",
+      "name": "Lish",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsi",
+      "name": "Lashi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsl",
+      "name": "Latvian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsm",
+      "name": "Saamia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lso",
+      "name": "Laos Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsp",
+      "name": "Panamanian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsr",
+      "name": "Aruop",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lss",
+      "name": "Lasi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lst",
+      "name": "Trinidad and Tobago Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lsy",
+      "name": "Mauritian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ltc",
+      "inverted_name": "Chinese, Late Middle",
+      "name": "Late Middle Chinese",
+      "scope": "I",
+      "type": "H"
+    },
+    {
+      "alpha_3": "ltg",
+      "name": "Latgalian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lti",
+      "name": "Leti (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ltn",
+      "name": "Latundê",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lto",
+      "name": "Tsotso",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lts",
+      "name": "Tachoni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ltu",
+      "name": "Latu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lb",
+      "alpha_3": "ltz",
+      "name": "Luxembourgish",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lua",
+      "name": "Luba-Lulua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lu",
+      "alpha_3": "lub",
+      "name": "Luba-Katanga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luc",
+      "name": "Aringa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lud",
+      "name": "Ludian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lue",
+      "name": "Luvale",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luf",
+      "name": "Laua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "lg",
+      "alpha_3": "lug",
+      "name": "Ganda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lui",
+      "name": "Luiseno",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luj",
+      "name": "Luna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luk",
+      "name": "Lunanakha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lul",
+      "name": "Olu'bo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lum",
+      "name": "Luimbi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lun",
+      "name": "Lunda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luo",
+      "name": "Luo (Kenya and Tanzania)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lup",
+      "name": "Lumbu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luq",
+      "name": "Lucumi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lur",
+      "name": "Laura",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lus",
+      "name": "Lushai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lut",
+      "name": "Lushootseed",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luu",
+      "name": "Lumba-Yakkha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luv",
+      "name": "Luwati",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luw",
+      "name": "Luo (Cameroon)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luy",
+      "name": "Luyia",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "luz",
+      "inverted_name": "Luri, Southern",
+      "name": "Southern Luri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lva",
+      "name": "Maku'a",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lvk",
+      "name": "Lavukaleve",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lvs",
+      "inverted_name": "Latvian, Standard",
+      "name": "Standard Latvian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lvu",
+      "name": "Levuka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwa",
+      "name": "Lwalu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwe",
+      "name": "Lewo Eleng",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwg",
+      "name": "Wanga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwh",
+      "inverted_name": "Lachi, White",
+      "name": "White Lachi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwl",
+      "inverted_name": "Lawa, Eastern",
+      "name": "Eastern Lawa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwm",
+      "name": "Laomian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwo",
+      "name": "Luwo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwt",
+      "name": "Lewotobi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lwu",
+      "name": "Lawu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lww",
+      "name": "Lewo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lya",
+      "name": "Layakha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lyg",
+      "name": "Lyngngam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lyn",
+      "name": "Luyana",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lzh",
+      "inverted_name": "Chinese, Literary",
+      "name": "Literary Chinese",
+      "scope": "I",
+      "type": "H"
+    },
+    {
+      "alpha_3": "lzl",
+      "name": "Litzlitz",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lzn",
+      "inverted_name": "Naga, Leinong",
+      "name": "Leinong Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "lzz",
+      "name": "Laz",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maa",
+      "inverted_name": "Mazatec, San Jerónimo Tecóatl",
+      "name": "San Jerónimo Tecóatl Mazatec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mab",
+      "inverted_name": "Mixtec, Yutanduchi",
+      "name": "Yutanduchi Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mad",
+      "name": "Madurese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mae",
+      "name": "Bo-Rukul",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maf",
+      "name": "Mafa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mag",
+      "name": "Magahi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mh",
+      "alpha_3": "mah",
+      "name": "Marshallese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mai",
+      "name": "Maithili",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maj",
+      "inverted_name": "Mazatec, Jalapa De Díaz",
+      "name": "Jalapa De Díaz Mazatec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mak",
+      "name": "Makasar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ml",
+      "alpha_3": "mal",
+      "name": "Malayalam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mam",
+      "name": "Mam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "man",
+      "name": "Mandingo",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maq",
+      "inverted_name": "Mazatec, Chiquihuitlán",
+      "name": "Chiquihuitlán Mazatec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mr",
+      "alpha_3": "mar",
+      "name": "Marathi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mas",
+      "name": "Masai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mat",
+      "inverted_name": "Matlatzinca, San Francisco",
+      "name": "San Francisco Matlatzinca",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mau",
+      "inverted_name": "Mazatec, Huautla",
+      "name": "Huautla Mazatec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mav",
+      "name": "Sateré-Mawé",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maw",
+      "name": "Mampruli",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "max",
+      "inverted_name": "Malay, North Moluccan",
+      "name": "North Moluccan Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "maz",
+      "inverted_name": "Mazahua, Central",
+      "name": "Central Mazahua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mba",
+      "name": "Higaonon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbb",
+      "inverted_name": "Manobo, Western Bukidnon",
+      "name": "Western Bukidnon Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbc",
+      "name": "Macushi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbd",
+      "inverted_name": "Manobo, Dibabawon",
+      "name": "Dibabawon Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbe",
+      "name": "Molale",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mbf",
+      "inverted_name": "Malay, Baba",
+      "name": "Baba Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbh",
+      "name": "Mangseng",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbi",
+      "inverted_name": "Manobo, Ilianen",
+      "name": "Ilianen Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbj",
+      "name": "Nadëb",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbk",
+      "name": "Malol",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbl",
+      "name": "Maxakalí",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbm",
+      "name": "Ombamba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbn",
+      "name": "Macaguán",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbo",
+      "name": "Mbo (Cameroon)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbp",
+      "name": "Malayo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbq",
+      "name": "Maisin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbr",
+      "name": "Nukak Makú",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbs",
+      "inverted_name": "Manobo, Sarangani",
+      "name": "Sarangani Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbt",
+      "inverted_name": "Manobo, Matigsalug",
+      "name": "Matigsalug Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbu",
+      "name": "Mbula-Bwazza",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbv",
+      "name": "Mbulungish",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbw",
+      "name": "Maring",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbx",
+      "name": "Mari (East Sepik Province)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mby",
+      "name": "Memoni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mbz",
+      "inverted_name": "Mixtec, Amoltepec",
+      "name": "Amoltepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mca",
+      "name": "Maca",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcb",
+      "name": "Machiguenga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcc",
+      "name": "Bitur",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcd",
+      "name": "Sharanahua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mce",
+      "inverted_name": "Mixtec, Itundujia",
+      "name": "Itundujia Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcf",
+      "name": "Matsés",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcg",
+      "name": "Mapoyo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mch",
+      "name": "Maquiritari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mci",
+      "name": "Mese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcj",
+      "name": "Mvanip",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mck",
+      "name": "Mbunda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcl",
+      "name": "Macaguaje",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mcm",
+      "inverted_name": "Creole Portuguese, Malaccan",
+      "name": "Malaccan Creole Portuguese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcn",
+      "name": "Masana",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mco",
+      "inverted_name": "Mixe, Coatlán",
+      "name": "Coatlán Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcp",
+      "name": "Makaa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcq",
+      "name": "Ese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcr",
+      "name": "Menya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcs",
+      "name": "Mambai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mct",
+      "name": "Mengisa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcu",
+      "inverted_name": "Mambila, Cameroon",
+      "name": "Cameroon Mambila",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcv",
+      "name": "Minanibai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcw",
+      "name": "Mawa (Chad)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcx",
+      "name": "Mpiemo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcy",
+      "inverted_name": "Watut, South",
+      "name": "South Watut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mcz",
+      "name": "Mawan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mda",
+      "name": "Mada (Nigeria)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdb",
+      "name": "Morigi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdc",
+      "name": "Male (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdd",
+      "name": "Mbum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mde",
+      "name": "Maba (Chad)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdf",
+      "name": "Moksha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdg",
+      "name": "Massalat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdh",
+      "name": "Maguindanaon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdi",
+      "name": "Mamvu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdj",
+      "name": "Mangbetu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdk",
+      "name": "Mangbutu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdl",
+      "name": "Maltese Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdm",
+      "name": "Mayogo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdn",
+      "name": "Mbati",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdp",
+      "name": "Mbala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdq",
+      "name": "Mbole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdr",
+      "name": "Mandar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mds",
+      "name": "Maria (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdt",
+      "name": "Mbere",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdu",
+      "name": "Mboko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdv",
+      "inverted_name": "Mixtec, Santa Lucía Monteverde",
+      "name": "Santa Lucía Monteverde Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdw",
+      "name": "Mbosi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdx",
+      "name": "Dizin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdy",
+      "name": "Male (Ethiopia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mdz",
+      "name": "Suruí Do Pará",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mea",
+      "name": "Menka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "meb",
+      "name": "Ikobi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mec",
+      "name": "Mara",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "med",
+      "name": "Melpa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mee",
+      "name": "Mengen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mef",
+      "name": "Megam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "meh",
+      "inverted_name": "Mixtec, Southwestern Tlaxiaco",
+      "name": "Southwestern Tlaxiaco Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mei",
+      "name": "Midob",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mej",
+      "name": "Meyah",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mek",
+      "name": "Mekeo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mel",
+      "inverted_name": "Melanau, Central",
+      "name": "Central Melanau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mem",
+      "name": "Mangala",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "men",
+      "name": "Mende (Sierra Leone)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "meo",
+      "inverted_name": "Malay, Kedah",
+      "name": "Kedah Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mep",
+      "name": "Miriwung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "meq",
+      "name": "Merey",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mer",
+      "name": "Meru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mes",
+      "name": "Masmaje",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "met",
+      "name": "Mato",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "meu",
+      "name": "Motu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mev",
+      "name": "Mano",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mew",
+      "name": "Maaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mey",
+      "name": "Hassaniyya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mez",
+      "name": "Menominee",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfa",
+      "inverted_name": "Malay, Pattani",
+      "name": "Pattani Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfb",
+      "name": "Bangka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfc",
+      "name": "Mba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfd",
+      "name": "Mendankwe-Nkwen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfe",
+      "name": "Morisyen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mff",
+      "name": "Naki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfg",
+      "name": "Mogofin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfh",
+      "name": "Matal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfi",
+      "name": "Wandala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfj",
+      "name": "Mefele",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfk",
+      "inverted_name": "Mofu, North",
+      "name": "North Mofu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfl",
+      "name": "Putai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfm",
+      "name": "Marghi South",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfn",
+      "inverted_name": "Mbembe, Cross River",
+      "name": "Cross River Mbembe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfo",
+      "name": "Mbe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfp",
+      "inverted_name": "Malay, Makassar",
+      "name": "Makassar Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfq",
+      "name": "Moba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfr",
+      "name": "Marithiel",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfs",
+      "name": "Mexican Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mft",
+      "name": "Mokerang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfu",
+      "name": "Mbwela",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfv",
+      "name": "Mandjak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfw",
+      "name": "Mulaha",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mfx",
+      "name": "Melo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfy",
+      "name": "Mayo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mfz",
+      "name": "Mabaan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mga",
+      "inverted_name": "Irish, Middle (900-1200)",
+      "name": "Middle Irish (900-1200)",
+      "scope": "I",
+      "type": "H"
+    },
+    {
+      "alpha_3": "mgb",
+      "name": "Mararit",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgc",
+      "name": "Morokodo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgd",
+      "name": "Moru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mge",
+      "name": "Mango",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgf",
+      "name": "Maklew",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgg",
+      "name": "Mpumpong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgh",
+      "name": "Makhuwa-Meetto",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgi",
+      "name": "Lijili",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgj",
+      "name": "Abureni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgk",
+      "name": "Mawes",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgl",
+      "name": "Maleu-Kilenge",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgm",
+      "name": "Mambae",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgn",
+      "name": "Mbangi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgo",
+      "name": "Meta'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgp",
+      "inverted_name": "Magar, Eastern",
+      "name": "Eastern Magar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgq",
+      "name": "Malila",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgr",
+      "name": "Mambwe-Lungu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgs",
+      "name": "Manda (Tanzania)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgt",
+      "name": "Mongol",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgu",
+      "name": "Mailu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgv",
+      "name": "Matengo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgw",
+      "name": "Matumbi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgy",
+      "name": "Mbunga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mgz",
+      "name": "Mbugwe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mha",
+      "name": "Manda (India)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhb",
+      "name": "Mahongwe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhc",
+      "name": "Mocho",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhd",
+      "name": "Mbugu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhe",
+      "name": "Besisi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhf",
+      "name": "Mamaa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhg",
+      "name": "Margu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhi",
+      "name": "Ma'di",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhj",
+      "name": "Mogholi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhk",
+      "name": "Mungaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhl",
+      "name": "Mauwake",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhm",
+      "name": "Makhuwa-Moniga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhn",
+      "name": "Mócheno",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mho",
+      "name": "Mashi (Zambia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhp",
+      "inverted_name": "Malay, Balinese",
+      "name": "Balinese Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhq",
+      "name": "Mandan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhr",
+      "inverted_name": "Mari, Eastern",
+      "name": "Eastern Mari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhs",
+      "name": "Buru (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mht",
+      "name": "Mandahuaca",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhu",
+      "name": "Digaro-Mishmi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhw",
+      "name": "Mbukushu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhx",
+      "name": "Maru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhy",
+      "name": "Ma'anyan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mhz",
+      "name": "Mor (Mor Islands)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mia",
+      "name": "Miami",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mib",
+      "inverted_name": "Mixtec, Atatláhuca",
+      "name": "Atatláhuca Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mic",
+      "name": "Mi'kmaq",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mid",
+      "name": "Mandaic",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mie",
+      "inverted_name": "Mixtec, Ocotepec",
+      "name": "Ocotepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mif",
+      "name": "Mofu-Gudur",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mig",
+      "inverted_name": "Mixtec, San Miguel El Grande",
+      "name": "San Miguel El Grande Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mih",
+      "inverted_name": "Mixtec, Chayuco",
+      "name": "Chayuco Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mii",
+      "inverted_name": "Mixtec, Chigmecatitlán",
+      "name": "Chigmecatitlán Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mij",
+      "name": "Abar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mik",
+      "name": "Mikasuki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mil",
+      "inverted_name": "Mixtec, Peñoles",
+      "name": "Peñoles Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mim",
+      "inverted_name": "Mixtec, Alacatlatzala",
+      "name": "Alacatlatzala Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "min",
+      "name": "Minangkabau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mio",
+      "inverted_name": "Mixtec, Pinotepa Nacional",
+      "name": "Pinotepa Nacional Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mip",
+      "inverted_name": "Mixtec, Apasco-Apoala",
+      "name": "Apasco-Apoala Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "miq",
+      "name": "Mískito",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mir",
+      "inverted_name": "Mixe, Isthmus",
+      "name": "Isthmus Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mis",
+      "name": "Uncoded languages",
+      "scope": "S",
+      "type": "S"
+    },
+    {
+      "alpha_3": "mit",
+      "inverted_name": "Mixtec, Southern Puebla",
+      "name": "Southern Puebla Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "miu",
+      "inverted_name": "Mixtec, Cacaloxtepec",
+      "name": "Cacaloxtepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "miw",
+      "name": "Akoye",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mix",
+      "inverted_name": "Mixtec, Mixtepec",
+      "name": "Mixtepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "miy",
+      "inverted_name": "Mixtec, Ayutla",
+      "name": "Ayutla Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "miz",
+      "inverted_name": "Mixtec, Coatzospan",
+      "name": "Coatzospan Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjb",
+      "name": "Makalero",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjc",
+      "inverted_name": "Mixtec, San Juan Colorado",
+      "name": "San Juan Colorado Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjd",
+      "inverted_name": "Maidu, Northwest",
+      "name": "Northwest Maidu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mje",
+      "name": "Muskum",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mjg",
+      "name": "Tu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjh",
+      "name": "Mwera (Nyasa)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mji",
+      "name": "Kim Mun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjj",
+      "name": "Mawak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjk",
+      "name": "Matukar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjl",
+      "name": "Mandeali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjm",
+      "name": "Medebur",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjn",
+      "name": "Ma (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjo",
+      "name": "Malankuravan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjp",
+      "name": "Malapandaram",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjq",
+      "name": "Malaryan",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mjr",
+      "name": "Malavedan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjs",
+      "name": "Miship",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjt",
+      "name": "Sauria Paharia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mju",
+      "name": "Manna-Dora",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjv",
+      "name": "Mannan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjw",
+      "name": "Karbi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjx",
+      "name": "Mahali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mjy",
+      "name": "Mahican",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mjz",
+      "name": "Majhi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mka",
+      "name": "Mbre",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkb",
+      "name": "Mal Paharia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkc",
+      "name": "Siliput",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mk",
+      "alpha_3": "mkd",
+      "bibliographic": "mac",
+      "name": "Macedonian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mke",
+      "name": "Mawchi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkf",
+      "name": "Miya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkg",
+      "name": "Mak (China)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mki",
+      "name": "Dhatki",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkj",
+      "name": "Mokilese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkk",
+      "name": "Byep",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkl",
+      "name": "Mokole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkm",
+      "name": "Moklen",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkn",
+      "inverted_name": "Malay, Kupang",
+      "name": "Kupang Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mko",
+      "name": "Mingang Doso",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkp",
+      "name": "Moikodi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkq",
+      "inverted_name": "Miwok, Bay",
+      "name": "Bay Miwok",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mkr",
+      "name": "Malas",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mks",
+      "inverted_name": "Mixtec, Silacayoapan",
+      "name": "Silacayoapan Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkt",
+      "name": "Vamale",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mku",
+      "inverted_name": "Maninka, Konyanka",
+      "name": "Konyanka Maninka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkv",
+      "name": "Mafea",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkw",
+      "name": "Kituba (Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkx",
+      "inverted_name": "Manobo, Kinamiging",
+      "name": "Kinamiging Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mky",
+      "inverted_name": "Makian, East",
+      "name": "East Makian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mkz",
+      "name": "Makasae",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mla",
+      "name": "Malo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlb",
+      "name": "Mbule",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlc",
+      "name": "Cao Lan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mle",
+      "name": "Manambu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlf",
+      "name": "Mal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mg",
+      "alpha_3": "mlg",
+      "name": "Malagasy",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlh",
+      "name": "Mape",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mli",
+      "name": "Malimpung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlj",
+      "name": "Miltu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlk",
+      "name": "Ilwana",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mll",
+      "name": "Malua Bay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlm",
+      "name": "Mulam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mln",
+      "name": "Malango",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlo",
+      "name": "Mlomp",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlp",
+      "name": "Bargam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlq",
+      "inverted_name": "Maninkakan, Western",
+      "name": "Western Maninkakan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlr",
+      "name": "Vame",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mls",
+      "name": "Masalit",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mt",
+      "alpha_3": "mlt",
+      "name": "Maltese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlu",
+      "name": "To'abaita",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlv",
+      "name": "Motlav",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlw",
+      "name": "Moloko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlx",
+      "name": "Malfaxal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mlz",
+      "name": "Malaynon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mma",
+      "name": "Mama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmb",
+      "name": "Momina",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmc",
+      "inverted_name": "Mazahua, Michoacán",
+      "name": "Michoacán Mazahua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmd",
+      "name": "Maonan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mme",
+      "name": "Mae",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmf",
+      "name": "Mundat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmg",
+      "inverted_name": "Ambrym, North",
+      "name": "North Ambrym",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmh",
+      "name": "Mehináku",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmi",
+      "name": "Musar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmj",
+      "name": "Majhwar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmk",
+      "name": "Mukha-Dora",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mml",
+      "name": "Man Met",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmm",
+      "name": "Maii",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmn",
+      "name": "Mamanwa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmo",
+      "inverted_name": "Buang, Mangga",
+      "name": "Mangga Buang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmp",
+      "name": "Siawi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmq",
+      "name": "Musak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmr",
+      "inverted_name": "Miao, Western Xiangxi",
+      "name": "Western Xiangxi Miao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmt",
+      "name": "Malalamai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmu",
+      "name": "Mmaala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmv",
+      "name": "Miriti",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mmw",
+      "name": "Emae",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmx",
+      "name": "Madak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmy",
+      "name": "Migaama",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mmz",
+      "name": "Mabaale",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mna",
+      "name": "Mbula",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnb",
+      "name": "Muna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnc",
+      "name": "Manchu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnd",
+      "name": "Mondé",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mne",
+      "name": "Naba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnf",
+      "name": "Mundani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mng",
+      "inverted_name": "Mnong, Eastern",
+      "name": "Eastern Mnong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnh",
+      "name": "Mono (Democratic Republic of Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mni",
+      "name": "Manipuri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnj",
+      "name": "Munji",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnk",
+      "name": "Mandinka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnl",
+      "name": "Tiale",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnm",
+      "name": "Mapena",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnn",
+      "inverted_name": "Mnong, Southern",
+      "name": "Southern Mnong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnp",
+      "inverted_name": "Chinese, Min Bei",
+      "name": "Min Bei Chinese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnq",
+      "name": "Minriq",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnr",
+      "name": "Mono (USA)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mns",
+      "name": "Mansi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnu",
+      "name": "Mer",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnv",
+      "name": "Rennell-Bellona",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnw",
+      "name": "Mon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnx",
+      "name": "Manikion",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mny",
+      "name": "Manyawa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mnz",
+      "name": "Moni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moa",
+      "name": "Mwan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moc",
+      "name": "Mocoví",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mod",
+      "name": "Mobilian",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "moe",
+      "name": "Montagnais",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mog",
+      "name": "Mongondow",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moh",
+      "name": "Mohawk",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moi",
+      "name": "Mboi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moj",
+      "name": "Monzombo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mok",
+      "name": "Morori",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mom",
+      "name": "Mangue",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_2": "mn",
+      "alpha_3": "mon",
+      "name": "Mongolian",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moo",
+      "name": "Monom",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mop",
+      "name": "Mopán Maya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moq",
+      "name": "Mor (Bomberai Peninsula)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mor",
+      "name": "Moro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mos",
+      "name": "Mossi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mot",
+      "name": "Barí",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mou",
+      "name": "Mogum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mov",
+      "name": "Mohave",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mow",
+      "name": "Moi (Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mox",
+      "name": "Molima",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moy",
+      "name": "Shekkacho",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "moz",
+      "name": "Mukulu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpa",
+      "name": "Mpoto",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpb",
+      "name": "Mullukmulluk",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpc",
+      "name": "Mangarayi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpd",
+      "name": "Machinere",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpe",
+      "name": "Majang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpg",
+      "name": "Marba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mph",
+      "name": "Maung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpi",
+      "name": "Mpade",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpj",
+      "name": "Martu Wangka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpk",
+      "name": "Mbara (Chad)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpl",
+      "inverted_name": "Watut, Middle",
+      "name": "Middle Watut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpm",
+      "inverted_name": "Mixtec, Yosondúa",
+      "name": "Yosondúa Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpn",
+      "name": "Mindiri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpo",
+      "name": "Miu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpp",
+      "name": "Migabac",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpq",
+      "name": "Matís",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpr",
+      "name": "Vangunu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mps",
+      "name": "Dadibi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpt",
+      "name": "Mian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpu",
+      "name": "Makuráp",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpv",
+      "name": "Mungkip",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpw",
+      "name": "Mapidian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpx",
+      "name": "Misima-Panaeati",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpy",
+      "name": "Mapia",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mpz",
+      "name": "Mpi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqa",
+      "name": "Maba (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqb",
+      "name": "Mbuko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqc",
+      "name": "Mangole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqe",
+      "name": "Matepi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqf",
+      "name": "Momuna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqg",
+      "inverted_name": "Malay, Kota Bangun Kutai",
+      "name": "Kota Bangun Kutai Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqh",
+      "inverted_name": "Mixtec, Tlazoyaltepec",
+      "name": "Tlazoyaltepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqi",
+      "name": "Mariri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqj",
+      "name": "Mamasa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqk",
+      "inverted_name": "Manobo, Rajah Kabunsuwan",
+      "name": "Rajah Kabunsuwan Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mql",
+      "name": "Mbelime",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqm",
+      "inverted_name": "Marquesan, South",
+      "name": "South Marquesan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqn",
+      "name": "Moronene",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqo",
+      "name": "Modole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqp",
+      "name": "Manipa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqq",
+      "name": "Minokok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqr",
+      "name": "Mander",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqs",
+      "inverted_name": "Makian, West",
+      "name": "West Makian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqt",
+      "name": "Mok",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqu",
+      "name": "Mandari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqv",
+      "name": "Mosimo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqw",
+      "name": "Murupi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqx",
+      "name": "Mamuju",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqy",
+      "name": "Manggarai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mqz",
+      "name": "Pano",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mra",
+      "name": "Mlabri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrb",
+      "name": "Marino",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrc",
+      "name": "Maricopa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrd",
+      "inverted_name": "Magar, Western",
+      "name": "Western Magar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mre",
+      "name": "Martha's Vineyard Sign Language",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mrf",
+      "name": "Elseng",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrg",
+      "name": "Mising",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrh",
+      "inverted_name": "Chin, Mara",
+      "name": "Mara Chin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "mi",
+      "alpha_3": "mri",
+      "bibliographic": "mao",
+      "name": "Maori",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrj",
+      "inverted_name": "Mari, Western",
+      "name": "Western Mari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrk",
+      "name": "Hmwaveke",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrl",
+      "name": "Mortlockese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrm",
+      "name": "Merlav",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrn",
+      "name": "Cheke Holo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mro",
+      "name": "Mru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrp",
+      "name": "Morouas",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrq",
+      "inverted_name": "Marquesan, North",
+      "name": "North Marquesan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrr",
+      "name": "Maria (India)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrs",
+      "name": "Maragus",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrt",
+      "name": "Marghi Central",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mru",
+      "name": "Mono (Cameroon)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrv",
+      "name": "Mangareva",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrw",
+      "name": "Maranao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrx",
+      "name": "Maremgi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mry",
+      "name": "Mandaya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mrz",
+      "name": "Marind",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ms",
+      "alpha_3": "msa",
+      "bibliographic": "may",
+      "name": "Malay (macrolanguage)",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msb",
+      "name": "Masbatenyo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msc",
+      "inverted_name": "Maninka, Sankaran",
+      "name": "Sankaran Maninka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msd",
+      "name": "Yucatec Maya Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mse",
+      "name": "Musey",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msf",
+      "name": "Mekwei",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msg",
+      "name": "Moraid",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msh",
+      "inverted_name": "Malagasy, Masikoro",
+      "name": "Masikoro Malagasy",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msi",
+      "inverted_name": "Malay, Sabah",
+      "name": "Sabah Malay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msj",
+      "name": "Ma (Democratic Republic of Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msk",
+      "name": "Mansaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msl",
+      "name": "Molof",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msm",
+      "inverted_name": "Manobo, Agusan",
+      "name": "Agusan Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msn",
+      "name": "Vurës",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mso",
+      "name": "Mombum",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msp",
+      "name": "Maritsauá",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "msq",
+      "name": "Caac",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msr",
+      "name": "Mongolian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mss",
+      "inverted_name": "Masela, West",
+      "name": "West Masela",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msu",
+      "name": "Musom",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msv",
+      "name": "Maslam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msw",
+      "name": "Mansoanka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msx",
+      "name": "Moresada",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msy",
+      "name": "Aruamu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "msz",
+      "name": "Momare",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mta",
+      "inverted_name": "Manobo, Cotabato",
+      "name": "Cotabato Manobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtb",
+      "name": "Anyin Morofo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtc",
+      "name": "Munit",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtd",
+      "name": "Mualang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mte",
+      "name": "Mono (Solomon Islands)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtf",
+      "name": "Murik (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtg",
+      "name": "Una",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mth",
+      "name": "Munggui",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mti",
+      "name": "Maiwa (Papua New Guinea)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtj",
+      "name": "Moskona",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtk",
+      "name": "Mbe'",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtl",
+      "name": "Montol",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtm",
+      "name": "Mator",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mtn",
+      "name": "Matagalpa",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mto",
+      "inverted_name": "Mixe, Totontepec",
+      "name": "Totontepec Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtp",
+      "name": "Wichí Lhamtés Nocten",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtq",
+      "name": "Muong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtr",
+      "name": "Mewari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mts",
+      "name": "Yora",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtt",
+      "name": "Mota",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtu",
+      "inverted_name": "Mixtec, Tututepec",
+      "name": "Tututepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtv",
+      "name": "Asaro'o",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtw",
+      "inverted_name": "Binukidnon, Southern",
+      "name": "Southern Binukidnon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mtx",
+      "inverted_name": "Mixtec, Tidaá",
+      "name": "Tidaá Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mty",
+      "name": "Nabi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mua",
+      "name": "Mundang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mub",
+      "name": "Mubi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muc",
+      "name": "Ajumbu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mud",
+      "inverted_name": "Aleut, Mednyj",
+      "name": "Mednyj Aleut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mue",
+      "name": "Media Lengua",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mug",
+      "name": "Musgu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muh",
+      "name": "Mündü",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mui",
+      "name": "Musi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muj",
+      "name": "Mabire",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muk",
+      "name": "Mugom",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mul",
+      "name": "Multiple languages",
+      "scope": "S",
+      "type": "S"
+    },
+    {
+      "alpha_3": "mum",
+      "name": "Maiwala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muo",
+      "name": "Nyong",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mup",
+      "name": "Malvi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muq",
+      "inverted_name": "Miao, Eastern Xiangxi",
+      "name": "Eastern Xiangxi Miao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mur",
+      "name": "Murle",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mus",
+      "name": "Creek",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mut",
+      "inverted_name": "Muria, Western",
+      "name": "Western Muria",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muu",
+      "name": "Yaaku",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muv",
+      "name": "Muthuvan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mux",
+      "name": "Bo-Ung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muy",
+      "name": "Muyang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "muz",
+      "name": "Mursi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mva",
+      "name": "Manam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvb",
+      "name": "Mattole",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mvd",
+      "name": "Mamboru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mve",
+      "name": "Marwari (Pakistan)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvf",
+      "inverted_name": "Mongolian, Peripheral",
+      "name": "Peripheral Mongolian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvg",
+      "inverted_name": "Mixtec, Yucuañe",
+      "name": "Yucuañe Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvh",
+      "name": "Mulgi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvi",
+      "name": "Miyako",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvk",
+      "name": "Mekmek",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvl",
+      "name": "Mbara (Australia)",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mvm",
+      "name": "Muya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvn",
+      "name": "Minaveha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvo",
+      "name": "Marovo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvp",
+      "name": "Duri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvq",
+      "name": "Moere",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvr",
+      "name": "Marau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvs",
+      "name": "Massep",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvt",
+      "name": "Mpotovoro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvu",
+      "name": "Marfa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvv",
+      "inverted_name": "Murut, Tagal",
+      "name": "Tagal Murut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvw",
+      "name": "Machinga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvx",
+      "name": "Meoswar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvy",
+      "inverted_name": "Kohistani, Indus",
+      "name": "Indus Kohistani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mvz",
+      "name": "Mesqan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwa",
+      "name": "Mwatebu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwb",
+      "name": "Juwal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwc",
+      "name": "Are",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwe",
+      "name": "Mwera (Chimwera)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwf",
+      "name": "Murrinh-Patha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwg",
+      "name": "Aiklep",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwh",
+      "name": "Mouk-Aria",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwi",
+      "name": "Labo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwk",
+      "inverted_name": "Maninkakan, Kita",
+      "name": "Kita Maninkakan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwl",
+      "name": "Mirandese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwm",
+      "name": "Sar",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwn",
+      "name": "Nyamwanga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwo",
+      "inverted_name": "Maewo, Central",
+      "name": "Central Maewo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwp",
+      "name": "Kala Lagaw Ya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwq",
+      "inverted_name": "Chin, Mün",
+      "name": "Mün Chin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwr",
+      "name": "Marwari",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mws",
+      "name": "Mwimbi-Muthambi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwt",
+      "name": "Moken",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwu",
+      "name": "Mittu",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mwv",
+      "name": "Mentawai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mww",
+      "name": "Hmong Daw",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwx",
+      "name": "Mediak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwy",
+      "name": "Mosiro",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mwz",
+      "name": "Moingi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxa",
+      "inverted_name": "Mixtec, Northwest Oaxaca",
+      "name": "Northwest Oaxaca Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxb",
+      "inverted_name": "Mixtec, Tezoatlán",
+      "name": "Tezoatlán Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxc",
+      "name": "Manyika",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxd",
+      "name": "Modang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxe",
+      "name": "Mele-Fila",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxf",
+      "name": "Malgbe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxg",
+      "name": "Mbangala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxh",
+      "name": "Mvuba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxi",
+      "name": "Mozarabic",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mxj",
+      "name": "Miju-Mishmi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxk",
+      "name": "Monumbo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxl",
+      "inverted_name": "Gbe, Maxi",
+      "name": "Maxi Gbe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxm",
+      "name": "Meramera",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxn",
+      "name": "Moi (Indonesia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxo",
+      "name": "Mbowe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxp",
+      "inverted_name": "Mixe, Tlahuitoltepec",
+      "name": "Tlahuitoltepec Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxq",
+      "inverted_name": "Mixe, Juquila",
+      "name": "Juquila Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxr",
+      "name": "Murik (Malaysia)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxs",
+      "inverted_name": "Mixtec, Huitepec",
+      "name": "Huitepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxt",
+      "inverted_name": "Mixtec, Jamiltepec",
+      "name": "Jamiltepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxu",
+      "name": "Mada (Cameroon)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxv",
+      "inverted_name": "Mixtec, Metlatónoc",
+      "name": "Metlatónoc Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxw",
+      "name": "Namo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxx",
+      "name": "Mahou",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxy",
+      "inverted_name": "Mixtec, Southeastern Nochixtlán",
+      "name": "Southeastern Nochixtlán Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mxz",
+      "inverted_name": "Masela, Central",
+      "name": "Central Masela",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "my",
+      "alpha_3": "mya",
+      "bibliographic": "bur",
+      "name": "Burmese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myb",
+      "name": "Mbay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myc",
+      "name": "Mayeka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myd",
+      "name": "Maramba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mye",
+      "name": "Myene",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myf",
+      "name": "Bambassi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myg",
+      "name": "Manta",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myh",
+      "name": "Makah",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myi",
+      "name": "Mina (India)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myj",
+      "name": "Mangayat",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myk",
+      "inverted_name": "Senoufo, Mamara",
+      "name": "Mamara Senoufo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myl",
+      "name": "Moma",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mym",
+      "name": "Me'en",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myo",
+      "name": "Anfillo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myp",
+      "name": "Pirahã",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myr",
+      "name": "Muniche",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mys",
+      "name": "Mesmes",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "myu",
+      "name": "Mundurukú",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myv",
+      "name": "Erzya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myw",
+      "name": "Muyuw",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myx",
+      "name": "Masaaba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myy",
+      "name": "Macuna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "myz",
+      "inverted_name": "Mandaic, Classical",
+      "name": "Classical Mandaic",
+      "scope": "I",
+      "type": "H"
+    },
+    {
+      "alpha_3": "mza",
+      "inverted_name": "Mixtec, Santa María Zacatepec",
+      "name": "Santa María Zacatepec Mixtec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzb",
+      "name": "Tumzabt",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzc",
+      "name": "Madagascar Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzd",
+      "name": "Malimba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mze",
+      "name": "Morawa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzg",
+      "name": "Monastic Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzh",
+      "name": "Wichí Lhamtés Güisnay",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzi",
+      "inverted_name": "Mazatec, Ixcatlán",
+      "name": "Ixcatlán Mazatec",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzj",
+      "name": "Manya",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzk",
+      "inverted_name": "Mambila, Nigeria",
+      "name": "Nigeria Mambila",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzl",
+      "inverted_name": "Mixe, Mazatlán",
+      "name": "Mazatlán Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzm",
+      "name": "Mumuye",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzn",
+      "name": "Mazanderani",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzo",
+      "name": "Matipuhy",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "mzp",
+      "name": "Movima",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzq",
+      "name": "Mori Atas",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzr",
+      "name": "Marúbo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzs",
+      "name": "Macanese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzt",
+      "name": "Mintil",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzu",
+      "name": "Inapang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzv",
+      "name": "Manza",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzw",
+      "name": "Deg",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzx",
+      "name": "Mawayana",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzy",
+      "name": "Mozambican Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "mzz",
+      "name": "Maiadomu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "naa",
+      "name": "Namla",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nab",
+      "inverted_name": "Nambikuára, Southern",
+      "name": "Southern Nambikuára",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nac",
+      "name": "Narak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nae",
+      "name": "Naka'ela",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "naf",
+      "name": "Nabak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nag",
+      "name": "Naga Pidgin",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "naj",
+      "name": "Nalu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nak",
+      "name": "Nakanai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nal",
+      "name": "Nalik",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nam",
+      "name": "Ngan'gityemerri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nan",
+      "inverted_name": "Chinese, Min Nan",
+      "name": "Min Nan Chinese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nao",
+      "name": "Naaba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nap",
+      "name": "Neapolitan",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "naq",
+      "name": "Khoekhoe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nar",
+      "name": "Iguta",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nas",
+      "name": "Naasioi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nat",
+      "name": "Ca̱hungwa̱rya̱",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "na",
+      "alpha_3": "nau",
+      "name": "Nauru",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "nv",
+      "alpha_3": "nav",
+      "name": "Navajo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "naw",
+      "name": "Nawuri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nax",
+      "name": "Nakwi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nay",
+      "name": "Narrinyeri",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "naz",
+      "inverted_name": "Nahuatl, Coatepec",
+      "name": "Coatepec Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nba",
+      "name": "Nyemba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbb",
+      "name": "Ndoe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbc",
+      "inverted_name": "Naga, Chang",
+      "name": "Chang Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbd",
+      "name": "Ngbinda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbe",
+      "inverted_name": "Naga, Konyak",
+      "name": "Konyak Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbg",
+      "name": "Nagarchal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbh",
+      "name": "Ngamo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbi",
+      "inverted_name": "Naga, Mao",
+      "name": "Mao Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbj",
+      "name": "Ngarinman",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbk",
+      "name": "Nake",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "nr",
+      "alpha_3": "nbl",
+      "inverted_name": "Ndebele, South",
+      "name": "South Ndebele",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbm",
+      "name": "Ngbaka Ma'bo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbn",
+      "name": "Kuri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbo",
+      "name": "Nkukoli",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbp",
+      "name": "Nnam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbq",
+      "name": "Nggem",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbr",
+      "name": "Numana-Nunku-Gbantu-Numbu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbs",
+      "name": "Namibian Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbt",
+      "name": "Na",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbu",
+      "inverted_name": "Naga, Rongmei",
+      "name": "Rongmei Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbv",
+      "name": "Ngamambo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nbw",
+      "inverted_name": "Ngbandi, Southern",
+      "name": "Southern Ngbandi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nby",
+      "name": "Ningera",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nca",
+      "name": "Iyo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncb",
+      "inverted_name": "Nicobarese, Central",
+      "name": "Central Nicobarese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncc",
+      "name": "Ponam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncd",
+      "name": "Nachering",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nce",
+      "name": "Yale",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncf",
+      "name": "Notsi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncg",
+      "name": "Nisga'a",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nch",
+      "inverted_name": "Nahuatl, Central Huasteca",
+      "name": "Central Huasteca Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nci",
+      "inverted_name": "Nahuatl, Classical",
+      "name": "Classical Nahuatl",
+      "scope": "I",
+      "type": "H"
+    },
+    {
+      "alpha_3": "ncj",
+      "inverted_name": "Nahuatl, Northern Puebla",
+      "name": "Northern Puebla Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nck",
+      "name": "Nakara",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncl",
+      "inverted_name": "Nahuatl, Michoacán",
+      "name": "Michoacán Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncm",
+      "name": "Nambo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncn",
+      "name": "Nauna",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nco",
+      "name": "Sibe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncp",
+      "name": "Ndaktup",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncr",
+      "name": "Ncane",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncs",
+      "name": "Nicaraguan Sign Language",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nct",
+      "inverted_name": "Naga, Chothe",
+      "name": "Chothe Naga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncu",
+      "name": "Chumburung",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncx",
+      "inverted_name": "Nahuatl, Central Puebla",
+      "name": "Central Puebla Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ncz",
+      "name": "Natchez",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "nda",
+      "name": "Ndasa",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndb",
+      "name": "Kenswei Nsei",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndc",
+      "name": "Ndau",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndd",
+      "name": "Nde-Nsele-Nta",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "nd",
+      "alpha_3": "nde",
+      "inverted_name": "Ndebele, North",
+      "name": "North Ndebele",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndf",
+      "name": "Nadruvian",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "ndg",
+      "name": "Ndengereko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndh",
+      "name": "Ndali",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndi",
+      "name": "Samba Leko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndj",
+      "name": "Ndamba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndk",
+      "name": "Ndaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndl",
+      "name": "Ndolo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndm",
+      "name": "Ndam",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndn",
+      "name": "Ngundi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ng",
+      "alpha_3": "ndo",
+      "name": "Ndonga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndp",
+      "name": "Ndo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndq",
+      "name": "Ndombe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndr",
+      "name": "Ndoola",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nds",
+      "inverted_name": "German, Low",
+      "name": "Low German",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndt",
+      "name": "Ndunga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndu",
+      "name": "Dugun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndv",
+      "name": "Ndut",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndw",
+      "name": "Ndobo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndx",
+      "name": "Nduga",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndy",
+      "name": "Lutos",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ndz",
+      "name": "Ndogo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nea",
+      "inverted_name": "Ngad'a, Eastern",
+      "name": "Eastern Ngad'a",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neb",
+      "name": "Toura (Côte d'Ivoire)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nec",
+      "name": "Nedebang",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ned",
+      "name": "Nde-Gbite",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nee",
+      "name": "Nêlêmwa-Nixumwak",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nef",
+      "name": "Nefamese",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neg",
+      "name": "Negidal",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neh",
+      "name": "Nyenkha",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nei",
+      "inverted_name": "Hittite, Neo-",
+      "name": "Neo-Hittite",
+      "scope": "I",
+      "type": "A"
+    },
+    {
+      "alpha_3": "nej",
+      "name": "Neko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nek",
+      "name": "Neku",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nem",
+      "name": "Nemi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nen",
+      "name": "Nengone",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neo",
+      "name": "Ná-Meo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_2": "ne",
+      "alpha_3": "nep",
+      "name": "Nepali (macrolanguage)",
+      "scope": "M",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neq",
+      "inverted_name": "Mixe, North Central",
+      "name": "North Central Mixe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ner",
+      "name": "Yahadian",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nes",
+      "inverted_name": "Kinnauri, Bhoti",
+      "name": "Bhoti Kinnauri",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "net",
+      "name": "Nete",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "neu",
+      "name": "Neo",
+      "scope": "I",
+      "type": "C"
+    },
+    {
+      "alpha_3": "nev",
+      "name": "Nyaheun",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "new",
+      "name": "Newari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nex",
+      "name": "Neme",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ney",
+      "name": "Neyo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nez",
+      "name": "Nez Perce",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nfa",
+      "name": "Dhao",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nfd",
+      "name": "Ahwai",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nfl",
+      "name": "Ayiwo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nfr",
+      "name": "Nafaanra",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nfu",
+      "name": "Mfumte",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nga",
+      "name": "Ngbaka",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngb",
+      "inverted_name": "Ngbandi, Northern",
+      "name": "Northern Ngbandi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngc",
+      "name": "Ngombe (Democratic Republic of Congo)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngd",
+      "name": "Ngando (Central African Republic)",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nge",
+      "name": "Ngemba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngg",
+      "name": "Ngbaka Manza",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngh",
+      "name": "N/u",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngi",
+      "name": "Ngizim",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngj",
+      "name": "Ngie",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngk",
+      "name": "Dalabon",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngl",
+      "name": "Lomwe",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngm",
+      "name": "Ngatik Men's Creole",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngn",
+      "name": "Ngwo",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngo",
+      "name": "Ngoni",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngp",
+      "name": "Ngulu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngq",
+      "name": "Ngurimi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngr",
+      "name": "Engdewu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngs",
+      "name": "Gvoko",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngt",
+      "name": "Ngeq",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngu",
+      "inverted_name": "Nahuatl, Guerrero",
+      "name": "Guerrero Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngv",
+      "name": "Nagumi",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "ngw",
+      "name": "Ngwaba",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngx",
+      "name": "Nggwahyi",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngy",
+      "name": "Tibea",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "ngz",
+      "name": "Ngungwel",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nha",
+      "name": "Nhanda",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhb",
+      "name": "Beng",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhc",
+      "inverted_name": "Nahuatl, Tabasco",
+      "name": "Tabasco Nahuatl",
+      "scope": "I",
+      "type": "E"
+    },
+    {
+      "alpha_3": "nhd",
+      "name": "Chiripá",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhe",
+      "inverted_name": "Nahuatl, Eastern Huasteca",
+      "name": "Eastern Huasteca Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhf",
+      "name": "Nhuwala",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhg",
+      "inverted_name": "Nahuatl, Tetelcingo",
+      "name": "Tetelcingo Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhh",
+      "name": "Nahari",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhi",
+      "inverted_name": "Nahuatl, Zacatlán-Ahuacatlán-Tepetzintla",
+      "name": "Zacatlán-Ahuacatlán-Tepetzintla Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhk",
+      "inverted_name": "Nahuatl, Isthmus-Cosoleacaque",
+      "name": "Isthmus-Cosoleacaque Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhm",
+      "inverted_name": "Nahuatl, Morelos",
+      "name": "Morelos Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhn",
+      "inverted_name": "Nahuatl, Central",
+      "name": "Central Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nho",
+      "name": "Takuu",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhp",
+      "inverted_name": "Nahuatl, Isthmus-Pajapan",
+      "name": "Isthmus-Pajapan Nahuatl",
+      "scope": "I",
+      "type": "L"
+    },
+    {
+      "alpha_3": "nhq",
+      "inverted_name": "Nahuatl, Huaxcaleca",
+      "name": "Hu

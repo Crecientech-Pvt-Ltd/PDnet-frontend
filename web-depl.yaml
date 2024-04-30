@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-fe-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab-fe
+  template:
+    metadata:
+      labels:
+        app: lab-fe
+    spec:
+      containers:
+        - name: lab-fe
+          image: registry.digitalocean.com/genes/lab-fe:prod1.0.13
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab-fe-clusterip-srv
+spec:
+  selector:
+    app: lab-fe
+  type: ClusterIP
+  ports:
+    - name: lab-fe
+      port: 8100
+      targetPort: 80
+      protocol: TCP

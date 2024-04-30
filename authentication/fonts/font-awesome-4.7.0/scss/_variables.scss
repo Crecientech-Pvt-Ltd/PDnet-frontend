@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Fonction FormatDateTime [VBA]</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="fuzzysort.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="fr/langnames.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="fr/bookmarks.js" defer></script><script type="text/javascript" src="fr/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="fr/text/shared/05/new_help.html"><div class="symbol"></div>
+<p>Aide LibreOffice 6.4</p></a></div></header><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('', 'fr');">Module</button><nav id="modules-nav"></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contenu</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search" placeholder="Rechercher dans un module donné"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+    <a name="FormatDateTime"></a>
+        <a name="bm_id3150499"></a>            <meta itemprop="keywords" content="FormatDateTime, fonction">
+
+        <h1 itemprop="articleSection" id="hd_id3150499">Fonction FormatDateTime [VBA]</h1>
+        <p id="par_id3151384" class="paragraph">Applique un format de date et/ou heure à une expression de date et renvoie une chaîne comme résultat.</p>
+    
+    <div class="embedded">
+<a name="vbasupport"></a>
+    <div class="warning">
+<div class="noteicon"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" title="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id051920171018124524">Cette fonction ou constante est activée avec l'instruction <a target="_top" href="fr/text/sbasic/shared/03103350.html"><span class="literal">Option VBASupport 1</span></a> placée dans un module avant le code exécutable.</p></div>
+</div>
+<br>
+</div>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682">
+<a name="functsyntax"></a>Syntaxe :</h3>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Cliquez sur le texte pour le copier dans le presse-papiers"><pre><code class="language-visual-basic line-numbers">
+        FormatDateTime (DateExpression as Date [, NamedFormat as Integer])
+    </code></pre></div>
+    <div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480">
+<a name="functvalue"></a>Valeur de retour :</h3>
+</div>
+    <p id="par_id3150669" class="paragraph">String</p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157">
+<a name="functparameters"></a>Paramètres :</h3>
+</div>
+    <p id="par_id240720170117391741" class="paragraph"><span class="emph">DateExpression</span> : l'expression de date à formater.</p>
+    <p id="par_id24072017011739895" class="paragraph"><span class="emph">NamedFormat</span> : une énumération facultative <span class="emph">vbDateTimeFormat</span> spécifiant le format qui est appliqué à une expression de date et d'heure. Si le format est omis, la valeur <span class="emph">vbGeneralDate</span> est utilisée.</p>
+    <h3 id="hd_id811512136434300">Formats de date et heure (énumération vbDateTimeFormat)</h3>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+        <tr>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id201512137337536" class="tableheadintable">Constante nommée</p>
+            </td>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id481512137342798" class="tableheadintable">Valeur</p>
+            </td>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id781512137345583" class="tableheadintable">Description</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id121512137348477" class="tablecontentsintable">vbGeneralDate</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id511512137351182" class="tablecontentsintable">0</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id991512137353869" class="tablecontentsintable">Affiche une date et/ou une heure tel que défini dans les paramètres de date généraux du système. S'il s'agit uniquement d'une date, l'heure n'est pas affichée ; s'il s'agit uniquement d'une heure, la date n'est pas affichée.</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id181512137579110" class="tablecontentsintable">vbLongDate</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id651512137595327" class="tablecontentsintable">1</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id841512137597989" class="tablecontentsintable">Affiche une date utilisant le format de date long spécifié dans les paramètres régionaux de l'ordinateur.</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id391512138077008" class="tablecontentsintable">vbShortDate</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id651512137594327" class="tablecontentsintable">2</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id841512137397989" class="tablecontentsintable">Affiche une date utilisant le format de date court spécifié dans les paramètres régionaux de l'ordinateur.</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id181512137679110" class="tablecontentsintable">vbLongTime</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id651512137595227" class="tablecontentsintable">3</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id841512147597989" class="tablecontentsintable">Affiche une heure telle que définie dans les paramètres de temps long du système.</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id183512137579110" class="tablecontentsintable">vbShortTime</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id651512937595327" class="tablecontentsintable">4</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id841517137597989" class="tablecontentsintable">Affiche une heure utilisant le format 24 heures (hh:mm).</p>
+            </td>
+        </tr>
+    </table>
+<br>
+
+    <div class="embedded">
+<a name="errorcode"></a>
+
+<h2 itemprop="articleSection" id="hd_id3152869">
+<a name="errorcode"></a>Codes d'erreur :</h2>
+</div>
+    <div class="embedded"><p class="embedded"><a name="err13"></a>13 le type de données ne correspond pas</p></div>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233">
+<a name="functexample"></a>Exemple :</h3>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Cliquez sur le texte pour le copier dans le presse-papiers"><pre><code class="language-visual-basic line-numbers">
+        REM  *****  BASIC  *****
+        Option VBASupport 1
+        Sub DateFormat
+         Dim d as Date
+         d = ("1958-01-29 00:25")
+         msgbox("Format de date général : " &amp; FormatDateTime(d))
+         msgbox("Format de date long : " &amp; FormatDateTime(d,vbLongDate))
+         msgbox("Format de date court : " &amp; FormatDateTime(d,vbShortDate))
+         msgbox("Format d'heure long : " &amp; FormatDateTime(d,3))
+         msgbox("Format d'heure court : " &amp; FormatDateTime(d,vbShortTime))
+        End Sub
+    </code></pre></div>
+
+    <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions"><a name="related"></a><span class="emph">Rubriques connexes</span></p>
+<div class="relatedbody" itemprop="mentions">
+        <div class="embedded"><p class="embedded"><a name="VBATimeAndDate"></a><a target="_top" href="fr/text/sbasic/shared/special_vba_func.html#VBADateTime">Fonctions Date et heure VBA</a></p></div>
+    </div>
+</div>
+</div>
+<div class="search-frame"></div>
+<div class="donation-frame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03150000.xhp" target="_blank">/text/sbasic/shared/03150000.xhp</a></p>
+<p>Title is: Fonction FormatDateTime [VBA]</p>
+<p id="bm_module"></p>
+<p id="bm_system"></p>
+<p id="bm_HID"></p>
+</div></footer>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!DOCTYPE html>
+<html lang="fr">
+<head>
+<base href="../../../../">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Fonction WeekdayName [VBA]</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="fuzzysort.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="fr/langnames.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="fr/bookmarks.js" defer></script><script type="text/javascript" src="fr/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body itemscope="true" itemtype="http://schema.org/TechArticle">
+<div class="header-extrawurst">
+<header><div class="logo-container"><a class="logo" href="fr/text/shared/05/new_help.html"><div class="symbol"></div>
+<p>Aide LibreOffice 6.4</p></a></div></header><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" onclick="setupModules('', 'fr');">Module</button><nav id="modules-nav"></nav>
+</div>
+</div>
+<aside class="rightside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1">Contenu</label><div id="Contents" class="contents-treeview"></div></aside><aside class="leftside"><div id="Index">
+<div class="index-label">Index  🔎︎ </div>
+<div id="Bookmarks">
+<input id="search-bar" type="text" class="search" placeholder="Rechercher dans un module donné"><nav class="index"></nav>
+</div>
+</div></aside><div id="DisplayArea" itemprop="articleBody">
+
+
+    <a name="WeekdayName"></a>
+        <a name="bm_id3150499"></a>            <meta itemprop="keywords" content="WeekdayName, fonction">
+
+        <h1 itemprop="articleSection" id="hd_id3150499">Fonction WeekdayName [VBA]</h1>
+        <p id="par_id3151384" class="paragraph">La fonction WeekdayName renvoie le nom du jour de la semaine du jour spécifié de la semaine.</p>
+    
+    <div class="embedded">
+<a name="vbasupport"></a>
+    <div class="warning">
+<div class="noteicon"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" title="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id051920171018124524">Cette fonction ou constante est activée avec l'instruction <a target="_top" href="fr/text/sbasic/shared/03103350.html"><span class="literal">Option VBASupport 1</span></a> placée dans un module avant le code exécutable.</p></div>
+</div>
+<br>
+</div>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682">
+<a name="functsyntax"></a>Syntaxe :</h3>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Cliquez sur le texte pour le copier dans le presse-papiers"><pre><code class="language-visual-basic line-numbers">
+        WeekdayName(Weekday as Integer [,Abbreviate as Boolean [,FirstDayofWeek as Integer]])
+    </code></pre></div>
+    <div class="embedded">
+<a name="functvalue"></a>
+<h3 id="hd_id061420171139087480">
+<a name="functvalue"></a>Valeur de retour :</h3>
+</div>
+    <p id="par_id3150669" class="paragraph">String</p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157">
+<a name="functparameters"></a>Paramètres :</h3>
+</div>
+    <p id="par_id240720170117391741" class="paragraph"><span class="emph">Weekday</span>: une valeur de 1 à 7, lundi à dimanche, pour laquelle le nom du jour de la semaine doit être calculé.</p>
+    <p id="par_id24072017011739895" class="paragraph"><span class="emph">Abbreviate</span> : facultatif. Une valeur logique qui indique si le jour de la semaine doit être abrégé.</p>
+    <p id="par_id240720170117395610" class="paragraph"><span class="emph">FirstDayofWeek</span> : facultatif. Spécifie le premier jour de la semaine.</p>
+    <h3 id="hd_id521512154797683">Premier jour de la semaine :</h3>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+        <tr>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id921512153192034" class="tableheadintable">Constante nommée</p>
+            </td>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id611512153251598" class="tableheadintable">Valeur</p>
+            </td>
+            <td rowspan="" colspan="" class="tableheadcell">
+                <p id="par_id491512153274624" class="tableheadintable">Description</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id991512153295301" class="tablecontentintable">vbUseSystemDayOfWeek</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id571512153316028" class="tablecontentintable">0</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id611512153338316" class="tablecontentintable">Utilise le paramétrage de l'API National Language Support (NLS)</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id291512153514339" class="tablecontentintable">vbSun­day</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id791512153569394" class="tablecontentsintable">1</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id151512153594420" class="tablecontentsintable">Dimanche (par défaut)</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id431512153629070" class="tablecontentsintable">vbMonday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id171512153830709" class="tablecontentsintable">2</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id211512153874765" class="tablecontentsintable">Lundi</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id1001512153904187" class="tablecontentintable">vbTuesday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id771512153929215" class="tablecontentsintable">3</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id801512153944376" class="tablecontentsintable">Mardi</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id751512153958407" class="tablecontentsintable">vbWednesday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id91512153983659" class="tablecontentsintable">4</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id551512153998501" class="tablecontentsintable">Mercredi</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id681512154016128" class="tablecontentsintable">vbThursday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id871512154041210" class="tablecontentsintable">5</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id121512154054207" class="tablecontentsintable">Jeudi</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id591512154073632" class="tablecontentsintable">vbFriday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id691512154099442" class="tablecontentsintable">6</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id571512154112044" class="tablecontentsintable">Vendredi</p>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="" colspan="">
+                <p id="par_id151512154128303" class="tablecontentsintable">vbSaturday</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id831512154158535" class="tablecontentsintable">7</p>
+            </td>
+            <td rowspan="" colspan="">
+                <p id="par_id541512154172107" class="tablecontentsintable">Samedi</p>
+            </td>
+        </tr>
+    </table>
+<br>
+
+
+    <div class="embedded">
+<a name="errorcode"></a>
+
+<h2 itemprop="articleSection" id="hd_id3152869">
+<a name="errorcode"></a>Codes d'erreur :</h2>
+</div>
+    <p id="par_id171512156115581" class="paragraph">Aucun</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233">
+<a name="functexample"></a>Exemple :</h3>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Cliquez sur le texte pour le copier dans le presse-papiers"><pre><code class="language-visual-basic line-numbers">
+        REM  *****  BASIC  *****
+        Option VBASupport 1
+        Sub Example_WeekdayName
+         Dim tgf as Integer
+         tgf = 6
+         print tgf &amp;" "&amp; WeekdayName(tgf,False,vbSunday)
+        End Sub
+    </code></pre></div>
+
+    <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions"><a name="related"></a><span class="emph">Rubriques connexes</span></p>
+<div class="relatedbody" itemprop="mentions">
+
+        <div class="embedded"><p class="embedded"><a name="VBATimeAndDate"></a><a target="_top" href="fr/text/sbasic/shared/special_vba_func.html#VBADateTime">Fonctions Date et heure VBA</a></p></div>
+    </div>
+</div>
+</div>
+<div class="search-frame"></div>
+<div class="donation-frame"></div>
+<footer><div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p>This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/
