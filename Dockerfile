@@ -8,7 +8,7 @@
 # RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx:1.15
+FROM nginx:1.15-alpine
 #Copy ci-dashboard-dist
 
 COPY  / /usr/share/nginx/html
