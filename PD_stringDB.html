@@ -2005,105 +2005,9 @@
 				url: `http://localhost:3000/graphql`,
 				type: "POST",
 				dataType: 'json',
-				data: JSON.stringify(d.order === 0 ? {
-					query: `query ZerothOrder($geneIDs: [String!]!) {
-								getGenes(input: { geneIDs: $geneIDs }) {
-									hgnc_gene_symbol
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID32968195_odds_ratio
-									GDA_Score_opentargets_impc
-									Druggability_Score_drugnome_tier_1_and_2_and_3a
-									pathway_Ubiquitination_And_Proteasome_Degradation_R_HSA_83168
-									pathway_AMPK_signaling_pathway
-									GDA_Score_opentargets_literature
-									GDA_Score_opentargets_ot_genetics_portal
-									GDA_Score_opentargets_expression_atlas
-									pathway_Unfolded_Protein_Response_UPR_R_HSA_381119
-									pathway_Lysosome_Vesicle_Biogenesis
-									GDA_Score_opentargets_orphanet
-									Gene_name
-									pathway_Protein_Ubiquitination_R_HSA_8852135
-									pathway_Regulation_Of_FZD_By_Ubiquitination_R_HSA_4641263
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID20801718_odds_ratio
-									database_Mendelian_GenCC_ALS
-									pathway_Synthesis_Of_Active_Ubiquitin_Roles_Of_E1_And_E2_Enzymes_R_HSA_8866652
-									ID
-									Druggability_Score_drugnome_tclin_and_tier_1
-									pathway_Mitophagy___animal___Homo_sapiens_human
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID24931836_odds_ratio
-									logFC_rnaseq_PMID37080969_sod1_fold_change
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID24256812_odds_ratio
-									pathway_IRE1alpha_Activates_Chaperones_R_HSA_381070
-									pathway_Synaptic_vesicle_cycle
-									pathway_p130Cas_linkage_to_MAPK_signaling_for_integrins
-									pathway_Cellular_response_to_hypoxia
-									GDA_Score_opentargets_genetic_association
-									Druggability_Score_drugnome_antibody
-									GDA_Score_opentargets_known_drug
-									pathway_Vesicle_mediated_transport
-									pathway_OXO_mediated_transcription_R_HSA_9614085
-									GDA_Score_opentargets_genomics_england
-									pathway_Chaperone_Mediated_Autophagy_R_HSA_9613829
-									GDA_Score_opentargets_uniprot_variants
-									Druggability_Score_drugnome_tier_1_and_2
-									Druggability_Score_drugnome_protac
-									pathway_Endocytosis
-									logFC_rnaseq_PMID37080969_c9orf72_fold_change
-									Druggability_Score_drugnome_tier_1
-									GDA_Score_opentargets_animal_model
-									Description
-									pathway_Ubiquitin_dependent_Degradation_Of_Cyclin_D_R_HSA_75815
-									pathway_Chaperonin_mediated_Protein_Folding_R_HSA_390466
-									pathway_Ribosome___Homo_sapiens_human
-									hgnc_gene_id
-									pathway_Ubiquitin_mediated_proteolysis
-									GDA_Score_opentargets_chembl
-									old_target_id
-									pathway_Proteasome
-									pathway_Proteasome_Degradation_R_HSA_983168
-									pathway_MAPK_signaling_pathway
-									universal_ID
-									Druggability_Score_drugnome_small_molecule
-									pathway_Chaperone_Mediated_Autophagy
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID23624525_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID29566793_odds_ratio
-									Druggability_Score_drugnome_tclin_and_tchem
-									logFC_rnaseq_PMID37080969_tardbp_fold_change
-									GDA_Score_MantisML_HPO
-									pathway_Chaperone_Mediated_Autophagy_1
-									GDA_Score_opentargets_overall_association_score
-									GDA_Score_opentargets_clingen
-									GDA_Score_opentargets_europepmc
-									pathway_Protein_processing_in_endoplasmic_reticulum___Homo_sapiens
-									GWAS_Beta_ot_genetics_MONDO_0004976_PMID19451621_beta
-									pathway_Ubiquitin_Mediated_Degradation_Of_Phosphorylated_Cdc25A_R_HSA_69601
-									pathway_E3_Ubiquitin_Ligases_Ubiquitinate_Target_Proteins_R_HSA_8866654
-									pathway_Lysosome___Homo_sapiens_human
-									pathway_p38_MAPK_signaling_pathway_R_HSA_450302
-									logFC_rnaseq_PMID37080969_sporadic_fold_change
-									pathway_Macroautophagy
-									logFC_rnaseq_PMID37080969_fus_fold_change
-									GWAS_Beta_ot_genetics_MONDO_0004976_PMID34873335_beta
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID27455348_odds_ratio
-									Druggability_Score_drugnome_tchem
-									GDA_Score_opentargets_rna_expression
-									pathway_SUMOylation_Of_Ubiquitinylation_Proteins_R_HSA_3232142
-									Druggability_Score_drugnome_tclin
-									GDA_Score_MantisML_OT
-									GDA_Score_opentargets_eva
-									GDA_Score_opentargets_uniprot_literature
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID18084291_odds_ratio
-									pathway_XBP1S_Activates_Chaperone_Genes_R_HSA_381038
-									pathway_Autodegradation_Of_E3_Ubiquitin_Ligase_COP1_R_HSA_349425
-									pathway_Longevity_regulating_pathway___Homo_sapiens_human
-									pathway_Oxidative_Stress_Induced_Senescence
-								}
-							}`,
-					variables: {
-						"geneIDs": d.nodeNames
-					}
-				} : {
-					query: `query FirstOrder($geneIDs: [String!]!, $minScore: Float!) {
-							  getGeneInteractions(input: { geneIDs: $geneIDs, minScore: $minScore }) {
+				data: JSON.stringify({
+					query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!) {
+							  getGeneInteractions(input: { geneIDs: $geneIDs, minScore: $minScore },order: $order) {
 							    genes {
 							      hgnc_gene_symbol
 							      GWAS_OR_ot_genetics_MONDO_0004976_PMID32968195_odds_ratio
@@ -2210,6 +2114,7 @@
 					variables: {
 						"geneIDs": d.nodeNames,
 						"minScore": d.score,
+						"order": d.order
 					}
 				}),
 				headers: {
@@ -2219,15 +2124,8 @@
 				success: function (result) {
 					$("#loader").css('display', 'none')
 					console.log(result);
-					var totalNodes;
-					var totalEdges;
-					if (d.order === 1) {
-						totalEdges = result.data.getGeneInteractions.links.length;
-						totalNodes = result.data.getGeneInteractions.genes.length;
-					} else {
-						totalEdges = 0;
-						totalNodes = result.data.getGenes.length
-					}
+					var totalEdges = result.data.getGeneInteractions.links.length;
+					var totalNodes = result.data.getGeneInteractions.genes.length;
 
 					if (totalNodes > 5000 || totalEdges > 10000) {
 						$('#node-modal-background-alert').css('display', 'block')
@@ -2235,11 +2133,7 @@
 
 					$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
-					if (d.order === 1) {
-						startD3(result.data.getGeneInteractions);
-					} else {
-						startD3(result.data.getGenes);
-					}
+					startD3(result.data.getGeneInteractions);
 					currentUniversal = result.data;
 					getUniversal(result.data);
 				},
