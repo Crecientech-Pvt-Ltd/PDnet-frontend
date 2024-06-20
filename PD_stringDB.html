@@ -45,8 +45,8 @@
 	function getUniversal(data) {
 
 		console.log("uniNode loaded")
-		uniNode = data?.getGenes?.[0] || data?.getGeneInteractions?.genes?.[0];
-		var uniNodeHeaders = Object.keys(uniNode);
+		uniNode = data?.getGeneInteractions;
+		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
 
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
 		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.startsWith("logFC_"));
@@ -1598,7 +1598,6 @@
 				.attr("cy", 0)
 				.attr("r", "100%")
 				.attr("id", function (d, i) {
-					console.log(d);
 					if (d.Gene_name == null) return "grad" + i;
 					genID = d.Gene_name.replace("-", "HYPHEN")
 					genID = genID.replace(".", "DOT")
@@ -1746,10 +1745,7 @@
 					//################### Update on 8.05.19 #################################//
 					if (nodeSize_sel != "") {
 
-						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (uniNode.genes[d.ID] ?
-							((uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] == "" || uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] == "NA") ?
-								"NA" : (uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]])
-									.toExponential(2)) : "NA") + "<br>";
+						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (d[nodeSize_sel] ? (Number(d[nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
 					}
 
 					//################### End_Update on 8.05.19 #################################//
@@ -2413,8 +2409,6 @@
 					graph.links.push(graphRec.links[i]);
 				}
 			}
-			console.log('-->', graph.links)
-
 			degreeOutput.innerHTML = 0;
 			document.getElementById("myDegree").value = 0;
 			DegreeFun()
@@ -2486,8 +2480,6 @@
 			// console.log(graph)
 			d3.selectAll(".node")
 				.filter(d => {
-					// console.log(d.weight)
-					// console.log(d.weight >= degreeVal)
 					return d.weight >= degreeVal;
 				})
 				.style("display", "inline");
@@ -2511,7 +2503,6 @@
 				.style("display", "inline");
 			d3.selectAll(".link")
 				.filter(d => {
-
 					return d.target.weight < degreeVal
 				})
 				.style("display", "none");
@@ -2594,10 +2585,10 @@
 		//---End Insert---
 
 		function getNodeSizeScale(nss) {
-			a = [];
-			$.each(uniNode.genes, function (d) {
-				if (typeof uniNode.genes[d][uniNode.headers[nss]] == "number") {
-					a.push(Math.abs(uniNode.genes[d][uniNode.headers[nss]]));
+			let a = [];
+			$.each(uniNode.genes, function (idx,d) {
+				if (d[nss] != undefined || d[nss] != null || Number(d[nss]) != NaN) {
+					a.push(Math.abs(Number(d[nss])));
 				} else {
 					a.push(0);
 				}
@@ -3014,8 +3005,6 @@
 				}
 				else return default_node_color;
 				//return uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
-
-
 			});
 
 
@@ -3141,21 +3130,8 @@
 		document.getElementById("pathwayID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var pat = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"pathwayID4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (pat == 1) {
-						return "red";
-					}
-					// else if (pat == "undefined") {
-					// 	return "black"
-					// }
-					//if(d[document.getElementById("pathwayID4Color").value] == 1) {return "red";}
-					//if(uniNode[d.ID] && uniNode[d.ID][document.getElementById("pathwayID4Color").value] == 1) {return "red";}
-					else return default_node_color;
-				}
-				else return default_node_color;
+				let pat = d[document.getElementById("pathwayID4Color").value] ?? undefined;
+				return pat && pat == 1 ? "red" : default_node_color;
 			});
 
 		}
@@ -3165,13 +3141,8 @@
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("druggabilityID4Color").value]])) : default_node_color;
-
+				let val = d[document.getElementById("druggabilityID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 
 			});
 
@@ -3183,40 +3154,23 @@
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("GDAID4Color").value]])) : default_node_color;
-
+				let val = d[document.getElementById("GDAID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 
 			});
 		}
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("GWAS_OR4Color").value]])) : default_node_color;
-
-
+				let val = d[document.getElementById("GWAS_OR4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("GWAS_Beta4Color").value]])) : default_node_color;
-
+				let val = d[document.getElementById("GWAS_Beta4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 
 			});
 		}
@@ -3569,14 +3523,14 @@
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
+				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("logFCID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("logFCID4Color").value]])) : default_node_color;
-
-
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
+				let val = d[document.getElementById("logFCID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 
 
@@ -3588,20 +3542,8 @@
 		document.getElementById("GWAS4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var gw = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"GWAS4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (gw >= 1) {
-						return "red";
-					}
-					// else if (gw == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color
-
+				let gw = d[document.getElementById("GWAS4Color").value] ?? undefined;
+				return gw && gw >= 1 ? "red" : default_node_color;
 			});
 
 
@@ -3614,20 +3556,8 @@
 		document.getElementById("DBs4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var dbs = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"DBs4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (dbs >= 1) {
-						return "red";
-					}
-					//  else if (dbs == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color;
-
+				let dbs = d[document.getElementById("DBs4Color").value] ?? undefined;
+				return dbs && dbs >= 1 ? "red" : default_node_color;
 			});
 
 		}
@@ -3638,18 +3568,8 @@
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				var mks = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"markers4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (mks >= 1) {
-						return "red";
-					}
-					//  else if (mks == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color;
+				var mks = d[document.getElementById("markers4Color").value] ?? undefined;
+				return mks && mks >= 1 ? "red" : default_node_color;
 
 			});
 
@@ -3661,21 +3581,8 @@
 		document.getElementById("pathwayID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var pat = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"pathwayID4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (pat == 1) {
-						return "red";
-					}
-					// else if (pat == "undefined") {
-					// 	return "black"
-					// }
-					//if(d[document.getElementById("pathwayID4Color").value] == 1) {return "red";}
-					//if(uniNode[d.ID] && uniNode[d.ID][document.getElementById("pathwayID4Color").value] == 1) {return "red";}
-					else return default_node_color;
-				}
-				else return default_node_color;
+				var pat = d[document.getElementById("pathwayID4Color").value] ?? undefined;
+				return pat && pat == 1 ? "red" : default_node_color;
 			});
 
 		}
@@ -3684,15 +3591,11 @@
 		document.getElementById("druggabilityID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("druggabilityID4Color").value]])) : default_node_color;
-
-
+				let val = d[document.getElementById("druggabilityID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 
 
@@ -3704,13 +3607,11 @@
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("GDAID4Color").value]])) : default_node_color;
-
+				let val = d[document.getElementById("GDAID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
 
 			});
 
@@ -3950,7 +3851,6 @@
 
 		document.getElementById("nodeDegreeID4Size").onchange = function () {
 			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
-
 			if (cutoff_type == "node_degree") {
 				$("#NodeDegreeRange").show()
 			} else {
@@ -3965,7 +3865,7 @@
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GlogFCID4Size").value;
 			nodeSize_sel = nodeSize;
-
+			
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
 			d3.selectAll(".node").select("path")
@@ -3975,12 +3875,9 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						//console.log(uniNode.genes[d.ID])
 						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
-						thisNodeSize = uniNode.genes[d.ID] ?
-							size(nodeSizeScale(typeof uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] ==
-								"number" ? Math.abs(uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]]) : 0)) :
-							"";
+						let val = Number(d[nodeSize]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
 						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
@@ -3988,9 +3885,36 @@
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
+		}
+		///=======
+		
+		//on selecting GWAS score, change the size of nodes
 
+		document.getElementById("gwasID4Size").onchange = function () {
 
+			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			nodeSize = document.getElementById("gwasID4Size").value;
+			nodeSize_sel = nodeSize;
+			
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					//.size(function(d) { return 600 })
+					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
+					.size(function (d) {
+
+						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
+						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						let val = Number(d[nodeSize]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
 		}
 		///=======
 
@@ -4012,10 +3936,8 @@
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//console.log(uniNode.genes[d.ID])
 						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
-						thisNodeSize = uniNode.genes[d.ID] ?
-							size(nodeSizeScale(typeof uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] ==
-								"number" ? Math.abs(uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]]) : 0)) :
-							"";
+						let val = Number(d[nodeSize]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
 						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
@@ -4023,9 +3945,6 @@
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-
-
-
 		}
 
 
@@ -4082,10 +4001,8 @@
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//console.log(uniNode.genes[d.ID])
-						thisNodeSize = uniNode.genes[d.ID] ?
-							size(nodeSizeScale(typeof uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] ==
-								"number" ? Math.abs(uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]]) : 0)) :
-							"";
+						let val = Number(d[nodeSize]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
 						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
@@ -4093,9 +4010,6 @@
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-
-
-
 		}
 
 		//Gradient Legend for the network
