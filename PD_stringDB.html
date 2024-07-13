@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="script/jquery.csv.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <!-- <script src='/script/jquery-ui.js'></script>
    <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="  crossorigin="anonymous"></script>-->
@@ -45,7 +46,7 @@
 	function getUniversal(data) {
 
 		console.log("uniNode loaded")
-		uniNode = data?.getGeneInteractions;
+		uniNode = data;
 		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
 
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
@@ -909,7 +910,7 @@
 			<div style="margin: 10px">
 				<b>Add a file:</b>
 				<div id="">
-					<input type="file" id="universal_ext">
+					<input type="file" id="universal_ext" accept="text/csv,.csv">
 					<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
 					<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset Universal</button>
 					<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
@@ -955,35 +956,41 @@
 		}
 		// new value to universal file
 		function universal_ext_update() {
+			let file = document.getElementById('universal_ext')?.files[0];
+			if (!file) {
+				alert('No file found!');
+				return;
+			}
+			console.log(geneIndexMap);
 			$('#uploading_custom_universal').css('display', 'block');
-			let f = document.getElementById('universal_ext').files[0]
-			let fromdata = new FormData();
-			fromdata.append('universal', JSON.stringify(currentUniversal));
-			fromdata.append('avatar', f);
-			// console.log(d);
-			$.ajax({
-				url: `${URLs()}/get/updateUniversal`,
-				method: 'POST',
-				data: fromdata,
-				processData: false,
-				contentType: false,
-				success: (result) => {
-					$('#uploading_custom_universal').css('display', 'none');
-					$('#uploaded_custom_universal').css('display', 'block');
-					setTimeout(() => {
-						$('#uploaded_custom_universal').css('display', 'none');
-					}, 2000)
-					document.getElementById("universal_ext").value = "";
-					clearUniData();
-					getUniversal(result);
-				},
-				error: (err) => {
-					$('#uploading_custom_universal').css('display', 'none');
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				const csvData = e.target.result;
+				let nodePropertyHeaders = ["logFC_", "logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_"];
+				let csvFormattedData = $.csv.toObjects(csvData);
+				csvFormattedData.forEach(gene => {
+					currentUniversal.genes[geneIndexMap[gene.ID]] = {
+						...currentUniversal.genes[geneIndexMap[gene.ID]],
+						...Object.keys(gene).filter(header => nodePropertyHeaders.some(prop => header.startsWith(prop))).reduce((obj, key) => {
+							obj[key] = gene[key];
+							return obj;
+						}, {})
+					}
+					console.log(gene);
+					// console.log(currentUniversal.genes[geneIndexMap[gene.ID]]);
+					// console.log(geneIndexMap[gene.ID]);
+				})
+				document.getElementById("universal_ext").value = "";
+				clearUniData();
+				// console.log(currentUniversal);
+				getUniversal(currentUniversal);
+				$('#uploading_custom_universal').css('display', 'none');
+				$('#uploaded_custom_universal').css('display', 'block');
+				setTimeout(() => {
 					$('#uploaded_custom_universal').css('display', 'none');
-					alert('File format mismatch');
-					console.log('universal update not working')
-				}
-			})
+				}, 2000)
+			}
+			reader.readAsText(file);
 		}
 		function closeAlert() {
 			$("#node-modal-background-alert").css("display", "none");
@@ -1386,7 +1393,6 @@
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
 						nodeDetails.push(d);
-						console.log(x.push(d.Gene_name));
 					}
 				});
 
@@ -1481,7 +1487,7 @@
 				source: d.gene1.index,
 				target: d.gene2.index,
 				weight: +d.score
-			}));;
+			}));
 
 			graphRec = JSON.parse(JSON.stringify(graph)); //Add this line
 			var nodSize = [];
@@ -1992,13 +1998,14 @@
 		// let l = document.getElementById('loader');
 		let thisCheck = getItemFromStorage('pd_net_stringDB');
 		var currentUniversal;
+		var geneIndexMap = {};
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
 			console.log(d);
 
 			$.ajax({
-				url: `http://localhost:3000/graphql`,
+				url: `https://pdnet-apis.crecientech.com/graphql`,
 				type: "POST",
 				dataType: 'json',
 				data: JSON.stringify({
@@ -2129,9 +2136,12 @@
 
 					$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
-					startD3(result.data.getGeneInteractions);
-					currentUniversal = result.data;
-					getUniversal(result.data);
+					currentUniversal = result.data?.getGeneInteractions;
+					currentUniversal?.genes.forEach((gene, idx) => {
+						geneIndexMap[gene.ID] = idx;
+					});
+					startD3(currentUniversal);
+					getUniversal(currentUniversal);
 				},
 				error: function (err) {
 					$("#loader").css('display', 'none')
@@ -2586,7 +2596,7 @@
 
 		function getNodeSizeScale(nss) {
 			let a = [];
-			$.each(uniNode.genes, function (idx,d) {
+			$.each(uniNode.genes, function (idx, d) {
 				if (d[nss] != undefined || d[nss] != null || Number(d[nss]) != NaN) {
 					a.push(Math.abs(Number(d[nss])));
 				} else {
@@ -2982,133 +2992,18 @@
 
 		});
 
+		// ********************************* Colour based on the selected option ******************************************************
 
-
-
-
-		//on selecting Direction type, color the nodes
-
-		document.getElementById("directionID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var dirc = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"directionID4Color").value]] : "undefined"
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				if (uniNode.genes[d.ID]) {
-
-					if (dirc == "UP") {
-						return "red";
-					} else if (dirc == "DOWN") return "green";
-					// else if (dirc == "undefined") return "black";
-					else return default_node_color;
-				}
-				else return default_node_color;
-				//return uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
-			});
-
-
-
-		}
-
-		//on selecting logFC type, color the nodes
-
-		document.getElementById("logFCID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("logFCID4Color").value]])) : "black";
-				return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-					.getElementById("logFCID4Color").value]])) : default_node_color;
-
-
-			});
-
-
-
-		}
-
-		//on selecting GWAS type, color the nodes
-
-		document.getElementById("GWAS4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var gw = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"GWAS4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (gw >= 1) {
-						return "red";
-					}
-					//  else if (gw == "undefined") {
-					// 	return "black"
-					// }
-					else return default_node_color;
-				}
-				else return default_node_color;
-
-			});
-
-
-
-		}
-
-
-		//on selecting Databases type, color the nodes
-
-		document.getElementById("DBs4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var dbs = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"DBs4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (dbs >= 1) {
-						return "red";
-					}
-					// else if (dbs == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color;
-
-			});
-
-		}
-
-		//on selecting Celltype Markers, color the nodes
-		document.getElementById("markers4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var mks = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"markers4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
-					if (mks >= 1) {
-						return "red";
-					}
-					// else if (mks == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color;
-
-			});
-
-		}
+		//on selecting custom color, color the nodes
 
 		document.getElementById("custom4Color").onchange = function () {
-
+			console.log(geneIndexMap);
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				let mks = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"custom4Color").value]] : "undefined";
-				if (uniNode.genes[d.ID]) {
+				console.log(d.ID);
+				console.log(geneIndexMap[d.ID]);
+				console.log(currentUniversal?.genes[geneIndexMap[d.ID]]);
+				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
+				if (mks) {
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
 					if (color_arr.includes(mks)) {
 						return mks;
@@ -3119,59 +3014,109 @@
 					else return default_node_color;
 				}
 				else return default_node_color;
-
 			});
+		}
 
+		//on selecting Direction type, color the nodes
+
+		document.getElementById("directionID4Color").onchange = function () {
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				var dirc = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("directionID4Color").value] ?? undefined;
+				if (dirc == "UP") {
+					return "red";
+				} else if (dirc == "DOWN") return "green";
+				// else if (dirc == "undefined") return "black";
+				else return default_node_color;
+				//return uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
+			});
+		}
+
+		//on selecting logFC type, color the nodes
+
+		document.getElementById("logFCID4Color").onchange = function () {
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
+				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("logFCID4Color").value]])) : "black";
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("logFCID4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
+			});
+		}
+
+		//on selecting GWAS type, color the nodes
+
+		document.getElementById("GWAS4Color").onchange = function () {
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
+				return gw && gw >= 1 ? "red" : default_node_color;
+			});
+		}
+
+
+		//on selecting Databases type, color the nodes
+
+		document.getElementById("DBs4Color").onchange = function () {
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
+				return dbs && dbs >= 1 ? "red" : default_node_color;
+			});
+		}
+
+		//on selecting Celltype Markers, color the nodes
+
+		document.getElementById("markers4Color").onchange = function () {
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
+				return mks && mks >= 1 ? "red" : default_node_color;
+			});
 		}
 
 
 		//on selecting pathway name, color the nodes
 
 		document.getElementById("pathwayID4Color").onchange = function () {
-
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let pat = d[document.getElementById("pathwayID4Color").value] ?? undefined;
+				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
 				return pat && pat == 1 ? "red" : default_node_color;
 			});
-
 		}
 
 		// on selecting trait for color change
 		document.getElementById("druggabilityID4Color").onchange = function () {
-
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				let val = d[document.getElementById("druggabilityID4Color").value];
+				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("druggabilityID4Color").value]])) : "black";
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
-
 			});
-
-
-
 		}
 
+		// on selecting trait for color change
 		document.getElementById("GDAID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				let val = d[document.getElementById("GDAID4Color").value];
+				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("druggabilityID4Color").value]])) : "black";
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
-
 			});
 		}
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let val = d[document.getElementById("GWAS_OR4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				let val = d[document.getElementById("GWAS_Beta4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
-
 			});
 		}
 
@@ -3486,146 +3431,6 @@
 
 		});
 
-
-
-
-
-		//on selecting Direction type, color the nodes
-
-		document.getElementById("directionID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var dirc = uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById(
-					"directionID4Color").value]] : "undefined"
-				uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				if (uniNode.genes[d.ID]) {
-
-					if (dirc == "UP") {
-						return "red";
-					} else if (dirc == "DOWN") return "green";
-					// else if (dirc == "undefined") return "black";
-					else return default_node_color;
-				}
-				else return default_node_color;
-				//return uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
-
-
-			});
-
-
-
-		}
-
-		//on selecting logFC type, color the nodes
-
-		document.getElementById("logFCID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("logFCID4Color").value]])) : "black";
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
-				let val = d[document.getElementById("logFCID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
-			});
-
-
-
-		}
-
-		//on selecting GWAS type, color the nodes
-
-		document.getElementById("GWAS4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let gw = d[document.getElementById("GWAS4Color").value] ?? undefined;
-				return gw && gw >= 1 ? "red" : default_node_color;
-			});
-
-
-
-		}
-
-
-		//on selecting Databases type, color the nodes
-
-		document.getElementById("DBs4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let dbs = d[document.getElementById("DBs4Color").value] ?? undefined;
-				return dbs && dbs >= 1 ? "red" : default_node_color;
-			});
-
-		}
-
-		//on selecting Celltype Markers, color the nodes
-
-		document.getElementById("markers4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				var mks = d[document.getElementById("markers4Color").value] ?? undefined;
-				return mks && mks >= 1 ? "red" : default_node_color;
-
-			});
-
-		}
-
-
-		//on selecting pathway name, color the nodes
-
-		document.getElementById("pathwayID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				var pat = d[document.getElementById("pathwayID4Color").value] ?? undefined;
-				return pat && pat == 1 ? "red" : default_node_color;
-			});
-
-		}
-
-		// on selecting trait for color change
-		document.getElementById("druggabilityID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = d[document.getElementById("druggabilityID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
-			});
-
-
-
-		}
-
-		// on selecting trait for color change
-		document.getElementById("GDAID4Color").onchange = function () {
-
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = d[document.getElementById("GDAID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
-
-			});
-
-		}
-
-
-
-
-
-
-
-
-
-
 		//radial analysis
 
 		$("input[name='radialAnylisis']").change(function () {
@@ -3865,7 +3670,7 @@
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GlogFCID4Size").value;
 			nodeSize_sel = nodeSize;
-			
+
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
 			d3.selectAll(".node").select("path")
@@ -3887,7 +3692,7 @@
 					}));
 		}
 		///=======
-		
+
 		//on selecting GWAS score, change the size of nodes
 
 		document.getElementById("gwasID4Size").onchange = function () {
@@ -3895,7 +3700,7 @@
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("gwasID4Size").value;
 			nodeSize_sel = nodeSize;
-			
+
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
 			d3.selectAll(".node").select("path")
