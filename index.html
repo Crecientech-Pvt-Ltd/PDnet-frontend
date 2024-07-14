@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="script/jquery.csv.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -182,122 +183,32 @@
 						aria-controls="v-pills-home" aria-selected="false"
 						style="color: rgb(255, 247, 247) !important; font-weight: bold;"> <i
 							class="lni lni-search-alt me-3"></i><span class="sb_item"> By protein name</span></a>
-					<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-						aria-controls="v-pills-profile" aria-selected="false" style="color: rgb(255, 247, 247) !important; font-weight: bold;">  <i class="lni lni-upload me-3"></i><span class="sb_item"> Upload a file</span></a>
-					<a class="nav-link  cls_pre_uds" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false"
+						style="color: rgb(255, 247, 247) !important; font-weight: bold;"> <i
+							class="lni lni-upload me-3"></i><span class="sb_item"> Upload a file</span></a>
+					<!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
 						role="tab" aria-controls="v-pills-messages" aria-selected="true"style="color: rgb(255, 247, 247) !important; font-weight: bold;"><i class="lni lni-database me-3"></i><span class="sb_item"> Pre-uploaded datasets</span></a> -->
-					<!-- <a class="nav-link"id="v-pills-messages-tab"data-toggle="pill"href="#v-pills-messages2"role="tab"aria-controls="v-pills-messages"aria-selected="false">Co-Expression</a> -->
+					<!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages2"
+						role="tab" aria-controls="v-pills-messages" aria-selected="false">Co-Expression</a> -->
 				</div>
-				<!--  -->
 				<div class=" col-sm-9 col-md-9 col-lg-9 col-xl-9 tab-content" id="v-pills-tabContent">
-					<!-- first form -->
-					<!-- <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-						<div class="search-box box-blurr rounded">
-							<div class="main-search-header">
-							<strong>Search by Multiple protiens</strong>
-							</div>
-							<div class="separator"></div>
-							<div class="input-section">
-								<div class="input-header">
-									List of Names / IDs
-								</div>
-								<textarea id="string_db_input" placeholder="Enter genes"></textarea>
-								<div style="text-align: center;">OR</div>
-								<div style="margin-bottom: 10px;">
-									<div class="input-header">
-										Upload a text file:
-									</div>
-									<span class="geneFileNames" id="geneFileName">Click here to upload</span>
-									<div class="input-file">
-										<input accept=".txt" onchange="uploadedGeneFile()" id="gene_file"
-											style="cursor: pointer;" class="hide-this" type="file">
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="input-header">Order</div>
-										<div style="position: relative;">
-											<select name="order" id="order">
-												<option value="0">Zero</option>
-												<option value="1">first</option>
-											</select>
-											<i id="down_chev" class="fas fa-chevron-down"></i>
-										</div>
-										<br>
-									</div>
-									<div class="col-md-6">
-										<div class="input-header">Min interaction score:</div>
-										<div style="position: relative;">
-											<select name="order" id="confidence">
-												<option value="0.9">Highest (0.9)</option>
-												<option value="0.7">High (0.7)</option>
-												<option selected value="0.4">Medium (0.4)</option>
-												<option value="0.15">Low (0.15)</option>
-											</select>
-											<i id="down_chev" class="fas fa-chevron-down"></i>
-										</div>
-										<br>
-									</div>
-								</div>
-								<div class="channel_selection">
-									<div class="input-header">Interaction channel:</div>
-									<input type="radio" id="neighborhood" name="channel" value="neighborhood">
-									<label for="neighborhood">Neighborhood</label>
-									<input type="radio" id="fusion" name="channel" value="fusion">
-									<label for="fusion">Fusion</label>
-									<input type="radio" id="cooccurence" name="channel" value="cooccurence">
-									<label for="cooccurence">Co-occurence</label>
-									<input type="radio" id="coexpression" name="channel" value="coexpression">
-									<label for="coexpression">Co-expression</label><br>
-									<input type="radio" id="experimental" name="channel" value="experimental">
-									<label for="experimental">Experimental</label>
-									<input type="radio" id="database" name="channel" value="database">
-									<label for="database">Database</label>
-									<input type="radio" id="textmining" name="channel" value="textmining">
-									<label for="textmining">Textmining</label><br>
-									<input type="radio" checked id="combined_score" name="channel"
-										value="combined_score">
-									<label for="combined_score">Combined Score</label>
-								</div>
-
-								<button onclick="getGeneNamesForStringDB()" class="list-submit">Submit</button>
-							</div>
-						</div>
-					</div> -->
-
-					<!-- first form end -->
 					<!-- my form1 with this -->
 					<div class="tab-pane fade  show active ms-5 card" id="v-pills-home" role="tabpanel"
 						aria-labelledby="v-pills-home-tab">
 						<div class="">
 							<div class="card mb-4">
-
 								<h4 class="card-header">Search by Multiple protiens</h4>
 								<div class="card-body">
 									<div class="input-section">
-
-
 										<div class="mb-3">
 											<label for="exampleFormControlTextarea1" class="form-label">Seed
 												Genes</label>
 											<textarea class="form-control" id="string_db_input"
 												placeholder="Enter genes" rows="3"></textarea>
 										</div>
-
-
-										<div class="input-header">
-
-										</div>
-										<!-- 
-										<textarea id="string_db_input" placeholder="Enter genes"></textarea>
-									-->
-
-
-
 										<div style="text-align: center;">OR</div>
 										<div style="margin-bottom: 10px;">
-											<!-- <div class="mb-3"> -->
 											<div class="input-header">
 												<!-- <label for="formFileMultiple geneFileNames" class="form-label" id="geneFileName">Upload a text file:</label> -->
 											</div>
@@ -432,10 +343,6 @@
 													onchange="saveFiles('csv')" class="hide-this" multiple>
 											</div>
 										</div>
-
-
-
-
 									</div>
 
 									<div style="display: none;" class="input-section check2 mt-5">
@@ -453,12 +360,6 @@
 											class="list-submit ">Submit</button>
 									</div>
 								</div>
-								<!-- <div id="sample_show_div">
-									<img style="padding: 10px 0px 10px 15px; width: 787px;" class="img-fluid" src="./images/img1.png">
-								</div> -->
-
-
-								<!-- </div> -->
 							</div>
 						</div>
 						<div id="sample_show_div">
@@ -467,67 +368,6 @@
 						</div>
 					</div>
 					<!-- *2nd my from end -->
-					<!-- 2nd form start -->
-					<!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-						aria-labelledby="v-pills-profile-tab">
-						<div class="search-box box-blurr rounded">
-							<div class="main-search-header">
-								<strong>Custom Upload</strong>
-							</div>
-							<div class="separator"></div>
-							<div class="input-section">
-								<div class="input-header">
-									Select File Type
-								</div>
-								<div style="position: relative; width: 40%;">
-									<select onchange="uploadType()" name="order" id="uploadFileType">
-										<option value="csv">CSV</option>
-										<option value="json">JSON</option>
-									</select>
-									<i id="down_chev" class="fas fa-chevron-down"></i>
-								</div>
-							</div>
-							<div class="input-section check1">
-								<div class="input-header">
-									Upload a csv
-								</div>
-								<span class="fileNames" id="fileName">Click here to upload</span>
-								<div class="input-file">
-									<input accept=".csv" id="getFile" onchange="saveFiles('csv')"
-										style="cursor: pointer;" class="hide-this" type="file">
-								</div>
-							</div>
-							<div style="display: none;" class="input-section check2">
-							 -->
-
-					<!-- <div class="input-header">
-									Upload a JSON
-								</div>
-								<span class="fileNames" id="fileName2">Click here to upload</span>
-								<div class="input-file">
-									<input accept=".json" id="getFile2" onchange="saveFiles('json')"
-										style="cursor: pointer;" class="hide-this" type="file">
-								</div>
-							</div> -->
-
-
-					<!-- ******88there comment start here -->
-					<!-- <div class="input-section">
-
-								<div class="input-header">
-									<input id="import_into_db"type="checkbox"> import into PD_NET database
-								</div>
-							</div> -->
-					<!--  there comment end ******8-->
-					<!-- <div class="input-section">
-								<button onclick="getNetworkFromFileUpload()" class="list-submit">Submit</button>
-							</div>
-						</div>
-						<div id="sample_show_div">
-							<img style="padding: 10px 0px 10px 15px; width: 787px;" src="./images/img1.png">
-						</div>
-					</div> -->
-					<!-- form2 end -->
 
 					<!-- form3 start my -->
 					<div class="tab-pane fade show  card ms-5" id="v-pills-messages" role="tabpanel"
@@ -885,7 +725,6 @@
 				<p style="font-size: 25px;">Please wait!</p>
 				<!-- <p style="font-size: 14px;">The Network is getting generated<br> -->
 				We are gathering informations</p>
-				<span><i></i><i></i><i></i></span>
 			</div>
 		</div>
 	</div>
@@ -952,7 +791,6 @@
 		// initially setting the dropdowns of csv / json to selected value
 		$(document).ready(function () {
 			let tx = $('#uploadFileType').val()
-			console.log(tx);
 			if (tx == 'json') {
 				$('.check2').css('display', 'block')
 				$('.check1').css('display', 'none')
@@ -973,11 +811,9 @@
 				if (geneFileData == undefined) {
 					genes = $('#string_db_input').val().split(',').join('\n');
 				} else {
-					genes = geneFileData;
-					genes = genes.split(',').join('\n');
+					genes = geneFileData.split(',').join('\n');
 				}
 				genes = genes.split('\n');
-				console.log('GENS', genes)
 				order = $('#order').val()
 				score = $('#confidence').val()
 				interaction_type_dropdown = $('#interaction_type_dropdown').val()
@@ -989,13 +825,11 @@
 					if (e.trim() != "")
 						genes2.push(e.trim().toUpperCase());
 				})
-				if (genes2.length == 1 && genes2[0] == "" && geneFileData == undefined) {
-					$('#wait').css('display', 'block');
-					alert('please enter atleast one gene');
+				if (genes2.length <= 1 && geneFileData == undefined) {
+					alert('please enter atleast more than one gene');
+					return;
 				} else {
-					console.log(genes2);
 					$('#wait').css('display', 'block');
-					//alert(genes2);
 					$.ajax({
 						url: `https://pdnet-apis.crecientech.com/graphql`,
 						method: 'POST',
@@ -1140,15 +974,10 @@
 
 		// get the file name generated in the server side and redirect the page to network.json
 		function getNetworkFromFileUpload() {
-			console.log('CALLED');
 			let network_name = $('#network_name_dropdown').val();
 			let network_order = $('#network_type_dropdown').val();
 			let interaction_type = $('#interaction_type_dropdown').val();
-			//let current_nav = $('.nav-link.active').text();
-			let current_nav = $('.cls_pre_uds').text();
-
-			//alert(current_nav);
-			//current_nav = "Pre-uploaded datasets";
+			let current_nav = $('.nav-link.active').text();
 
 			if ((network_name === "" || network_order == "" || interaction_type == "") && current_nav === "Pre-uploaded datasets") {
 				alert('Please select all the options!')
@@ -1163,42 +992,24 @@
 					localStorage.removeItem('pd_net');
 					window.open(`PD_network.html?fileName=uploads/${fileName}`);
 				} else {
-					let t = $('#uploadFileType').val()
-					formdata = new FormData();
-					var f2 = t == 'csv' ? document.getElementById('getFile').files : document.getElementById('getFile2').files;
-					//console.log(f2[0])
-					if (f2.length == 0) {
-						console.log("No file")
+					let fileType = $('#uploadFileType').val()
+					let uploadedFile = fileType == 'csv' ? document.getElementById('getFile').files : document.getElementById('getFile2').files;
+					if (uploadedFile.length == 0) {
+						alert("No file")
 					} else {
 						$('#wait').css('display', 'block');
-						// let imp = $('#import_into_db').prop('checked');
-						// console.log('asdasda', imp)
-						// formdata.append("isImport", imp ? imp : false); // if we are willing to import the file into database
-						formdata.append("isImport", false); // if we are willing to import the file into database
-						formdata.append("avatar", f2[0]);
-						console.log(formdata);
-
-						$.ajax({
-							url: `${URLs()}/import`,
-							type: "POST",
-							data: formdata,
-							processData: false,
-							contentType: false,
-							success: function (result) {
-								$('#wait').css('display', 'none');
-								setItemToStorage('pd_net', JSON.stringify(result));
-								window.open('PD_network.html?type=' + t);
-							},
-							error: function (err) {
-								$('#wait').css('display', 'none');
-								alert('There is some issue, please try after some time');
-							}
-						});
+						let reader = new FileReader();
+						reader.onload = function () {
+							let data = $.csv.toObjects(reader.result);
+							$('#wait').css('display', 'none');
+							setItemToStorage('pd_net_file', JSON.stringify(data));
+							window.open("PD_network.html");
+						}
+						reader.readAsText(uploadedFile[0]);
 					}
 				}
 			}
 		}
-
 		$(".network_tabs").click(function () {
 			$('.collapse').collapse("hide")
 		})
@@ -1794,7 +1605,6 @@
 			{ regionId: "CBE_MAYO_StringDB", Name: "Cerebellum StringDB" },
 			{ regionId: "CBE_MAYO_InBio", Name: "Cerebellum InBio" },
 			{ regionId: "CBE_MAYO_InWeb3", Name: "Cerebellum InWeb3" }
-
 		]
 
 		for (var i = 0; i < ppi_pathwayList.length; i++) {
@@ -1820,8 +1630,6 @@
 			})
 
 		}
-
-
 
 		var submitPPIPathway = document.getElementById("submitPPIPathway");
 		submitPPIPathway.addEventListener("click", function () {

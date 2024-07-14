@@ -43,11 +43,11 @@
 	// 	dataType: 'json',
 	// 	// crossDomain: 'http://*',
 	// 	success: function (data) {
-	function getUniversal(data) {
+	function getUniversal(data,idx = 0) {
 
 		console.log("uniNode loaded")
 		uniNode = data;
-		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+		var uniNodeHeaders = Object.keys(uniNode?.genes?.[idx]);
 
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
 		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.startsWith("logFC_"));
@@ -75,13 +75,13 @@
 		for (var key = 0; key < uniNodeGDA.length; key++) {
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
-
 		}
 
+		// Populate Druggability dropdown
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
 			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color');
 		}
-		// Populate GWAS OR
+		// Populate GWAS OR dropdown
 		for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
 			$('<option/>').val(uniNodeGWAS_OR[key]).text(jsUcFirst(uniNodeGWAS_OR[key])).appendTo('#GWAS_OR4Color');
 		}
@@ -236,26 +236,26 @@
 		</div>
 	</div>
 	<!-- table for selected nodes -->
-	<!-- <div style="display: none;" id="node-modal-background-alert">
-      <div id="alertModal">
-      	<div class="modal-header">
-      		<span class="alert header-text">
-      			Big Network Alert!
-      		</span>
-      		<button class="modal-close-btn" onclick="closeAlert()">x</button>
-      	</div>
-      	<div class="modal-body">
-      		<ul>
-      			<li>
-      				Network is bigger in size. Number of nodes or interactions are high.
-      			</li>
-      			<li>
-      				Network will respond / render slow.
-      			</li>
-      		</ul>
-      	</div>
-      </div>
-      </div> -->
+	<div style="display: none;" id="node-modal-background-alert">
+		<div id="alertModal">
+			<div class="modal-header">
+				<span class="alert header-text">
+					Big Network Alert!
+				</span>
+				<button class="modal-close-btn" onclick="closeAlert()">x</button>
+			</div>
+			<div class="modal-body">
+				<ul>
+					<li>
+						Network is bigger in size. Number of nodes or interactions are high.
+					</li>
+					<li>
+						Network will respond / render slow.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<!-- table for selected nodes -->
 	<div style="display: none;" id="node-modal-background">
 		<div id="nodeModal">
@@ -615,6 +615,9 @@
 				Screenshot!
 			</button>
 			<script>
+
+				/***************  Change network type [Not Implemented yet due to unavailability of data]  ***************
+
 				// Weight Change
 				function changedWeight() {
 					graph = ""
@@ -644,7 +647,8 @@
 					});
 
 				}
-
+				
+				*/
 
 				var width = 1280,
 					height = 720;
@@ -807,28 +811,31 @@
 				<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
 				<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
 				<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
+				<p>
+					<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
+				</p>
 				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
-               <input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
+                <input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
 				<!-- Threshold for weight -->
-			<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
-				<br>
-				<p>link distance: <span id="linkdistanceinput"></span></p>
-			</div>
-			<!-- Threshold for Degree -->
-			<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
-				<br>
-				<p>node charge: <span id="linkchargeinput"></span></p>
-			</div>
-			<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
-				<br>
-				<p>distance: <span id="linkStrengthinput"></span></p>
-			</div>
-			<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
-            </button> -->
-			<!-- Gene connections -->
+				<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
+					<br>
+					<p>link distance: <span id="linkdistanceinput"></span></p>
+				</div>
+				<!-- Threshold for Degree -->
+				<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
+					<br>
+					<p>node charge: <span id="linkchargeinput"></span></p>
+				</div>
+				<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
+					<br>
+					<p>distance: <span id="linkStrengthinput"></span></p>
+				</div>
+				<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
+				</button> -->
+				<!-- Gene connections -->
 			</p>
 		</div>
 		<button class="accordion active">Network parameters</button>
@@ -878,7 +885,6 @@
             <button class="zoom_btn" id="zoom_out">-</button>
             
             
-            </div> -->
 			<!-- Threshold for Degree -->
 			<!-- <div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
             <input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
@@ -952,7 +958,7 @@
 		function resetUniversals() {
 			resetText()
 			clearUniData()
-			getUniversal(currentUniversal);
+			getUniversal(initialUniversal);
 		}
 		// new value to universal file
 		function universal_ext_update() {
@@ -961,7 +967,6 @@
 				alert('No file found!');
 				return;
 			}
-			console.log(geneIndexMap);
 			$('#uploading_custom_universal').css('display', 'block');
 			const reader = new FileReader();
 			reader.onload = function (e) {
@@ -976,14 +981,10 @@
 							return obj;
 						}, {})
 					}
-					console.log(gene);
-					// console.log(currentUniversal.genes[geneIndexMap[gene.ID]]);
-					// console.log(geneIndexMap[gene.ID]);
 				})
 				document.getElementById("universal_ext").value = "";
 				clearUniData();
-				// console.log(currentUniversal);
-				getUniversal(currentUniversal);
+				getUniversal(currentUniversal,geneIndexMap[csvFormattedData[0].ID]);
 				$('#uploading_custom_universal').css('display', 'none');
 				$('#uploaded_custom_universal').css('display', 'block');
 				setTimeout(() => {
@@ -1029,9 +1030,6 @@
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 
-
-
-
 		//Handling left menu hight
 		var acc = document.getElementsByClassName("accordion");
 		var i;
@@ -1056,7 +1054,6 @@
 			$("#directionID4Color").val('none')
 			$("#pathwayID4Color").val('none')
 			$("#druggabilityID4Color").val('none')
-			// console.log($("#logFCID4Color").val());
 			$("input[name='nodeColor']")[0].checked = true; // rectified nodecolor
 
 
@@ -1065,7 +1062,6 @@
 				$("#pathwayID4Color option:selected").trigger('change');
 			} else {
 				$("input[name='nodeColor']:checked").trigger('change');
-				// console.log('-->', $("input[name='nodeColor']:checked").val());
 				//$("#pathwayID4Color option:selected").trigger('change');
 
 			}
@@ -1082,11 +1078,9 @@
 			var parameters = location.search.substring(1).split("&");
 			var temp = parameters[0].split("=");
 			jsonFile = unescape(temp[1]);
-			// console.log('HERE-->', jsonFile, '<--ends') // Rectify
 			var heading = jsonFile.split(".");
 			d3.select("body").selectAll(".heading").selectAll("h5").remove("*");
 			d3.select("body").selectAll(".heading").append("h5").style("word-wrap", "break-word").text('custom');
-
 		}
 		processUser();
 
@@ -1283,63 +1277,9 @@
 			return html.trim('<br>');
 		}
 
-		/*
-		//An ajax call to read universal node file which contain data for different filters.
-		$.ajax({
-				  url: 'data/json/GRCH38-p12-uniNode_V4.json',
-				  dataType: 'json',
-				  success: function(data) {
-				  console.log("uniNode loaded")
-				  uniNode = data;
-				  uniNodeHeaders = Object.keys(uniNode.headers);
-	    
-				  //Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-				  uniNodeLogFC = uniNodeHeaders.filter((header) => header.startsWith("logFC_"));
-				  uniNodePLogFC = uniNodeLogFC.filter((header) => header.startsWith("logFC_proteomics"));
-				  uniNodeGLogFC = uniNodeLogFC.filter((header) => !header.startsWith("logFC_proteomics"));
-				  uniNodeDirection = uniNodeHeaders.filter((header) => header.startsWith("direction_"));
-				  uniNodePathway = uniNodeHeaders.filter((header) => header.startsWith("pathway_"));
-				  uniNodeDruggability = uniNodeHeaders.filter((header) => header.startsWith("trait_"));
-	    
-				  //Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
-				  for (var key=0; key < uniNodeLogFC.length; key++) {
-							  $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color')
-						  };
-	    
-				  for (var key=0; key < uniNodeDirection.length; key++) {
-							  $('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo('#directionID4Color')
-						  };
-				  for (var key=0; key < uniNodePathway.length; key++) {
-					  //var val = sample[0]+"_"+pathwayList[key];
-					  $('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo('#pathwayID4Color')
-				  };
-	    
-	    
-				  for (var key=0; key < uniNodePLogFC.length; key++) {
-							  $('<option/>').val(uniNodePLogFC[key]).text(jsUcFirst(uniNodePLogFC[key])).appendTo('#PlogFCID4Size')
-						  };
-				  for (var key=0; key < uniNodeGLogFC.length; key++) {
-							  $('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo('#GlogFCID4Size')
-						  };
-	    
-				  for (var key=0; key < uniNodeDruggability.length; key++) {
-					  //var val = sample[0]+"_"+pathwayList[key];
-					  if(uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
-					  //$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-				  };
-	    
-	    
-					//console.log("uniNode: ", uniNode)
-	    
-				 },
-				statusCode: {
-				   404: function() {
-					 alert('There was a problem with the server.  Try again soon!');
-				   }
-				 }
-		   });
-		//End of ajax call.
-		*/
+		function stopAnimation() {
+			force.stop();
+		}
 
 		function clearSelectedNode() {
 			nodeDetails = [];
@@ -1388,8 +1328,7 @@
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
 				//########################
-				x = [];
-				nodeDetails = []; // NEW ADDED
+				let nodeDetails = []; // NEW ADDED
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
 						nodeDetails.push(d);
@@ -1404,23 +1343,23 @@
 							let tableInfo = document.getElementById("table_data-ip");
 							gene_info.innerHTML = "";
 							tableInfo.innerHTML = "";
-							for (let i of nodeDetails) {
+							nodeDetails.forEach((i, index) => {
 								$("#gene_info").append(`<p>${i.Gene_name}</p>`)
 								$("#table_data-ip")
 									.append(`<tr>
-      								<td style="width: 50px; padding: 5px;">${x.indexOf(i.Gene_name) + 1}.</td>
+      								<td style="width: 50px; padding: 5px;">${index + 1}.</td>
       								<td>${i.Gene_name}</td>
-      								<td>${i.id}</td>
-      								<td style="width: 360px">${i.Desnoidecription == undefined ? 'No description found' : i.Description}</td>
+      								<td>${i.ID}</td>
+      								<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
       							</tr>`);
-							}
+							});
 							$("#gene_info").append(
 								`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
 							);
 							$("#gene_info").append(
 								`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
 							)
-							$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${x.length} nodes selected</div>`);
+							$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
 						}
 					}); // NEW ADDED
 				$('#sgene_list').val(x.toString())
@@ -1484,8 +1423,8 @@
 			graph = data;
 
 			graph.links = graph.links.map(d => ({
-				source: d.gene1.index,
-				target: d.gene2.index,
+				source: +d.gene1.index,
+				target: +d.gene2.index,
 				weight: +d.score
 			}));
 
@@ -1998,11 +1937,11 @@
 		// let l = document.getElementById('loader');
 		let thisCheck = getItemFromStorage('pd_net_stringDB');
 		var currentUniversal;
+		var initialUniversal;
 		var geneIndexMap = {};
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
-			console.log(d);
 
 			$.ajax({
 				url: `https://pdnet-apis.crecientech.com/graphql`,
@@ -2126,7 +2065,6 @@
 				},
 				success: function (result) {
 					$("#loader").css('display', 'none')
-					console.log(result);
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
 
@@ -2137,6 +2075,7 @@
 					$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
 					currentUniversal = result.data?.getGeneInteractions;
+					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 					currentUniversal?.genes.forEach((gene, idx) => {
 						geneIndexMap[gene.ID] = idx;
 					});
@@ -2428,7 +2367,7 @@
 
 
 		function ConnectionFun() {
-			countHub = 0;
+			let countHub = 0;
 			hubGenesArray.length = 0;
 			ConnectionOutput.innerHTML = this.value;
 			var myval1 = this.value;
@@ -2474,7 +2413,6 @@
 				document.getElementById('table_data-ip-2').innerHTML = ""
 				hubGenesArray.length = 0;
 			}
-
 		}
 
 
@@ -2999,9 +2937,6 @@
 		document.getElementById("custom4Color").onchange = function () {
 			console.log(geneIndexMap);
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				console.log(d.ID);
-				console.log(geneIndexMap[d.ID]);
-				console.log(currentUniversal?.genes[geneIndexMap[d.ID]]);
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
 				if (mks) {
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
