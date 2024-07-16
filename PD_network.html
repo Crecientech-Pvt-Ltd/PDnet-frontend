@@ -1345,7 +1345,7 @@
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
 						nodeDetails.push(d);
-						console.log(x.push(d.Gene_name));
+						console.log(x.push(d?.Gene_name));
 					}
 				});
 
@@ -1549,13 +1549,14 @@
 				.attr("cy", 0)
 				.attr("r", "100%")
 				.attr("id", function (d, i) {
-					genID = d.Gene_name.replace("-", "HYPHEN")
+					console.log(d);
+					genID = d?.Gene_name?.replace("-", "HYPHEN") ?? "null"
 					genID = genID.replace(".", "DOT")
 					genID = genID.replace("(", "LB")
 					genID = genID.replace(")", "RB")
 					genID = genID.replace(/[^A-Za-z0-9]/g, '')
 					//genID = genID.replace(/\s/, "")
-					genID = d.ID + "_" + genID;
+					genID = d?.ID + "_" + genID;
 					return genID;
 				});
 			//.attr("id", function(d, i) { return "grad" + i; });
@@ -1578,11 +1579,11 @@
 				.enter().append("g")
 				.attr("class", "node")
 				.attr("id", function (d, i) {
-					//console.log(d.ID);
-					//genID = d.Gene_name.replace("-", "HYPHEN")
+					//console.log(d?.ID);
+					//genID = d?.Gene_name?.replace("-", "HYPHEN")
 					//genID = genID .replace(".", "DOT")
-					//genID = d.ID+"_"+genID;
-					genID = d.ID;
+					//genID = d?.ID+"_"+genID;
+					genID = d?.ID;
 					return genID;
 				})
 			//.call(force.drag)
@@ -1632,12 +1633,12 @@
 					}))
 				.style("fill", function (d, i) {
 
-					genID = d.Gene_name.replace("-", "HYPHEN")
+					genID = d?.Gene_name?.replace("-", "HYPHEN") ?? "null"
 					genID = genID.replace(".", "DOT")
 					genID = genID.replace("(", "LB")
 					genID = genID.replace(")", "RB")
 					genID = genID.replace(/[^A-Za-z0-9]/g, '')
-					genID = d.ID + "_" + genID;
+					genID = d?.ID + "_" + genID;
 					return "url(#" + genID + ")";
 				})
 				//.style(tocolor, function(d) { return default_node_color; })
@@ -1658,7 +1659,7 @@
 
 			if (text_center)
 				text.text(function (d) {
-					return d.Gene_name == "NA" ? d.ID : d.Gene_name;
+					return d?.Gene_name == "NA" ? d?.ID : d?.Gene_name;
 				})
 					.style("text-anchor", "middle");
 			else
@@ -1667,7 +1668,7 @@
 
 				})
 					.text(function (d) {
-						return d.Gene_name == "NA" ? '\u2002' + d.ID : '\u2002' + d.Gene_name;
+						return d?.Gene_name == "NA" ? '\u2002' + d?.ID : '\u2002' + d?.Gene_name;
 					});
 
 			//Highlight connection of a node and show tooltip on mouseover event
@@ -1677,9 +1678,9 @@
 				// document.getElementById("mysetting").style.display ="block"
 				var gene_info = document.getElementById("gene_info");
 				//  gene info on hover  on side tab 
-				// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d.ID}"  target='_blank'>Id: ${d.ID} </a>` + "<br>"+
+				// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d?.ID}"  target='_blank'>Id: ${d?.ID} </a>` + "<br>"+
 				//  "<p class='gene_info'>Description :</p>" + d.Description  + "<br>"+
-				//  "<p class='gene_info'>label :</p>" + d.Gene_name + "<br>"+
+				//  "<p class='gene_info'>label :</p>" + d?.Gene_name + "<br>"+
 				//  "<p class='gene_info'>weight :</p>" + d.weight
 
 				gbTootip.transition().duration(500);
@@ -1688,9 +1689,9 @@
 				gbTootip.html(function () {
 
 
-					//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
-					var tmp1 = d.Gene_name ? "<b>Gene:</b> " + d.Gene_name + "<br>" : "";
-					var tmp2 = d.ID ? "<b>Ensemble:</b> " + d.ID + "<br>" : "";
+					//var tmp1 = "Gene: " + d?.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
+					var tmp1 = d?.Gene_name ? "<b>Gene:</b> " + d?.Gene_name + "<br>" : "";
+					var tmp2 = d?.ID ? "<b>Ensemble:</b> " + d?.ID + "<br>" : "";
 					var tmp3 = d.Description ? "<b>Description:</b> " + d.Description + "<br>" : "";
 					//################### Update on 8.05.19 #################################//
 					if (nodeSize_sel != "") {
@@ -1850,8 +1851,8 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2, Math.abs(
-							Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2, Math.abs(
+							Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
 						//console.log(thisNodeSize);
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ?
 							max_base_node_size : thisNodeSize || nominal_base_node_size, 2);
@@ -2067,11 +2068,13 @@
 						geneIndexMap[gene.ID] = idx;
 					});
 					fileData.forEach(e => {
-						currentUniversal.links.push({
-							source: +geneIndexMap[e.Node1],
-							target: +geneIndexMap[e.Node2],
-							weight: +e.Score
-						});
+						if (geneIndexMap[e.Node1] && geneIndexMap[e.Node2]) {
+							currentUniversal.links.push({
+								source: +geneIndexMap[e.Node1],
+								target: +geneIndexMap[e.Node2],
+								weight: +e.Score
+							});
+						}
 					});
 					var totalNodes = result.data.getGenes.length
 					var totalEdges = currentUniversal.links.length
@@ -2385,16 +2388,16 @@
 			d3.selectAll(".node").each(function (d) {
 				if (d.weight >= myval1 && myval1 >= 1) {
 					countHub++;
-					d3.selectAll("*[id^=" + d.ID
-						.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+					d3.selectAll("*[id^=" + d?.ID
+						.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d?.Gene_name
 							.replace(/\./g, 'DOT') + "]")
 						.select("stop[offset='100%']")
 						.style("stop-color", "blue");
 
 					hubGenesArray.push(d)
 				} else {
-					d3.selectAll("*[id^=" + d.ID
-						.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+					d3.selectAll("*[id^=" + d?.ID
+						.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d?.Gene_name
 							.replace(/\./g, 'DOT') + "]")
 						.select("stop[offset='100%']")
 						.style("stop-color", default_node_color);
@@ -2575,10 +2578,10 @@
 					//First change the color of all dots to blue (to reset previous serach)
 					//d = d.replace(/\./g, '');
 					})*/
-				//d3.selectAll(".node").each(function(d){ if (y.indexOf(d.Gene_name)>-1 || y.indexOf(d.ID)>-1) {d3.selectAll("*[id^="+d.ID+"_],"+"*[id$=_"+d.Gene_name+"]").select("stop[offset='100%']").style("stop-color",  "blue");} })
+				//d3.selectAll(".node").each(function(d){ if (y.indexOf(d?.Gene_name)>-1 || y.indexOf(d?.ID)>-1) {d3.selectAll("*[id^="+d?.ID+"_],"+"*[id$=_"+d?.Gene_name+"]").select("stop[offset='100%']").style("stop-color",  "blue");} })
 				d3.selectAll(".node").each(function (d) {
-					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
-						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+					if (y.indexOf(d?.Gene_name) > -1 || y.indexOf(d?.ID) > -1) {
+						d3.selectAll("*[id^=" + d?.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d?.Gene_name
 							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
 								"stop-color", "blue");
 					}
@@ -2729,7 +2732,7 @@
 				//.style("fill", function(d) {
 				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 					//if(d["trait_Module ID"] && d["trait_Module ID"] != "NA") {return "red";}
-					// if (uniNode.genes[d.ID] && uniNode.genes[d.ID][uniNode.headers["druggability_Module_ID"]] != "NA") { return "red"; }
+					// if (uniNode.genes[d?.ID] && uniNode.genes[d?.ID][uniNode.headers["druggability_Module_ID"]] != "NA") { return "red"; }
 					return default_node_color;
 				});
 				d3.select("#druggabilityInput").style("display", "block");
@@ -2948,7 +2951,7 @@
 
 		document.getElementById("custom4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
+				let mks = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("custom4Color").value] ?? undefined;
 				if (mks) {
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
 					if (color_arr.includes(mks)) {
@@ -2967,13 +2970,13 @@
 
 		document.getElementById("directionID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				var dirc = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("directionID4Color").value] ?? undefined;
+				var dirc = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("directionID4Color").value] ?? undefined;
 				if (dirc == "UP") {
 					return "red";
 				} else if (dirc == "DOWN") return "green";
 				// else if (dirc == "undefined") return "black";
 				else return default_node_color;
-				//return uniNode.genes[d.ID] ? uniNode.genes[d.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
+				//return uniNode.genes[d?.ID] ? uniNode.genes[d?.ID][uniNode.headers[document.getElementById("directionID4Color").value]] == "red" ?  : "black";
 			});
 		}
 
@@ -2981,13 +2984,13 @@
 
 		document.getElementById("logFCID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// uniNode.genes[d?.ID] ? "" : console.log(d?.ID);
+				//return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document
 				// 	.getElementById("logFCID4Color").value]])) : "black";
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document
 				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("logFCID4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("logFCID4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
@@ -2996,7 +2999,7 @@
 
 		document.getElementById("GWAS4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
+				let gw = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
 				return gw && gw >= 1 ? "red" : default_node_color;
 			});
 		}
@@ -3006,7 +3009,7 @@
 
 		document.getElementById("DBs4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
+				let dbs = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("DBs4Color").value] ?? undefined;
 				return dbs && dbs >= 1 ? "red" : default_node_color;
 			});
 		}
@@ -3015,7 +3018,7 @@
 
 		document.getElementById("markers4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
+				var mks = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("markers4Color").value] ?? undefined;
 				return mks && mks >= 1 ? "red" : default_node_color;
 			});
 		}
@@ -3025,7 +3028,7 @@
 
 		document.getElementById("pathwayID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
+				var pat = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
 				return pat && pat == 1 ? "red" : default_node_color;
 			});
 		}
@@ -3033,10 +3036,10 @@
 		// on selecting trait for color change
 		document.getElementById("druggabilityID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				//return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("druggabilityID4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
@@ -3045,23 +3048,23 @@
 		document.getElementById("GDAID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				//return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d?.ID] ? expressionColor(Number(uniNode.genes[d?.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("GDAID4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("GWAS_OR4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("GWAS_Beta4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
@@ -3609,7 +3612,7 @@
 
 		document.getElementById("GlogFCID4Size").onchange = function () {
 
-			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			// uniNode.genes[d?.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GlogFCID4Size").value;
 			nodeSize_sel = nodeSize;
 
@@ -3622,7 +3625,7 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
 						let val = Number(d[nodeSize]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
@@ -3639,7 +3642,7 @@
 
 		document.getElementById("gwasID4Size").onchange = function () {
 
-			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			// uniNode.genes[d?.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("gwasID4Size").value;
 			nodeSize_sel = nodeSize;
 
@@ -3652,7 +3655,7 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
 						let val = Number(d[nodeSize]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
@@ -3668,7 +3671,7 @@
 
 		document.getElementById("GDAID4Size").onchange = function () {
 
-			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			// uniNode.genes[d?.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GDAID4Size").value;
 			nodeSize_sel = nodeSize;
 
@@ -3681,8 +3684,8 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						//console.log(uniNode.genes[d.ID])
-						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						//console.log(uniNode.genes[d?.ID])
+						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
 						let val = Number(d[nodeSize]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
@@ -3711,16 +3714,16 @@
 		// 			.size(function (d) {
 
 		// 				//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-		// 				//console.log(uniNode.genes[d.ID])
-		// 				thisNodeSize = uniNode.genes[d.ID] ?
-		// 					size(nodeSizeScale(typeof uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]] == "number" ? Math.abs(uniNode.genes[d.ID][uniNode.headers[nodeSize_sel]]) : 0)) :
+		// 				//console.log(uniNode.genes[d?.ID])
+		// 				thisNodeSize = uniNode.genes[d?.ID] ?
+		// 					size(nodeSizeScale(typeof uniNode.genes[d?.ID][uniNode.headers[nodeSize_sel]] == "number" ? Math.abs(uniNode.genes[d?.ID][uniNode.headers[nodeSize_sel]]) : 0)) :
 		// 					"";
 		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size : thisNodeSize || nominal_base_node_size, 2);
 		// 				//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
 		// 			})
 		// 			//.logFC(function(d) {
 		// 			//CKECK FROM
-		// 			//	return  uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+		// 			//	return  uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
 		// 			//})
 		// 			.type(function (d) { return "circle";/*d.type;*/ }))
 		// 		;
@@ -3746,7 +3749,7 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						//console.log(uniNode.genes[d.ID])
+						//console.log(uniNode.genes[d?.ID])
 						let val = Number(d[nodeSize]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
