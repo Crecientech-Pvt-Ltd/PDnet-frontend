@@ -345,14 +345,14 @@
 										</div>
 									</div>
 
-									<div style="display: none;" class="input-section check2 mt-5">
+									<div style="display: none;" class="input-section check2">
 										<div class="input-header">
-											Upload a JSON
-										</div>
-										<span class="fileNames" id="fileName2">Click here to upload</span>
-										<div class="input-file">
-											<input accept=".json" id="getFile2" onchange="saveFiles('json')"
-												style="cursor: pointer;" class="hide-this" type="file">
+											<div class="mb-3">
+												<label for="formFileMultiple fileNames" class="form-label"
+													id="fileName">Upload a JSON</label>
+												<input accept=".json" class="form-control" type="file" id="getFile2"
+													onchange="saveFiles('json')" class="hide-this" multiple>
+											</div>
 										</div>
 									</div>
 									<div class="input-section mt-3">
@@ -1000,7 +1000,7 @@
 						$('#wait').css('display', 'block');
 						let reader = new FileReader();
 						reader.onload = function () {
-							let data = $.csv.toObjects(reader.result);
+							let data = fileType == 'csv' ? $.csv.toObjects(reader.result) : JSON.parse(reader.result);
 							$('#wait').css('display', 'none');
 							setItemToStorage('pd_net_file', JSON.stringify(data));
 							window.open("PD_network.html");
