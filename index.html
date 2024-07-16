@@ -1385,32 +1385,11 @@
 
 		//Custom Network
 
-
 		//An ajax call to read file which contain names of different uploaded files.
 		var UP_File = ''
 		function jsUcFirst(string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
-
-
-		$.ajax({
-			url: 'data/json/uploads/FileName.txt',
-			//dataType: 'json',
-			success: function (data) {
-				FileNames = data.split("\n");
-				//console.log(FileNames)
-				var arrayLength = FileNames.length;
-				for (var i = 0; i < arrayLength; i++) {
-					console.log(returnDesc(FileNames[i]))
-					if (FileNames[i].indexOf(' ') == -1) $('<option/>').val(FileNames[i]).text(jsUcFirst(FileNames[i])).appendTo('#selectFile')
-				}
-			},
-			statusCode: {
-				404: function () {
-					alert('There was a problem with the server.  Try again soon!');
-				}
-			}
-		});
 		//End of ajax call.
 
 		//2nd ajax call to read files in a directory
