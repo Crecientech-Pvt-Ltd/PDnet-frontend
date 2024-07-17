@@ -56,28 +56,33 @@
 	// 	// crossDomain: 'http://*',
 	// 	success: function (data) {
 
-	function getUniversal(data, idx = 0) {
+	function getUniversal(data, headers) {
 		console.log("uniNode loaded")
 		uniNode = data;
-		var uniNodeHeaders = Object.keys(uniNode?.genes?.[idx]);
-
+		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+		if (headers) {
+			headers.forEach((header) => {
+				if (!uniNodeHeaders.includes(header)) {
+					uniNodeHeaders.push(header);
+				}
+			});
+		}
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.startsWith("logFC_"));
-		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.startsWith("logFC_proteomics"));
-		var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.startsWith("logFC_"));
-		var uniNodeDirection = uniNodeHeaders.filter((header) => header.startsWith("direction_"));
-		var uniNodePathway = uniNodeHeaders.filter((header) => header.startsWith("pathway_"));
-		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.startsWith("CellType_"));
-		var uniNodePvalue = uniNodeHeaders.filter((header) => header.startsWith("pvalue_"));
-		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.startsWith("Druggability_"));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.startsWith("GWAS_"));
-		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.startsWith("GWAS_OR_"));
-		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.startsWith("GWAS_Beta_"));
-		var uniNodeDBs = uniNodeHeaders.filter((header) => header.startsWith("database_"));
-		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.startsWith("custom_color_"));
-		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.startsWith("relevence_"));
-		var uniNodeGDA = uniNodeHeaders.filter((header) => header.startsWith("GDA_"));
-
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
+		var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
+		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
+		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
+		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
+		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_".toLowerCase()));
+		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
+		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
+		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
+		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
@@ -215,8 +220,6 @@
 
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
-				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color')
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
@@ -809,33 +812,33 @@
 				<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
 				<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
 				<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
-				<p>
-					<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
-				</p>
-				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
+			<p>
+				<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
+			</p>
+			<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
 				<input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
-				<!-- Threshold for weight -->
-				<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
-					<br>
-					<p>link distance: <span id="linkdistanceinput"></span></p>
-				</div>
+			<!-- Threshold for weight -->
+			<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
+				<br>
+				<p>link distance: <span id="linkdistanceinput"></span></p>
+			</div>
 
-				<!-- Threshold for Degree -->
-				<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
-					<br>
-					<p>node charge: <span id="linkchargeinput"></span></p>
-				</div>
+			<!-- Threshold for Degree -->
+			<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
+				<br>
+				<p>node charge: <span id="linkchargeinput"></span></p>
+			</div>
 
-				<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
-					<br>
-					<p>distance: <span id="linkStrengthinput"></span></p>
-				</div>
-				<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
+			<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
+				<br>
+				<p>distance: <span id="linkStrengthinput"></span></p>
+			</div>
+			<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
 					</button> -->
-				<!-- Gene connections -->
+			<!-- Gene connections -->
 
 			</p>
 		</div>
@@ -974,20 +977,30 @@
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				const csvData = e.target.result;
-				let nodePropertyHeaders = ["logFC_", "logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_"];
+				let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_"];
 				let csvFormattedData = $.csv.toObjects(csvData);
-				csvFormattedData.forEach(gene => {
+				if (csvFormattedData.length === 0) {
+					alert('No data found in the file!');
+					return;
+				}
+				// trim all keys and values of csvFormattedData
+				csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
+					acc[key.trim()] = obj[key].trim();
+					return acc;
+				}, {}));
+				const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+				csvFormattedData.forEach((gene, idx) => {
 					currentUniversal.genes[geneIndexMap[gene.ID]] = {
-						...currentUniversal.genes[geneIndexMap[gene.ID]],
-						...Object.keys(gene).filter(header => nodePropertyHeaders.some(prop => header.startsWith(prop))).reduce((obj, key) => {
+						...headers.reduce((obj, key) => {
 							obj[key] = gene[key];
 							return obj;
-						}, {})
+						}, {}),
+						...currentUniversal.genes[geneIndexMap[gene.ID]]
 					}
-				})
+				});
 				document.getElementById("universal_ext").value = "";
 				clearUniData();
-				getUniversal(currentUniversal,geneIndexMap[csvFormattedData[0].ID]);
+				getUniversal(currentUniversal, headers);
 				$('#uploading_custom_universal').css('display', 'none');
 				$('#uploaded_custom_universal').css('display', 'block');
 				setTimeout(() => {
@@ -1054,11 +1067,24 @@
 
 			$("#logFCID4Color").val('none')
 			$("#directionID4Color").val('none')
-			$("#pathwayID4Color").val('none')
-			$("#traitID4Color").val('none')
+			$("#pathwayID4Color").val('none');
+			d3.select("#druggabilityInput4Size").style("display", "none");
+			d3.select("#PlogFCInput").style("display", "none");
+			d3.select("#GlogFCInput4Size").style("display", "none");
+			d3.select("#gwasInput4Size").style("display", "none");
+			d3.select("#GDAInput4Size").style("display", "none");
 			// console.log($("#logFCID4Color").val());
 			$("input[name='nodeColor']")[0].checked = true; // rectified nodecolor
 
+			$("input[name='nodeSize']")[0].checked = true; // rectified nodesize
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					.size(function (d) {
+						return Math.PI * Math.pow(nominal_base_node_size, 2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
 
 			if ($("input[name='nodeColor']:checked").val() == 3) {
 				//$("input[name='nodeColor']:checked").trigger('change');
@@ -1549,7 +1575,6 @@
 				.attr("cy", 0)
 				.attr("r", "100%")
 				.attr("id", function (d, i) {
-					console.log(d);
 					genID = d?.Gene_name?.replace("-", "HYPHEN") ?? "null"
 					genID = genID.replace(".", "DOT")
 					genID = genID.replace("(", "LB")
@@ -1851,11 +1876,10 @@
 					.size(function (d) {
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-						thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2, Math.abs(
-							Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
-						//console.log(thisNodeSize);
-						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ?
-							max_base_node_size : thisNodeSize || nominal_base_node_size, 2);
+						let val = Number(d[nodeSize]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.pow(Math.abs(val), 2))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
 						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2, Math.abs(Number(d[nodeSize])))))||base_radius,2);
 
 					})
@@ -3626,7 +3650,7 @@
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
-						let val = Number(d[nodeSize]) ?? undefined;
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GlogFCID4Size").value]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
@@ -3656,7 +3680,7 @@
 
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
-						let val = Number(d[nodeSize]) ?? undefined;
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("gwasID4Size").value]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
@@ -3686,7 +3710,7 @@
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//console.log(uniNode.genes[d?.ID])
 						//thisNodeSize = uniNode.genes[d?.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d?.ID][uniNode.headers[nodeSize]]))))) : "";
-						let val = Number(d[nodeSize]) ?? undefined;
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Size").value]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
@@ -3739,18 +3763,15 @@
 
 			nodeSize = document.getElementById("druggabilityID4Size").value;
 			nodeSize_sel = nodeSize;
-
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
-
 			d3.selectAll(".node").select("path")
 				.attr("d", d3.svg.symbol()
 					//.size(function(d) { return 600 })
 					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
 					.size(function (d) {
-
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//console.log(uniNode.genes[d?.ID])
-						let val = Number(d[nodeSize]) ?? undefined;
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Size").value]) ?? undefined;
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);

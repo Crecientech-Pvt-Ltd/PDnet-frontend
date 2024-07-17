@@ -1001,6 +1001,10 @@
 						let reader = new FileReader();
 						reader.onload = function () {
 							let data = fileType == 'csv' ? $.csv.toObjects(reader.result) : JSON.parse(reader.result);
+							data = data.map(obj => Object.keys(obj).reduce((acc, key) => {
+								acc[key.trim()] = obj[key].trim();
+								return acc;
+							}, {}));
 							$('#wait').css('display', 'none');
 							setItemToStorage('pd_net_file', JSON.stringify(data));
 							window.open("PD_network.html");
