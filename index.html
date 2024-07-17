@@ -838,7 +838,7 @@
 							'Accept': 'application/json'
 						},
 						data: JSON.stringify({
-							query: `query Bla($geneIDs: [String!]!) {
+							query: `query GeneVerification($geneIDs: [String!]!) {
 								getGenes(input: {
 									geneIDs: $geneIDs
 								}) {
