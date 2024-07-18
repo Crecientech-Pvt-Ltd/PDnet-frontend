@@ -1000,6 +1000,7 @@
 						$('#wait').css('display', 'block');
 						let reader = new FileReader();
 						reader.onload = function () {
+							setItemToStorage('headers',reader.result.split('\n').shift());
 							let data = fileType == 'csv' ? $.csv.toObjects(reader.result) : JSON.parse(reader.result);
 							data = data.map(obj => Object.keys(obj).reduce((acc, key) => {
 								acc[key.trim()] = obj[key].trim();
