@@ -2099,6 +2099,7 @@
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 					currentUniversal?.genes.forEach((gene, idx) => {
 						geneIndexMap[gene.ID] = idx;
+						geneIndexMap[gene?.Gene_name] = idx;
 					});
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);

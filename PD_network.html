@@ -2089,10 +2089,11 @@
 					currentUniversal.genes = result.data.getGenes;
 					currentUniversal.links = [];
 					result.data.getGenes.forEach((gene, idx) => {
-						geneIndexMap[gene.ID] = idx;
+						geneIndexMap[gene?.ID] = idx;
+						geneIndexMap[gene?.Gene_name] = idx;
 					});
 					fileData.forEach(e => {
-						if (geneIndexMap[e.Node1] && geneIndexMap[e.Node2]) {
+						if (geneIndexMap[e.Node1] !== undefined && geneIndexMap[e.Node2] !== undefined) {
 							currentUniversal.links.push({
 								source: +geneIndexMap[e.Node1],
 								target: +geneIndexMap[e.Node2],
