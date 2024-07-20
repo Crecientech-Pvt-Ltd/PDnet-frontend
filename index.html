@@ -998,19 +998,49 @@
 						alert("No file")
 					} else {
 						$('#wait').css('display', 'block');
-						let reader = new FileReader();
-						reader.onload = function () {
-							setItemToStorage('headers',reader.result.split('\n').shift());
-							let data = fileType == 'csv' ? $.csv.toObjects(reader.result) : JSON.parse(reader.result);
-							data = data.map(obj => Object.keys(obj).reduce((acc, key) => {
-								acc[key.trim()] = obj[key].trim();
-								return acc;
-							}, {}));
+						/****************************** Localstorage Implementation ***********************/
+						// 	let reader = new FileReader();
+						// 	reader.onload = function () {
+						// 		setItemToStorage('headers',reader.result.split('\n').shift());
+						// 		let data = fileType == 'csv' ? $.csv.toObjects(reader.result) : JSON.parse(reader.result);
+						// 		data = data.map(obj => Object.keys(obj).reduce((acc, key) => {
+						// 			acc[key.trim()] = obj[key].trim();
+						// 			return acc;
+						// 		}, {}));
+						// 		$('#wait').css('display', 'none');
+						// 		setItemToStorage('pd_net_file', JSON.stringify(data));
+						// 		window.open("PD_network.html");
+						// 	}
+						// 	reader.readAsText(uploadedFile[0]);
+						// }
+
+						/********************************* IndexedDB implementation ***********************/
+						let db;
+						let dbRequest = window.indexedDB.open("pdnet", 1);
+						dbRequest.onerror = function (req, ev) {
+							console.error(req.target.error);
+							alert("Access is blocked to indexedDB used for file storing");
 							$('#wait').css('display', 'none');
-							setItemToStorage('pd_net_file', JSON.stringify(data));
-							window.open("PD_network.html");
-						}
-						reader.readAsText(uploadedFile[0]);
+							return;
+						};
+
+						dbRequest.onupgradeneeded = function (req) {
+							db = req.target.result;
+							let objectStore = db.createObjectStore("files");
+						};
+
+						dbRequest.onsuccess = function (req, ev) {
+							db = req.target.result;
+							let objectStore;
+							objectStore = db.transaction(["files"], "readwrite").objectStore("files");
+							const fileRequest = objectStore.put(uploadedFile[0], "custom_network");
+							fileRequest.onsuccess = function (req, ev) {
+								$('#wait').css('display', 'none');
+								db.close();
+								window.open("PD_network.html");
+							};
+						};
+						db.close();
 					}
 				}
 			}

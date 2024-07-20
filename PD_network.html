@@ -1394,7 +1394,7 @@
       								<td>${i.ID}</td>
       								<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
       							</tr>`);
-							});	
+							});
 							$("#gene_info").append(
 								`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: right">Clear</button>`
 							)
@@ -1983,161 +1983,197 @@
 		var initialUniversal;
 		var geneIndexMap = {};
 
-		let fileData = JSON.parse(getItemFromStorage('pd_net_file'));
+		/*************************** Local storage Implementation  ********************************/
+		// let fileData = JSON.parse(getItemFromStorage('pd_net_file'));
 
-		const [Node1,Node2,Score] = getItemFromStorage('headers').split(',');
+		// const [Node1,Node2,Score] = getItemFromStorage('headers').split(',');
 
-		if (fileData) {
-			let geneIDs = new Set();
-			fileData.forEach(e => {
-				geneIDs.add(e[Node1]);
-				geneIDs.add(e[Node2]);
-			});
-			let allGeneNames = Array.from(geneIDs);
-			$.ajax({
-				url: `https://pdnet-apis.crecientech.com/graphql`,
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Accept': 'application/json'
-				},
-				data: JSON.stringify({
-					query: `query GeneVerification($geneIDs: [String!]!) {
-								getGenes(input: {
-									geneIDs: $geneIDs
-								}) {
-									ID
-									hgnc_gene_id
-									hgnc_gene_symbol
-									Description
-									Gene_name
-									database_Mendelian_GenCC_ALS
-									GDA_Score_opentargets_overall_association_score
-									GDA_Score_opentargets_uniprot_variants
-									GDA_Score_opentargets_eva
-									GDA_Score_opentargets_clingen
-									GDA_Score_opentargets_genomics_england
-									GDA_Score_opentargets_uniprot_literature
-									GDA_Score_opentargets_orphanet
-									GDA_Score_opentargets_chembl
-									GDA_Score_opentargets_impc
-									GDA_Score_opentargets_known_drug
-									GDA_Score_opentargets_literature
-									GDA_Score_opentargets_animal_model
-									GDA_Score_opentargets_genetic_association
-									GDA_Score_opentargets_expression_atlas
-									GDA_Score_opentargets_europepmc
-									GDA_Score_opentargets_rna_expression
-									GDA_Score_opentargets_ot_genetics_portal
-									GDA_Score_MantisML_HPO
-									GDA_Score_MantisML_OT
-									Druggability_Score_drugnome_small_molecule
-									Druggability_Score_drugnome_antibody
-									Druggability_Score_drugnome_protac
-									Druggability_Score_drugnome_tclin
-									Druggability_Score_drugnome_tier_1
-									Druggability_Score_drugnome_tclin_and_tier_1
-									Druggability_Score_drugnome_tclin_and_tchem
-									Druggability_Score_drugnome_tchem
-									Druggability_Score_drugnome_tier_1_and_2
-									Druggability_Score_drugnome_tier_1_and_2_and_3a
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID29566793_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID27455348_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID20801718_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID24931836_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID24256812_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID23624525_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID18084291_odds_ratio
-									GWAS_OR_ot_genetics_MONDO_0004976_PMID32968195_odds_ratio
-									GWAS_Beta_ot_genetics_MONDO_0004976_PMID34873335_beta
-									GWAS_Beta_ot_genetics_MONDO_0004976_PMID19451621_beta
-									logFC_rnaseq_PMID37080969_sporadic_fold_change
-									logFC_rnaseq_PMID37080969_c9orf72_fold_change
-									logFC_rnaseq_PMID37080969_fus_fold_change
-									logFC_rnaseq_PMID37080969_tardbp_fold_change
-									logFC_rnaseq_PMID37080969_sod1_fold_change
-									old_target_id
-									universal_ID
-									pathway_AMPK_signaling_pathway
-									pathway_OXO_mediated_transcription_R_HSA_9614085
-									pathway_MAPK_signaling_pathway
-									pathway_p38_MAPK_signaling_pathway_R_HSA_450302
-									pathway_p130Cas_linkage_to_MAPK_signaling_for_integrins
-									pathway_Macroautophagy
-									pathway_Chaperone_Mediated_Autophagy
-									pathway_Endocytosis
-									pathway_Synaptic_vesicle_cycle
-									pathway_Vesicle_mediated_transport
-									pathway_Chaperone_Mediated_Autophagy_1
-									pathway_Proteasome
-									pathway_Proteasome_Degradation_R_HSA_983168
-									pathway_Ubiquitin_mediated_proteolysis
-									pathway_Cellular_response_to_hypoxia
-									pathway_Longevity_regulating_pathway___Homo_sapiens_human
-									pathway_Lysosome___Homo_sapiens_human
-									pathway_Lysosome_Vesicle_Biogenesis
-									pathway_Mitophagy___animal___Homo_sapiens_human
-									pathway_Ribosome___Homo_sapiens_human
-									pathway_Oxidative_Stress_Induced_Senescence
-									pathway_Protein_processing_in_endoplasmic_reticulum___Homo_sapiens
-									pathway_Unfolded_Protein_Response_UPR_R_HSA_381119
-									pathway_Ubiquitination_And_Proteasome_Degradation_R_HSA_983168
-									pathway_Autodegradation_Of_E3_Ubiquitin_Ligase_COP1_R_HSA_349425
-									pathway_E3_Ubiquitin_Ligases_Ubiquitinate_Target_Proteins_R_HSA_8866654
-									pathway_Protein_Ubiquitination_R_HSA_8852135
-									pathway_Regulation_Of_FZD_By_Ubiquitination_R_HSA_4641263
-									pathway_SUMOylation_Of_Ubiquitinylation_Proteins_R_HSA_3232142
-									pathway_Synthesis_Of_Active_Ubiquitin_Roles_Of_E1_And_E2_Enzymes_R_HSA_8866652
-									pathway_Ubiquitin_Mediated_Degradation_Of_Phosphorylated_Cdc25A_R_HSA_69601
-									pathway_Ubiquitin_dependent_Degradation_Of_Cyclin_D_R_HSA_75815
-									pathway_Chaperone_Mediated_Autophagy_R_HSA_9613829
-									pathway_Chaperonin_mediated_Protein_Folding_R_HSA_390466
-									pathway_IRE1alpha_Activates_Chaperones_R_HSA_381070
-									pathway_XBP1S_Activates_Chaperone_Genes_R_HSA_381038
-								}
-							}`,
-					variables: {
-						"geneIDs": allGeneNames
-					}
-				}),
-				success: function (result) {
+		/************************************** IndexedDB Implementation **************************/
+		let db;
+		let dbRequest = window.indexedDB.open("pdnet");
+		let file;
 
-					currentUniversal.genes = result.data.getGenes;
-					currentUniversal.links = [];
-					result.data.getGenes.forEach((gene, idx) => {
-						geneIndexMap[gene?.ID] = idx;
-						geneIndexMap[gene?.Gene_name] = idx;
+		dbRequest.onerror = function (req, ev) {
+			console.error(req.target.error);
+			alert("Access is blocked to indexedDB used for file storing");
+			$('#wait').css('display', 'none');
+			db?.close();
+			return;
+		};
+
+		dbRequest.onsuccess = function (req, ev) {
+			db = req.target.result;
+			let objectStore;
+			try {
+				objectStore = db.transaction(["files"], "readonly").objectStore("files");
+			} catch (error) {
+				alert("Make sure to upload the file first to view the network");
+			}
+			let fileRequest = objectStore.get("custom_network");
+			fileRequest.onsuccess = function (req, ev) {
+				file = req.target.result;
+				console.log(file);
+				if (file) {
+					const fileReader = new FileReader();
+					fileReader.onload = function () {
+						let fileType = file.type.split('/').pop();
+						let fileData = fileType === 'csv' ? $.csv.toObjects(fileReader.result) : JSON.parse(fileReader.result);
+						const [Node1, Node2, Score] = fileType === 'csv' ? fileReader.result.split('\n').shift().split(',') : Object.keys(fileData[0]);
+						let geneIDs = new Set();
+						fileData.forEach(e => {
+						geneIDs.add(e[Node1]);
+						geneIDs.add(e[Node2]);
 					});
-					fileData.forEach(e => {
-						if (geneIndexMap[e[Node1]] !== undefined && geneIndexMap[e[Node2]] !== undefined) {
-							currentUniversal.links.push({
-								source: +geneIndexMap[e[Node1]],
-								target: +geneIndexMap[e[Node2]],
-								weight: +e[Score]
+					let allGeneNames = Array.from(geneIDs);
+					$.ajax({
+						url: `https://pdnet-apis.crecientech.com/graphql`,
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Accept': 'application/json'
+						},
+						data: JSON.stringify({
+							query: `query GeneVerification($geneIDs: [String!]!) {
+												getGenes(input: {
+													geneIDs: $geneIDs
+												}) {
+													ID
+													hgnc_gene_id
+													hgnc_gene_symbol
+													Description
+													Gene_name
+													database_Mendelian_GenCC_ALS
+													GDA_Score_opentargets_overall_association_score
+													GDA_Score_opentargets_uniprot_variants
+													GDA_Score_opentargets_eva
+													GDA_Score_opentargets_clingen
+													GDA_Score_opentargets_genomics_england
+													GDA_Score_opentargets_uniprot_literature
+													GDA_Score_opentargets_orphanet
+													GDA_Score_opentargets_chembl
+													GDA_Score_opentargets_impc
+													GDA_Score_opentargets_known_drug
+													GDA_Score_opentargets_literature
+													GDA_Score_opentargets_animal_model
+													GDA_Score_opentargets_genetic_association
+													GDA_Score_opentargets_expression_atlas
+													GDA_Score_opentargets_europepmc
+													GDA_Score_opentargets_rna_expression
+													GDA_Score_opentargets_ot_genetics_portal
+													GDA_Score_MantisML_HPO
+													GDA_Score_MantisML_OT
+													Druggability_Score_drugnome_small_molecule
+													Druggability_Score_drugnome_antibody
+													Druggability_Score_drugnome_protac
+													Druggability_Score_drugnome_tclin
+													Druggability_Score_drugnome_tier_1
+													Druggability_Score_drugnome_tclin_and_tier_1
+													Druggability_Score_drugnome_tclin_and_tchem
+													Druggability_Score_drugnome_tchem
+													Druggability_Score_drugnome_tier_1_and_2
+													Druggability_Score_drugnome_tier_1_and_2_and_3a
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID29566793_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID27455348_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID20801718_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID24931836_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID24256812_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID23624525_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID18084291_odds_ratio
+													GWAS_OR_ot_genetics_MONDO_0004976_PMID32968195_odds_ratio
+													GWAS_Beta_ot_genetics_MONDO_0004976_PMID34873335_beta
+													GWAS_Beta_ot_genetics_MONDO_0004976_PMID19451621_beta
+													logFC_rnaseq_PMID37080969_sporadic_fold_change
+													logFC_rnaseq_PMID37080969_c9orf72_fold_change
+													logFC_rnaseq_PMID37080969_fus_fold_change
+													logFC_rnaseq_PMID37080969_tardbp_fold_change
+													logFC_rnaseq_PMID37080969_sod1_fold_change
+													old_target_id
+													universal_ID
+													pathway_AMPK_signaling_pathway
+													pathway_OXO_mediated_transcription_R_HSA_9614085
+													pathway_MAPK_signaling_pathway
+													pathway_p38_MAPK_signaling_pathway_R_HSA_450302
+													pathway_p130Cas_linkage_to_MAPK_signaling_for_integrins
+													pathway_Macroautophagy
+													pathway_Chaperone_Mediated_Autophagy
+													pathway_Endocytosis
+													pathway_Synaptic_vesicle_cycle
+													pathway_Vesicle_mediated_transport
+													pathway_Chaperone_Mediated_Autophagy_1
+													pathway_Proteasome
+													pathway_Proteasome_Degradation_R_HSA_983168
+													pathway_Ubiquitin_mediated_proteolysis
+													pathway_Cellular_response_to_hypoxia
+													pathway_Longevity_regulating_pathway___Homo_sapiens_human
+													pathway_Lysosome___Homo_sapiens_human
+													pathway_Lysosome_Vesicle_Biogenesis
+													pathway_Mitophagy___animal___Homo_sapiens_human
+													pathway_Ribosome___Homo_sapiens_human
+													pathway_Oxidative_Stress_Induced_Senescence
+													pathway_Protein_processing_in_endoplasmic_reticulum___Homo_sapiens
+													pathway_Unfolded_Protein_Response_UPR_R_HSA_381119
+													pathway_Ubiquitination_And_Proteasome_Degradation_R_HSA_983168
+													pathway_Autodegradation_Of_E3_Ubiquitin_Ligase_COP1_R_HSA_349425
+													pathway_E3_Ubiquitin_Ligases_Ubiquitinate_Target_Proteins_R_HSA_8866654
+													pathway_Protein_Ubiquitination_R_HSA_8852135
+													pathway_Regulation_Of_FZD_By_Ubiquitination_R_HSA_4641263
+													pathway_SUMOylation_Of_Ubiquitinylation_Proteins_R_HSA_3232142
+													pathway_Synthesis_Of_Active_Ubiquitin_Roles_Of_E1_And_E2_Enzymes_R_HSA_8866652
+													pathway_Ubiquitin_Mediated_Degradation_Of_Phosphorylated_Cdc25A_R_HSA_69601
+													pathway_Ubiquitin_dependent_Degradation_Of_Cyclin_D_R_HSA_75815
+													pathway_Chaperone_Mediated_Autophagy_R_HSA_9613829
+													pathway_Chaperonin_mediated_Protein_Folding_R_HSA_390466
+													pathway_IRE1alpha_Activates_Chaperones_R_HSA_381070
+													pathway_XBP1S_Activates_Chaperone_Genes_R_HSA_381038
+												}
+											}`,
+							variables: {
+								"geneIDs": allGeneNames
+							}
+						}),
+						success: function (result) {
+
+							currentUniversal.genes = result.data.getGenes;
+							currentUniversal.links = [];
+							result.data.getGenes.forEach((gene, idx) => {
+								geneIndexMap[gene?.ID] = idx;
+								geneIndexMap[gene?.Gene_name] = idx;
 							});
+							fileData.forEach(e => {
+								if (geneIndexMap[e[Node1]] !== undefined && geneIndexMap[e[Node2]] !== undefined) {
+									currentUniversal.links.push({
+										source: +geneIndexMap[e[Node1]],
+										target: +geneIndexMap[e[Node2]],
+										weight: +e[Score]
+									});
+								}
+							});
+							var totalNodes = result.data.getGenes.length
+							var totalEdges = currentUniversal.links.length
+							$('#network_details').append(`<div style="margin: 10px 5px">Total Genes: ${totalNodes}<br>Total Interactions: ${totalEdges}</div>`)
+							if (totalNodes > 5000 || totalEdges > 10000) {
+								$('#node-modal-background-alert').css('display', 'block')
+							}
+							initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
+							$("#loader").css('display', 'none')
+							startD3(currentUniversal);
+							getUniversal(currentUniversal);
+						},
+						error: function (err) {
+							$("#loader").css('display', 'none')
+							alert('Please try after some time');
 						}
 					});
-					var totalNodes = result.data.getGenes.length
-					var totalEdges = currentUniversal.links.length
-					$('#network_details').append(`<div style="margin: 10px 5px">Total Genes: ${totalNodes}<br>Total Interactions: ${totalEdges}</div>`)
-					if (totalNodes > 5000 || totalEdges > 10000) {
-						$('#node-modal-background-alert').css('display', 'block')
-					}
-					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
+				};
+				fileReader.readAsText(file);
+				} else {
 					$("#loader").css('display', 'none')
-					startD3(currentUniversal);
-					getUniversal(currentUniversal);
-				},
-				error: function (err) {
-					$("#loader").css('display', 'none')
-					alert('Please try after some time');
+					alert('File was temporary in use, please upload the file again');
+					// window.close();
 				}
-			});
-		} else {
-			$("#loader").css('display', 'none')
-			alert('File was temporary in use, please upload the file again');
-			window.close();
-		}
+			};
+			db.close();
+		};
 
 		// setTimeout(() => {
 		// 	force.stop();
