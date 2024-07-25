@@ -357,6 +357,7 @@ span.down_arrow {
 
 #order,
 #confidence,
+#disease_dropdown,
 #uploadFileType {
     /*border: 1px solid #d8d7d7 !important;*/
     width: 100%;

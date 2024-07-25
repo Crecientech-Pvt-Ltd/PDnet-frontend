@@ -355,7 +355,17 @@
 		</div>
 
 		<div class="legends" style="background: rgb(255, 255, 255, 0.6);">
-
+			<button class="accordion active">Disease Map:</button>
+			<div class="panel" style="max-height:600px;">
+				<div class="padding-16" style="padding:10px 0;">
+					<select id="diseaseMap" name="diseaseMap" style="width:100%;">
+						<option value="OI">OI</option>
+						<option value="PSP">PSP</option>
+						<option value="ALS">ALS</option>
+						<option value="FTD">FTD</option>
+					</select>
+				</div>
+			</div>
 			<button class="accordion active">Node Color</button>
 
 			<!-- To change the color of nodes based on different parameters-->
@@ -654,10 +664,19 @@
 					</form>
 				</div>
 			</div>
-			<!-- Node colors legend-->
-			<button class="accordion">Legends</button>
-			<div class="panel" id="legendPanel">
-				<p></p>
+			<button class="accordion active">Add Paper</button>
+			<div class="panel" style="max-height:400px;">
+				<div style="margin: 10px">
+					<b>Add a file:</b>
+					<div id="">
+						<input type="file" accept=".csv" id="universal_ext">
+						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
+							Universal</button>
+						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
+						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
+					</div>
+				</div>
 			</div>
 			<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
 				Screenshot!
@@ -932,20 +951,11 @@
 
 			</div>
 		</div>
-		<button class="accordion active">Add Paper</button>
-		<div class="panel" style="max-height:400px;">
-			<div style="margin: 10px">
-				<b>Add a file:</b>
-				<div id="">
-					<input type="file" accept=".csv" id="universal_ext">
-					<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
-					<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset Universal</button>
-					<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
-					<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
-				</div>
-			</div>
+		<!-- Node colors legend-->
+		<button class="accordion">Legends</button>
+		<div class="panel" id="legendPanel">
+			<p></p>
 		</div>
-
 	</div>
 	</div>
 	<div class="networksetting">
@@ -975,6 +985,10 @@
 		// Reset universal
 		function resetUniversals() {
 			resetText();
+			/***************************************************** Change this to initial disease logic ********************************/
+			$("#diseaseMap").val("ALS");
+			/***************************************************** Change this to initial disease logic ********************************/
+			$("#diseaseMap option[value='Custom Universal']").remove();
 			clearUniData();
 			getUniversal(initialUniversal);
 		}
@@ -990,7 +1004,7 @@
 			reader.onload = function (e) {
 				const csvData = e.target.result;
 				const ID = csvData.split('\n').shift().split(',').shift().trim();
-				let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_"];
+				let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
 				let csvFormattedData = $.csv.toObjects(csvData);
 				if (csvFormattedData.length === 0) {
 					alert('No data found in the file!');
@@ -1011,6 +1025,8 @@
 						...currentUniversal.genes[geneIndexMap[gene[ID]]]
 					}
 				});
+				$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
+				$("#diseaseMap").val('Custom Universal');
 				document.getElementById("universal_ext").value = "";
 				clearUniData();
 				getUniversal(currentUniversal, headers);
@@ -1077,7 +1093,7 @@
 		function resetText() {
 			$("#gene_list").val('');
 
-
+			d3.select("#TE4Color").style("display", "none");
 			$("#logFCID4Color").val('none')
 			$("#directionID4Color").val('none')
 			$("#pathwayID4Color").val('none');
@@ -1380,12 +1396,11 @@
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
 				//########################
-				x = [];
+				let x = [];
 				let nodeDetails = []; // NEW ADDED
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
 						nodeDetails.push(d);
-						console.log(x.push(d?.Gene_name));
 					}
 				});
 
@@ -2024,7 +2039,7 @@
 			let fileRequest = objectStore.get("custom_network");
 			fileRequest.onsuccess = function (req, ev) {
 				file = req.target.result;
-				let { disease } = JSON.parse(getItemFromStorage('network')) ?? { disease: 'ALS'};
+				let { disease } = JSON.parse(getItemFromStorage('network')) ?? { disease: 'ALS' };
 				if (file) {
 					const fileReader = new FileReader();
 					fileReader.onload = function () {
@@ -2033,19 +2048,19 @@
 						const [Node1, Node2, Score] = fileType === 'csv' ? fileReader.result.split('\n').shift().split(',') : Object.keys(fileData[0]);
 						let geneIDs = new Set();
 						fileData.forEach(e => {
-						geneIDs.add(e[Node1]);
-						geneIDs.add(e[Node2]);
-					});
-					let allGeneNames = Array.from(geneIDs);
-					$.ajax({
-						url: `https://pdnet-apis.crecientech.com/graphql`,
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Accept': 'application/json'
-						},
-						data: JSON.stringify({
-							query: `query GeneVerification($geneIDs: [String!]!) {
+							geneIDs.add(e[Node1]);
+							geneIDs.add(e[Node2]);
+						});
+						let allGeneNames = Array.from(geneIDs);
+						$.ajax({
+							url: `https://pdnet-apis.crecientech.com/graphql`,
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								'Accept': 'application/json'
+							},
+							data: JSON.stringify({
+								query: `query GeneVerification($geneIDs: [String!]!) {
 												getGenes(input: {
 													geneIDs: $geneIDs
 												}) {
@@ -2058,58 +2073,58 @@
 													${disease}
 												}
 											}`,
-							variables: {
-								"geneIDs": allGeneNames
-							}
-						}),
-						success: function (result) {
-
-							currentUniversal.genes = result.data.getGenes;
-							currentUniversal.links = [];
-							result.data.getGenes.forEach((gene, idx) => {
-								geneIndexMap[gene.ID] = idx;
-								geneIndexMap[gene?.Gene_name] = idx;
-								Object.keys(gene.common).forEach((key) => {
-									gene[key] = gene.common[key];
-								});
-								delete gene.common;
-								Object.keys(gene[disease]).forEach((key) => {
-									gene[key] = gene[disease][key];
-								});
-								delete gene[disease];
-								// Object.keys(gene[d?.disease]).forEach((key) => {
-								// 	gene[key] = gene[d?.disease][key];
-								// });
-								// delete gene[d?.disease];
-								
-							});
-							fileData.forEach(e => {
-								if (geneIndexMap[e[Node1]] !== undefined && geneIndexMap[e[Node2]] !== undefined) {
-									currentUniversal.links.push({
-										source: +geneIndexMap[e[Node1]],
-										target: +geneIndexMap[e[Node2]],
-										weight: +e[Score]
-									});
+								variables: {
+									"geneIDs": allGeneNames
 								}
-							});
-							var totalNodes = result.data.getGenes.length
-							var totalEdges = currentUniversal.links.length
-							$('#network_details').append(`<div style="margin: 10px 5px">Total Genes: ${totalNodes}<br>Total Interactions: ${totalEdges}</div>`)
-							if (totalNodes > 5000 || totalEdges > 10000) {
-								$('#node-modal-background-alert').css('display', 'block')
+							}),
+							success: function (result) {
+
+								currentUniversal.genes = result.data.getGenes;
+								currentUniversal.links = [];
+								result.data.getGenes.forEach((gene, idx) => {
+									geneIndexMap[gene.ID] = idx;
+									geneIndexMap[gene?.Gene_name] = idx;
+									Object.keys(gene.common).forEach((key) => {
+										gene[key] = gene.common[key];
+									});
+									delete gene.common;
+									Object.keys(gene[disease]).forEach((key) => {
+										gene[key] = gene[disease][key];
+									});
+									delete gene[disease];
+									// Object.keys(gene[d?.disease]).forEach((key) => {
+									// 	gene[key] = gene[d?.disease][key];
+									// });
+									// delete gene[d?.disease];
+
+								});
+								fileData.forEach(e => {
+									if (geneIndexMap[e[Node1]] !== undefined && geneIndexMap[e[Node2]] !== undefined) {
+										currentUniversal.links.push({
+											source: +geneIndexMap[e[Node1]],
+											target: +geneIndexMap[e[Node2]],
+											weight: +e[Score]
+										});
+									}
+								});
+								var totalNodes = result.data.getGenes.length
+								var totalEdges = currentUniversal.links.length
+								$('#network_details').append(`<div style="margin: 10px 5px">Total Genes: ${totalNodes}<br>Total Interactions: ${totalEdges}</div>`)
+								if (totalNodes > 5000 || totalEdges > 10000) {
+									$('#node-modal-background-alert').css('display', 'block')
+								}
+								initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
+								$("#loader").css('display', 'none')
+								startD3(currentUniversal);
+								getUniversal(currentUniversal);
+							},
+							error: function (err) {
+								$("#loader").css('display', 'none')
+								alert('Please try after some time');
 							}
-							initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-							$("#loader").css('display', 'none')
-							startD3(currentUniversal);
-							getUniversal(currentUniversal);
-						},
-						error: function (err) {
-							$("#loader").css('display', 'none')
-							alert('Please try after some time');
-						}
-					});
-				};
-				fileReader.readAsText(file);
+						});
+					};
+					fileReader.readAsText(file);
 				} else {
 					$("#loader").css('display', 'none')
 					alert('File was temporary in use, please upload the file again');

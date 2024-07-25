@@ -284,7 +284,7 @@
 												<div class="input-header">Disease Map</div>
 												<div>
 													<select class="form-select" aria-label="Default select example"
-													name="order" id="order">
+													name="disease_dropdown" id="disease_dropdown">
 													<option value="ALS">ALS</option>
 													<option value="FTD">FTD</option>
 													<option value="OI">OI</option>
@@ -819,7 +819,8 @@
 						order: parseInt(order),
 						analysedWeight: channel,
 						score: parseFloat(score),
-						type: interaction_type_dropdown
+						type: interaction_type_dropdown,
+						disease: $('#disease_dropdown').val()
 					}
 					d = JSON.stringify(d)
 					setItemToStorage('pd_net_stringDB', d);
@@ -838,7 +839,8 @@
 					order: parseInt(order),
 					analysedWeight: channel,
 					score: parseFloat(score),
-					type: interaction_type_dropdown
+					type: interaction_type_dropdown,
+					disease: $('#disease_dropdown').val()
 				}
 				console.log(d)
 				d = JSON.stringify(d)
@@ -1118,7 +1120,7 @@
 	</script>
 	<script>
 		// ================================ Network Description Add ================================
-		function checkPreUploadNetworkExists(n_name) {
+		function checkPreUploadNetworkExists(n_name) {	
 
 		}
 
@@ -1131,7 +1133,6 @@
 
 			let x = document.getElementById('networkDesc');
 			let y = returnDesc(whole_network_name);
-			console.log('Y---', y)
 			if ((network_name !== "" && network_order !== "" && interaction_type !== "")) {
 				$.ajax({
 					url: `data/json/uploads/${whole_network_name}.json`, // taking long time to load

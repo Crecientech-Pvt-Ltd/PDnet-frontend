@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="script/jquery.csv.min.js"></script>
+<script defer type="text/javascript" src="script/jquery.csv.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <!-- <script src='/script/jquery-ui.js'></script>
    <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="  crossorigin="anonymous"></script>-->
@@ -48,7 +48,7 @@
 	// 	dataType: 'json',
 	// 	// crossDomain: 'http://*',
 	// 	success: function (data) {
-	function getUniversal(data,headers) {
+	function getUniversal(data, headers) {
 
 		console.log("uniNode loaded")
 		uniNode = data;
@@ -349,12 +349,12 @@
 			<div class="panel" style="max-height:600px;">
 				<div class="padding-16" style="padding:10px 0;">
 					<select id="diseaseMap" name="diseaseMap" style="width:100%;">
-	    			<option value="0">OI</option>
-					<option value="1">PSP</option>
-					<option value="2">ALS</option>
-					<option value="3">FTD</option>
-				</select>
-			</div>
+						<option value="OI">OI</option>
+						<option value="PSP">PSP</option>
+						<option value="ALS">ALS</option>
+						<option value="FTD">FTD</option>
+					</select>
+				</div>
 			</div>
 			<button class="accordion active">Node Color</button>
 			<!-- To change the color of nodes based on different parameters-->
@@ -377,16 +377,16 @@
 					<!-- Dropdown for pathways name to highlight nodes-->
 				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
 					Select Pathway:
-					   <select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
+					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
 						<!--TEMP <option value="none" selected="selected">None</option> -->
-						
-					</select>					
+
+					</select>
 				</div>
 				<script>
 					jQuery('.pathwayID4Color').chosen();
 				</script>
 
-				
+
 				<!-- Dropdown for GWAS DATA TO highlight nodes-->
 				<div id="GWASInput" style="padding-bottom:5px;display:none;">
 					Select GWAS data:
@@ -585,7 +585,7 @@
 					<br>
 					<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
 					<input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
-					<input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br>
+					<!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
 					<!-- Threshold for weight -->
 				<div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
 					<input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
@@ -653,7 +653,8 @@
 					<div id="">
 						<input type="file" id="universal_ext" accept="text/csv,.csv">
 						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
-						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset Universal</button>
+						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
+							Universal</button>
 						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
 						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
 					</div>
@@ -980,10 +981,10 @@
 		</div> -->
 		<!-- Node colors legend 2-->
 
-		 <button class="accordion">Legends</button>
-		 <div class="panel" id="legendPanel">
-			 <p></p>
-		 </div> 
+		<button class="accordion">Legends</button>
+		<div class="panel" id="legendPanel">
+			<p></p>
+		</div>
 
 	</div>
 	</div>
@@ -1014,6 +1015,8 @@
 		function resetUniversals() {
 			resetText()
 			clearUniData()
+			$("#diseaseMap").val(JSON.parse(getItemFromStorage('pd_net_stringDB')).disease);
+			$("#diseaseMap option[value='Custom Universal']").remove();
 			getUniversal(initialUniversal);
 		}
 		// new value to universal file
@@ -1027,7 +1030,7 @@
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				const csvData = e.target.result;
-				let nodePropertyHeaders = ["logFC_", "logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "tissue_enh_"];
+				let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
 				let csvFormattedData = $.csv.toObjects(csvData);
 				csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
 					acc[key.trim()] = obj[key].trim();
@@ -1043,9 +1046,11 @@
 						...currentUniversal.genes[geneIndexMap[gene.ID]]
 					}
 				});
+				$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
+				$("#diseaseMap").val('Custom Universal');
 				document.getElementById("universal_ext").value = "";
 				clearUniData();
-				getUniversal(currentUniversal,headers);
+				getUniversal(currentUniversal, headers);
 				$('#uploading_custom_universal').css('display', 'none');
 				$('#uploaded_custom_universal').css('display', 'block');
 				setTimeout(() => {
@@ -1117,6 +1122,7 @@
 			d3.select("#GlogFCInput4Size").style("display", "none");
 			d3.select("#gwasInput4Size").style("display", "none");
 			d3.select("#GDAInput4Size").style("display", "none");
+			d3.select("#TE4Color").style("display", "none");
 			// console.log($("#logFCID4Color").val());
 			$("input[name='nodeColor']")[0].checked = true; // rectified nodecolor
 
@@ -1245,6 +1251,7 @@
 
 		//deferent variables used in plot generation
 		var nodeSize_sel = "";
+		var nodeColor_sel = "";
 		var default_node_color = "rgb(23, 190, 207)"; //#17becf
 		//var default_node_color = "rgb(3,190,100)";
 		//var default_link_color = "#888";
@@ -1401,6 +1408,7 @@
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
 				//########################
+				let x = [];
 				let nodeDetails = []; // NEW ADDED
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
@@ -1765,7 +1773,9 @@
 
 						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (d[nodeSize_sel] ? (Number(d[nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
 					}
-
+					if (nodeColor_sel != "") {
+						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
+					}
 					//################### End_Update on 8.05.19 #################################//
 					//var tmp4 = "logFC: " + d.logFC.toExponential(2) + "<br>";
 					//d.proteomics_fc == "NA" || typeof d.proteomics_fc == "undefined" ? tmp5 = "" : tmp5 = "Proteomic logFC: " + d.proteomics_fc.toExponential(2) + "<br>"
@@ -1775,12 +1785,14 @@
 					//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
 					//console.log("Node size")
 					//console.log(nodSize)
+					let result = tmp1 + tmp2 + tmp3;
 					if (nodeSize_sel != "") {
-						return tmp1 + tmp2 + tmp3 + tmp4;
-					} else {
-						return tmp1 + tmp2 + tmp3;
+						result += tmp4;
 					}
-
+					if (nodeColor_sel != "") {
+						result += tmp5;
+					}
+					return result;
 				})
 				gbTootip.style("display", "block");
 			})
@@ -2015,9 +2027,10 @@
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
+			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
-				 url: `https://pdnet-apis.crecientech.com/graphql`,
+				url: `https://pdnet-apis.crecientech.com/graphql`,
 				// url: `http://localhost:3000/graphql`,
 				type: "POST",
 				dataType: 'json',
@@ -2636,7 +2649,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			} else if ($(this).val() === '1') { //color based on differential expression (Directions: up/down/none)
 				// $('#Direction').
@@ -2662,7 +2675,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 
 			} else if ($(this).val() === '2') { //color based on differential expression (linear scale)
@@ -2690,7 +2703,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			} else if ($(this).val() === '3') { //color based on presence in pathway/s
 
@@ -2714,7 +2727,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			} else if ($(this).val() === '4') { //color based on presence in trait list (p-values from articles)
 
@@ -2739,7 +2752,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			} else if ($(this).val() === '5') { //color based on differential expression (linear scale)
 
@@ -2766,7 +2779,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			} else if ($(this).val() === '6') { //color based on differential expression (linear scale)
 
@@ -2793,7 +2806,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 
 			} else if ($(this).val() === '7') { //color based on differential expression (linear scale)
@@ -2821,7 +2834,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 
 			} else if ($(this).val() === '8') { //color based on differential expression (linear scale)
@@ -2849,7 +2862,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 
 			} else if ($(this).val() === '9') { //color based on differential expression (linear scale)
@@ -2877,7 +2890,7 @@
 				d3.select("#GDAInput").style("display", "block");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			}
 
@@ -2895,7 +2908,7 @@
 				d3.select("#logFCInput").style("display", "none");
 				d3.select("#pathwayInput").style("display", "none");
 				//d3.select("#druggabilityInput4Size").style("display", "none");
-				d3.select(".legendExpression").attr("opacity", 0);
+				d3.select(".legendExpression").attr("opacity", 1);
 				d3.select(".legendDirection").attr("opacity", 0);
 				d3.select(".legendPathway").attr("opacity", 0);
 				d3.select("#directionInput").style("display", "none");
@@ -2907,7 +2920,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "block");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 			}
 
@@ -2924,7 +2937,7 @@
 				d3.select("#logFCInput").style("display", "none");
 				d3.select("#pathwayInput").style("display", "none");
 				//d3.select("#druggabilityInput4Size").style("display", "none");
-				d3.select(".legendExpression").attr("opacity", 0);
+				d3.select(".legendExpression").attr("opacity", 1);
 				d3.select(".legendDirection").attr("opacity", 0);
 				d3.select(".legendPathway").attr("opacity", 0);
 				d3.select("#directionInput").style("display", "none");
@@ -2936,7 +2949,7 @@
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "block");
-				d3.select("#TE4Input").style("display", "none");
+				d3.select("#TEInput").style("display", "none");
 
 
 			} else if ($(this).val() == '12') {
@@ -2967,6 +2980,7 @@
 		//on selecting custom color, color the nodes
 
 		document.getElementById("custom4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
 				if (mks) {
@@ -2986,6 +3000,7 @@
 		//on selecting Direction type, color the nodes
 
 		document.getElementById("directionID4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("directionID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var dirc = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("directionID4Color").value] ?? undefined;
 				if (dirc == "UP") {
@@ -3000,6 +3015,7 @@
 		//on selecting logFC type, color the nodes
 
 		document.getElementById("logFCID4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("logFCID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
@@ -3015,6 +3031,7 @@
 		//on selecting GWAS type, color the nodes
 
 		document.getElementById("GWAS4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("GWAS4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
 				return gw && gw >= 1 ? "red" : default_node_color;
@@ -3025,6 +3042,7 @@
 		//on selecting Databases type, color the nodes
 
 		document.getElementById("DBs4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("DBs4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
 				return dbs && dbs >= 1 ? "red" : default_node_color;
@@ -3034,6 +3052,7 @@
 		//on selecting Celltype Markers, color the nodes
 
 		document.getElementById("markers4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("markers4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
 				return mks && mks >= 1 ? "red" : default_node_color;
@@ -3044,6 +3063,7 @@
 		//on selecting pathway name, color the nodes
 
 		document.getElementById("pathwayID4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("pathwayID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
 				return pat && pat == 1 ? "red" : default_node_color;
@@ -3053,6 +3073,7 @@
 		// on selecting Druggability for color change
 
 		document.getElementById("druggabilityID4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
@@ -3065,7 +3086,7 @@
 		// on selecting GDA for color change
 
 		document.getElementById("GDAID4Color").onchange = function () {
-
+			nodeColor_sel = document.getElementById("GDAID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
@@ -3078,6 +3099,7 @@
 		// on selecting GWAS OR for color change
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("GWAS_OR4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
@@ -3087,6 +3109,7 @@
 		// on selecting GWAS Beta for color change
 
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("GWAS_Beta4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
