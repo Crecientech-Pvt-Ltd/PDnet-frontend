@@ -2024,7 +2024,7 @@
 			let fileRequest = objectStore.get("custom_network");
 			fileRequest.onsuccess = function (req, ev) {
 				file = req.target.result;
-				let { disease } = JSON.parse(getItemFromStorage('network'));
+				let { disease } = JSON.parse(getItemFromStorage('network')) ?? { disease: 'ALS'};
 				if (file) {
 					const fileReader = new FileReader();
 					fileReader.onload = function () {
@@ -2073,10 +2073,15 @@
 									gene[key] = gene.common[key];
 								});
 								delete gene.common;
-								Object.keys(gene[d?.disease]).forEach((key) => {
-									gene[key] = gene[d?.disease][key];
+								Object.keys(gene[disease]).forEach((key) => {
+									gene[key] = gene[disease][key];
 								});
-								delete gene[d?.disease];
+								delete gene[disease];
+								// Object.keys(gene[d?.disease]).forEach((key) => {
+								// 	gene[key] = gene[d?.disease][key];
+								// });
+								// delete gene[d?.disease];
+								
 							});
 							fileData.forEach(e => {
 								if (geneIndexMap[e[Node1]] !== undefined && geneIndexMap[e[Node2]] !== undefined) {
