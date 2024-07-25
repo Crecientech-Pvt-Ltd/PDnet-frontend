@@ -76,20 +76,16 @@
 		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
 		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
-		var uniNodeTissueEnh = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("tissue_enh_".toLowerCase()));
-
+		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
 
 
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
 
-//For tissue_enh_
-for (var key = 0; key < uniNodeTissueEnh.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			$('<option/>').val(uniNodeTissueEnh[key]).text(jsUcFirst(uniNodeTissueEnh[key])).appendTo(
-				'#custom4Color')
-		};
-
+		// For TE Color
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color');
+		}
 
 		// For GDA Color
 		for (var key = 0; key < uniNodeGDA.length; key++) {
@@ -461,10 +457,9 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-
-				<div id="tissue_enh_input" style="padding-bottom:5px;display:none;">
+				<div id="TEInput" style="padding-bottom:5px;display:none;">
 					Select Tissue Enrichment Options:
-					<select id="tissueEnh" name="tissuEnh" style="max-width:90%;">
+					<select id="TE4Color" name="TE4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -2027,97 +2022,16 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				type: "POST",
 				dataType: 'json',
 				data: JSON.stringify({
-					query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!) {
-							  	getGeneInteractions(input: { geneIDs: $geneIDs, minScore: $minScore },order: $order) {
+					query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!, $interactionType: String!) {
+							  	getGeneInteractions(input: { geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType },order: $order) {
 							    	genes {
 										ID
 										hgnc_gene_id
 										hgnc_gene_symbol
 										Description
 										Gene_name
-										database_Mendelian_GenCC_ALS
-										GDA_Score_opentargets_overall_association_score
-										GDA_Score_opentargets_uniprot_variants
-										GDA_Score_opentargets_eva
-										GDA_Score_opentargets_clingen
-										GDA_Score_opentargets_genomics_england
-										GDA_Score_opentargets_uniprot_literature
-										GDA_Score_opentargets_orphanet
-										GDA_Score_opentargets_chembl
-										GDA_Score_opentargets_impc
-										GDA_Score_opentargets_known_drug
-										GDA_Score_opentargets_literature
-										GDA_Score_opentargets_animal_model
-										GDA_Score_opentargets_genetic_association
-										GDA_Score_opentargets_expression_atlas
-										GDA_Score_opentargets_europepmc
-										GDA_Score_opentargets_rna_expression
-										GDA_Score_opentargets_ot_genetics_portal
-										GDA_Score_MantisML_HPO
-										GDA_Score_MantisML_OT
-										Druggability_Score_drugnome_small_molecule
-										Druggability_Score_drugnome_antibody
-										Druggability_Score_drugnome_protac
-										Druggability_Score_drugnome_tclin
-										Druggability_Score_drugnome_tier_1
-										Druggability_Score_drugnome_tclin_and_tier_1
-										Druggability_Score_drugnome_tclin_and_tchem
-										Druggability_Score_drugnome_tchem
-										Druggability_Score_drugnome_tier_1_and_2
-										Druggability_Score_drugnome_tier_1_and_2_and_3a
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID29566793_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID27455348_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID20801718_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID24931836_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID24256812_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID23624525_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID18084291_odds_ratio
-										GWAS_OR_ot_genetics_MONDO_0004976_PMID32968195_odds_ratio
-										GWAS_Beta_ot_genetics_MONDO_0004976_PMID34873335_beta
-										GWAS_Beta_ot_genetics_MONDO_0004976_PMID19451621_beta
-										logFC_rnaseq_PMID37080969_sporadic_fold_change
-										logFC_rnaseq_PMID37080969_c9orf72_fold_change
-										logFC_rnaseq_PMID37080969_fus_fold_change
-										logFC_rnaseq_PMID37080969_tardbp_fold_change
-										logFC_rnaseq_PMID37080969_sod1_fold_change
-										old_target_id
-										universal_ID
-										pathway_AMPK_signaling_pathway
-										pathway_OXO_mediated_transcription_R_HSA_9614085
-										pathway_MAPK_signaling_pathway
-										pathway_p38_MAPK_signaling_pathway_R_HSA_450302
-										pathway_p130Cas_linkage_to_MAPK_signaling_for_integrins
-										pathway_Macroautophagy
-										pathway_Chaperone_Mediated_Autophagy
-										pathway_Endocytosis
-										pathway_Synaptic_vesicle_cycle
-										pathway_Vesicle_mediated_transport
-										pathway_Chaperone_Mediated_Autophagy_1
-										pathway_Proteasome
-										pathway_Proteasome_Degradation_R_HSA_983168
-										pathway_Ubiquitin_mediated_proteolysis
-										pathway_Cellular_response_to_hypoxia
-										pathway_Longevity_regulating_pathway___Homo_sapiens_human
-										pathway_Lysosome___Homo_sapiens_human
-										pathway_Lysosome_Vesicle_Biogenesis
-										pathway_Mitophagy___animal___Homo_sapiens_human
-										pathway_Ribosome___Homo_sapiens_human
-										pathway_Oxidative_Stress_Induced_Senescence
-										pathway_Protein_processing_in_endoplasmic_reticulum___Homo_sapiens
-										pathway_Unfolded_Protein_Response_UPR_R_HSA_381119
-										pathway_Ubiquitination_And_Proteasome_Degradation_R_HSA_983168
-										pathway_Autodegradation_Of_E3_Ubiquitin_Ligase_COP1_R_HSA_349425
-										pathway_E3_Ubiquitin_Ligases_Ubiquitinate_Target_Proteins_R_HSA_8866654
-										pathway_Protein_Ubiquitination_R_HSA_8852135
-										pathway_Regulation_Of_FZD_By_Ubiquitination_R_HSA_4641263
-										pathway_SUMOylation_Of_Ubiquitinylation_Proteins_R_HSA_3232142
-										pathway_Synthesis_Of_Active_Ubiquitin_Roles_Of_E1_And_E2_Enzymes_R_HSA_8866652
-										pathway_Ubiquitin_Mediated_Degradation_Of_Phosphorylated_Cdc25A_R_HSA_69601
-										pathway_Ubiquitin_dependent_Degradation_Of_Cyclin_D_R_HSA_75815
-										pathway_Chaperone_Mediated_Autophagy_R_HSA_9613829
-										pathway_Chaperonin_mediated_Protein_Folding_R_HSA_390466
-										pathway_IRE1alpha_Activates_Chaperones_R_HSA_381070
-										pathway_XBP1S_Activates_Chaperone_Genes_R_HSA_381038
+										common
+										${d?.disease}
 							    	}
 									links {
 										gene1 {
@@ -2135,7 +2049,8 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 					variables: {
 						"geneIDs": d.nodeNames,
 						"minScore": d.score,
-						"order": d.order
+						"order": d.order,
+						"interactionType": d.type
 					}
 				}),
 				headers: {
@@ -2154,12 +2069,21 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 					$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
 					currentUniversal = result.data?.getGeneInteractions;
-					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 					currentUniversal?.genes.forEach((gene, idx) => {
 						geneIndexMap[gene.ID] = idx;
+						geneIndexMap[gene?.Gene_name] = idx;
+						Object.keys(gene.common).forEach((key) => {
+							gene[key] = gene.common[key];
+						});
+						delete gene.common;
+						Object.keys(gene[d?.disease]).forEach((key) => {
+							gene[key] = gene[d?.disease][key];
+						});
+						delete gene[d?.disease];
 					});
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
+					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 				},
 				error: function (err) {
 					$("#loader").css('display', 'none')
@@ -2712,6 +2636,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 			} else if ($(this).val() === '1') { //color based on differential expression (Directions: up/down/none)
 				// $('#Direction').
@@ -2737,6 +2662,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 
 			} else if ($(this).val() === '2') { //color based on differential expression (linear scale)
@@ -2764,7 +2690,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-
+				d3.select("#TE4Input").style("display", "none");
 
 			} else if ($(this).val() === '3') { //color based on presence in pathway/s
 
@@ -2788,6 +2714,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 			} else if ($(this).val() === '4') { //color based on presence in trait list (p-values from articles)
 
@@ -2812,6 +2739,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 			} else if ($(this).val() === '5') { //color based on differential expression (linear scale)
 
@@ -2838,7 +2766,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-
+				d3.select("#TE4Input").style("display", "none");
 
 			} else if ($(this).val() === '6') { //color based on differential expression (linear scale)
 
@@ -2865,6 +2793,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 
 			} else if ($(this).val() === '7') { //color based on differential expression (linear scale)
@@ -2892,6 +2821,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 
 			} else if ($(this).val() === '8') { //color based on differential expression (linear scale)
@@ -2919,6 +2849,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
 
 
 			} else if ($(this).val() === '9') { //color based on differential expression (linear scale)
@@ -2946,8 +2877,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "block");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
-
-
+				d3.select("#TE4Input").style("display", "none");
 
 			}
 
@@ -2977,6 +2907,8 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "block");
 				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select("#TE4Input").style("display", "none");
+
 			}
 
 			else if ($(this).val() === '11') { //color based on differential expression (linear scale)
@@ -3004,7 +2936,28 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 				d3.select("#GDAInput").style("display", "none");
 				d3.select("#GWAS_OR_Input").style("display", "none");
 				d3.select("#GWAS_Beta_Input").style("display", "block");
+				d3.select("#TE4Input").style("display", "none");
 
+
+			} else if ($(this).val() == '12') {
+				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+					return default_node_color;
+				});
+				d3.select("#logFCInput").style("display", "none");
+				d3.select("#pathwayInput").style("display", "none");
+				d3.select(".legendExpression").attr("opacity", 0);
+				d3.select(".legendDirection").attr("opacity", 0);
+				d3.select(".legendPathway").attr("opacity", 0);
+				d3.select("#directionInput").style("display", "none");
+				d3.select("#druggabilityInput").style("display", "none");
+				d3.select("#GWASInput").style("display", "none");
+				d3.select("#DBsInput").style("display", "none");
+				d3.select("#celltypemarkerInput").style("display", "none");
+				d3.select("#custom_color_input").style("display", "none");
+				d3.select("#GDAInput").style("display", "none");
+				d3.select("#GWAS_OR_Input").style("display", "none");
+				d3.select("#GWAS_Beta_Input").style("display", "none");
+				d3.select('#TEInput').style('display', 'block');
 			}
 
 		});
@@ -3097,7 +3050,8 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 			});
 		}
 
-		// on selecting trait for color change
+		// on selecting Druggability for color change
+
 		document.getElementById("druggabilityID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
@@ -3108,7 +3062,8 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 			});
 		}
 
-		// on selecting trait for color change
+		// on selecting GDA for color change
+
 		document.getElementById("GDAID4Color").onchange = function () {
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
@@ -3120,15 +3075,30 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 			});
 		}
 
+		// on selecting GWAS OR for color change
+
 		document.getElementById("GWAS_OR4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
+
+		// on selecting GWAS Beta for color change
+
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
+				return val ? expressionColor(Number(val)) : default_node_color;
+			});
+		}
+
+		// on selecting TE Score for color change
+
+		document.getElementById("TE4Color").onchange = function () {
+			nodeColor_sel = document.getElementById("TE4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
