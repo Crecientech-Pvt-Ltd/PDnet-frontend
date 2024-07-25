@@ -377,7 +377,7 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 					<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
 					<input type="radio" name="nodeColor" id="GWAS_OR" value="10"> GWAS OR <br>
 					<input type="radio" name="nodeColor" id="GWAS_Beta" value="11"> GWAS Beta <br>
-					<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enh. <br>
+					<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr. <br>
 					<!-- Dropdown for pathways name to highlight nodes-->
 				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
 					Select Pathway:
@@ -2022,8 +2022,8 @@ for (var key = 0; key < uniNodeTissueEnh.length; key++) {
 			let d = JSON.parse(thisCheck);
 
 			$.ajax({
-				// url: `https://pdnet-apis.crecientech.com/graphql`,
-				url: `http://localhost:3000/graphql`,
+				 url: `https://pdnet-apis.crecientech.com/graphql`,
+				// url: `http://localhost:3000/graphql`,
 				type: "POST",
 				dataType: 'json',
 				data: JSON.stringify({
