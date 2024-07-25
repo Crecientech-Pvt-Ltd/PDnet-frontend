@@ -16,6 +16,11 @@
 <script type="text/javascript" src="script/d3-legend.min.js"></script>
 <script type="text/javascript" src="script/math.js"></script>
 <link rel="stylesheet" type="text/css" href="css/network.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+
 <!-- <script src="./.url.js"></script> -->
 <script>
 	function getItemFromStorage(key) {
@@ -71,11 +76,20 @@
 		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
 		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
+		var uniNodeTissueEnh = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("tissue_enh_".toLowerCase()));
 
 
 
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
+
+//For tissue_enh_
+for (var key = 0; key < uniNodeTissueEnh.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodeTissueEnh[key]).text(jsUcFirst(uniNodeTissueEnh[key])).appendTo(
+				'#custom4Color')
+		};
+
 
 		// For GDA Color
 		for (var key = 0; key < uniNodeGDA.length; key++) {
@@ -335,6 +349,17 @@
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="padding: 0px;">&times;</a>
 		</div>
 		<div class="legends" style="background: rgb(255, 255, 255, 0.6);">
+			<button class="accordion active">Disease Map:</button>
+			<div class="panel" style="max-height:600px;">
+				<div class="padding-16" style="padding:10px 0;">
+					<select id="diseaseMap" name="diseaseMap" style="width:100%;">
+	    			<option value="0">OI</option>
+					<option value="1">PSP</option>
+					<option value="2">ALS</option>
+					<option value="3">FTD</option>
+				</select>
+			</div>
+			</div>
 			<button class="accordion active">Node Color</button>
 			<!-- To change the color of nodes based on different parameters-->
 			<div class="panel" style="max-height:600px;">
@@ -352,13 +377,20 @@
 					<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
 					<input type="radio" name="nodeColor" id="GWAS_OR" value="10"> GWAS OR <br>
 					<input type="radio" name="nodeColor" id="GWAS_Beta" value="11"> GWAS Beta <br>
+					<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enh. <br>
 					<!-- Dropdown for pathways name to highlight nodes-->
 				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
 					Select Pathway:
-					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
-						<option value="none" selected="selected">None</option>
-					</select>
+					   <select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
+						<!--TEMP <option value="none" selected="selected">None</option> -->
+						
+					</select>					
 				</div>
+				<script>
+					jQuery('.pathwayID4Color').chosen();
+				</script>
+
+				
 				<!-- Dropdown for GWAS DATA TO highlight nodes-->
 				<div id="GWASInput" style="padding-bottom:5px;display:none;">
 					Select GWAS data:
@@ -422,9 +454,17 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
+
 				<div id="GDAInput" style="padding-bottom:5px;display:none;">
 					Select GDA:
 					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;">
+						<option value="none" selected="selected">None</option>
+					</select>
+				</div>
+
+				<div id="tissue_enh_input" style="padding-bottom:5px;display:none;">
+					Select Tissue Enrichment Options:
+					<select id="tissueEnh" name="tissuEnh" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -610,11 +650,26 @@
 					</form>
 				</div>
 			</div>
+
+			<button class="accordion active">Add Paper</button>
+			<div class="panel" style="max-height:400px;">
+				<div style="margin: 10px">
+					<b>Add a file:</b>
+					<div id="">
+						<input type="file" id="universal_ext" accept="text/csv,.csv">
+						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset Universal</button>
+						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
+						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
+					</div>
+				</div>
+			</div>
+
 			<!-- Node colors legend-->
-			<button class="accordion">Legends</button>
+			<!-- <button class="accordion">Legends</button>
 			<div class="panel" id="legendPanel">
 				<p></p>
-			</div>
+			</div> -->
 			<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
 				Screenshot!
 			</button>
@@ -915,7 +970,7 @@
 			<div id="network_details">
 			</div>
 		</div>
-		<button class="accordion active">Add Paper</button>
+		<!-- <button class="accordion active">Add Paper</button>
 		<div class="panel" style="max-height:400px;">
 			<div style="margin: 10px">
 				<b>Add a file:</b>
@@ -927,12 +982,14 @@
 					<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Node colors legend 2-->
-		<!-- <button class="accordion">Legends</button>
-         <div class="panel" id="legendPanel">
-         	<p></p>
-         </div> -->
+
+		 <button class="accordion">Legends</button>
+		 <div class="panel" id="legendPanel">
+			 <p></p>
+		 </div> 
+
 	</div>
 	</div>
 	<div class="networksetting">
@@ -941,7 +998,7 @@
 	<script>
 		// clear universal data
 		function clearUniData() {
-			// GWAS4Color
+			// GWAS4Color vandana
 			document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('GWAS4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
@@ -975,8 +1032,7 @@
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				const csvData = e.target.result;
-				const ID = csvData.split('\n').shift().split(',').shift().trim();
-				let nodePropertyHeaders = ["logFC_", "logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_"];
+				let nodePropertyHeaders = ["logFC_", "logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "tissue_enh_"];
 				let csvFormattedData = $.csv.toObjects(csvData);
 				csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
 					acc[key.trim()] = obj[key].trim();
@@ -984,12 +1040,12 @@
 				}, {}));
 				const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 				csvFormattedData.forEach((gene, idx) => {
-					currentUniversal.genes[geneIndexMap[gene[ID]]] = {
+					currentUniversal.genes[geneIndexMap[gene.ID]] = {
 						...headers.reduce((obj, key) => {
 							obj[key] = gene[key];
 							return obj;
 						}, {}),
-						...currentUniversal.genes[geneIndexMap[gene[ID]]]
+						...currentUniversal.genes[geneIndexMap[gene.ID]]
 					}
 				});
 				document.getElementById("universal_ext").value = "";
@@ -1194,7 +1250,6 @@
 
 		//deferent variables used in plot generation
 		var nodeSize_sel = "";
-		var nodeColor_sel = "";
 		var default_node_color = "rgb(23, 190, 207)"; //#17becf
 		//var default_node_color = "rgb(3,190,100)";
 		//var default_link_color = "#888";
@@ -1443,14 +1498,9 @@
 		}
 
 		function startD3(data) {
-			graph.genes = data.genes.map(function (d) {
-				return {
-					ID: d.ID,
-					Gene_name: d.Gene_name,
-					Description: d.Description,
-				}
-			});
-			graph.links = data.links.map(d => ({
+			graph = data;
+
+			graph.links = graph.links.map(d => ({
 				source: +d.gene1.index,
 				target: +d.gene2.index,
 				weight: +d.score
@@ -1718,10 +1768,7 @@
 					//################### Update on 8.05.19 #################################//
 					if (nodeSize_sel != "") {
 
-						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
-					}
-					if (nodeColor_sel != "") {
-						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
+						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (d[nodeSize_sel] ? (Number(d[nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
 					}
 
 					//################### End_Update on 8.05.19 #################################//
@@ -1733,14 +1780,11 @@
 					//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
 					//console.log("Node size")
 					//console.log(nodSize)
-					let result = tmp1 + tmp2 + tmp3;
 					if (nodeSize_sel != "") {
-						result += tmp4;
+						return tmp1 + tmp2 + tmp3 + tmp4;
+					} else {
+						return tmp1 + tmp2 + tmp3;
 					}
-					if (nodeColor_sel != "") {
-						result += tmp5;
-					}
-					return result;
 
 				})
 				gbTootip.style("display", "block");
@@ -1978,7 +2022,8 @@
 			let d = JSON.parse(thisCheck);
 
 			$.ajax({
-				url: `https://pdnet-apis.crecientech.com/graphql`,
+				// url: `https://pdnet-apis.crecientech.com/graphql`,
+				url: `http://localhost:3000/graphql`,
 				type: "POST",
 				dataType: 'json',
 				data: JSON.stringify({
@@ -2112,7 +2157,6 @@
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 					currentUniversal?.genes.forEach((gene, idx) => {
 						geneIndexMap[gene.ID] = idx;
-						geneIndexMap[gene?.Gene_name] = idx;
 					});
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
@@ -2970,7 +3014,6 @@
 		//on selecting custom color, color the nodes
 
 		document.getElementById("custom4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
 				if (mks) {
@@ -2990,7 +3033,6 @@
 		//on selecting Direction type, color the nodes
 
 		document.getElementById("directionID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("directionID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var dirc = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("directionID4Color").value] ?? undefined;
 				if (dirc == "UP") {
@@ -3005,7 +3047,6 @@
 		//on selecting logFC type, color the nodes
 
 		document.getElementById("logFCID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("logFCID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
@@ -3021,7 +3062,6 @@
 		//on selecting GWAS type, color the nodes
 
 		document.getElementById("GWAS4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("GWAS4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
 				return gw && gw >= 1 ? "red" : default_node_color;
@@ -3032,7 +3072,6 @@
 		//on selecting Databases type, color the nodes
 
 		document.getElementById("DBs4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("DBs4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
 				return dbs && dbs >= 1 ? "red" : default_node_color;
@@ -3042,7 +3081,6 @@
 		//on selecting Celltype Markers, color the nodes
 
 		document.getElementById("markers4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("markers4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
 				return mks && mks >= 1 ? "red" : default_node_color;
@@ -3053,7 +3091,6 @@
 		//on selecting pathway name, color the nodes
 
 		document.getElementById("pathwayID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("pathwayID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
 				return pat && pat == 1 ? "red" : default_node_color;
@@ -3062,7 +3099,6 @@
 
 		// on selecting trait for color change
 		document.getElementById("druggabilityID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
@@ -3074,7 +3110,7 @@
 
 		// on selecting trait for color change
 		document.getElementById("GDAID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("GDAID4Color").value;
+
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
@@ -3085,14 +3121,12 @@
 		}
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("GWAS_OR4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
 			});
 		}
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("GWAS_Beta4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
 				return val ? expressionColor(Number(val)) : default_node_color;
@@ -3816,7 +3850,7 @@
 			.shapeWidth(10)
 			.shapeHeight(10)
 			.cells([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-			.shapePadding(0)
+			.shapePadding(6)
 			.labelOffset(10)
 			.scale(linear)
 			//.orient("horizontal")
@@ -3846,7 +3880,7 @@
 		var legendDirection = d3.legend.color()
 			.shape("circle")
 			.shapeRadius(10)
-			.shapePadding(15)
+			.shapePadding(25)
 			.orient('vertical')
 			.scale(nodeColorScale);
 
@@ -3861,7 +3895,7 @@
 		var legendPathway = d3.legend.color()
 			.shape("circle")
 			.shapeRadius(10)
-			.shapePadding(15)
+			.shapePadding(25)
 			.orient('vertical')
 			.scale(nodeColorScalePathway);
 

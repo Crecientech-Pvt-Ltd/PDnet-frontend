@@ -150,7 +150,7 @@
 					<input type="radio" name="nodeColor" id="gwas" value="5"> GWAS <br>
 					<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>
 					<input type="radio" name="nodeColor" id="markers" value="7"> Celltype Markers <br>
-
+                    <input type="radio" name="nodeColor" id="tissue_enh" value="8"> Tissue Enr. <br>
 
 					<!-- Dropdown for pathways name to highlight nodes-->
 				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
@@ -1810,6 +1810,7 @@
 						uniNodeDBs = uniNodeHeaders.filter((header) => header.startsWith("database_"));
 						// console.log("uniNodeDBs:", uniNodeDBs)
 						uniNodeRelevence = uniNodeHeaders.filter((header) => header.startsWith("relevence_"));
+						
 
 
 						//************************* TO POPULATE DROP DOWNS

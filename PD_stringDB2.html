@@ -328,6 +328,7 @@
 					<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>
 					<input type="radio" name="nodeColor" id="markers" value="7"> Biomarkers <br>
 					<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>
+					<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr <br>
 
 
 					<!-- Dropdown for pathways name to highlight nodes-->
@@ -605,10 +606,25 @@
 					</div>
 				</div>
 				<!-- Node colors legend-->
-				<button class="accordion">Legends</button>
+				<!-- <button class="accordion">Legends</button>
 				<div class="panel" id="legendPanel">
 					<p></p>
+				</div> -->
+
+				<button class="accordion active">Add Paper</button>
+				<div class="panel" style="max-height:400px;">
+					<div style="margin: 10px">
+						<b>Add a file:</b>
+						<div id="">
+							<input type="file" id="universal_ext">
+							<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+							<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset Universal</button>
+							<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
+							<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
+						</div>
+					</div>
 				</div>
+				
 				<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
 					Screenshot!
 				</button>
@@ -934,7 +950,13 @@
 					
 				</div>
 			</div>
-			<button class="accordion active">Add Paper</button>
+
+							<!-- Node colors legend-->
+				<button class="accordion">Legends</button>
+				<div class="panel" id="legendPanel">
+					<p></p>
+				</div>
+			<!-- <button class="accordion active">Add Paper</button>
 			<div class="panel" style="max-height:400px;">
 				<div style="margin: 10px">
 					<b>Add a file:</b>
@@ -946,7 +968,7 @@
 						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- Node colors legend 2-->
 			<!-- <button class="accordion">Legends</button>

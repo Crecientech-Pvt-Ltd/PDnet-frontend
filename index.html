@@ -221,23 +221,51 @@
 
 											<!-- </div> -->
 										</div>
-										<div class="row">
-											<div class="col-md-4">
-												<div class="input-header">Order</div>
-												<div style="position: relative;">
+										<!-- <div class="row">
+											<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+												<div class="input-header">Disease Map</div>
+												<div>
 													<select class="form-select" aria-label="Default select example"
 														name="order" id="order">
-
-														<option value="0">Zero</option>
-														<option value="1">First</option>
+														<option value="0">OI</option>
+														<option value="1">PSP</option>
+														<option value="2">ALS</option>
+														<option value="3">FTD</option>
 													</select>
 													<i id="down_chev" class="fas fa-chevron-down"></i>
 												</div>
 												<br>
 											</div>
-											<div class="col-md-4">
+											<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+												<div class="input-header">Order</div>
+												<div>
+													<select class="form-select" aria-label="Default select example"
+														name="order" id="order">
+														<option value="0">Zero</option>
+														<option value="1">First</option>
+														<option value="2">Second</option>
+													</select>
+													<i id="down_chev" class="fas fa-chevron-down"></i>
+												</div>
+												<br>
+											</div>
+											<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+												<div class="input-header">Interaction Type:</div>
+												<div>
+													<select onchange="addDescription()" class="form-select  rounded"
+														aria-label="Default select example"
+														id="interaction_type_dropdown">
+														<option value="bikg">BIKG</option>
+														<option value="cmplt">ComPPLete</option>
+														<option value="ppi">PPI Interaction</option>										
+														<option selected value="fun-ppi">FunPPI Interaction</option>
+													</select>
+													<i id="down_chev" class="fas fa-chevron-down"></i>
+												</div>
+											</div>
+											<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
 												<div class="input-header">Min interaction score:</div>
-												<div style="position: relative;">
+												<div>
 													<select class="form-select" aria-label="Default select example"
 														name="order" id="confidence">
 														<option value="0.9">Highest (0.9)</option>
@@ -245,24 +273,62 @@
 														<option selected value="0.4">Medium (0.4)</option>
 														<option value="0.15">Low (0.15)</option>
 													</select>
-
-
 													<i id="down_chev" class="fas fa-chevron-down"></i>
 												</div>
 												<br>
 											</div>
-											<div class="col-md-4">
+										</div> -->
 
-
+										<div class="row">
+											<div class="col">
+												<div class="input-header">Disease Map</div>
+												<div>
+													<select class="form-select" aria-label="Default select example"
+													name="order" id="order">
+													<option value="0">OI</option>
+													<option value="1">PSP</option>
+													<option value="2">ALS</option>
+													<option value="3">FTD</option>
+												</select>
+													<i id="down_chev" class="fas fa-chevron-down"></i>
+												</div>
+											</div>
+											<div class="col">
+												<div class="input-header">Order</div>
+												<div>
+													<select class="form-select" aria-label="Default select example"
+														name="order" id="order">
+														<option value="0">Zero</option>
+														<option value="1">First</option>
+														<option value="2">Second</option>
+													</select>
+													<i id="down_chev" class="fas fa-chevron-down"></i>
+												</div>
+												
+											</div>
+											<div class="col">
 												<div class="input-header">Interaction Type:</div>
-												<div style="position: relative;">
+												<div>
 													<select onchange="addDescription()" class="form-select  rounded"
 														aria-label="Default select example"
 														id="interaction_type_dropdown">
-
-														<!-- <option value="">Select Interaction Type</option> -->
-														<option value="ppi">PPI Interaction</option>
-														<option selected value="fun-ppi">FunPPI Interaction</option>
+															<option value="bikg">BIKG</option>
+															<option value="cmplt">ComPPLete</option>
+															<option value="ppi">PPI Interaction</option>										
+															<option selected value="fun-ppi">FunPPI Interaction</option>
+													 </select>
+													<i id="down_chev" class="fas fa-chevron-down"></i>		
+												</div>										
+											</div>
+											<div class="col">
+												<div class="input-header">Min interaction score:</div>
+												<div>
+												<select class="form-select" aria-label="Default select example"
+														name="order" id="confidence">
+														<option value="0.9">Highest (0.9)</option>
+														<option value="0.7">High (0.7)</option>
+														<option selected value="0.4">Medium (0.4)</option>
+														<option value="0.15">Low (0.15)</option>
 													</select>
 													<i id="down_chev" class="fas fa-chevron-down"></i>
 												</div>
@@ -408,6 +474,7 @@
 													<option value="">Select Network Order</option>
 													<option selected value="zero_order">Zero Order</option>
 													<option value="first_order">First Order</option>
+													<option value="second_order">Second Order</option>
 												</select>
 											</div>
 											<div class="col-6">
@@ -415,7 +482,9 @@
 													aria-label="Default select example" id="interaction_type_dropdown">
 
 													<option value="">Select Interaction Type</option>
-													<option value="PPI">PPI Interaction</option>
+													<option value="bikg">BIKG</option>
+													<option value="cmplt">ComPPLete</option>												    
+													<option value="PPI">PPI Interaction</option>													
 													<option selected value="FunPPI">FunPPI Interaction</option>
 												</select>
 											</div>
@@ -831,7 +900,8 @@
 				} else {
 					$('#wait').css('display', 'block');
 					$.ajax({
-						url: `https://pdnet-apis.crecientech.com/graphql`,
+						//url: `https://pdnet-apis.crecientech.com/graphql`,
+						url: `http://localhost:3000/graphql`,
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
