@@ -78,7 +78,6 @@
 		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
 
-
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
 
@@ -349,10 +348,10 @@
 			<div class="panel" style="max-height:600px;">
 				<div class="padding-16" style="padding:10px 0;">
 					<select id="diseaseMap" name="diseaseMap" style="width:100%;">
-						<option value="OI">OI</option>
-						<option value="PSP">PSP</option>
 						<option value="ALS">ALS</option>
 						<option value="FTD">FTD</option>
+						<option value="OI">OI</option>
+						<option value="PSP">PSP</option>
 					</select>
 				</div>
 			</div>
@@ -365,14 +364,15 @@
 						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 						<input type="radio" name="nodeColor" id="logFC" value="2"> logFC <br>
 						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
-                        <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics <br>						
+                        <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics <br>												
                     </p>
 					<button class= "sub_btn">Disease Independent</button>
 					<p class="margin_left">
 						<input type="radio" name="nodeColor" id="Pathways" value="3"> Pathways <br>
 						<input type="radio" name="nodeColor" id="Druggability" value="4"> Druggability<br>
 						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr. <br>
-						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>					
+						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>	
+						<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>				
 					</p>
 
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
@@ -470,7 +470,7 @@
 					</select>
 				</div>
 				<!-- custom color options dropdown to highlight nodes  -->
-				<div id="custom_color_input" style="padding-bottom:5px;display:none;">
+				<div id="custom_color_input" style="padding-bottom:5px;display:none;" class="margin_left">
 					Select Custom Options:
 					<select id="custom4Color" name="custom4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -494,7 +494,8 @@
 					<button class= "sub_btn">Disease Independent</button>
 					<p class="margin_left">
 						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-						<input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						
+						<input type="radio" name="nodeSize" id="direction4Size" value="4"> Tissue Enr. <br>
+						<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
 					</p>
 					<!-- Genomic logFC Dropdown to change the node size-->
 				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
@@ -524,11 +525,20 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
+
+				<!-- <div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
+					Select Tissue Enrichment Options:
+					<select id="TE4Size" name="TE4Size" style="max-width:90%;">
+						<option value="none" selected="selected">None</option>
+					</select>
+				</div> -->
+
 				<div id="directionInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
 					Select Tissue Enrichment Options:
 					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
+				</div>
 				</div>
 				</p>
 			</div>
@@ -1027,7 +1037,6 @@
 			document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('directionID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
-
 		}
 
 		// Reset universal

@@ -383,7 +383,8 @@
 						<input type="radio" name="nodeColor" id="Pathways" value="3"> Pathways <br>
 						<input type="radio" name="nodeColor" id="Druggability" value="4"> Druggability<br>
 						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr. <br>
-						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>					
+						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>	
+						<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>				
 					</p>
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 					<input type="radio" name="nodeColor" id="Direction" value="1"> Direction <br>
@@ -462,7 +463,7 @@
 					</select>
 				</div>
 				<!-- custom color options dropdown to highlight nodes  -->
-				<div id="custom_color_input" style="padding-bottom:5px;display:none;">
+				<div id="custom_color_input" style="padding-bottom:5px;display:none;" class="margin_left">
 					Select Custom Options:
 					<select id="custom4Color" name="custom4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -494,10 +495,11 @@
 						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> GDA <br>
 						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> Genetics <br>						
 					</p>
-					<button class= "sub_btn">Disease Dependent</button>
+					<button class= "sub_btn">Disease Independent</button>
 					<p class="margin_left">
 						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-						<input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						
+						<input type="radio" name="nodeSize" id="direction4Size" value="4"> Tissue Enr. <br>
+						<!-- <input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						 -->
 					</p>
 
 <!-- 
@@ -536,17 +538,17 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				<div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<!-- <div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
 					Select Tissue Enrichment Options:
 					<select id="TE4Color" name="TE4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
-				</div>
+				</div> -->
 				
 				
 				<!-- Direction Dropdown to change the node size-->
-				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
-					Select Direction:
+				<div id="directionInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
+					Select Tissue Enrichment Options:
 					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
