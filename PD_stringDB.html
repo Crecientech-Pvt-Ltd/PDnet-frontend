@@ -1520,14 +1520,20 @@
 		}
 
 		function startD3(data) {
-			graph = data;
-
+			graph = JSON.parse(JSON.stringify(data));
+			
 			graph.links = graph.links.map(d => ({
 				source: +d.gene1.index,
 				target: +d.gene2.index,
 				weight: +d.score
 			}));
-
+			graph.genes = graph.genes.map(d => ({
+				ID: d?.ID,
+				Gene_name: d?.Gene_name,
+				Description: d?.Description,
+				hgnc_gene_id: d?.hgnc_gene_id,
+				hgnc_gene_symbol: d?.hgnc_gene_symbol,
+			}));
 			graphRec = JSON.parse(JSON.stringify(graph)); //Add this line
 			var nodSize = [];
 
