@@ -84,6 +84,7 @@
 		// For TE Color
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color');
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Size');
 		}
 
 		// For GDA Color
@@ -494,7 +495,7 @@
 					<button class= "sub_btn">Disease Independent</button>
 					<p class="margin_left">
 						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-						<input type="radio" name="nodeSize" id="direction4Size" value="4"> Tissue Enr. <br>
+						<input type="radio" name="nodeSize" id="TE4Size" value="4"> Tissue Enr. <br>
 						<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
 					</p>
 					<!-- Genomic logFC Dropdown to change the node size-->
@@ -525,8 +526,8 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-
-				<!-- <div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
+<!-- 
+				<div id="TE4SizeInput" style="padding-bottom:5px;display:none;" class="margin_left">
 					Select Tissue Enrichment Options:
 					<select id="TE4Size" name="TE4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -539,6 +540,7 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
+				
 				</div>
 				</p>
 			</div>
@@ -2064,7 +2066,7 @@
 			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
-				url: `https://pdnet-apis.crecientech.com/graphql`,
+				url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
 				// url: `http://localhost:3000/graphql`,
 				type: "POST",
 				dataType: 'json',

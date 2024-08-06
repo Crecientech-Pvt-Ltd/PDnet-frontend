@@ -285,10 +285,10 @@
 												<div>
 													<select class="form-select" aria-label="Default select example"
 													name="disease_dropdown" id="disease_dropdown">
+													<option value="PSP">PSP</option>
 													<option value="ALS">ALS</option>
 													<option value="FTD">FTD</option>
-													<option value="OI">OI</option>
-													<option value="PSP">PSP</option>
+													<option value="OI">OI</option>													
 												</select>
 													<i id="down_chev" class="fas fa-chevron-down"></i>
 												</div>
@@ -325,8 +325,8 @@
 												<div>
 												<select class="form-select" aria-label="Default select example"
 														name="order" id="confidence">
-														<option value="0.9">Highest (0.9)</option>
 														<option value="0.7">High (0.7)</option>
+														<option value="0.9">Highest (0.9)</option>														
 														<option selected value="0.4">Medium (0.4)</option>
 														<option value="0.15">Low (0.15)</option>
 													</select>
@@ -898,7 +898,7 @@
 				} else {
 					$('#wait').css('display', 'block');
 					$.ajax({
-						url: `https://pdnet-apis.crecientech.com/graphql`,
+						url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
 						// url: `http://localhost:3000/graphql`,
 						method: 'POST',
 						headers: {
