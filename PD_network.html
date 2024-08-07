@@ -369,23 +369,23 @@
 			<button class="accordion active">Node Color</button>
 
 			<!-- To change the color of nodes based on different parameters-->
-			<div class="panel" style="max-height:600px;margin-left:-20px;">
+			<div class="panel" style="max-height:600px;">
 				<p>
-					<button class= "sub_btn">Disease Dependent</button>
-					<p class="margin_left">
+					<!-- <button class= "sub_btn">Disease Dependent</button> -->
+					<!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 						<input type="radio" name="nodeColor" id="logFC" value="2"> logFC <br>
 						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
                         <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics <br>						
-                    </p>
-					<button class= "sub_btn">Disease Independent</button>
-					<p class="margin_left">
+                    <!-- </p> -->
+					<!-- <button class= "sub_btn">Disease Independent</button> -->
+					<!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeColor" id="Pathways" value="3"> Pathways <br>
 						<input type="radio" name="nodeColor" id="Druggability" value="4"> Druggability<br>
-						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr. <br>
+						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> TE <br>
 						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>	
 						<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>				
-					</p>
+					<!-- </p> -->
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 					<input type="radio" name="nodeColor" id="Direction" value="1"> Direction <br>
 					<input type="radio" name="nodeColor" id="logFC" value="2"> logFC <br>
@@ -400,56 +400,56 @@
 					<input type="radio" name="nodeColor" id="GWAS_Beta" value="11"> GWAS Beta <br>
 					<input type="radio" name="nodeColor" id="TE" value="12"> Tissue Enr. <br> -->
 					<!-- Dropdown for pathways name to highlight nodes-->
-				<div id="pathwayInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
 					Select Pathway:
 					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Dropdown for GWAS DATA TO highlight nodes-->
-				<div id="GWASInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GWASInput" style="padding-bottom:5px;display:none;">
 					Select Genetics data:
 					<select id="GWAS4Color" name="GWAS4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- GWAS_OR_Input -->
-				<div id="GWAS_OR_Input" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GWAS_OR_Input" style="padding-bottom:5px;display:none;">
 					Select GWAS OR:
 					<select id="GWAS_OR4Color" name="GWAS_OR4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- GWAS_Beta_Input -->
-				<div id="GWAS_Beta_Input" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GWAS_Beta_Input" style="padding-bottom:5px;display:none;">
 					Select GWAS Beta:
 					<select id="GWAS_Beta4Color" name="GWAS_Beta4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- logFC Dropdown to highlight node with color spectrum-->
-				<div id="logFCInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="logFCInput" style="padding-bottom:5px;display:none;">
 					Select logFC:
 					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Direction Dropdown to highlight nodes-->
-				<div id="directionInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="directionInput" style="padding-bottom:5px;display:none;">
 					Select Direction:
 					<select id="directionID4Color" name="directionID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Trait dropdown to highlight nodes  -->
-				<div id="druggabilityInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
 					Select Druggability:
 					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Database and assocition dropdown to highlight nodes  -->
-				<div id="DBsInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="DBsInput" style="padding-bottom:5px;display:none;">
 					Select significance from databases:
 					<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -463,20 +463,20 @@
 					</select>
 				</div>
 				<!-- custom color options dropdown to highlight nodes  -->
-				<div id="custom_color_input" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="custom_color_input" style="padding-bottom:5px;display:none;">
 					Select Custom Options:
 					<select id="custom4Color" name="custom4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				<div id="GDAInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GDAInput" style="padding-bottom:5px;display:none;">
 					Select GDA:
 					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				<div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
-					Select Tissue Enrichment Options:
+				<div id="TEInput" style="padding-bottom:5px;display:none;">
+					Select TE Options:
 					<select id="TE4Color" name="TE4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
@@ -486,21 +486,21 @@
 
 			<!-- Node size change button -->
 			<button class="accordion active">Node Size</button>
-			<div class="panel" style="max-height: 300px;margin-left:-20px;">
+			<div class="panel" style="max-height: 300px;">
 				<p>
-				<button class= "sub_btn">Disease Dependent</button>
-				  <p class="margin_left">
+				<!-- <button class= "sub_btn">Disease Dependent</button> -->
+				  <!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
 						<input type="radio" name="nodeSize" id="GlogFC" value="1"> LogFC <br>
 						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> GDA <br>
 						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> Genetics <br>						
-					</p>
-					<button class= "sub_btn">Disease Independent</button>
-					<p class="margin_left">
+					<!-- </p> -->
+					<!-- <button class= "sub_btn">Disease Independent</button> -->
+					<!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-						<input type="radio" name="nodeSize" id="direction4Size" value="4"> Tissue Enr. <br>
+						<input type="radio" name="nodeSize" id="direction4Size" value="4"> TE <br>
 						<!-- <input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						 -->
-					</p>
+					<!-- </p> -->
 
 <!-- 
 					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
@@ -510,14 +510,14 @@
 					<input type="radio" name="nodeSize" id="direction4Size" value="4"> Direction <br>
 					<input type="radio" name="nodeSize" id="GDA4Size" value="5"> GDA <br> -->
 					<!-- Genomic logFC Dropdown to change the node size-->
-				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;">
 					Select logFC:
 					<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!----GDAID4Size------>
-				<div id="GDAInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="GDAInput4Size" style="padding-bottom:5px;display:none;">
 					Select GDA:
 					<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -525,20 +525,20 @@
 				</div>
 
 				<!-- GWAS Dropdown to change the node size-->
-				<div id="gwasInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="gwasInput4Size" style="padding-bottom:5px;display:none;">
 					Select Genetics:
 					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
                 <!-- Trait P-values Dropdown to change the node size-->
-				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
+				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;">
 					Select Trait:
 					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				<!-- <div id="TEInput" style="padding-bottom:5px;display:none;" class="margin_left">
+				<!-- <div id="TEInput" style="padding-bottom:5px;display:none;">
 					Select Tissue Enrichment Options:
 					<select id="TE4Color" name="TE4Color" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
@@ -547,8 +547,8 @@
 				
 				
 				<!-- Direction Dropdown to change the node size-->
-				<div id="directionInput4Size" style="padding-bottom:5px;display:none;" class="margin_left">
-					Select Tissue Enrichment Options:
+				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
+					Select TE Options:
 					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;">
 						<option value="none" selected="selected">None</option>
 					</select>
