@@ -84,7 +84,6 @@
 		// For TE Color
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color');
-			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Size');
 		}
 
 		// For GDA Color
@@ -120,9 +119,8 @@
 		};
 
 		//For Direction Size
-		for (var key = 0; key < uniNodeDirection.length; key++) {
-
-			$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
 				'#directionID4Size')
 		};
 
@@ -528,13 +526,6 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-<!-- 
-				<div id="TE4SizeInput" style="padding-bottom:5px;display:none;" class="margin_left">
-					Select Tissue Enrichment Options:
-					<select id="TE4Size" name="TE4Size" style="max-width:90%;">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div> -->
 
 				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
 					Select TE Options:
