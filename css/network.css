@@ -53,11 +53,11 @@ body {
       padding: 0 18px;
       border-radius: 0;
       background-color:rgb(74, 129, 148);
-      max-height: 0;
-      overflow: hidden;
+      /* max-height: 0; */
+      /* overflow: hidden; */
       transition: max-height 0.2s ease-out;
       margin-bottom:0px;
-      color: white;
+      color: white;     
       font-size: 13px;
   }
   
@@ -562,3 +562,17 @@ body {
     .margin_left{
         margin-left:10px;
     }
+
+    .chosen-container .chosen-search input { 
+        color: black; 
+        }
+
+    .chosen-container-single .chosen-single {
+            font-size:12px;
+            height: 24px;
+            width: 200px;
+        }
+
+    .chosen-container-single .chosen-single :hover{
+            color:none;           
+        }

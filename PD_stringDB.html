@@ -17,9 +17,28 @@
 <script type="text/javascript" src="script/math.js"></script>
 <link rel="stylesheet" type="text/css" href="css/network.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+<!-- Chosen CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+
+<!-- jQuery (required for Chosen) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Chosen JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+
+<!-- Chosen CSS -->
+<link rel="stylesheet" href="/node_modules/chosen-js/chosen.min.css">
+
+<!-- jQuery (required for Chosen) -->
+<!-- <script src="/node_modules/jquery.min.js"></script> -->
+
+<!-- Chosen JS -->
+<script src="/node_modules/chosen-js/chosen.jquery.min.js"></script>
+
 
 <!-- <script src="./.url.js"></script> -->
 <script>
@@ -83,18 +102,22 @@
 
 		// For TE Color
 		for (var key = 0; key < uniNodeTE.length; key++) {
-			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color');
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color')
+			$('#TE4Color').trigger("chosen:updated");
 		}
 
 		// For GDA Color
 		for (var key = 0; key < uniNodeGDA.length; key++) {
-			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
-			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
+			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
+			$('#GDAID4Color').trigger("chosen:updated");
+			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
+			$('#GDAID4Size').trigger("chosen:updated");
 		}
 
 		// Populate Druggability dropdown
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
-			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color');
+			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color')
+			$('#druggabilityID4Color').trigger("chosen:updated");
 		}
 		// Populate GWAS OR dropdown
 		for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
@@ -107,21 +130,24 @@
 		}
 
 		for (var key = 0; key < uniNodeLogFC.length; key++) {
-
 			$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
 				'#logFCID4Color')
+			$('#logFCID4Color').trigger("chosen:updated");
 		};
 
 		//For Direction Color
 		for (var key = 0; key < uniNodeDirection.length; key++) {
 			$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
 				'#directionID4Color')
+			$('#directionID4Color').trigger("chosen:updated");
 		};
 
 		//For Direction Size
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
 				'#directionID4Size')
+			$('#directionID4Size').trigger("chosen:updated");
+			
 		};
 
 		//For Direction Shape
@@ -134,13 +160,17 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
 				'#pathwayID4Color')
+			$('#pathwayID4Color').trigger("chosen:updated");
 		};
+
+
 
 		//For Custom color
 		for (var key = 0; key < uniNodeCustomColors.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
 			$('<option/>').val(uniNodeCustomColors[key]).text(jsUcFirst(uniNodeCustomColors[key])).appendTo(
 				'#custom4Color')
+			$('#custom4Color').trigger("chosen:updated");
 		};
 
 		//For Pathways Shape
@@ -154,6 +184,7 @@
 		for (var key = 0; key < uniNodeGLogFC.length; key++) {
 			$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo(
 				'#GlogFCID4Size')
+			$('#GlogFCID4Size').trigger("chosen:updated");
 		};
 
 		//Trait for Size
@@ -161,6 +192,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
+				$('#druggabilityID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 color
@@ -168,6 +200,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#GWAS4Color')
+			    $('#GWAS4Color').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 shape
@@ -183,6 +216,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#gwasID4Size')
+				$('#gwasID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//Databases 4 color
@@ -190,6 +224,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
 				uniNodeDBs[key])).appendTo('#DBs4Color')
+				$('#DBs4Color').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -221,6 +256,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
+				$('#nodeDegreeID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -239,6 +275,15 @@
 	// 	}
 	// });
 	//End of ajax call.
+
+	$(document).ready(function() {
+    $('.chosen-select').chosen({
+      width: '100%' ,
+	  search_contains: true,
+    }); 
+  })  
+
+
 </script>
 
 <body>
@@ -393,49 +438,47 @@
 				<!-- logFC Dropdown to highlight node with color spectrum-->
 				<div id="logFCInput" style="padding-bottom:5px;display:none;">
 					Select logFC:
-					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;">
+					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
                 
 				<div id="GDAInput" style="padding-bottom:5px;display:none;">
 					Select GDA:
-					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;">
+					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Dropdown for GWAS DATA TO highlight nodes-->
 				<div id="GWASInput" style="padding-bottom:5px;display:none;">
 					Select Genetics data:
-					<select id="GWAS4Color" name="GWAS4Color" style="max-width:90%;">
+					<select id="GWAS4Color" name="GWAS4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
 					Select Pathway:
-					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;">
+					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				<script>
-					jQuery('.pathwayID4Color').chosen();
-				</script>
+
                	<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
 					Select Druggability:
-					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;">
+					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Database and assocition dropdown to highlight nodes  -->
 				<div id="DBsInput" style="padding-bottom:5px;display:none;">
 					Select significance from databases:
-					<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;">
+					<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>				
-				<div id="TEInput" style="padding-bottom:5px;display:none;">
+				<div id="TEInput" style="padding-bottom:5px;display:none;" >
 					Select TE Options:
-					<select id="TE4Color" name="TE4Color" style="max-width:90%;">
+					<select id="TE4Color" name="TE4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -472,7 +515,7 @@
 				<!-- custom color options dropdown to highlight nodes  -->
 				<div id="custom_color_input" style="padding-bottom:5px;display:none;">
 					Select Custom Options:
-					<select id="custom4Color" name="custom4Color" style="max-width:90%;">
+					<select id="custom4Color" name="custom4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -501,28 +544,28 @@
 					<!-- Genomic logFC Dropdown to change the node size-->
 				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;">
 					Select logFC:
-					<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;">
+					<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!----GDAID4Size------>
 				<div id="GDAInput4Size" style="padding-bottom:5px;display:none;">
 					Select GDA:
-					<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;">
+					<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Trait P-values Dropdown to change the node size-->
 				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;">
 					Select Trait:
-					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;">
+					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- GWAS Dropdown to change the node size-->
 				<div id="gwasInput4Size" style="padding-bottom:5px;display:none;">
 					Select Genetics:
-					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;">
+					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -531,7 +574,7 @@
 
 				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
 					Select TE Options:
-					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;">
+					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -619,10 +662,10 @@
 					<p>Edge Weight: <span id="thresh"></span></p>
 				</div>
 				<!-- node weight dropdown options  -->
-				<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;">
+				<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
 					Select Interaction Type:
 					<select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
-						style="width:100%;">
+						style="width:100%;" >
 						<option value="combined_score" selected="selected">Combined score</option>
 						<option value="textmining">Textmining</option>
 						<option value="experiments">Experiments</option>
@@ -636,7 +679,7 @@
 				<!-- node degree dropdown options  -->
 				<div id="nodeDegreeInput4Size" class="slidecontainer" style="padding-bottom:5px;display:none;">
 					Select Node cutoff:
-					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;">
+					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 						<option value="node_degree">Gene Degree</option>
 					</select>
