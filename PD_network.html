@@ -1468,49 +1468,6 @@
 				});
 			})
 
-			// .on("brushend", function () {
-			// 	d3.event.target.clear();
-			// 	d3.select(this).call(d3.event.target);
-			// 	//########################
-			// 	let x = [];
-			// 	let nodeDetails = []; // NEW ADDED
-			// 	d3.selectAll('.node').each(function (d) {
-			// 		if (d.selected) {
-			// 			nodeDetails.push(d);
-			// 		}
-			// 	});
-
-			// 	// on mouse select of single or multi nodes
-			// 	d3.selectAll('.node') // Create Table on node select
-			// 		.each(function (d) {
-			// 			if (d.selected) {
-			// 				let gInfo = document.getElementById("gene_info");
-			// 				let tableInfo = document.getElementById("table_data-ip");
-			// 				gene_info.innerHTML = "";
-			// 				tableInfo.innerHTML = "";
-			// 				nodeDetails.forEach((i, index) => {
-			// 					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
-			// 					$("#table_data-ip")
-			// 						.append(`<tr>
-      		// 						<td style="width: 50px; padding: 5px;">${index + 1}.</td>
-      		// 						<td>${i.Gene_name}</td>
-      		// 						<td>${i.ID}</td>
-      		// 						<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
-      		// 					</tr>`);
-			// 				});
-			// 				$("#gene_info").append(
-			// 					`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: right">Clear</button>`
-			// 				)
-			// 				$("#gene_info").append(
-			// 					`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
-			// 				);
-			// 				$("#gene_info").append(`<div style="float: left">${nodeDetails.length} nodes selected</div>`);
-			// 			}
-			// 		}); // NEW ADDED
-			// 	$('#sgene_list').val(x.toString())
-			// });
-
-//////////////////////////////////////////////////////new code added by Vandana (start)
 			.on("brushend", function () {
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
@@ -1518,73 +1475,43 @@
 				let x = [];
 				let nodeDetails = []; // NEW ADDED
 				d3.selectAll('.node').each(function (d) {
-					// console.log("11")
 					if (d.selected) {
 						nodeDetails.push(d);
 					}
 				});
-				const geneInfoElement = document.getElementById("gene_info");
-				const tableInfoElement = document.getElementById("table_data-ip");
-
-				// Clear the content outside the loop
-				geneInfoElement.innerHTML = "";
-				tableInfoElement.innerHTML = "";
-
-				// Create a document fragment to batch DOM updates
-				const geneInfoFragment = document.createDocumentFragment();
-				const tableInfoFragment = document.createDocumentFragment();
-
-				// Iterate over the nodes
-				d3.selectAll('.node').each(function (d) {
-					// console.log("12")
-    				if (d.selected) {
-						// console.log("13")
-        			// Create and append gene details to the fragment
-        				nodeDetails.forEach((i, index) => {
-							// console.log("14")
-            				const pElement = document.createElement('p');
-            				pElement.textContent = i.Gene_name;
-            				geneInfoFragment.appendChild(pElement);
-							// console.log("15")
-            				const trElement = document.createElement('tr');
-
-            				trElement.innerHTML = `
-                				<td style="width: 50px; padding: 5px;">${index + 1}.</td>
-                				<td>${i.Gene_name}</td>
-                				<td>${i.ID}</td>
-                				<td style="width: 360px">${i.Description === undefined ? 'No description found' : i.Description}</td>
-            					`;
-            				tableInfoFragment.appendChild(trElement);
-        				});
-
-       					// Create and append buttons
-        				const buttonDetails = document.createElement('button');
-        				buttonDetails.textContent = 'Node Details';
-        				buttonDetails.onclick = showModal;
-       					buttonDetails.style.cssText = 'margin: 10px 0px; padding: 5px 10px; color: black; float: left;';
-       					geneInfoFragment.appendChild(buttonDetails);
-
-        				const buttonClear = document.createElement('button');
-        				buttonClear.textContent = 'Clear';
-        				buttonClear.onclick = clearSelectedNode;
-        				buttonClear.style.cssText = 'margin: 10px 0px; padding: 5px 10px; color: black; float: left;';
-        				geneInfoFragment.appendChild(buttonClear);
-
-        				const infoDiv = document.createElement('div');
-        				infoDiv.style.cssText = 'float: left; margin-bottom: 10px';
-        				infoDiv.textContent = `${nodeDetails.length} nodes selected`;
-        				geneInfoFragment.appendChild(infoDiv);
-
-        				// Update the DOM once with the fragments
-        				geneInfoElement.appendChild(geneInfoFragment);
-        				tableInfoElement.appendChild(tableInfoFragment);
-    				}
-				});
-				$('#sgene_list').val(x.toString())
+				let gInfo = document.getElementById("gene_info");
+				let tableInfo = document.getElementById("table_data-ip");
+				// on mouse select of single or multi nodes
+				d3.selectAll('.node') // Create Table on node select
+					.each(function (d) {
+						if (d.selected) {
+							// let gInfo = document.getElementById("gene_info");
+							// let tableInfo = document.getElementById("table_data-ip");
+							gene_info.innerHTML = "";
+							tableInfo.innerHTML = "";
+						}
+					});
+					nodeDetails.forEach((i, index) => {
+						$("#gene_info").append(`<p>${i.Gene_name}</p>`)
+						$("#table_data-ip")
+						.append(`<tr>
+      						<td style="width: 50px; padding: 5px;">${index + 1}.</td>
+      						<td>${i.Gene_name}</td>
+      						<td>${i.ID}</td>
+      						<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
+      					</tr>`);
+					});
+					$("#gene_info").append(
+						`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: right">Clear</button>`
+					)
+					$("#gene_info").append(
+						`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+					);
+					$("#gene_info").append(`<div style="float: left">${nodeDetails.length} nodes selected</div>`);
+					// 	}
+					// }); // NEW ADDED
+					$('#sgene_list').val(x.toString())
 			});
-
-/////////////////////////////////////////////////////////////new code added by Vandana (End)
-
 
 		var svg_graph = svg.append('svg:g').call(zoomer);
 

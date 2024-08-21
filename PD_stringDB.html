@@ -1497,28 +1497,28 @@
 							tableInfo.innerHTML = "";
 						}
 				});	
-							nodeDetails.forEach((i, index) => {
-								$("#gene_info").append(`<p>${i.Gene_name}</p>`)
-								$("#table_data-ip")
-								.append(`<tr>
-      								<td style="width: 50px; padding: 5px;">${index + 1}.</td>
-      								<td>${i.Gene_name}</td>
-      								<td>${i.ID}</td>
-      								<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
-      							</tr>`);
-							});
-							$("#gene_info").append(
-								`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
-							);
-							$("#gene_info").append(
-								`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
-							)
-							$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
+				nodeDetails.forEach((i, index) => {
+					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
+					$("#table_data-ip")
+					.append(`<tr>
+      				  	<td style="width: 50px; padding: 5px;">${index + 1}.</td>
+      					<td>${i.Gene_name}</td>
+      					<td>${i.ID}</td>
+      					<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
+      				</tr>`);
+				});
+				$("#gene_info").append(
+					`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+				);
+				$("#gene_info").append(
+					`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+				)
+				$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
 						// }
 					// }); // NEW ADDED
 				$('#sgene_list').val(x.toString())
 			});
-			
+
 		var svg_graph = svg.append('svg:g').call(zoomer);
 
 		var rect = svg_graph.append('svg:rect')
