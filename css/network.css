@@ -576,3 +576,18 @@ body {
     .chosen-container-single .chosen-single :hover{
             color:none;           
         }
+        .radio-label {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        
+        .radio-label input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .info-image {  
+            width: 10px; 
+            height: 11px;
+        }

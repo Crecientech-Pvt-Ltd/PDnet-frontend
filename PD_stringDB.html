@@ -42,6 +42,10 @@
 
 <!-- <script src="./.url.js"></script> -->
 <script>
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 	function getItemFromStorage(key) {
 		if (window.location.pathname.split('/').includes("pdnet_dev")) {
 			return localStorage.getItem(key + '_dev');
@@ -281,12 +285,18 @@
       width: '100%' ,
 	  search_contains: true,
     }); 
-  })  
+  }) 
+  
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 
 </script>
 
 <body>
+
+
 	<div id="loader" class="spinner-box">
 		<div class="circle-border">
 			<div class="circle-core"></div>
@@ -388,6 +398,11 @@
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="padding: 0px;">&times;</a>
 		</div>
 		<div class="legends" style="background: rgb(255, 255, 255, 0.6);">
+<!-- 		
+			<label class="btn btn-primary active" data-toggle="tooltip" data-placement="bottom" title="tooltip on radio!">
+				<input type="radio" name="options" id="radio1" autocomplete="off">Radio 1
+			  </label>
+			 -->
 			<button class="accordion active">Disease Map:</button>
 			<div class="panel" style="max-height:600px;">
 				<div class="padding-16" style="padding:10px 0;">
@@ -407,17 +422,56 @@
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeColor" id="logFC" value="2"> logFC <br>
-						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
-                        <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics <br>												
+						<input type="radio" name="nodeColor" id="logFC" value="2"> 
+						logFC 
+						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change." >
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						  <br>
+						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA 
+						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+                        <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics 
+						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>												
                     <!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeColor" id="Pathways" value="3"> Pathways <br>
-						<input type="radio" name="nodeColor" id="Druggability" value="4"> Druggability<br>
-						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> TE <br>
-						<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>	
-						<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>				
+						<input type="radio" name="nodeColor" id="Pathways" value="3"> 
+						Pathways 
+						<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeColor" id="Druggability" value="4"> 
+						Druggability
+						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> 
+						TE 
+						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeColor" id="DBs" value="6"> 
+						Databases 
+						<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>	
+						<input type="radio" name="nodeColor" id="custom_color" value="8"> 
+						Custom 
+						<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+			
 					<!-- </p> -->
 
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
@@ -441,6 +495,7 @@
 					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
+					
 				</div>
                 
 				<div id="GDAInput" style="padding-bottom:5px;display:none;">
@@ -531,14 +586,39 @@
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
 						<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeSize" id="GlogFC" value="1"> LogFC <br>
-						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> GDA <br>
-						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> Genetics <br>						
+						<input type="radio" name="nodeSize" id="GlogFC" value="1"> 
+						LogFC 
+						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> 
+						GDA 
+						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> 
+						Genetics 
+						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>						
 					<!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-						<input type="radio" name="nodeSize" id="TE4Size" value="4"> TE <br>
+						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> 
+						Druggability 
+						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
+						<input type="radio" name="nodeSize" id="TE4Size" value="4"> 
+						TE 
+						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
+							<img src="../images/icons/info6.png" class="info-image">
+						  </span>
+						<br>
 						<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
 					<!-- </p> -->
 					<!-- Genomic logFC Dropdown to change the node size-->
@@ -569,8 +649,6 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-
-
 
 				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
 					Select TE Options:
@@ -3996,4 +4074,7 @@
 		// 	d3.select('.status')
 		// 	.text('You closeModal on circle ' + i, d);
 		// });
+	</script>
+
+<script>
 	</script>
