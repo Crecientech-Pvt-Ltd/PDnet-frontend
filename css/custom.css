@@ -771,7 +771,7 @@ margin-left: 20px;
 .question {
     width: 22px !important;
     /* height: 22px !important; */
-    color: rgb(20, 2, 86);
+    /* color: rgb(20, 2, 86); */
     z-index: 10;
     position: relative;
 }
