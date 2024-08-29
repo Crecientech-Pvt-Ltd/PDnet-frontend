@@ -761,3 +761,15 @@ td {
 .padding_imp {
     padding: 20px 50px !important;
 }
+
+.image-format {
+z-index: 1;
+position: relative;
+margin-left: 20px;
+}
+
+.fa-question-circle {
+    width: 22px !important;
+    color: rgb(20, 2, 86);
+}
+
