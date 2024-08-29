@@ -763,13 +763,16 @@ td {
 }
 
 .image-format {
-z-index: 1;
-position: relative;
+/* z-index: 1;
+position: relative; */
 margin-left: 20px;
 }
 
-.fa-question-circle {
+.question {
     width: 22px !important;
+    /* height: 22px !important; */
     color: rgb(20, 2, 86);
+    z-index: 10;
+    position: relative;
 }
 
