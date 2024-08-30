@@ -148,11 +148,12 @@
 				'#directionID4Color')
 		};
 
-		//For Direction Size
+		//For TE Size
 		for (var key = 0; key < uniNodeTE.length; key++) {
-
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
 				'#directionID4Size')
+			$('#directionID4Size').trigger("chosen:updated");
+			
 		};
 
 		//For Direction Shape
@@ -608,7 +609,7 @@
 							<img src="../images/icons/info6.png" class="info-image">
 						  </span>
 						<br>
-						<input type="radio" name="nodeSize" id="direction4Size" value="4"> 
+						<input type="radio" name="nodeSize" id="direction4Size" value="4">  
 						TE 
 						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
 							<img src="../images/icons/info6.png" class="info-image">
