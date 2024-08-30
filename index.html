@@ -180,14 +180,43 @@
 		<div style="font-size:37px;">
 			<b>Target discovery knowledgebase platform
 			</b>
-			<a class= "image-format" href="./images/Quick_Start_Guide.pdf" target="_blank">
-				<!-- <i class="fas question fa-question-circle"></i> -->
-				 <img class="question" src= "./images/icons/question.svg">
-				 
-			</a>
+			
 	   </div>
-	</div>
+	   <!-- <a class= "image-format" href="./images/Quick_Start_Guide.pdf" target="_blank">
+		  <img class="question" src= "./images/icons/question.svg">
+			</a> -->
+			<nav class="navbar navbar-expand-lg navbar-light amp-navbar" style="padding: 0;top: 0;">
+			<ul class="navbar-nav ml-auto">
+			  <div class="ham_div" onclick="hamAnimation(this)">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+				
+				<div id="drop_ham" style="display: none;">
+					<div style="cursor: pointer; margin-bottom: 5px;">
+						<a class="menu-title" href="./images/Quick_Start_Guide.pdf" target="_blank">Help</a></div>
+					 <div style="cursor: pointer; margin-bottom: 5px;"><a class="menu-title" href="./images/pageNotFound.html" target="_blank"
+							>About</a></div>
+					<div style="cursor: pointer; margin-bottom: 5px;"><a class="menu-title" href="./images/pageNotFound.html" target="_blank"
+							>FAQ</a></div>
+					<div style="cursor: pointer; margin-bottom: 5px;"><a class="menu-title" href="./images/pageNotFound.html" target="_blank"
+							>Contact</a></div>
+				</div>
 
+				<script>
+					function hamAnimation(x) {
+						x.classList.toggle("change");
+						if ($('#drop_ham').css('display') == 'none') {
+							$('#drop_ham').css('display', 'block');
+						} else {
+							$('#drop_ham').css('display', 'none');
+						}
+					}
+				</script>
+		</ul>
+	</nav>
+</div>
 	<div class="pamp-wrapper ">
 		<div class="overlay">
 			<div class="container overlay-wrapper">

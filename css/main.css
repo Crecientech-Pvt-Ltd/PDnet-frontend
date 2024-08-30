@@ -216,8 +216,8 @@ button:active {
     position: absolute;
     background: #f5f5f5;
     padding: 10px 20px;
-    /* right: 125px; */
-    top: 113px;
+    right: 25px;
+    top: 30px;
   }
 
   .ham_div {
@@ -245,4 +245,9 @@ button:active {
   .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-3px, -3px);
     transform: rotate(45deg) translate(-3px, -3px);
+  }
+
+  .menu-title {
+    text-decoration: none;
+    color: black;
   }
