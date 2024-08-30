@@ -43,8 +43,8 @@
 <!-- <script src="./.url.js"></script> -->
 <script>
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 	function getItemFromStorage(key) {
 		if (window.location.pathname.split('/').includes("pdnet_dev")) {
@@ -110,6 +110,14 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			$('#TE4Color').trigger("chosen:updated");
 		}
 
+		//For TE Size
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
+				'#TE4Size')
+			$('#TE4Size').trigger("chosen:updated");
+
+		};
+
 		// For GDA Color
 		for (var key = 0; key < uniNodeGDA.length; key++) {
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
@@ -146,13 +154,6 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			$('#directionID4Color').trigger("chosen:updated");
 		};
 
-		//For Direction Size
-		for (var key = 0; key < uniNodeTE.length; key++) {
-			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
-				'#directionID4Size')
-			$('#directionID4Size').trigger("chosen:updated");
-			
-		};
 
 		//For Direction Shape
 		//for (var key = 0; key < uniNodeDirection.length; key++) {
@@ -196,7 +197,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
-				$('#druggabilityID4Size').trigger("chosen:updated");
+			$('#druggabilityID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 color
@@ -204,7 +205,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#GWAS4Color')
-			    $('#GWAS4Color').trigger("chosen:updated");
+			$('#GWAS4Color').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 shape
@@ -220,7 +221,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#gwasID4Size')
-				$('#gwasID4Size').trigger("chosen:updated");
+			$('#gwasID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//Databases 4 color
@@ -228,7 +229,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
 				uniNodeDBs[key])).appendTo('#DBs4Color')
-				$('#DBs4Color').trigger("chosen:updated");
+			$('#DBs4Color').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -260,7 +261,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
-				$('#nodeDegreeID4Size').trigger("chosen:updated");
+			$('#nodeDegreeID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -280,16 +281,16 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 	// });
 	//End of ajax call.
 
-	$(document).ready(function() {
-    $('.chosen-select').chosen({
-      width: '100%' ,
-	  search_contains: true,
-    }); 
-  }) 
-  
-  $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+	$(document).ready(function () {
+		$('.chosen-select').chosen({
+			width: '100%',
+			search_contains: true,
+		});
+	})
+
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 
 
 </script>
@@ -398,7 +399,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="padding: 0px;">&times;</a>
 		</div>
 		<div class="legends" style="background: rgb(255, 255, 255, 0.6);">
-<!-- 		
+			<!-- 		
 			<label class="btn btn-primary active" data-toggle="tooltip" data-placement="bottom" title="tooltip on radio!">
 				<input type="radio" name="options" id="radio1" autocomplete="off">Radio 1
 			  </label>
@@ -417,61 +418,65 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			<button class="accordion active">Node Color</button>
 			<!-- To change the color of nodes based on different parameters-->
 			<!-- <div class="panel" style="max-height:600px;margin-left:-20px;"> -->
-				<div class="panel" style="max-height:600px;">
+			<div class="panel" style="max-height:600px;">
 				<p>
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeColor" id="logFC" value="2"> 
-						logFC 
-						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change." >
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						  <br>
-						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA 
-						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-                        <input type="radio" name="nodeColor" id="gwas" value="5"> Genetics 
-						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>												
-                    <!-- </p> -->
+					<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
+					<input type="radio" name="nodeColor" id="logFC" value="2">
+					logFC
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Differential Expression in Log2 fold change.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="GDA" value="9"> GDA
+					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="gwas" value="5"> Genetics
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Odd ratio or Beta-values from population studies.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeColor" id="Pathways" value="3"> 
-						Pathways 
-						<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="Druggability" value="4"> 
-						Druggability
-						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> 
-						TE 
-						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="DBs" value="6"> 
-						Databases 
-						<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>	
-						<input type="radio" name="nodeColor" id="custom_color" value="8"> 
-						Custom 
-						<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-			
+					<input type="radio" name="nodeColor" id="Pathways" value="3">
+					Pathways
+					<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="Druggability" value="4">
+					Druggability
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Druggability score from MantisML and Open Target.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="tissue_enh" value="12">
+					TE
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Tissue-specific expression from GTEX and HPA.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="DBs" value="6">
+					Databases
+					<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="custom_color" value="8">
+					Custom
+					<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+
 					<!-- </p> -->
 
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
@@ -489,15 +494,15 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					<input type="radio" name="nodeColor" id="tissue_enh" value="12"> Tissue Enr. <br> -->
 					<!-- Dropdown for pathways name to highlight nodes-->
 
-				<!-- logFC Dropdown to highlight node with color spectrum-->
+					<!-- logFC Dropdown to highlight node with color spectrum-->
 				<div id="logFCInput" style="padding-bottom:5px;display:none;">
 					Select logFC:
 					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
-					
+
 				</div>
-                
+
 				<div id="GDAInput" style="padding-bottom:5px;display:none;">
 					Select GDA:
 					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;" class="chosen-select">
@@ -518,9 +523,10 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					</select>
 				</div>
 
-               	<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
+				<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
 					Select Druggability:
-					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;" class="chosen-select">
+					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -530,8 +536,8 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
-				</div>				
-				<div id="TEInput" style="padding-bottom:5px;display:none;" >
+				</div>
+				<div id="TEInput" style="padding-bottom:5px;display:none;">
 					Select TE Options:
 					<select id="TE4Color" name="TE4Color" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
@@ -581,45 +587,49 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			<!-- Node size change button -->
 			<button class="accordion active">Node Size</button>
 			<!-- <div class="panel" style="max-height: 300px;margin-left:-20px;" > -->
-				<div class="panel" style="max-height: 300px;" >
+			<div class="panel" style="max-height: 300px;">
 				<p>
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeSize" id="GlogFC" value="1"> 
-						LogFC 
-						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> 
-						GDA 
-						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> 
-						Genetics 
-						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>						
+					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
+					<input type="radio" name="nodeSize" id="GlogFC" value="1">
+					LogFC
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Differential Expression in Log2 fold change.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" id="GDA4Size" value="5">
+					GDA
+					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" id="GWAS4Size" value="3">
+					Genetics
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Odd ratio or Beta-values from population studies.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
 					<!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> 
-						Druggability 
-						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="TE4Size" value="4"> 
-						TE 
-						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
+					<input type="radio" name="nodeSize" id="druggability4Size" value="2">
+					Druggability
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Druggability score from MantisML and Open Target.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" value="4">
+					TE
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Tissue-specific expression from GTEX and HPA.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
 					<!-- </p> -->
 					<!-- Genomic logFC Dropdown to change the node size-->
 				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;">
@@ -638,7 +648,8 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				<!-- Trait P-values Dropdown to change the node size-->
 				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;">
 					Select Trait:
-					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;" class="chosen-select">
+					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -650,18 +661,18 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					</select>
 				</div>
 
-				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
+				<div id="TEInput4Size" style="padding-bottom:5px;display:none;">
 					Select TE Options:
-					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
+					<select id="TE4Size" name="TE4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				
-				</div>
-				</p>
+
 			</div>
-			<!-- Node Shape -->
-			<!-- <div class="legends" style="background: rgb(255, 255, 255, 0.6);">
+			</p>
+		</div>
+		<!-- Node Shape -->
+		<!-- <div class="legends" style="background: rgb(255, 255, 255, 0.6);">
             <button class="accordion active">Node Shape</button>
             
             <div class="panel" style="max-height: 300px;">
@@ -723,263 +734,263 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
             	</p>
             
             </div> -->
-			<!-- Radial Analysis -->
-			<button class="accordion active">Radial Analysis</button>
-			<div class="panel" style="max-height: 250px;">
-				<p>
-					<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
-					<input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
-					<br>
-					<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
-					<input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
-					<!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
-					<!-- Threshold for weight -->
-				<div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
-					<br>
-					<p>Edge Weight: <span id="thresh"></span></p>
-				</div>
-				<!-- node weight dropdown options  -->
-				<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
-					Select Interaction Type:
-					<select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
-						style="width:100%;" >
-						<option value="combined_score" selected="selected">Combined score</option>
-						<option value="textmining">Textmining</option>
-						<option value="experiments">Experiments</option>
-						<option value="database">Databases</option>
-						<option value="coexpression">Co-expression</option>
-						<option value="neighborhood">Neighborhood</option>
-						<option value="fusion">Gene Fusion</option>
-						<option value="cooccurrence">Co-occurrence</option>
-					</select>
-				</div>
-				<!-- node degree dropdown options  -->
-				<div id="nodeDegreeInput4Size" class="slidecontainer" style="padding-bottom:5px;display:none;">
-					Select Node cutoff:
-					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-						<option value="node_degree">Gene Degree</option>
-					</select>
-				</div>
-				<!-- Threshold for Degree -->
-				<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
-					<p>node Degree: <span id="thresh1"></span></p>
-				</div>
-				<!-- Gene connections -->
-				<div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
-					<br>
-					<p>Hub Node Size: <span id="thresh2"></span></p>
-				</div>
-				<div id="hub_genes_button_div"></div>
-				</p>
+		<!-- Radial Analysis -->
+		<button class="accordion active">Radial Analysis</button>
+		<div class="panel" style="max-height: 250px;">
+			<p>
+				<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
+				<input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
+				<br>
+				<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
+				<input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
+				<!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
+				<!-- Threshold for weight -->
+			<div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
+				<br>
+				<p>Edge Weight: <span id="thresh"></span></p>
 			</div>
-			<!-- Find node panel-->
-			<button class="accordion">Custom search</button>
-			<div class="panel">
-				<div id="geneinput">
-					<form name="geneinput">
-						<br>
-						<p>Find Node<span id="thresh1"></span></p>
-						<textarea rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
-							placeholder="Enter Genes list (comma seperated)"></textarea>
-						<!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
-						<input type="submit" id="submit" value="Submit" />
-						<button type="reset" value="Reset" onclick="resetText()">Reset </button>
-						<a id="currentgenesymbol"></a>
-					</form>
-				</div>
+			<!-- node weight dropdown options  -->
+			<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
+				Select Interaction Type:
+				<select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
+					style="width:100%;">
+					<option value="combined_score" selected="selected">Combined score</option>
+					<option value="textmining">Textmining</option>
+					<option value="experiments">Experiments</option>
+					<option value="database">Databases</option>
+					<option value="coexpression">Co-expression</option>
+					<option value="neighborhood">Neighborhood</option>
+					<option value="fusion">Gene Fusion</option>
+					<option value="cooccurrence">Co-occurrence</option>
+				</select>
 			</div>
+			<!-- node degree dropdown options  -->
+			<div id="nodeDegreeInput4Size" class="slidecontainer" style="padding-bottom:5px;display:none;">
+				Select Node cutoff:
+				<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
+					<option value="none" selected="selected">None</option>
+					<option value="node_degree">Gene Degree</option>
+				</select>
+			</div>
+			<!-- Threshold for Degree -->
+			<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
+				<p>node Degree: <span id="thresh1"></span></p>
+			</div>
+			<!-- Gene connections -->
+			<div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
+				<input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
+				<br>
+				<p>Hub Node Size: <span id="thresh2"></span></p>
+			</div>
+			<div id="hub_genes_button_div"></div>
+			</p>
+		</div>
+		<!-- Find node panel-->
+		<button class="accordion">Custom search</button>
+		<div class="panel">
+			<div id="geneinput">
+				<form name="geneinput">
+					<br>
+					<p>Find Node<span id="thresh1"></span></p>
+					<textarea rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
+						placeholder="Enter Genes list (comma seperated)"></textarea>
+					<!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
+					<input type="submit" id="submit" value="Submit" />
+					<button type="reset" value="Reset" onclick="resetText()">Reset </button>
+					<a id="currentgenesymbol"></a>
+				</form>
+			</div>
+		</div>
 
-			<!-- <button class="accordion active">Add Paper</button> -->
-			<button class="accordion active">Custom Upload</button>
-			<div class="panel" style="max-height:400px;">
-				<div style="margin: 10px">
-					<b>Add a file:</b>
-					<div id="">
-						<input type="file" id="universal_ext" accept="text/csv,.csv">
-						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
-						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
-							Universal</button>
-						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
-						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
-					</div>
+		<!-- <button class="accordion active">Add Paper</button> -->
+		<button class="accordion active">Custom Upload</button>
+		<div class="panel" style="max-height:400px;">
+			<div style="margin: 10px">
+				<b>Add a file:</b>
+				<div id="">
+					<input type="file" id="universal_ext" accept="text/csv,.csv">
+					<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+					<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
+						Universal</button>
+					<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
+					<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
 				</div>
 			</div>
+		</div>
 
-			<!-- Node colors legend-->
-			<!-- <button class="accordion">Legends</button>
+		<!-- Node colors legend-->
+		<!-- <button class="accordion">Legends</button>
 			<div class="panel" id="legendPanel">
 				<p></p>
 			</div> -->
-			<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
-				Screenshot!
-			</button>
-			<script>
+		<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
+			Screenshot!
+		</button>
+		<script>
 
-				/***************  Change network type [Not Implemented yet due to unavailability of data]  ***************
+			/***************  Change network type [Not Implemented yet due to unavailability of data]  ***************
 
-				// Weight Change
-				function changedWeight() {
-					graph = ""
-					$("#loader").css('display', 'block')
-					let w = $('#stringDBchanal4weight').val()
-					let d = JSON.parse(getItemFromStorage('pd_net_stringDB'));
-					console.log(d)
-					d.analysedWeight = w;
-					// localStorage.setItem('pd_net_stringDB', JSON.stringify(d));
-					setItemToStorage('pd_net_stringDB', JSON.stringify(d));
+			// Weight Change
+			function changedWeight() {
+				graph = ""
+				$("#loader").css('display', 'block')
+				let w = $('#stringDBchanal4weight').val()
+				let d = JSON.parse(getItemFromStorage('pd_net_stringDB'));
+				console.log(d)
+				d.analysedWeight = w;
+				// localStorage.setItem('pd_net_stringDB', JSON.stringify(d));
+				setItemToStorage('pd_net_stringDB', JSON.stringify(d));
 
-					$.ajax({
-						url: `${URLs()}/get/network/fromNodes`,
-						type: "POST",
-						dataType: 'json',
-						data: d,
-						success: function (result) {
-							$("#loader").css('display', 'none')
-							startD3(result);
-							// force.start();
-						},
-						error: function (err) {
-							$("#loader").css('display', 'none')
-							alert(err.responseJSON.message ? err.responseJSON.message : "There is an issue. Please try after some time");
-							// window.location.href = '/pdnet';
-						}
-					});
-
-				}
-				
-				*/
-
-				var width = 1280,
-					height = 720;
-				// function takesnapshot() {
-				d3.select('#button_snap').on('click', function () {
-					jQuery('#button_snap').html('loading ...');
-					$('#button_snap').css('background', 'transparent');
-					$('#button_snap').css('pointer-events', 'none');
-					$('#button_snap').css('border', 'none');
-					var svgString = getSVGString(svg.node());
-					svgString2Image(svgString, 10 * width, 10 * height, 'png',
-						save); // passes Blob and filesize String to the callback
-
-					function save(dataBlob, filesize) {
-						console.log('BLOB', dataBlob, jsonFile)
-						jQuery('#button_snap').html('Take a Screenshot!');
-						jQuery('#button_snap').css('background', 'white');
-						$('#button_snap').css('pointer-events', 'all');
-						// $('#button_snap').append("Take a Screenshot!")
-						saveAs(dataBlob, `${'savethis'}.png`); // FileSaver.js function
+				$.ajax({
+					url: `${URLs()}/get/network/fromNodes`,
+					type: "POST",
+					dataType: 'json',
+					data: d,
+					success: function (result) {
+						$("#loader").css('display', 'none')
+						startD3(result);
+						// force.start();
+					},
+					error: function (err) {
+						$("#loader").css('display', 'none')
+						alert(err.responseJSON.message ? err.responseJSON.message : "There is an issue. Please try after some time");
+						// window.location.href = '/pdnet';
 					}
 				});
 
-				function getSVGString(svgNode) {
-					svgNode.setAttribute('xlink', 'http://www.w3.org/1999/xlink');
-					var cssStyleText = getCSSStyles(svgNode);
-					appendCSS(cssStyleText, svgNode);
+			}
+			
+			*/
 
-					var serializer = new XMLSerializer();
-					var svgString = serializer.serializeToString(svgNode);
-					svgString = svgString.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
-					svgString = svgString.replace(/NS\d+:href/g, 'xlink:href'); // Safari NS namespace fix
+			var width = 1280,
+				height = 720;
+			// function takesnapshot() {
+			d3.select('#button_snap').on('click', function () {
+				jQuery('#button_snap').html('loading ...');
+				$('#button_snap').css('background', 'transparent');
+				$('#button_snap').css('pointer-events', 'none');
+				$('#button_snap').css('border', 'none');
+				var svgString = getSVGString(svg.node());
+				svgString2Image(svgString, 10 * width, 10 * height, 'png',
+					save); // passes Blob and filesize String to the callback
 
-					return svgString;
+				function save(dataBlob, filesize) {
+					console.log('BLOB', dataBlob, jsonFile)
+					jQuery('#button_snap').html('Take a Screenshot!');
+					jQuery('#button_snap').css('background', 'white');
+					$('#button_snap').css('pointer-events', 'all');
+					// $('#button_snap').append("Take a Screenshot!")
+					saveAs(dataBlob, `${'savethis'}.png`); // FileSaver.js function
+				}
+			});
 
-					function getCSSStyles(parentElement) {
-						var selectorTextArr = [];
+			function getSVGString(svgNode) {
+				svgNode.setAttribute('xlink', 'http://www.w3.org/1999/xlink');
+				var cssStyleText = getCSSStyles(svgNode);
+				appendCSS(cssStyleText, svgNode);
 
-						// Add Parent element Id and Classes to the list
-						selectorTextArr.push('#' + parentElement.id);
-						for (var c = 0; c < parentElement.classList.length; c++)
-							if (!contains('.' + parentElement.classList[c], selectorTextArr))
-								selectorTextArr.push('.' + parentElement.classList[c]);
+				var serializer = new XMLSerializer();
+				var svgString = serializer.serializeToString(svgNode);
+				svgString = svgString.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink='); // Fix root xlink without namespace
+				svgString = svgString.replace(/NS\d+:href/g, 'xlink:href'); // Safari NS namespace fix
 
-						// Add Children element Ids and Classes to the list
-						var nodes = parentElement.getElementsByTagName("*");
-						for (var i = 0; i < nodes.length; i++) {
-							var id = nodes[i].id;
-							if (!contains('#' + id, selectorTextArr))
-								selectorTextArr.push('#' + id);
+				return svgString;
 
-							var classes = nodes[i].classList;
-							for (var c = 0; c < classes.length; c++)
-								if (!contains('.' + classes[c], selectorTextArr))
-									selectorTextArr.push('.' + classes[c]);
-						}
+				function getCSSStyles(parentElement) {
+					var selectorTextArr = [];
 
-						// Extract CSS Rules
-						var extractedCSSText = "";
-						for (var i = 0; i < document.styleSheets.length; i++) {
-							var s = document.styleSheets[i];
+					// Add Parent element Id and Classes to the list
+					selectorTextArr.push('#' + parentElement.id);
+					for (var c = 0; c < parentElement.classList.length; c++)
+						if (!contains('.' + parentElement.classList[c], selectorTextArr))
+							selectorTextArr.push('.' + parentElement.classList[c]);
 
-							try {
-								if (!s.cssRules) continue;
-							} catch (e) {
-								if (e.name !== 'SecurityError') throw e; // for Firefox
-								continue;
-							}
+					// Add Children element Ids and Classes to the list
+					var nodes = parentElement.getElementsByTagName("*");
+					for (var i = 0; i < nodes.length; i++) {
+						var id = nodes[i].id;
+						if (!contains('#' + id, selectorTextArr))
+							selectorTextArr.push('#' + id);
 
-							var cssRules = s.cssRules;
-							for (var r = 0; r < cssRules.length; r++) {
-								if (contains(cssRules[r].selectorText, selectorTextArr))
-									extractedCSSText += cssRules[r].cssText;
-							}
-						}
-
-
-						return extractedCSSText;
-
-						function contains(str, arr) {
-							return arr.indexOf(str) === -1 ? false : true;
-						}
-
+						var classes = nodes[i].classList;
+						for (var c = 0; c < classes.length; c++)
+							if (!contains('.' + classes[c], selectorTextArr))
+								selectorTextArr.push('.' + classes[c]);
 					}
 
-					function appendCSS(cssText, element) {
-						var styleElement = document.createElement("style");
-						styleElement.setAttribute("type", "text/css");
-						styleElement.innerHTML = cssText;
-						var refNode = element.hasChildNodes() ? element.children[0] : null;
-						element.insertBefore(styleElement, refNode);
+					// Extract CSS Rules
+					var extractedCSSText = "";
+					for (var i = 0; i < document.styleSheets.length; i++) {
+						var s = document.styleSheets[i];
+
+						try {
+							if (!s.cssRules) continue;
+						} catch (e) {
+							if (e.name !== 'SecurityError') throw e; // for Firefox
+							continue;
+						}
+
+						var cssRules = s.cssRules;
+						for (var r = 0; r < cssRules.length; r++) {
+							if (contains(cssRules[r].selectorText, selectorTextArr))
+								extractedCSSText += cssRules[r].cssText;
+						}
 					}
+
+
+					return extractedCSSText;
+
+					function contains(str, arr) {
+						return arr.indexOf(str) === -1 ? false : true;
+					}
+
 				}
 
-
-				function svgString2Image(svgString, width, height, format, callback) {
-					var format = format ? format : 'png';
-
-					var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(
-						svgString))); // Convert SVG string to data URL
-
-					var canvas = document.createElement("canvas");
-					var context = canvas.getContext("2d");
-
-					canvas.width = width;
-					canvas.height = height;
-
-					var image = new Image();
-					image.onload = function () {
-						context.clearRect(0, 0, width, height);
-						context.drawImage(image, 0, 0, width, height);
-
-						canvas.toBlob(function (blob) {
-							var filesize = Math.round(blob.length / 1024) + ' KB';
-							if (callback) callback(blob, filesize);
-						});
-
-
-					};
-					console.log(imgsrc);
-					image.src = imgsrc;
+				function appendCSS(cssText, element) {
+					var styleElement = document.createElement("style");
+					styleElement.setAttribute("type", "text/css");
+					styleElement.innerHTML = cssText;
+					var refNode = element.hasChildNodes() ? element.children[0] : null;
+					element.insertBefore(styleElement, refNode);
 				}
-				// }
-			</script>
-			<!-- <button class="reset-all-btn">Reset All</button> -->
-			<!-- network setting page -->
-			<!-- Select node panel-->
-			<!-- <button class="accordion">Selected Node</button>
+			}
+
+
+			function svgString2Image(svgString, width, height, format, callback) {
+				var format = format ? format : 'png';
+
+				var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(
+					svgString))); // Convert SVG string to data URL
+
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+
+				canvas.width = width;
+				canvas.height = height;
+
+				var image = new Image();
+				image.onload = function () {
+					context.clearRect(0, 0, width, height);
+					context.drawImage(image, 0, 0, width, height);
+
+					canvas.toBlob(function (blob) {
+						var filesize = Math.round(blob.length / 1024) + ' KB';
+						if (callback) callback(blob, filesize);
+					});
+
+
+				};
+				console.log(imgsrc);
+				image.src = imgsrc;
+			}
+			// }
+		</script>
+		<!-- <button class="reset-all-btn">Reset All</button> -->
+		<!-- network setting page -->
+		<!-- Select node panel-->
+		<!-- <button class="accordion">Selected Node</button>
             <div class="panel" id="sgeneinput">
                <p>
               <div id="sgeneinput1">
@@ -989,13 +1000,13 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
             <div class="resetBtn">
             	<button type="reset" value="Reset" onclick="resetText()" style="margin:auto;display:block; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" >Reset the network </button>
             </div> -->
-			<!--button type="reset" value="Reset" onclick="resetText()" >Reset </button-->
-			<!-- <div class="resetBtn">
+		<!--button type="reset" value="Reset" onclick="resetText()" >Reset </button-->
+		<!-- <div class="resetBtn">
             <button type="reset" value="Reset" onclick="resetText()"
             	style="margin:auto;display:block; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">Reset
             	the network </button>
             </div> -->
-		</div>
+	</div>
 	</div>
 	<div class="setting_wrapper" id="mysetting" style="display: none">
 		<div class="setting_close">
@@ -1154,7 +1165,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('druggabilityID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
-			document.getElementById('directionID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+			document.getElementById('TE4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 			document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 		}
 
@@ -1574,11 +1585,11 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 							gene_info.innerHTML = "";
 							tableInfo.innerHTML = "";
 						}
-				});	
+					});
 				nodeDetails.forEach((i, index) => {
 					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
 					$("#table_data-ip")
-					.append(`<tr>
+						.append(`<tr>
       				  	<td style="width: 50px; padding: 5px;">${index + 1}.</td>
       					<td>${i.Gene_name}</td>
       					<td>${i.ID}</td>
@@ -1592,8 +1603,8 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
 				)
 				$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
-						// }
-					// }); // NEW ADDED
+				// }
+				// }); // NEW ADDED
 				$('#sgene_list').val(x.toString())
 			});
 
@@ -1653,7 +1664,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 		function startD3(data) {
 			graph = JSON.parse(JSON.stringify(data));
-			
+
 			graph.links = graph.links.map(d => ({
 				source: +d.gene1.index,
 				target: +d.gene2.index,
@@ -3280,7 +3291,9 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			nodeColor_sel = document.getElementById("TE4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+				return val ? d3.scale.linear()
+					.domain([0, 1])
+					.range([default_node_color, "red"])(Number(val)) : default_node_color;
 			});
 		}
 
@@ -3304,6 +3317,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#GlogFCInput4Size").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "none");
 				d3.select("#GDAInput4Size").style("display", "none");
+				d3.select("#TEInput4Size").style("display", "none");
 				d3.selectAll(".node").select("path")
 					.attr("d", d3.svg.symbol()
 						.size(function (d) {
@@ -3326,7 +3340,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#PlogFCInput").style("display", "none");
 				d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "none");
-				d3.select("#directionInput4Size").style("display", "none");
+				d3.select("#TEInput4Size").style("display", "none");
 				d3.select("#GDAInput4Size").style("display", "none");
 				$("#GlogFCID4Size").val('none');
 				d3.selectAll(".node").select("path")
@@ -3342,7 +3356,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#GlogFCInput4Size").style("display", "none");
 				d3.select("#PlogFCInput").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "none");
-				d3.select("#directionInput4Size").style("display", "none");
+				d3.select("#TEInput4Size").style("display", "none");
 				d3.select("#druggabilityInput4Size").style("display", "block");
 				d3.select("#GDAInput4Size").style("display", "none");
 				$("#druggabilityID4Size").val('none');
@@ -3362,7 +3376,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#GlogFCInput4Size").style("display", "none");
 				d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "block");
-				d3.select("#directionInput4Size").style("display", "none");
+				d3.select("#TEInput4Size").style("display", "none");
 				d3.select("#PlogFCInput").style("display", "none");
 				d3.select("#GDAInput4Size").style("display", "none");
 				$("#gwasID4Size").val('none');
@@ -3380,10 +3394,9 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#GlogFCInput4Size").style("display", "none");
 				d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "none");
-				d3.select("#directionInput4Size").style("display", "block");
+				d3.select("#TEInput4Size").style("display", "block");
 				d3.select("#PlogFCInput").style("display", "none");
 				d3.select("#GDAInput4Size").style("display", "none");
-				$("#directionID4Size").val('none');
 				d3.selectAll(".node").select("path")
 					.attr("d", d3.svg.symbol()
 						.size(function (d) {
@@ -3401,9 +3414,8 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 				d3.select("#GlogFCInput4Size").style("display", "none");
 				d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select("#gwasInput4Size").style("display", "none");
-				d3.select("#directionInput4Size").style("display", "none");
+				d3.select("#TEInput4Size").style("display", "none");
 				d3.select("#PlogFCInput").style("display", "none");
-				$("#directionID4Size").val('none');
 				d3.selectAll(".node").select("path")
 					.attr("d", d3.svg.symbol()
 						.size(function (d) {
@@ -3981,6 +3993,24 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 					}));
 		}
 
+
+		document.getElementById("TE4Size").onchange = function () {
+			nodeSize = document.getElementById("TE4Size").value;
+			nodeSize_sel = nodeSize;
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					.size(function (d) {
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("TE4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+		}
+
 		//Gradient Legend for the network
 
 		var svg2 = d3.select("div#legendPanel").append("svg").attr("width", 150).attr("height", 100).attr("class",
@@ -4005,7 +4035,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 			.labelOffset(10)
 			.scale(linear)
 			//.orient("horizontal")
-			.labels(["", "Up", "", "", "", "Baseline", "",  "", "", "Down"])
+			.labels(["", "Up", "", "", "", "Baseline", "", "", "", "Down"])
 			.labelAlign("start");
 
 		svg2.select(".legendExpression")
@@ -4076,5 +4106,5 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 		// });
 	</script>
 
-<script>
+	<script>
 	</script>
