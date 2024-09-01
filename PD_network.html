@@ -93,7 +93,7 @@
 		var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
 		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
 		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
-		 var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
+		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
 		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_".toLowerCase()));
@@ -118,7 +118,7 @@
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
 			$('#GDAID4Color').trigger("chosen:updated");
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
-            $('#GDAID4Size').trigger("chosen:updated");
+			$('#GDAID4Size').trigger("chosen:updated");
 		}
 
 		// Populate Druggability dropdown
@@ -153,7 +153,7 @@
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
 				'#directionID4Size')
 			$('#directionID4Size').trigger("chosen:updated");
-			
+
 		};
 
 		//For Direction Shape
@@ -167,7 +167,7 @@
 			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
 				'#pathwayID4Color')
 			$('#pathwayID4Color').trigger("chosen:updated");
-			
+
 		};
 
 		//For Custom color
@@ -198,7 +198,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
 				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
-				$('#druggabilityID4Size').trigger("chosen:updated");
+			$('#druggabilityID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 color
@@ -206,8 +206,8 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#GWAS4Color')
-				$('#GWAS4Color').trigger("chosen:updated");
-			    
+			$('#GWAS4Color').trigger("chosen:updated");
+
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 shape
@@ -215,7 +215,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#GWAS4Shape')
-				$('#GWAS4Shape').trigger("chosen:updated");
+			$('#GWAS4Shape').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 Size
@@ -224,7 +224,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
 				uniNodeGWAS[key])).appendTo('#gwasID4Size')
-				$('#gwasID4Size').trigger("chosen:updated");
+			$('#gwasID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//Databases 4 color
@@ -232,7 +232,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
 				uniNodeDBs[key])).appendTo('#DBs4Color')
-				$('#gwasID4Size').trigger("chosen:updated");
+			$('#gwasID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -241,7 +241,7 @@
 			//var val = sample[0]+"_"+pathwayList[key];
 			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
 				uniNodeDBs[key])).appendTo('#DBs4Shape')
-				$('#DBs4Shape').trigger("chosen:updated");
+			$('#DBs4Shape').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 
@@ -261,13 +261,13 @@
 
 		};
 
-		for (var key = 0; key < uniNodeDruggability.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
-				jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
-				$('#nodeDegreeID4Size').trigger("chosen:updated");
-			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-		};
+		// for (var key = 0; key < uniNodeDruggability.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+		// 		jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
+		// 		$('#nodeDegreeID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
 
 		//  relevence in  radial analysis
 		// for(let key=0; key<uniNodeRelevence.length; key++){
@@ -284,16 +284,16 @@
 	// 	}
 	// });
 	//End of ajax call.	
-	$(document).ready(function() {
-    $('.chosen-select').chosen({
-      width: '100%' ,
-	  search_contains: true,
-    }); 
-  })  
+	$(document).ready(function () {
+		$('.chosen-select').chosen({
+			width: '100%',
+			search_contains: true,
+		});
+	})
 
-  $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 
 
 </script>
@@ -424,58 +424,62 @@
 				<p>
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeColor" id="logFC" value="2"> 
-						logFC 
-						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change." >
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="GDA" value="9"> 
-						GDA 
-						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-                        <input type="radio" name="nodeColor" id="gwas" value="5"> 
-						Genetics
-						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span> 
-						<br>						
-                    <!-- </p> -->
+					<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
+					<input type="radio" name="nodeColor" id="logFC" value="2">
+					logFC
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Differential Expression in Log2 fold change.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="GDA" value="9">
+					GDA
+					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="gwas" value="5">
+					Genetics
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Odd ratio or Beta-values from population studies.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeColor" id="Pathways" value="3"> 
-						Pathways 
-						<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="Druggability" value="4"> 
-						Druggability
-						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="tissue_enh" value="12"> 
-						TE 
-						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeColor" id="DBs" value="6"> 
-						Databases 
-						<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>	
-						<input type="radio" name="nodeColor" id="custom_color" value="8"> 
-						Custom 
-						<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>				
+					<input type="radio" name="nodeColor" id="Pathways" value="3">
+					Pathways
+					<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="Druggability" value="4">
+					Druggability
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Druggability score from MantisML and Open Target.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="tissue_enh" value="12">
+					TE
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Tissue-specific expression from GTEX and HPA.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="DBs" value="6">
+					Databases
+					<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeColor" id="custom_color" value="8">
+					Custom
+					<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
 					<!-- </p> -->
 					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 					<input type="radio" name="nodeColor" id="Direction" value="1"> Direction <br>
@@ -528,14 +532,16 @@
 				<!-- Direction Dropdown to highlight nodes-->
 				<div id="directionInput" style="padding-bottom:5px;display:none;">
 					Select Direction:
-					<select id="directionID4Color" name="directionID4Color" style="max-width:90%;" class="chosen-select">
+					<select id="directionID4Color" name="directionID4Color" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!-- Trait dropdown to highlight nodes  -->
 				<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
 					Select Druggability:
-					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;" class="chosen-select">
+					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
@@ -579,46 +585,50 @@
 			<button class="accordion active">Node Size</button>
 			<div class="panel" style="max-height: 300px;">
 				<p>
-				<!-- <button class= "sub_btn">Disease Dependent</button> -->
-				  <!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
-						<input type="radio" name="nodeSize" id="GlogFC" value="1"> 
-						LogFC 
-						<span data-toggle="tooltip" data-placement="bottom" title="Differential Expression in Log2 fold change.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="GDA4Size" value="5"> 
-						GDA 
-						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> 
-						Genetics 
-						<span data-toggle="tooltip" data-placement="bottom" title="Odd ratio or Beta-values from population studies.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>						
+					<!-- <button class= "sub_btn">Disease Dependent</button> -->
+					<!-- <p class="margin_left"> -->
+					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
+					<input type="radio" name="nodeSize" id="GlogFC" value="1">
+					LogFC
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Differential Expression in Log2 fold change.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" id="GDA4Size" value="5">
+					GDA
+					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" id="GWAS4Size" value="3">
+					Genetics
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Odd ratio or Beta-values from population studies.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
 					<!-- </p> -->
 					<!-- <button class= "sub_btn">Disease Independent</button> -->
 					<!-- <p class="margin_left"> -->
-						<input type="radio" name="nodeSize" id="druggability4Size" value="2"> 
-						Druggability 
-						<span data-toggle="tooltip" data-placement="bottom" title="Druggability score from MantisML and Open Target.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<input type="radio" name="nodeSize" id="direction4Size" value="4">  
-						TE 
-						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
-							<img src="../images/icons/info6.png" class="info-image">
-						  </span>
-						<br>
-						<!-- <input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						 -->
+					<input type="radio" name="nodeSize" id="druggability4Size" value="2">
+					Druggability
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Druggability score from MantisML and Open Target.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<input type="radio" name="nodeSize" id="direction4Size" value="4">
+					TE
+					<span data-toggle="tooltip" data-placement="bottom"
+						title="Tissue-specific expression from GTEX and HPA.">
+						<img src="../images/icons/info6.png" class="info-image">
+					</span>
+					<br>
+					<!-- <input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						 -->
 					<!-- </p> -->
 
-<!-- 
+					<!-- 
 					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
 					<input type="radio" name="nodeSize" id="GlogFC" value="1"> LogFC <br>
 					<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
@@ -647,14 +657,15 @@
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-                <!-- Trait P-values Dropdown to change the node size-->
+				<!-- Trait P-values Dropdown to change the node size-->
 				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;">
 					Select Trait:
-					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;" class="chosen-select">
+					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-				
+
 				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
 					Select TE Options:
 					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
@@ -750,7 +761,8 @@
 				<!-- node weight dropdown options  -->
 				<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;">
 					Select Interaction Type:
-					<select id="stringDBchanal4weight" name="stringDBchanal4weight" style="width:100%;" class="chosen-select">
+					<select id="stringDBchanal4weight" name="stringDBchanal4weight" style="width:100%;"
+						class="chosen-select">
 						<option value="none" selected="selected">Combined score </option>
 						<option value="tm">Textmining</option>
 						<option value="expr">Experiments</option>
@@ -766,7 +778,8 @@
 				<!-- node degree dropdown options  -->
 				<div id="nodeDegreeInput4Size" class="slidecontainer" style="padding-bottom:5px;display:none;">
 					Select Node cutoff:
-					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
+					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;"
+						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 						<option value="node_degree">Gene Degree</option>
 					</select>
@@ -1563,26 +1576,26 @@
 							tableInfo.innerHTML = "";
 						}
 					});
-					nodeDetails.forEach((i, index) => {
-						$("#gene_info").append(`<p>${i.Gene_name}</p>`)
-						$("#table_data-ip")
+				nodeDetails.forEach((i, index) => {
+					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
+					$("#table_data-ip")
 						.append(`<tr>
       						<td style="width: 50px; padding: 5px;">${index + 1}.</td>
       						<td>${i.Gene_name}</td>
       						<td>${i.ID}</td>
       						<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
       					</tr>`);
-					});
-					$("#gene_info").append(
-						`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: right">Clear</button>`
-					)
-					$("#gene_info").append(
-						`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
-					);
-					$("#gene_info").append(`<div style="float: left">${nodeDetails.length} nodes selected</div>`);
-					// 	}
-					// }); // NEW ADDED
-					$('#sgene_list').val(x.toString())
+				});
+				$("#gene_info").append(
+					`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: right">Clear</button>`
+				)
+				$("#gene_info").append(
+					`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+				);
+				$("#gene_info").append(`<div style="float: left">${nodeDetails.length} nodes selected</div>`);
+				// 	}
+				// }); // NEW ADDED
+				$('#sgene_list').val(x.toString())
 			});
 
 		var svg_graph = svg.append('svg:g').call(zoomer);
@@ -2626,40 +2639,33 @@
 			}
 			var degreeVal = this.value || 0;
 			// console.log(graph)
-			d3.selectAll(".node")
+			const totalNodes = d3.selectAll(".node")
 				.filter(d => {
-					// console.log(d)
-					// console.log(d.weight >= degreeVal)
 					return d.weight >= degreeVal;
 				})
-				.style("display", "inline");
-
+				.style("display", "inline").size();
 			d3.selectAll(".node")
 				.filter(d => {
 					return d.weight < degreeVal;
 				})
 				.style("display", "none");
-			d3.selectAll(".link")
+			const totalEdges = d3.selectAll(".link")
 				.filter(d => {
-
-					return d.target.weight > degreeVal
+					return d.target.weight >= degreeVal
 				})
-				.style("display", "inline");
+				.style("display", "inline").size();
 			d3.selectAll(".link")
 				.filter(d => {
-
 					return d.source.weight >= degreeVal
 				})
 				.style("display", "inline");
 			d3.selectAll(".link")
 				.filter(d => {
-					// console.log('->', d);
 					return d.target.weight < degreeVal
 				})
 				.style("display", "none");
 			d3.selectAll(".link")
 				.filter(d => {
-					//console.log(d.source.weight,d.target.weight,"newtork");
 					return d.source.weight < degreeVal
 				})
 				.style("display", "none");
@@ -2674,6 +2680,8 @@
 					// console.log(d.weight)
 					return d.weight < degreeVal;
 				}).style("display", "none");
+			$('#network_details').empty();
+			$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
 		}
 
 		// slider.oninput =  function() {
@@ -4019,7 +4027,7 @@
 			.labelOffset(10)
 			.scale(linear)
 			//.orient("horizontal")
-			.labels(["","Up", "", "", "", "Baseline", "", "", "", "Down"])
+			.labels(["", "Up", "", "", "", "Baseline", "", "", "", "Down"])
 			.labelAlign("start");
 
 		svg2.select(".legendExpression")

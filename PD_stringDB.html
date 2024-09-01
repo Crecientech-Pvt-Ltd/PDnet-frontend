@@ -257,13 +257,13 @@
 
 		};
 
-		for (var key = 0; key < uniNodeDruggability.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
-				jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
-			$('#nodeDegreeID4Size').trigger("chosen:updated");
-			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-		};
+		// for (var key = 0; key < uniNodeDruggability.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+		// 		jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
+		// 	$('#nodeDegreeID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
 
 		//  relevence in  radial analysis
 		// for(let key=0; key<uniNodeRelevence.length; key++){
@@ -1939,7 +1939,7 @@
 					//################### Update on 8.05.19 #################################//
 					if (nodeSize_sel != "") {
 
-						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (d[nodeSize_sel] ? (Number(d[nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
+						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
 					}
 					if (nodeColor_sel != "") {
 						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
@@ -2611,26 +2611,23 @@
 			}
 			var degreeVal = this.value || 0;
 			// console.log(graph)
-			d3.selectAll(".node")
+			const totalNodes = d3.selectAll(".node")
 				.filter(d => {
 					return d.weight >= degreeVal;
 				})
-				.style("display", "inline");
-
+				.style("display", "inline").size();
 			d3.selectAll(".node")
 				.filter(d => {
 					return d.weight < degreeVal;
 				})
 				.style("display", "none");
-			d3.selectAll(".link")
+			const totalEdges = d3.selectAll(".link")
 				.filter(d => {
-
-					return d.target.weight > degreeVal
+					return d.target.weight >= degreeVal
 				})
-				.style("display", "inline");
+				.style("display", "inline").size();
 			d3.selectAll(".link")
 				.filter(d => {
-
 					return d.source.weight >= degreeVal
 				})
 				.style("display", "inline");
@@ -2641,7 +2638,6 @@
 				.style("display", "none");
 			d3.selectAll(".link")
 				.filter(d => {
-					//console.log(d.source.weight,d.target.weight,"newtork");
 					return d.source.weight < degreeVal
 				})
 				.style("display", "none");
@@ -2656,6 +2652,8 @@
 					// console.log(d.weight)
 					return d.weight < degreeVal;
 				}).style("display", "none");
+			$('#network_details').empty();
+			$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
 		}
 
 		// slider.oninput =  function() {
