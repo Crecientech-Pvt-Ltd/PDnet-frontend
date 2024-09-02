@@ -41,6 +41,11 @@
 
 
 <!-- <script src="./.url.js"></script> -->
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 <script>
 
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -286,13 +291,14 @@
 			width: '100%',
 			search_contains: true,
 		});
-	})
+	});
+
+
+
 
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
-	})
-
-
+	});
 </script>
 
 <body>
@@ -407,18 +413,58 @@
 			<button class="accordion active">Disease Map:</button>
 			<div class="panel" style="max-height:600px;">
 				<div class="padding-16" style="padding:10px 0;">
-					<select id="diseaseMap" name="diseaseMap" style="width:100%;" class="chosen-select">
+					<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
+					left: 162px;
+					bottom: 22px;" class="chosen-select" onchange="updateTooltip()">
 						<option value="ALS">ALS</option>
 						<option value="FTD">FTD</option>
 						<option value="OI">OI</option>
 						<option value="PSP">PSP</option>
-					</select>
+					
+					
+				</select>
+					<div class="tooltiptext" id="tooltipContainer">
+						<span data-toggle="tooltip" data-placement="bottom" style="position:relative; left: 160px; bottom: 20px;">
+							<img src="../images/icons/info6.png" class="info-image" id="tooltipImage">
+							<div class="tooltip-content" id="tooltipContent">Initial Tooltip Text</div>
+						</span>
+					</div>
 				</div>
+				<script>
+					function updateTooltip() {
+						const selectElement = document.getElementById('diseaseMap');
+						const selectedText = selectElement.options[selectElement.selectedIndex].text;
+						const tooltipContentElement = document.getElementById('tooltipContent');
+						const tooltipImageElement = document.getElementById('tooltipImage');
+			
+						// Update the tooltip content based on the selected value
+						tooltipContentElement.textContent = getTooltipText(selectedText);
+					}
+			
+					function getTooltipText(selectedValue) {
+						// Define different tooltip texts based on the selected value
+						switch (selectedValue) {
+							case 'ALS':
+								return 'Amyotrophic Lateral Sclerosis.';
+							case 'FTD':
+								return 'Frontotemporal Dementia.';
+							case 'OI':
+								return 'Osteogenesis Imperfecta.';
+							case 'PSP':
+								return 'Progressive Supranuclear Palsy.';
+							default:
+								return 'Select a disease to see more information.';
+						}
+					}
+			
+					// Initialize tooltip on page load
+					window.onload = updateTooltip;
+				</script>
 			</div>
 			<button class="accordion active">Node Color</button>
 			<!-- To change the color of nodes based on different parameters-->
 			<!-- <div class="panel" style="max-height:600px;margin-left:-20px;"> -->
-			<div class="panel" style="max-height:600px;">
+			<div class="panel" style="max-height:300px;">
 				<p>
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->

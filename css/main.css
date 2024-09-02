@@ -224,7 +224,7 @@ button:active {
     display: inline-block;
     cursor: pointer;
     margin-top: 6px;
-    margin-left: 20px;
+    margin-right: 60px;
   }
   
   .bar1, .bar2, .bar3 {

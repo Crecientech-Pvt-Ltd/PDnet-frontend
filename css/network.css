@@ -53,13 +53,25 @@ body {
       padding: 0 18px;
       border-radius: 0;
       background-color:rgb(74, 129, 148);
-      /* max-height: 0; */
-      /* overflow: hidden; */
+      /* max-height: 0;
+      overflow: hidden; */
       transition: max-height 0.2s ease-out;
       margin-bottom:0px;
       color: white;     
       font-size: 13px;
   }
+
+  /* .panel1 {
+    padding: 0 18px;
+    border-radius: 0;
+    background-color:rgb(74, 129, 148);
+    max-height: 0;
+    overflow-x: auto; 
+    transition: max-height 0.2s ease-out;
+    margin-bottom:0px;
+    color: white;     
+    font-size: 13px;
+} */
   
   /* #legendPanel{
       min-height: 100px; 
@@ -570,7 +582,7 @@ body {
     .chosen-container-single .chosen-single {
             font-size:12px;
             height: 24px;
-            width: 200px;
+            width: 150px;
         }
 
     .chosen-container-single .chosen-single :hover{
@@ -590,4 +602,51 @@ body {
         .info-image {  
             width: 10px; 
             height: 11px;
+        }
+
+        /* .info-image1 {  
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            cursor: pointer;
+        } */
+
+
+        .tooltiptext {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltiptext .tooltip-content {
+            visibility: hidden;
+            width: 200px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            /* bottom: 125%;  */
+            left: 50%;
+            margin-left: -151px; 
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .tooltiptext:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
+        .custom-tooltip .tooltip-inner {
+            background-color: #FFFFFF !important; /* White background */
+            color: #000000 !important;           /* Text color */
+            border: 1px solid #CCCCCC;           /* Optional: Add a border */
+        }
+        .custom-tooltip .arrow::before {
+            border-bottom-color: #FFFFFF !important; /* White arrow for bottom placement */
+            border-top-color: #FFFFFF !important;    /* White arrow for top placement */
         }
