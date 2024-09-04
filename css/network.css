@@ -2,6 +2,7 @@
 body {
     overflow:hidden;
      margin:0;
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   
   text {
@@ -53,26 +54,30 @@ body {
       padding: 0 18px;
       border-radius: 0;
       background-color:rgb(74, 129, 148);
-      /* max-height: 0;
-      overflow: hidden; */
+      max-height: 0;
+      overflow: hidden;
       transition: max-height 0.2s ease-out;
       margin-bottom:0px;
       color: white;     
       font-size: 13px;
   }
 
-  /* .panel1 {
-    padding: 0 18px;
-    border-radius: 0;
-    background-color:rgb(74, 129, 148);
-    max-height: 0;
-    overflow-x: auto; 
-    transition: max-height 0.2s ease-out;
-    margin-bottom:0px;
-    color: white;     
-    font-size: 13px;
-} */
-  
+  .panel1 {
+    overflow: auto; 
+    scrollbar-width: none; 
+   
+}
+
+.list-box {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+/* WebKit browsers (Chrome, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+}
   /* #legendPanel{
       min-height: 100px; 
   } */
@@ -613,8 +618,8 @@ body {
 
 
         .tooltiptext {
-            position: relative;
-            display: inline-block;
+            position: absolute;
+            /* display: inline-block; */
         }
 
         .tooltiptext .tooltip-content {
@@ -650,3 +655,33 @@ body {
             border-bottom-color: #FFFFFF !important; /* White arrow for bottom placement */
             border-top-color: #FFFFFF !important;    /* White arrow for top placement */
         }
+
+        .new {
+            border-top: 1px solid white;
+            border-radius: 4px 4px 0 0;
+            background: #2d6e84;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        .b {
+            background-color: rgb(74, 129, 148);
+            border-radius: 0;
+        }
+
+        .size {
+            font-size: 13px;
+            color: #FFFFFF;
+        }
+
+      .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .tool-tip-font {
+        font-size: 14px;
+      }

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
 <script defer type="text/javascript" src="script/jquery.csv.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
@@ -12,7 +13,6 @@
 <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="  crossorigin="anonymous"></script>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="script/d3-legend.min.js"></script>
 <script type="text/javascript" src="script/math.js"></script>
@@ -37,11 +37,15 @@
 <!-- Chosen JS -->
 <script src="/node_modules/chosen-js/chosen.jquery.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
 <!-- <script src="./.url.js"></script> -->
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
 
 <script>
@@ -415,8 +419,16 @@
 		</div>
 
 		<div class="legends" style="background: rgb(255, 255, 255, 0.6);">
-			<button class="accordion active">Disease Map:</button>
-			<div class="panel" style="max-height:600px;">
+			<!-- <button class="accordion active">Disease Map:</button> -->
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">
+					Disease Map:<span>+</span>
+				</div>
+			</div>
+			<!-- <div class="panel" style="max-height:600px;"> -->
+			<div class="collapse" id="collapseExampleOne">
+			<div class="b card card-body">
+			<p class="size">
 				<div class="padding-16" style="padding:10px 0;">
 					<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
 					left: 162px;
@@ -425,11 +437,10 @@
 						<option value="FTD">FTD</option>
 						<option value="OI">OI</option>
 						<option value="PSP">PSP</option>
-					
-					
-				</select>
+					</select>
 					<div class="tooltiptext" id="tooltipContainer">
-						<span data-toggle="tooltip" data-placement="bottom" style="position:relative; left: 160px; bottom: 20px;">
+						<span data-toggle="tooltip" data-placement="bottom"
+							style="position:relative; left: 160px; bottom: 20px;">
 							<img src="../images/icons/info6.png" class="info-image" id="tooltipImage">
 							<div class="tooltip-content" id="tooltipContent">Initial Tooltip Text</div>
 						</span>
@@ -441,13 +452,11 @@
 						const selectedText = selectElement.options[selectElement.selectedIndex].text;
 						const tooltipContentElement = document.getElementById('tooltipContent');
 						const tooltipImageElement = document.getElementById('tooltipImage');
-			
-						// Update the tooltip content based on the selected value
+
 						tooltipContentElement.textContent = getTooltipText(selectedText);
 					}
-			
+
 					function getTooltipText(selectedValue) {
-						// Define different tooltip texts based on the selected value
 						switch (selectedValue) {
 							case 'ALS':
 								return 'Amyotrophic Lateral Sclerosis.';
@@ -461,198 +470,204 @@
 								return 'Select a disease to see more information.';
 						}
 					}
-			
-					// Initialize tooltip on page load
+
 					window.onload = updateTooltip;
 				</script>
-			</div>
-			<button class="accordion active">Node Color</button>
+			</p>
+		</div>
+	       </div>
+
+			<!-- <button class="accordion active">Node Color</button> -->
 
 			<!-- To change the color of nodes based on different parameters-->
-			<div class="panel" style="max-height:600px;">
-				<p>
-					<!-- <button class= "sub_btn">Disease Dependent</button> -->
-					<!-- <p class="margin_left"> -->
-					<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
-					<input type="radio" name="nodeColor" id="logFC" value="2">
-					logFC
-					<span data-toggle="tooltip" data-placement="bottom"
-						title="Differential Expression in Log2 fold change.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="GDA" value="9">
-					GDA
-					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="gwas" value="5">
-					Genetics
-					<span data-toggle="tooltip" data-placement="bottom"
-						title="Odd ratio or Beta-values from population studies.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<!-- </p> -->
-					<!-- <button class= "sub_btn">Disease Independent</button> -->
-					<!-- <p class="margin_left"> -->
-					<input type="radio" name="nodeColor" id="Pathways" value="3">
-					Pathways
-					<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="Druggability" value="4">
-					Druggability
-					<span data-toggle="tooltip" data-placement="bottom"
-						title="Druggability score from MantisML and Open Target.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="tissue_enh" value="12">
-					TE
-					<span data-toggle="tooltip" data-placement="bottom"
-						title="Tissue-specific expression from GTEX and HPA.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="DBs" value="6">
-					Databases
-					<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeColor" id="custom_color" value="8">
-					Custom
-					<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<!-- </p> -->
-					<!-- <input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
-					<input type="radio" name="nodeColor" id="Direction" value="1"> Direction <br>
-					<input type="radio" name="nodeColor" id="logFC" value="2"> logFC <br>
-					<input type="radio" name="nodeColor" id="Pathways" value="3"> Pathways <br>
-					<input type="radio" name="nodeColor" id="Druggability" value="4"> Druggability<br>
-					<input type="radio" name="nodeColor" id="gwas" value="5"> GWAS <br>
-					<input type="radio" name="nodeColor" id="DBs" value="6"> Databases <br>
-					<input type="radio" name="nodeColor" id="markers" value="7"> Celltype Markers <br>
-					<input type="radio" name="nodeColor" id="custom_color" value="8"> Custom <br>
-					<input type="radio" name="nodeColor" id="GDA" value="9"> GDA <br>
-					<input type="radio" name="nodeColor" id="GWAS_OR" value="10"> GWAS OR <br>
-					<input type="radio" name="nodeColor" id="GWAS_Beta" value="11"> GWAS Beta <br>
-					<input type="radio" name="nodeColor" id="TE" value="12"> Tissue Enr. <br> -->
-					<!-- Dropdown for pathways name to highlight nodes-->
-				<div id="pathwayInput" style="padding-bottom:5px;display:none;">
-					Select Pathway:
-					<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				  Node Color<span>+</span>
 				</div>
-				<!-- Dropdown for GWAS DATA TO highlight nodes-->
-				<div id="GWASInput" style="padding-bottom:5px;display:none;">
-					Select Genetics data:
-					<select id="GWAS4Color" name="GWAS4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- GWAS_OR_Input -->
-				<div id="GWAS_OR_Input" style="padding-bottom:5px;display:none;">
-					Select GWAS OR:
-					<select id="GWAS_OR4Color" name="GWAS_OR4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- GWAS_Beta_Input -->
-				<div id="GWAS_Beta_Input" style="padding-bottom:5px;display:none;">
-					Select GWAS Beta:
-					<select id="GWAS_Beta4Color" name="GWAS_Beta4Color" style="max-width:90%;">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- logFC Dropdown to highlight node with color spectrum-->
-				<div id="logFCInput" style="padding-bottom:5px;display:none;">
-					Select logFC:
-					<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- Direction Dropdown to highlight nodes-->
-				<div id="directionInput" style="padding-bottom:5px;display:none;">
-					Select Direction:
-					<select id="directionID4Color" name="directionID4Color" style="max-width:90%;"
-						class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- Trait dropdown to highlight nodes  -->
-				<div id="druggabilityInput" style="padding-bottom:5px;display:none;">
-					Select Druggability:
-					<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;"
-						class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- Database and assocition dropdown to highlight nodes  -->
-				<div id="DBsInput" style="padding-bottom:5px;display:none;">
-					Select significance from databases:
-					<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- celltype markers dropdown to highlight nodes  -->
-				<div id="celltypemarkerInput" style="padding-bottom:5px;display:none;">
-					Select celltype markers:
-					<select id="markers4Color" name="markers4Color" style="max-width:90%;">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- custom color options dropdown to highlight nodes  -->
-				<div id="custom_color_input" style="padding-bottom:5px;display:none;">
-					Select Custom Options:
-					<select id="custom4Color" name="custom4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<div id="GDAInput" style="padding-bottom:5px;display:none;">
-					Select GDA:
-					<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<div id="TEInput" style="padding-bottom:5px;display:none;">
-					Select TE Options:
-					<select id="TE4Color" name="TE4Color" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				</p>
 			</div>
+			  <div class="collapse" id="collapseExample">
+				<div class="b card card-body">
+					<p class="size">
+						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
+						<input type="radio" name="nodeColor" id="logFC" value="2">
+						logFC
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Differential Expression in Log2 fold change.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="GDA" value="9"> GDA
+						<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="gwas" value="5"> Genetics
+						<span data-toggle="tooltip" data-placement="bottom"
+							title="Odd ratio or Beta-values from population studies.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+				
+						<input type="radio" name="nodeColor" id="Pathways" value="3">
+						Pathways
+						<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="Druggability" value="4">
+						Druggability
+						<span data-toggle="tooltip" data-placement="bottom"
+							title="Druggability score from MantisML and Open Target.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="tissue_enh" value="12">
+						TE
+						<span data-toggle="tooltip" data-placement="bottom"
+							title="Tissue-specific expression from GTEX and HPA.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="DBs" value="6">
+						Databases
+						<span data-toggle="tooltip" data-placement="bottom" title="Membership in various databases.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeColor" id="custom_color" value="8">
+						Custom
+						<span data-toggle="tooltip" data-placement="bottom" title="Custom Informations.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+	
+					<div>
+	
+						<div id="logFCInput" class="size" style="padding-bottom:5px;display:none;">
+							Select logFC:
+							<!-- <div class="panel1" style="max-height:300px;"></div> -->
+							<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+	
+						</div>
+	
+						<div id="GDAInput" class="size" style="padding-bottom:5px;display:none;">
+							Select GDA:
+							<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- Dropdown for GWAS DATA TO highlight nodes-->
+						<div id="GWASInput" class="size" style="padding-bottom:5px;display:none;">
+							Select Genetics data:
+							<select id="GWAS4Color" name="GWAS4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<div id="pathwayInput" class="size" style="padding-bottom:5px;display:none;">
+							Select Pathway:
+							<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;"
+								class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+	
+						<div id="druggabilityInput" class="size" style="padding-bottom:5px;display:none;">
+							Select Druggability:
+							<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;"
+								class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- Database and assocition dropdown to highlight nodes  -->
+						<div id="DBsInput" class="size" style="padding-bottom:5px;display:none;">
+							Select significance from databases:
+							<select id="DBs4Color" name="DBsID4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<div id="TEInput" class="size" style="padding-bottom:5px;display:none;">
+							Select TE Options:
+							<select id="TE4Color" name="TE4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+	
+						<!-- Direction Dropdown to highlight nodes-->
+						<div id="directionInput" class="size" style="padding-bottom:5px;display:none;">
+							Select Direction:
+							<select id="directionID4Color" name="directionID4Color" style="max-width:90%;">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- Trait dropdown to highlight nodes  -->
+						<!-- GWAS_OR_Input -->
+						<div id="GWAS_OR_Input" class="size" style="padding-bottom:5px;display:none;">
+							Select GWAS OR:
+							<select id="GWAS_OR4Color" name="GWAS_OR4Color" style="max-width:90%;">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- GWAS_Beta_Input -->
+						<div id="GWAS_Beta_Input" class="size" style="padding-bottom:5px;display:none;">
+							Select GWAS Beta:
+							<select id="GWAS_Beta4Color" name="GWAS_Beta4Color" style="max-width:90%;">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- celltype markers dropdown to highlight nodes  -->
+						<div id="celltypemarkerInput" class="size" style="padding-bottom:5px;display:none;">
+							Select celltype markers:
+							<select id="markers4Color" name="markers4Color" style="max-width:90%;">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- custom color options dropdown to highlight nodes  -->
+						<div id="custom_color_input" class="size" style="padding-bottom:5px;display:none;">
+							Select Custom Options:
+							<select id="custom4Color" name="custom4Color" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+	
+					</div>
+					</p>
+				</div>
+			  </div>
 
 			<!-- Node size change button -->
-			<button class="accordion active">Node Size</button>
-			<div class="panel" style="max-height: 300px;">
-				<p>
+			<!-- <button class="accordion active">Node Size</button> -->
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">
+					Node Size<span>+</span>
+				</div>
+			</div> 
+			<div class="collapse" id="collapseExampleTwo">
+			  <div class="b card card-body">
+			    <p class="size">
+			<!-- <div class="panel" style="max-height: 300px;margin-left:-20px;" > -->
+			<!-- <div class="panel" style="max-height: 300px;">
+				<p> -->
 					<!-- <button class= "sub_btn">Disease Dependent</button> -->
 					<!-- <p class="margin_left"> -->
 					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
 					<input type="radio" name="nodeSize" id="GlogFC" value="1">
 					LogFC
-					<span data-toggle="tooltip" data-placement="bottom"
+					<span  class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
 						title="Differential Expression in Log2 fold change.">
 						<img src="../images/icons/info6.png" class="info-image">
 					</span>
 					<br>
 					<input type="radio" name="nodeSize" id="GDA4Size" value="5">
 					GDA
-					<span data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
+					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
 						<img src="../images/icons/info6.png" class="info-image">
 					</span>
 					<br>
 					<input type="radio" name="nodeSize" id="GWAS4Size" value="3">
 					Genetics
-					<span data-toggle="tooltip" data-placement="bottom"
+					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
 						title="Odd ratio or Beta-values from population studies.">
 						<img src="../images/icons/info6.png" class="info-image">
 					</span>
@@ -662,68 +677,61 @@
 					<!-- <p class="margin_left"> -->
 					<input type="radio" name="nodeSize" id="druggability4Size" value="2">
 					Druggability
-					<span data-toggle="tooltip" data-placement="bottom"
+					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
 						title="Druggability score from MantisML and Open Target.">
 						<img src="../images/icons/info6.png" class="info-image">
 					</span>
 					<br>
-					<input type="radio" name="nodeSize" id="direction4Size" value="4">
+					<input type="radio" name="nodeSize" value="4">
 					TE
-					<span data-toggle="tooltip" data-placement="bottom"
+					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
 						title="Tissue-specific expression from GTEX and HPA.">
 						<img src="../images/icons/info6.png" class="info-image">
 					</span>
 					<br>
-					<!-- <input type="radio" name="nodeSize" id="tissue_enh" value="6"> Tissue Enr. <br>						 -->
+					<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
 					<!-- </p> -->
-
-					<!-- 
-					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
-					<input type="radio" name="nodeSize" id="GlogFC" value="1"> LogFC <br>
-					<input type="radio" name="nodeSize" id="druggability4Size" value="2"> Druggability <br>
-					<input type="radio" name="nodeSize" id="GWAS4Size" value="3"> GWAS <br>
-					<input type="radio" name="nodeSize" id="direction4Size" value="4"> Direction <br>
-					<input type="radio" name="nodeSize" id="GDA4Size" value="5"> GDA <br> -->
 					<!-- Genomic logFC Dropdown to change the node size-->
-				<div id="GlogFCInput4Size" style="padding-bottom:5px;display:none;">
+				<div>
+				 <div id="GlogFCInput4Size" class="size" style="padding-bottom:5px;display:none;">
 					Select logFC:
 					<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 				<!----GDAID4Size------>
-				<div id="GDAInput4Size" style="padding-bottom:5px;display:none;">
+				<div id="GDAInput4Size" class="size" style="padding-bottom:5px;display:none;">
 					Select GDA:
 					<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-
-				<!-- GWAS Dropdown to change the node size-->
-				<div id="gwasInput4Size" style="padding-bottom:5px;display:none;">
-					Select Genetics:
-					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
 				<!-- Trait P-values Dropdown to change the node size-->
-				<div id="druggabilityInput4Size" style="padding-bottom:5px;display:none;">
-					Select Trait:
+				<div id="druggabilityInput4Size" class="size" style="padding-bottom:5px;display:none;">
+					Select Druggability:
 					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;"
 						class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
-
-				<div id="directionInput4Size" style="padding-bottom:5px;display:none;">
-					Select TE Options:
-					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
+				<!-- GWAS Dropdown to change the node size-->
+				<div id="gwasInput4Size" class="size" style="padding-bottom:5px;display:none;">
+					Select Genetics:
+					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;" class="chosen-select">
 						<option value="none" selected="selected">None</option>
 					</select>
 				</div>
 
-				</p>
+				<div id="TEInput4Size" class="size" style="padding-bottom:5px;display:none;">
+					Select TE Options:
+					<select id="TE4Size" name="TE4Size" style="max-width:90%;" class="chosen-select">
+						<option value="none" selected="selected">None</option>
+					</select>
+				</div>
 			</div>
+			</p>
+		</div>
+	      </div>
 
 
 			<!-- Node Shape -->
@@ -791,102 +799,119 @@
 
 			<!-- Radial Analysis -->
 
-			<button class="accordion active">Radial Analysis</button>
-			<div class="panel" style="max-height: 250px;">
-				<p>
-					<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
-					<input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
-					<br>
-					<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
-					<input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
-					<!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
-					<!-- Threshold for weight -->
-				<div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
-					<br>
-					<p>Edge Weight: <span id="thresh"></span></p>
+			<!-- <button class="accordion active">Radial Analysis</button> -->
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">
+					Radial Analysis<span>+</span>
 				</div>
-
-				<!-- node weight dropdown options  -->
-				<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;">
-					Select Interaction Type:
-					<select id="stringDBchanal4weight" name="stringDBchanal4weight" style="width:100%;"
-						class="chosen-select">
-						<option value="none" selected="selected">Combined score </option>
-						<option value="tm">Textmining</option>
-						<option value="expr">Experiments</option>
-						<option value="db">Databases</option>
-						<option value="coex">Co-expression</option>
-						<option value="nbrhd">Neighborhood</option>
-						<option value="genefu">Gene Fusion</option>
-						<option value="occur">Co-occurrence</option>
-					</select>
-
+				
+				<div class="collapse" id="collapseExampleThree">
+					<div class="b card card-body">
+					   <p class="size">
+						   <input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
+						   <input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
+						   <br>
+						   <input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
+						   <input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
+						   <!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
+						   <!-- Threshold for weight -->
+					   <div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
+						   <input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
+						   <br>
+						   <p class="size">Edge Weight: <span id="thresh"></span></p>
+					   </div>
+					   <!-- node weight dropdown options  -->
+					   <div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
+						   Select Interaction Type:
+						   <select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
+							   style="width:100%;">
+							   <option value="combined_score" selected="selected">Combined score</option>
+							   <option value="textmining">Textmining</option>
+							   <option value="experiments">Experiments</option>
+							   <option value="database">Databases</option>
+							   <option value="coexpression">Co-expression</option>
+							   <option value="neighborhood">Neighborhood</option>
+							   <option value="fusion">Gene Fusion</option>
+							   <option value="cooccurrence">Co-occurrence</option>
+						   </select>
+					   </div>
+					   <!-- node degree dropdown options  -->
+					   <div id="nodeDegreeInput4Size" class="slidecontainer size" style="padding-bottom:5px;display:none;">
+						   Select Node cutoff:
+						   <select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
+							   <option value="none" selected="selected">None</option>
+							   <option value="node_degree">Gene Degree</option>
+						   </select>
+					   </div>
+					   <!-- Threshold for Degree -->
+					   <div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
+						   <input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
+						   <p class="size">node Degree: <span id="thresh1"></span></p>
+					   </div>
+					   <!-- Gene connections -->
+					   <div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
+						   <input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
+						   <br>
+						   <p class="size">Hub Node Size: <span id="thresh2"></span></p>
+					   </div>
+					   <div id="hub_genes_button_div"></div>
+				   </p>
+			     </div>
 				</div>
-
-				<!-- node degree dropdown options  -->
-				<div id="nodeDegreeInput4Size" class="slidecontainer" style="padding-bottom:5px;display:none;">
-					Select Node cutoff:
-					<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;"
-						class="chosen-select">
-						<option value="none" selected="selected">None</option>
-						<option value="node_degree">Gene Degree</option>
-					</select>
-
-				</div>
-				<!-- Threshold for Degree -->
-
-				<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
-
-					<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
-					<p>node Degree: <span id="thresh1"></span></p>
-				</div>
-
-				<!-- Gene connections -->
-				<div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
-					<br>
-					<p>Hub Node Size: <span id="thresh2"></span></p>
-				</div>
-				<div id="hub_genes_button_div"></div>
-				</p>
-			</div>
 
 
 
 			<!-- Find node panel-->
-			<button class="accordion">Custom search</button>
-			<div class="panel">
-
-
-				<div id="geneinput">
-					<form name="geneinput">
-						<br>
-						<p>Find Node<span id="thresh1"></span></p>
-						<textarea rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
-							placeholder="Enter Genes list (comma seperated)"></textarea>
-						<!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
-						<input type="submit" id="submit" value="Submit" />
-						<button type="reset" value="Reset" onclick="resetText()">Reset </button>
-						<a id="currentgenesymbol"></a>
-					</form>
+			<!-- <button class="accordion">Custom search</button> -->
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">
+					Custom search<span>+</span>
 				</div>
 			</div>
+			<div class="collapse" id="collapseExampleFour">
+				<div class="b card card-body">
+				   <p class="size">
+			   <!-- <div class="panel"> -->
+				   <div id="geneinput">
+					   <form name="geneinput">
+						   <br>
+						   <p class="size">Find Node<span id="thresh1"></span></p>
+						   <textarea class="size" rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
+							   placeholder="Enter Genes list (comma seperated)"></textarea>
+						   <!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
+						   <input class="size" type="submit" id="submit" value="Submit" />
+						   <button class="size" type="reset" value="Reset" onclick="resetText()">Reset </button>
+						   <a id="currentgenesymbol"></a>
+					   </form>
+				   </div>
+			     </p>
+		       </div>
+			 </div>
 			<!-- <button class="accordion active">Add Paper</button> -->
-			<button class="accordion active">Custom Upload</button>
-			<div class="panel" style="max-height:400px;">
-				<div style="margin: 10px">
-					<b>Add a file:</b>
-					<div id="">
-						<input type="file" accept=".csv" id="universal_ext">
-						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
-						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
-							Universal</button>
-						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
-						<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
-					</div>
+			<!-- <button class="accordion active">Custom Upload</button> -->
+
+			<div class="d-inline-flex justify-content-between gap-1 w-100">
+				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">
+					Custom Upload<span>+</span>
 				</div>
 			</div>
+			<div class="collapse" id="collapseExampleFive">
+				<div class="b card card-body">
+				   <p class="size">
+				   <div class="size"style=" margin: 10px">
+					   <b>Add a file:</b>
+					   <div id="">
+						   <input type="file" id="universal_ext" accept="text/csv,.csv">
+						   <button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+						   <button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
+							   Universal</button>
+						   <div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
+						   <div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
+					   </div>
+				   </div>
+				  </p>
+				</div>
+			  </div>
 			<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
 				Screenshot!
 			</button>
@@ -1155,7 +1180,7 @@
 			<div id="gene_info"></div>
 		</div>
 		<div style="margin: 10px">
-			<b>NETWORK INFO:</b>
+			<b class="size">NETWORK INFO:</b>
 			<div id="network_details">
 
 			</div>
@@ -2730,7 +2755,7 @@
 					return d.weight < degreeVal;
 				}).style("display", "none");
 			$('#network_details').empty();
-			$('#network_details').append(`<div style="margin: 10px 5px">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
 		}
 
 		// slider.oninput =  function() {
