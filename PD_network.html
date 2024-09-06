@@ -3954,6 +3954,19 @@
 			}
 		}
 
+
+		document.getElementById("collapseExampleThree").onchange = function () {
+		  var nodeDegreeId = document.getElementById("NodeDegree").value;
+		  if (nodeDegreeId == "2") {		
+			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
+			if (cutoff_type == "node_degree") {
+				$("#NodeDegreeRange").show()
+			} else {
+				$("#NodeDegreeRange").hide()
+			}
+	  }
+	}
+	
 		//on selecting Genomic LogFC, change the size of nodes
 
 		document.getElementById("GlogFCID4Size").onchange = function () {

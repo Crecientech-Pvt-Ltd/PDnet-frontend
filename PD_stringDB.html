@@ -843,10 +843,11 @@
 			<!-- node degree dropdown options  -->
 			<div id="nodeDegreeInput4Size" class="slidecontainer size" style="padding-bottom:5px;display:none;">
 				Select Node cutoff:
-				<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;">
+				<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
 					<option value="none" selected="selected">None</option>
 					<option value="node_degree">Gene Degree</option>
 				</select>
+				
 				<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
 					<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
 					<p class="size">node Degree: <span id="thresh1"></span></p>
@@ -3953,7 +3954,7 @@
 
 		// on seleting node cutoff , change in node degree and relevence
 
-		document.getElementById("nodeDegreeID4Size").onchange = function () {
+		document.getElementById("nodeDegreeID4Size").onchange = function () {			
 			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
 			if (cutoff_type == "node_degree") {
 				$("#NodeDegreeRange").show()
@@ -3961,6 +3962,18 @@
 				$("#NodeDegreeRange").hide()
 			}
 		}
+
+		document.getElementById("collapseExampleThree").onchange = function () {
+		  var nodeDegreeId = document.getElementById("NodeDegree").value;
+		  if (nodeDegreeId == "2") {		
+			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
+			if (cutoff_type == "node_degree") {
+				$("#NodeDegreeRange").show()
+			} else {
+				$("#NodeDegreeRange").hide()
+			}
+	  }
+	}
 
 		//on selecting Genomic LogFC, change the size of nodes
 
