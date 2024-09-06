@@ -48,6 +48,8 @@
 	crossorigin="anonymous"></script>
 
 
+
+	
 <script>
 
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -341,8 +343,9 @@
 				<span class="header-text">
 					Node Details
 				</span>
-				<button class="modal-close-btn" onclick="closeModal()">x</button>
+				<button class="modal-close-btn" onclick="closeModal()">x</button>	
 			</div>
+			
 			<div class="modal-body">
 				<table class="fixed_header">
 					<thead>
@@ -416,15 +419,16 @@
 			 -->
 			<!-- <button class="accordion active">Disease Map:</button> -->
 			<div class="d-inline-flex justify-content-between gap-1 w-100">
-				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">
+				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">
 					Disease Map:<span>+</span>
-				</div>
+				</div> -->
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">Disease Map:</button>
 			</div>
 			<!-- <div class="panel" style="max-height:600px;"> -->
-			<div class="collapse" id="collapseExampleOne">
+			<div class="collapse show" id="collapseExampleOne">
 			<div class="b card card-body">
-			<p class="size">
-				<div class="padding-16" style="padding:10px 0;">
+			<!-- <p class="size"> -->
+				<div class="size" style="padding:10px 0; max-height:600px;">
 					<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
 					left: 162px;
 					bottom: 22px;" class="chosen-select" onchange="updateTooltip()">
@@ -470,7 +474,7 @@
 
 					window.onload = updateTooltip;
 				</script>
-			</p>
+			<!-- </p> -->
 		</div>
 	  </div>
 			
@@ -478,17 +482,18 @@
 			
 
 			<div class="d-inline-flex justify-content-between gap-1 w-100">
-				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				  Node Color<span>+</span>
-				</div>
+				</div> -->
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Node Color</button>
 			</div>
-			  <div class="collapse" id="collapseExample">
+			  <div class="collapse show" id="collapseExample">
 				<div class="b card card-body">
 					<p class="size">
 						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
 						<input type="radio" name="nodeColor" id="logFC" value="2">
 						logFC
-						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+						<span data-toggle="tooltip" data-placement="bottom"
 							title="Differential Expression in Log2 fold change.">
 							<img src="../images/icons/info6.png" class="info-image">
 						</span>
@@ -636,11 +641,12 @@
 			<!-- Node size change button -->
 			<!-- <button class="accordion active">Node Size</button> -->
 			<div class="d-inline-flex justify-content-between gap-1 w-100">
-				<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">
+				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">
 					Node Size<span>+</span>
-				</div>
+				</div> -->
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">Node Size</button>
 			</div>
-			  <div class="collapse" id="collapseExampleTwo">
+			   <div class="collapse show" id="collapseExampleTwo">
 				<div class="b card card-body">
 				<p class="size">
 			<!-- <div class="panel" style="max-height: 300px;margin-left:-20px;" > -->
@@ -799,11 +805,12 @@
 		<div class="panel" style="max-height: 250px;">
 			<p> -->
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
-			<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">
+			<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">
 				Radial Analysis<span>+</span>
-			</div>
+			</div> -->
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">Radial Analysis</button>
 		</div>
-		<div class="collapse" id="collapseExampleThree">
+		<div class="collapse show" id="collapseExampleThree">
 		 <div class="b card card-body">
 			<p class="size">
 				<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
@@ -836,16 +843,20 @@
 			<!-- node degree dropdown options  -->
 			<div id="nodeDegreeInput4Size" class="slidecontainer size" style="padding-bottom:5px;display:none;">
 				Select Node cutoff:
-				<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
+				<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;">
 					<option value="none" selected="selected">None</option>
 					<option value="node_degree">Gene Degree</option>
 				</select>
+				<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
+					<p class="size">node Degree: <span id="thresh1"></span></p>
+				</div>
 			</div>
 			<!-- Threshold for Degree -->
-			<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
+			<!-- <div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
 				<p class="size">node Degree: <span id="thresh1"></span></p>
-			</div>
+			</div> -->
 			<!-- Gene connections -->
 			<div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
@@ -859,17 +870,18 @@
 		<!-- Find node panel-->
 		<!-- <button class="accordion">Custom search</button> -->
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
-			<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">
+			<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">
 				Custom search<span>+</span>
-			</div>
+			</div> -->
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">Custom search</button>
 		</div>
-		<div class="collapse" id="collapseExampleFour">
+		<div class="collapse show" id="collapseExampleFour">
 		 <div class="b card card-body">
-			<p class="size">
+			<!-- <p class="size"> -->
 		<!-- <div class="panel"> -->
-			<div id="geneinput">
+			<div class="size" id="geneinput">
 				<form name="geneinput">
-					<br>
+					<!-- <br> -->
 					<p class="size">Find Node<span id="thresh1"></span></p>
 					<textarea class="size" rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
 						placeholder="Enter Genes list (comma seperated)"></textarea>
@@ -879,7 +891,7 @@
 					<a id="currentgenesymbol"></a>
 				</form>
 			</div>
-		</p>
+		<!-- </p> -->
 	</div>
 	  </div>
 
@@ -887,11 +899,12 @@
 		<!-- <button class="accordion active">Custom Upload</button>
 		<div class="panel" style="max-height:400px;"> -->
 	<div class="d-inline-flex justify-content-between gap-1 w-100">
-		<div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">
+		<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">
 			Custom Upload<span>+</span>
-		</div>
+		</div> -->
+		<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">Custom Upload</button>
 	</div>
-		<div class="collapse" id="collapseExampleFive">
+		<div class="collapse show" id="collapseExampleFive">
 		 <div class="b card card-body">
 			<p class="size">
 			<div class="size"style=" margin: 10px">
@@ -1108,14 +1121,19 @@
          //  chargeDistance infinity
          // linkStrength 1
          // theta .8 -->
-		<button class="accordion active">Network layout</button>
-		<div class="panel" style="max-height: 202px;">
-			<p>
+		<!-- <button class="accordion active">Network layout</button> -->
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightOne" aria-expanded="false" aria-controls="collapseRightOne">Network layout</button>
+		</div>
+		<!-- <div class="panel" style="max-height: 202px;"> -->
+		<div class="collapse show" id="collapseRightOne">
+		  <div class="b card card-body">
+			<p class="size">
 				<input type="radio" name="force_setting" id="none" value="0" checked> None <br>
 				<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
 				<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
 				<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
-			<p>
+			<p class="size">
 				<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
 			</p>
 			<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
@@ -1124,27 +1142,34 @@
 			<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
 				<br>
-				<p>link distance: <span id="linkdistanceinput"></span></p>
+				<p class="size">link distance: <span id="linkdistanceinput"></span></p>
 			</div>
 			<!-- Threshold for Degree -->
 			<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
 				<br>
-				<p>node charge: <span id="linkchargeinput"></span></p>
+				<p class="size">node charge: <span id="linkchargeinput"></span></p>
 			</div>
 			<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
 				<br>
-				<p>distance: <span id="linkStrengthinput"></span></p>
+				<p class="size">distance: <span id="linkStrengthinput"></span></p>
 			</div>
 			<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
 				</button> -->
 			<!-- Gene connections -->
 			</p>
 		</div>
-		<button class="accordion active">Network parameters</button>
-		<div class="panel" style="max-height:400px;">
-			<p>
+		</div>
+		<!-- <button class="accordion active">Network parameters</button> -->
+		<!-- <div class="panel" style="max-height:400px;"> -->
+			<!-- <p> -->
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightTwo" aria-expanded="false" aria-controls="collapseRightTwo">Network parameters</button>
+		</div>
+		<div class="collapse show" id="collapseRightTwo">
+		  <div class="b card card-body">
+			<p class="size">
 				<input type="radio" name="network_parameters" id="none" value="0" checked> None <br>
 				<input type="radio" name="network_parameters" id="nodecolor" value="1"> Node Color Change<br>
 				<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
@@ -1156,30 +1181,30 @@
 				<!-- Threshold for weight -->
 			<div class="networkcontainer" id="color_range" style="padding-bottom:5px;display:none;">
 				<div class="colorParam" id="color_ouput" style="background: rgb(23,190,207)"></div>
-				<p>color R: <span id="rRange">23</span></p>
+				<p class="size">color R: <span id="rRange">23</span></p>
 				<input type="range" min="0" max="255" step="1" value="23" class="slider" id="redRange"
 					onchange="colorFinc()">
 				<br>
-				<p>color G: <span id="gRange">190</span></p>
+				<p class="size">color G: <span id="gRange">190</span></p>
 				<input type="range" min="0" max="255" step="1" value="190" class="slider" id="greenRange"
 					onchange="colorFinc()">
 				<br>
-				<p>color B: <span id="bRange">207</span></p>
+				<p class="size">color B: <span id="bRange">207</span></p>
 				<input type="range" min="0" max="255" step="1" value="207" class="slider" id="blueRange"
 					onchange="colorFinc()">
 			</div>
 			<div class="networkcontainer" id="opacity_range" style="padding-bottom:5px;display:none;">
-				<p>opacity: <span id="oRange">1</span></p>
+				<p class="size">opacity: <span id="oRange">1</span></p>
 				<input type="range" min="0" max="1" step=".1" value="1" class="slider" id="opacityRange"
 					onchange="opacityFunc()">
 			</div>
 			<div class="networkcontainer" id="node_size" style="padding-bottom:5px;display:none;">
-				<p>node size: <span id="nRange">8</span></p>
+				<p class="size">node size: <span id="nRange">8</span></p>
 				<input type="range" min="8" max="15" step="1" value="8" class="slider" id="nodeRange"
 					onchange="nodeSizeFunc()">
 			</div>
 			<div class="networkcontainer" id="text_size" style="padding-bottom:5px;display:none;">
-				<p>text size: <span id="tRange">8</span></p>
+				<p class="size">text size: <span id="tRange">8</span></p>
 				<input type="range" min="2" max="15" step="1" value="8" class="slider" id="textRange"
 					onchange="textSizeFunc()">
 				<!--CHANGE IS NEEDED-->
@@ -1189,7 +1214,7 @@
             <button class="zoom_btn" id="zoom_out">-</button>
             
             
-			<!-- Threshold for Degree -->
+			 Threshold for Degree -->
 			<!-- <div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
             <input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
             <br>
@@ -1205,11 +1230,20 @@
             </button> -->
 			<!-- Gene connections -->
 			</p>
+		  </div>
 		</div>
-		<button class="accordion active">Annotations</button>
-		<div class="panel" style="max-height:200px;">
-			<div id="gene_info"></div>
+
+		<!-- <button class="accordion active">Annotations</button>
+		<div class="panel" style="max-height:200px;"> -->
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+		 <button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightThree" aria-expanded="false" aria-controls="collapseRightThree">Annotations</button>
 		</div>
+		<div class="collapse show" id="collapseRightThree">
+		  <div class="b card card-body">
+			<div class="size" id="gene_info"></div>
+		</div>
+		</div>
+
 		<div style="margin: 10px">
 			<b class="size">NETWORK INFO:</b>
 			<div id="network_details">
@@ -2295,7 +2329,8 @@
 				dataType: 'json',
 				data: JSON.stringify({
 					query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!, $interactionType: String!) {
-							  	getGeneInteractions(input: { geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType },order: $order) {
+							  	getGeneInteractions(input: 
+								{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType },order: $order) {
 							    	genes {
 										ID
 										hgnc_gene_id
