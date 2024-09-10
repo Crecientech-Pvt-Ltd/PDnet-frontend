@@ -1297,7 +1297,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 											alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
 										} else {
 							               $('#wait').css('display', 'none');
-						            	//    db.close();
+						            	   db.close();
 						                   window.open("PD_network.html");
 										}
 									}
@@ -1310,7 +1310,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 
 // Added by Vandana(End)
 
-						// db.close();
+						db.close();
 					}
 				}
 			}
