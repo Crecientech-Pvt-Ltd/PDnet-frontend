@@ -253,8 +253,7 @@
 												Genes</label>
 											<textarea class="form-control" id="string_db_input"
 												placeholder="Enter genes" rows="3">
-MAPT,STX6,EIF2AK3,MOBP,DCTN1,LRRK2
-											</textarea>
+MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 											<!-- <textarea class="form-control" id="string_db_input"
 												placeholder="Enter genes" rows="3"></textarea> -->
 										</div>
@@ -906,9 +905,47 @@ MAPT,STX6,EIF2AK3,MOBP,DCTN1,LRRK2
 						disease: $('#disease_dropdown').val()
 					}
 					d = JSON.stringify(d)
-					setItemToStorage('pd_net_stringDB', d);
-					window.open("PD_stringDB.html");
-					$('.popup_card').css('display', 'none');
+					//////////////Vandana(Start)
+					$.ajax({
+					url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
+					method: 'POST',
+					headers: {
+							'Content-Type': 'application/json',
+							'Accept': 'application/json'
+						},
+					data: JSON.stringify({
+							query: `query GeneGraph($geneIDs: [String!]!, 
+								$minScore: Float!, $order: Int!, $interactionType: String!) 
+								{ getGeneInteractions(input: 
+							 	{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType }, order: $order) 
+							  	{ genes { ID hgnc_gene_id hgnc_gene_symbol Description Gene_name common } 
+							  	 links { gene1 { ID index } gene2 { ID index } score } } }`,
+							variables: {
+							"geneIDs": gene_exists,
+							"minScore": parseFloat(score),
+							"order": parseInt(order),
+							"interactionType": interaction_type_dropdown}						
+				    }),			
+					success: function (result) {
+						var totalNodes = result.data.getGeneInteractions.genes.length;
+						console.log("totalNodes = ", totalNodes)
+						if (totalNodes > 5000) {
+							alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+						} else {
+							setItemToStorage('pd_net_stringDB', d);
+				        	window.open("PD_stringDB.html");
+				        	$('.popup_card').css('display', 'none');
+						}
+					},
+					error: function (err) {
+					alert('Please try after some time.')
+				   }
+				}); 
+				/////////////Vandana(End)
+				/////below code commented by Vandana
+					// setItemToStorage('pd_net_stringDB', d);
+					// window.open("PD_stringDB.html");
+					// $('.popup_card').css('display', 'none');
 				} else {
 					$('.popup_card').css('display', 'none');
 				}
@@ -927,9 +964,51 @@ MAPT,STX6,EIF2AK3,MOBP,DCTN1,LRRK2
 				}
 				console.log(d)
 				d = JSON.stringify(d)
-				setItemToStorage('pd_net_stringDB', d);
-				window.open("PD_stringDB.html");
-				$('.popup_card').css('display', 'none');
+				//////////////Vandana(Start)
+				$.ajax({
+				url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
+				method: 'POST',
+				headers: {
+							'Content-Type': 'application/json',
+							'Accept': 'application/json'
+						},
+						data: JSON.stringify({
+							query: `query GeneGraph($geneIDs: [String!]!, 
+								$minScore: Float!, $order: Int!, $interactionType: String!) 
+								{ getGeneInteractions(input: 
+							 	{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType }, order: $order) 
+							  	{ genes { ID hgnc_gene_id hgnc_gene_symbol Description Gene_name common } 
+							  	 links { gene1 { ID index } gene2 { ID index } score } } }`,
+							variables: {
+							"geneIDs": gene_exists,
+							"minScore": parseFloat(score),
+							"order": parseInt(order),
+							"interactionType": interaction_type_dropdown}						
+				       }),
+
+			
+				success: function (result) {
+					// $('#wait').css('display', 'none');
+					var totalNodes = result.data.getGeneInteractions.genes.length;
+					console.log("totalNodes = ", totalNodes)
+					if (totalNodes > 5000) {
+						alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+					} else {
+						setItemToStorage('pd_net_stringDB', d);
+				        window.open("PD_stringDB.html");
+				        $('.popup_card').css('display', 'none');
+					}
+				},
+				error: function (err) {
+					alert('Please try after some time.')
+					
+				}
+			}); 
+				/////////////Vandana(End)
+				/////below code commented by Vandana
+				// setItemToStorage('pd_net_stringDB', d);
+				// window.open("PD_stringDB.html");
+				// $('.popup_card').css('display', 'none');
 			}
 		}
 		// ======================================== CLOSE POPUP TABLE ===================================
@@ -1148,7 +1227,7 @@ MAPT,STX6,EIF2AK3,MOBP,DCTN1,LRRK2
 					if (uploadedFile.length == 0) {
 						alert("No file")
 					} else {
-						$('#wait').css('display', 'block');
+						// $('#wait').css('display', 'block');  //commented by Vandana
 						/****************************** Localstorage Implementation ***********************/
 						// 	let reader = new FileReader();
 						// 	reader.onload = function () {
@@ -1179,19 +1258,59 @@ MAPT,STX6,EIF2AK3,MOBP,DCTN1,LRRK2
 							db = req.target.result;
 							let objectStore = db.createObjectStore("files");
 						};
+// commented by Vandana
+						// dbRequest.onsuccess = function (req, ev) {
+						// 	db = req.target.result;
+						// 	let objectStore;
+						// 	objectStore = db.transaction(["files"], "readwrite").objectStore("files");
+						// 	const fileRequest = objectStore.put(uploadedFile[0], "custom_network");
+						// 	fileRequest.onsuccess = function (req, ev) {
+						// 		$('#wait').css('display', 'none');
+						// 		db.close();
+						// 		window.open("PD_network.html");
+						// 	};
+						// };
 
-						dbRequest.onsuccess = function (req, ev) {
+// Added by Vandana(Start)
+                     dbRequest.onsuccess = function (req, ev) {
 							db = req.target.result;
 							let objectStore;
 							objectStore = db.transaction(["files"], "readwrite").objectStore("files");
 							const fileRequest = objectStore.put(uploadedFile[0], "custom_network");
 							fileRequest.onsuccess = function (req, ev) {
-								$('#wait').css('display', 'none');
-								db.close();
-								window.open("PD_network.html");
-							};
-						};
-						db.close();
+                              let fileRequest1 = objectStore.get("custom_network");
+			                //   console.log("fileRequest = ", fileRequest)
+			                 fileRequest1.onsuccess = function (req, ev) {
+								file = req.target.result;								
+								if (file) {
+									// console.log("file ==", file)
+								  	const fileReader = new FileReader();
+									fileReader.onload = function () {
+										// console.log("file ==")
+										let fileType = file.type.split('/').pop();
+										let fileData = fileType === 'csv' ? $.csv.toObjects(fileReader.result) : JSON.parse(fileReader.result);
+										const [Node1, Node2, Score] = fileType === 'csv' ? fileReader.result.split('\n').shift().split(',') : Object.keys(fileData[0]);
+										let geneIDs = new Set();
+										// console.log("fileData ==", fileData.length)
+										let totalNodes = fileData.length;
+										if (totalNodes > 5000) {
+											alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+										} else {
+							               $('#wait').css('display', 'none');
+						            	//    db.close();
+						                   window.open("PD_network.html");
+										}
+									}
+									fileReader.readAsText(file);
+								}
+							 }
+							}
+							
+						}
+
+// Added by Vandana(End)
+
+						// db.close();
 					}
 				}
 			}

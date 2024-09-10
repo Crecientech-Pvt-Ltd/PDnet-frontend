@@ -1789,22 +1789,20 @@
 
 		function startD3(data) {
 			graph = JSON.parse(JSON.stringify(data));
-
 			graph.links = graph.links.map(d => ({
 				source: +d.gene1.index,
 				target: +d.gene2.index,
 				weight: +d.score
 			}));
-			graph.genes = graph.genes.map(d => ({
+			graph.genes = graph.genes.map(d => ({			
 				ID: d?.ID,
 				Gene_name: d?.Gene_name,
 				Description: d?.Description,
 				hgnc_gene_id: d?.hgnc_gene_id,
 				hgnc_gene_symbol: d?.hgnc_gene_symbol,
 			}));
-			graphRec = JSON.parse(JSON.stringify(graph)); //Add this line
+			graphRec = JSON.parse(JSON.stringify(graph)); //Add this line			
 			var nodSize = [];
-
 
 			//Node size scales for genomic and proteomic logfc
 
@@ -1952,6 +1950,18 @@
 					//genID = genID .replace(".", "DOT")
 					//genID = d.ID+"_"+genID;
 					genID = d.ID;
+					genName = d.Gene_name;
+					function color_input_genes2(y) {
+						d3.selectAll(".node").each(function (d) {
+							if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
+								d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+									.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']")
+									.style("stop-color", "blue");
+							}
+						})
+					}
+					y = genName.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    color_input_genes2(y)
 					return genID;
 				})
 			//.call(force.drag)
