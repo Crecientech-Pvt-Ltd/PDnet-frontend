@@ -1950,20 +1950,6 @@
 					//genID = genID .replace(".", "DOT")
 					//genID = d.ID+"_"+genID;
 					genID = d.ID;
-					genName = d.Gene_name;
-					if (d.Gene_name !== null && d.Gene_name !== undefined) {
-						function color_input_genes2(y) {
-							d3.selectAll(".node").each(function (d) {
-								if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
-									d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
-									.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']")
-									.style("stop-color", "blue");
-								}
-							})
-						}
-						y = genName.split(/\s*[,\n]+\s*[,\n]*\s*/);
-				    	color_input_genes2(y)
-					}
 					return genID;
 				})
 			//.call(force.drag)
@@ -2332,6 +2318,7 @@
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
+			
 			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
@@ -2404,7 +2391,11 @@
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-				},
+					for (let i of d.nodeNames) {
+						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    	color_input_genes2(y);
+					}
+				 },
 				error: function (err) {
 					$("#loader").css('display', 'none')
 					alert(err.responseJSON ? err.responseJSON.message : "There is an issue. Please try after some time");
@@ -2415,6 +2406,18 @@
 		}
 		// ===============================================d3.json() ends=============================>>>>>>>>>>>>>>>>
 		var linkedByIndex = {};
+
+        //================= highlight input seed genes ===============================>>>>
+		function color_input_genes2(y) {
+		  	d3.selectAll(".node").each(function (d) {
+		  		if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
+					d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+					.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']")
+					.style("stop-color", "blue");
+				}
+		  	})
+		}
+						
 
 		function keydown() { // this funtion is for key control
 
