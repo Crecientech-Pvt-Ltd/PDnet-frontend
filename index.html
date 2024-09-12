@@ -928,9 +928,10 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 				    }),			
 					success: function (result) {
 						var totalNodes = result.data.getGeneInteractions.genes.length;
-						console.log("totalNodes = ", totalNodes)
+						// console.log("totalNodes = ", totalNodes)
 						if (totalNodes > 5000) {
-							alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+							alert('The whole network contains more than 5000 gene nodes! Please select lesser gene nodes.')
+							// alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
 						} else {
 							setItemToStorage('pd_net_stringDB', d);
 				        	window.open("PD_stringDB.html");
@@ -992,7 +993,8 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 					var totalNodes = result.data.getGeneInteractions.genes.length;
 					console.log("totalNodes = ", totalNodes)
 					if (totalNodes > 5000) {
-						alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+						alert('The whole network contains more than 5000 gene nodes! Please select lesser gene nodes.')
+						// alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
 					} else {
 						setItemToStorage('pd_net_stringDB', d);
 				        window.open("PD_stringDB.html");
@@ -1294,7 +1296,8 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 										// console.log("fileData ==", fileData.length)
 										let totalNodes = fileData.length;
 										if (totalNodes > 5000) {
-											alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
+											alert('The whole network contains more than 5000 gene nodes! Please select lesser gene nodes.')
+											// alert('The whole network contains more than 5000 gene nodes! Only render top 5000 nodes.')
 										} else {
 							               $('#wait').css('display', 'none');
 						            	   db.close();
