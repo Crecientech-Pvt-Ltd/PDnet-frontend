@@ -473,10 +473,14 @@ body {
       background: transparent;
       border: 0;
       outline: 0;
-      position: absolute;
-      right: 0;
+      /* position: absolute; */
+      /* right: 0; */
       font-size: 15px;
-      padding-right: 16px;
+      /* padding-right: 16px; */
+      position: relative;
+      left: 133px;
+    bottom: 33px;
+
   }
   
   .modal-header {

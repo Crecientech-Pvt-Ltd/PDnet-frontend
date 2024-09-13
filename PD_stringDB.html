@@ -326,11 +326,12 @@
 			</div>
 			<div class="modal-body">
 				<ul>
-					<li>
+					<li style="font-size: 12px">
 						Network is bigger in size. Number of nodes or interactions are high.
 					</li>
-					<li>
-						Network will respond / render slow.
+					<li style="font-size: 12px">
+						Displaying network for top 5000 genes.
+						<!-- The Network for 5000 genes are render slow. -->
 					</li>
 				</ul>
 			</div>
@@ -2369,10 +2370,14 @@
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
 
-					if (totalNodes > 5000 || totalEdges > 10000) {
+					// if (totalNodes > 5000 || totalEdges > 10000) {
+					// 	$('#node-modal-background-alert').css('display', 'block')
+					// }  //commented by Vandana.
+					//below code added by Vandana (Start)
+					if (totalNodes >= 5000) {
 						$('#node-modal-background-alert').css('display', 'block')
 					}
-
+                    //code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
 					currentUniversal = result.data?.getGeneInteractions;
