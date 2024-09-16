@@ -2323,9 +2323,8 @@
 			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
-				url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
-				// url: `http://localhost:3000/graphql`,
-				// url: `https://pdnet-apis.crecientech.com/graphql`,
+				url: 'https://api.tdp-dev.alexion.cloud/graphql',
+				// url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
 				type: "POST",
 				dataType: 'json',
 				data: JSON.stringify({
