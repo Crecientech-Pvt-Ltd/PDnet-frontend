@@ -40,16 +40,16 @@
   
   <div class="form">
     <div class="login">
-      <div class="image">
+      <div class="image" style="width: 252px; height: 403px;">
         <img src="./images/image.jpeg" alt="">
       </div>
       <div class="loginForm">
-        <h2>Welcome to PDNET<br>Sign-in into your Account</h2>
+        <h2 style="font-size: 20px; margin-bottom: 16px;">Welcome to PDNET<br>Sign-in into your Account</h2>
         <div class="flex-row">
           <form id="loginForm">
 
             <div>
-              <input type="text" id="username" placeholder="Username or Email" required oninvalid="this.setCustomValidity('Enter User Name')"
+              <input type="text" id="username" placeholder="Username" required oninvalid="this.setCustomValidity('Enter User Name')"
               oninput="this.setCustomValidity('')">
             </div>
             <div>
@@ -65,6 +65,10 @@
   </div>
   
   <script>
+    if (localStorage.getItem('isLoggedIn') == 'true') {
+			window.location.href = 'geneSearch.html'; 
+		}
+
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
         const name='pdnet';

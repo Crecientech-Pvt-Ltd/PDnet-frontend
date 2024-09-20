@@ -166,6 +166,13 @@
 
 	<!-- </div> -->
 
+	<script>
+		if (localStorage.getItem('isLoggedIn') !== 'true') {
+			window.location.href = 'index.html'; 
+		}
+		
+	</script>
+
 	<div class="d-flex justify-content-between p-3 align-items-center" >
 		<div style="font-size:37px;">
 			<b>Target discovery knowledgebase platform
@@ -192,9 +199,15 @@
 							>FAQ</a></div>
 					<div style="cursor: pointer; margin-bottom: 5px;"><a class="menu-title" href="./images/pageNotFound.html" target="_blank"
 							>Contact</a></div>
+					<div onclick="logout()" style="cursor:pointer;margin-bottom:5px;"><a class="menu-title" href="" target="_blank">LogOut</a></div>
 				</div>
 
 				<script>
+					function logout() {
+						localStorage.removeItem('isLoggedIn'); 
+						window.location.href = 'index.html'; 
+					}
+
 					function hamAnimation(x) {
 						x.classList.toggle("change");
 						if ($('#drop_ham').css('display') == 'none') {
