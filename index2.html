@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="../authentication/js/environment.js"></script>
+	<script src="./script/descriptions.js"></script>
+	<!-- description -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.js"></script>
+	<!--File saver-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>PD_Net@PMAP</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="script/jquery.csv.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!-- included by me -->
+	<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/mycustom.css">
+
+</head>
+<body>
+  <style>
+		@media (max-width:576px) {
+			.sb_item {
+				display: none;
+				width: 10px;
+			}
+
+			#v-pills-home-tab {
+				width: 35px;
+				font-size: 26;
+			}
+
+			#v-pills-tab {
+				background-color: red;
+				height: 80px;
+				margin: 10px;
+
+			}
+		}
+	</style>
+  
+  <div class="form">
+    <div class="login">
+      <div class="image" style="width: 252px; height: 403px;">
+        <img src="./images/image.jpeg" alt="">
+      </div>
+      <div class="loginForm">
+        <h2 style="font-size: 20px; margin-bottom: 16px;">Welcome to Target Discovery Platform<br>Sign-in into your Account</h2>
+        <div class="flex-row">
+          <form id="loginForm">
+
+            <div>
+              <input type="text" id="username" placeholder="Username" required oninvalid="this.setCustomValidity('Enter User Name')"
+              oninput="this.setCustomValidity('')">
+            </div>
+            <div>
+              <input type="password" id="password" placeholder="Password" required oninvalid="this.setCustomValidity('Enter Password')"
+              oninput="this.setCustomValidity('')">
+            </div>
+
+            <button type="submit">Login</button>   
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    if (localStorage.getItem('isLoggedIn') == 'true') {
+			window.location.href = 'geneSearch.html'; 
+		}
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const name='pdnet';
+        const password='pdnet123';
+        const username = document.getElementById('username').value;
+        const userpassword = document.getElementById('password').value;
+        if(username==name && userpassword==password){
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'geneSearch.html'; 
+        }else{
+            alert('The login credentials which you have entered are invalid. Please provide valid credentials.')
+        }
+    });
+  </script>
+</body>
+</html>

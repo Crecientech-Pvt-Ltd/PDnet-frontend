@@ -37,33 +37,87 @@
 
 </head>
 <body>
+  <style>
+		@media (max-width:576px) {
+			.sb_item {
+				display: none;
+				width: 10px;
+			}
+
+			#v-pills-home-tab {
+				width: 35px;
+				font-size: 26;
+			}
+
+			#v-pills-tab {
+				background-color: red;
+				height: 80px;
+				margin: 10px;
+
+			}
+		}
+	</style>
+
+
   
-  <div class="form">
-    <div class="login">
-      <div class="image" style="width: 252px; height: 403px;">
+  <!-- <div class="form"> -->
+    <!-- <div class="login"> -->
+      <!-- <div class="image" style="width: 252px; height: 403px;">
         <img src="./images/image.jpeg" alt="">
-      </div>
-      <div class="loginForm">
-        <h2 style="font-size: 20px; margin-bottom: 16px;">Welcome to PDNET<br>Sign-in into your Account</h2>
-        <div class="flex-row">
-          <form id="loginForm">
-
-            <div>
-              <input type="text" id="username" placeholder="Username" required oninvalid="this.setCustomValidity('Enter User Name')"
-              oninput="this.setCustomValidity('')">
-            </div>
-            <div>
-              <input type="password" id="password" placeholder="Password" required oninvalid="this.setCustomValidity('Enter Password')"
-              oninput="this.setCustomValidity('')">
-            </div>
-
-            <button type="submit">Login</button>   
-          </form>
+      </div> -->
+      
+        <div class="d-flex justify-content-between p-3 align-items-center" >
+            <div style="font-size:37px;">
+                <b>Welcome to Target discovery platform
+                </b>
+           </div>
         </div>
-      </div>
-    </div>
+        <div class="pamp-wrapper ">
+            <div class="overlay">
+                <div class="container overlay-wrapper">
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="pamp-overview"> -->
+            <div class="container">
+                <div class="row middle-item">
+                    
+        <div class=" col-sm-9 col-md-9 col-lg-9 col-xl-9 tab-content" id="v-pills-tabContent">
+            <!-- <div class="tab-pane fade  show active ms-5 card" id="v-pills-home" role="tabpanel"
+                aria-labelledby="v-pills-home-tab"> -->
+                    <div class="card mb-4">
+                        <h4 class="card-header">Sign-in into your Account</h4>
+                            <div class="input-section">
+                                <!-- <div class="mb-3"> -->
+                                   
+                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                    <!-- <div class="image" style="width: 252px; height: 403px;">
+                                        <img src="./images/image.jpeg" alt="">
+                                      </div> -->
+                                      <div class="loginForm">
+                                    <div class="flex-row">
+                                        <form id="loginForm">
+                                    <div>
+                                        <input type="text" id="username" placeholder="Username" required oninvalid="this.setCustomValidity('Enter User Name')"
+                                        oninput="this.setCustomValidity('')">
+                                      </div>
+                                      <div>
+                                        <input type="password" id="password" placeholder="Password" required oninvalid="this.setCustomValidity('Enter Password')"
+                                        oninput="this.setCustomValidity('')">
+                                      </div>
+                          
+                                      <button type="submit">Login</button>  
+                                    </form>
+                                </div> 
+                                </div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    <!-- </div> -->
   </div>
-  
+
   <script>
     if (localStorage.getItem('isLoggedIn') == 'true') {
 			window.location.href = 'geneSearch.html'; 
