@@ -49,7 +49,9 @@
 
 
 <script>
-
+	if (localStorage.getItem('isLoggedIn') !== 'true') {
+			window.location.href = 'index.html'; 
+	}
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
@@ -1825,9 +1827,20 @@
 				.attr("class", "link")
 				.style("stroke-width", nominal_stroke)
 				.style("stroke", function (d) {
-					if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
+					//below code added by Vandana to provide intensity to the edge color
+					if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
+					 else if (isNumber(d.weight) && d.weight > 0 && d.weight <= 0.5) return "#e9e5ed"; 
+					 else if (isNumber(d.weight) && d.weight > 0.5 && d.weight <= 0.6) return "#d8d4dc"; 
+					 else if (isNumber(d.weight) && d.weight > 0.6 && d.weight <= 0.7) return "#b4b0b7"; 
+					 else if (isNumber(d.weight) && d.weight > 0.7 && d.weight <= 0.8) return "#949097"; 
+					 else if (isNumber(d.weight) && d.weight > 0.8 && d.weight <= 0.9) return "#6b686f"; 
+					 else if (isNumber(d.weight) && d.weight > 0.9 && d.weight < 1) return "#4c494f"; 
+					 else if (isNumber(d.weight) &&  d.weight >= 1) return "#2a272d";
+					 else return default_link_color;
+					//above code added by Vandana to provide intensity to the edge color
+					//commented by Vandana	// if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
 					// else if (isNumber(d.weight) && d.weight > 0.5) return "green"; // color
-					else return default_link_color;
+					//commented by Vandana	// else return default_link_color;
 				})
 
 			function dragstarted(d) {
@@ -2117,7 +2130,18 @@
 						circle.style(towhite, "white");
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
-							return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
+                           //below code added by Vandana to provide intensity to the edge color 
+							if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
+					 		else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
+					 		else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#d8d4dc";
+					 		else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return "#b4b0b7";
+					 		else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#949097";
+					 		else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#6b686f";
+					 		else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#4c494f";
+					 		else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
+					 		else return default_link_color;
+							//above code added by Vandana to provide intensity to the edge color
+						//commented by Vandana	// return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
 						});
 					}
 
