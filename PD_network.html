@@ -1849,52 +1849,52 @@
 				.style("stroke-width", nominal_stroke)
 				.style("stroke", function (d) {
 			//below code added by Vandana to provide intensity to the edge color
-                 if (isNumber(d.weight)){
-					if (d.weight <= 0){
-						return "black";
-					} 
+                //  if (isNumber(d.weight)){
+				// 	if (d.weight <= 0){
+				// 		return "black";
+				// 	} 
 
-					if (d.weight >= 0.15){  //low
-						if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
-						else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-						else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-						else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					} 
+				// 	if (d.weight >= 0.15){  //low
+				// 		if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
+				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	} 
 							
-					if (d.weight >= 0.4){  //medium
-						if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
-						else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-						else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-						else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					}
+				// 	if (d.weight >= 0.4){  //medium
+				// 		if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
+				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	}
 
-                	if (d.weight >= 0.7){  //high
-						if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					} 
+                // 	if (d.weight >= 0.7){  //high
+				// 		if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	} 
 
-					if (d.weight >= 0.9){  //highest
-						if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
-					 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
-					 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
-					 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
-					 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
-					 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
-					 	else if (d.weight >= 1) return "#e93e3a"; 
-					 	else return default_link_color;
-					}
-				  }			
+				// 	if (d.weight >= 0.9){  //highest
+				// 		if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
+				// 	 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
+				// 	 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
+				// 	 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
+				// 	 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
+				// 	 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
+				// 	 	else if (d.weight >= 1) return "#e93e3a"; 
+				// 	 	else return default_link_color;
+				// 	}
+				//   }			
 
 
 					// if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
@@ -1907,9 +1907,9 @@
 					//  else if (isNumber(d.weight) &&  d.weight >= 1) return "#2a272d";
 					//  else return default_link_color;
 					//above code added by Vandana to provide intensity to the edge color
-					//commented by Vandana	// if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
+					 if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
 					// else if (isNumber(d.weight) && d.weight > 0.5) return "green"; // color
-					//commented by Vandana	// else return default_link_color;
+					 else return default_link_color;
 				})
 
 			function dragstarted(d) {
@@ -2200,57 +2200,53 @@
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
                         //below code added by Vandana to provide intensity to the edge color 
-						   if (isNumber(o.weight)){
-                            if (o.weight <= 0){
-								return "black";
-							} 
+						//    if (isNumber(o.weight)){
+                        //     if (o.weight <= 0){
+						// 		return "black";
+						// 	} 
 
-							if (o.weight >= 0.15){  //low
-								if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
-					 			else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 			else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 			else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							} 
+						// 	if (o.weight >= 0.15){  //low
+						// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
 							
-							if (o.weight >= 0.4){  //medium
-								if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
-					 			else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 			else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 			else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							}
+						// 	if (o.weight >= 0.4){  //medium
+						// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
 
-                            if (o.weight >= 0.7){  //high
-					 		  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							} 
+                        //     if (o.weight >= 0.7){  //high
+					 	// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
 
-							if (o.weight >= 0.9){  //highest
-								// if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			// else if (o.weight >= 1) return "#e93e3a"; 
-					 			// else return default_link_color;
+						// 	if (o.weight >= 0.9){  //highest
 
-
-								if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
-					 			else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
-					 			else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
-					 			else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
-					 			else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
-					 			else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							}
-						}	
+						// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
+					 	// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
+					 	// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
+						// }	
 
 							// if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
 					 		// else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
@@ -2262,7 +2258,7 @@
 					 		// else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
 					 		// else return default_link_color;
 							//above code added by Vandana to provide intensity to the edge color
-						//commented by Vandana	// return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
+						 return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
 						});
 					}
 
