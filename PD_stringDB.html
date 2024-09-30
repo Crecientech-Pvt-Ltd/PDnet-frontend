@@ -83,8 +83,7 @@
 	// 	// crossDomain: 'http://*',
 	// 	success: function (data) {
 	function getUniversal(data, headers) {
-
-		console.log("uniNode loaded")
+		console.log("uniNode loaded ")
 		uniNode = data;
 		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
 		if (headers) {
@@ -111,7 +110,6 @@
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
 		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
-
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
 
@@ -121,16 +119,16 @@
 			$('#TE4Color').trigger("chosen:updated");
 		}		
 		// Adding TE options to the node cut-off in Radial Analysis section
-	// 	var allValues = [];
-	// 	$('#TE4Color option').each(function() {
-    // 		allValues.push($(this).val());
-	// 	});
-	// 	// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
-	// 	var TE_cutOff = allValues.forEach(function(value) {
-    // 		$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
-	// 	});
-    //    $('#nodeDegreeID4Size').trigger("chosen:updated");
-
+		var allValues = [];
+		$('#TE4Color option').each(function() {
+    		allValues.push($(this).val());
+		});
+		// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
+		var TE_cutOff = allValues.forEach(function(value) {
+    		$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
+		});
+       $('#nodeDegreeID4Size').trigger("chosen:updated");
+	 
 		//For TE Size
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
@@ -864,11 +862,11 @@
 					<p class="size">node Degree: <span id="thresh1"></span></p>
 				</div>
                 <!-- Threshold for TE -->
-				 <!-- <div class="slidecontainer" id="TERange" style="padding-bottom:5px;display:none;">
-					<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myTEvalues" style="margin-top: 10px;">
-					<p class="size" style="margin-top: 10px;">TE.: <span id="thresh2"></span></p>
-				</div> -->
-			</div> 
+				<div class="slidecontainer" id="TERange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="0" max="20" step="0.01" value="0" class="slider" id="myTEvalues" style="margin-top: 10px;">
+					<p class="size" style="margin-top: 10px;">TE.: <span id="thresh3"></span></p>
+				</div>
+			</div>
 		
 			
 			<!-- Threshold for Degree -->
@@ -2128,8 +2126,6 @@
 				gbTootip.style("top", d3.event.pageY - 5 + "px");
 				gbTootip.style("left", d3.event.pageX + 5 + "px");
 				gbTootip.html(function () {
-
-
 					//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
 					var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
 					var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
@@ -2806,15 +2802,18 @@
 		var slider = document.getElementById("myRange");
 		var output = document.getElementById("thresh");
 		var degree = document.getElementById("myDegree");
-		var degreeOutput = document.getElementById("thresh1");
+		var degreeOutput = document.getElementById("thresh1");		
 		var myConnection = document.getElementById("myConnection");
 		var ConnectionOutput = document.getElementById("thresh2");
+		var TEdegree = document.getElementById("myTEvalues");
+		var TEdegreeOutput = document.getElementById("thresh3");
 		degreeOutput.innerHTML = 0;
 		ConnectionOutput.innerHTML = 0;
+		TEdegreeOutput.innerHTML = 0;
 		myConnection.addEventListener("change", ConnectionFun)
 		degree.addEventListener("change", DegreeFun);
-		slider.addEventListener("change", weightFunc)
-
+		slider.addEventListener("change", weightFunc);
+        TEdegree.addEventListener("change", TEdegreeFun);
 		function weightFunc() {
 			//var textval=10
 			// console.log('LINK CUT', this.value || 1);
@@ -2828,8 +2827,11 @@
 			degreeOutput.innerHTML = 0;
 			document.getElementById("myDegree").value = 0;
 			DegreeFun()
-
 			restart();
+			TEdegreeOutput.innerHTML = 0;
+		 	document.getElementById("myTEvalues").value = 0;
+            TEdegreeFun()
+		 	restart();
 		}
 
 
@@ -2937,6 +2939,56 @@
 			$('#network_details').empty();
 			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
 		}
+
+		function TEdegreeFun() {
+			TEdegreeOutput.innerHTML = this.value || 0;
+			if (typeof this.value == "undefined") {
+				this.value = 0;
+			}
+			var degreeValTE = this.value || 0;
+			const totalNodes = d3.selectAll(".node")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".node")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				})
+				.style("display", "none");
+			const totalEdges = d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight >= degreeValTE
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight >= degreeValTE
+				})
+				.style("display", "inline");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				}).style("display", "none");
+			$('#network_details').empty();
+			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+		}
+
 
 		// slider.oninput =  function() {
 		//   //var textval=10
@@ -3992,7 +4044,6 @@
 		// node size change
 		function nodeSizeFunc() {
 			var nodeRange = document.getElementById("nodeRange");
-
 			var nRange = document.getElementById("nRange");
 			nRange.innerHTML = nodeRange.value
 			nominal_base_node_size = nodeRange.value
@@ -4123,7 +4174,6 @@
 		
 		document.getElementById("collapseExampleThree").onchange = function () {
 		  var nodeDegreeId = document.getElementById("NodeDegree").value;
-		//   console.log("nodeDegreeId ==", nodeDegreeId)
 		  if (nodeDegreeId == "2") {		
 			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
 			if (cutoff_type == "node_degree") {
@@ -4131,14 +4181,32 @@
 			} else {
 				$("#NodeDegreeRange").hide()
 			}
-
-			// if (/TE/.test(cutoff_type)) {
-			// 	$("#TERange").show()
-			// } else {
-			// 	$("#TERange").hide()
-			// }
-	  }
-	}
+			let val2;
+			if (/TE/.test(cutoff_type)) {	
+				var allTEvalues = [];			
+				d3.selectAll(".node").select("path")
+				.attr("dTest", d3.svg.symbol()
+					.size(function (dTest) {
+						 val2 = (currentUniversal?.genes[geneIndexMap[dTest.ID]][document.getElementById("nodeDegreeID4Size").value]) ?? 0;
+						 	allTEvalues.push(val2);
+					})
+				);
+				let newVal;
+				const minTEval = Math.min(...allTEvalues).toFixed(2);
+				const maxTEval = Math.max(...allTEvalues).toFixed(2);			
+				const TErangeInput = document.getElementById('myTEvalues');		
+    			TErangeInput.min = minTEval;
+   	 			TErangeInput.max = maxTEval;
+				TErangeInput.addEventListener('input', function() {
+        			document.getElementById('thresh3').textContent = this.value;
+    			});
+    			 document.getElementById('thresh3').textContent = TErangeInput.value;
+				$("#TERange").show()
+			} else {
+				$("#TERange").hide()
+			}
+	      }
+	    }
 
 		//on selecting Genomic LogFC, change the size of nodes
 
@@ -4268,9 +4336,7 @@
 		//on selecting trait name, change the size of nodes
 
 		document.getElementById("druggabilityID4Size").onchange = function () {
-
-
-			nodeSize = document.getElementById("druggabilityID4Size").value;
+     		nodeSize = document.getElementById("druggabilityID4Size").value;
 			nodeSize_sel = nodeSize;
 
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
