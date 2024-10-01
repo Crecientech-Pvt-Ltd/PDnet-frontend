@@ -1192,6 +1192,8 @@
 				<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
 				<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
 				<input type="radio" name="network_parameters" id="linkcolor" value="4"> Text Size<br>
+				<input type="radio" name="network_parameters" id="nodecolor1" value="6"> Highlight Seed Genes<br>
+				<!-- <input type="radio" name="network_parameters" id="nodeColor" value="5"> Text Size<br> -->
 				<!-- <input type="radio" name="network_parameters" id="linkcolor" value="5"> Network Zoom<br> -->
 				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
                <input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
@@ -1292,6 +1294,17 @@
 		<h4 onclick="settingFunc()">Setting &#x2699; </h4>
 	</div>
 	<script>
+			function highlightNodes() {
+			let totalData = getItemFromStorage('pd_net_stringDB');
+			if (totalData != undefined || totalData != null) {
+			let d = JSON.parse(totalData);
+			for (let i of d.nodeNames) {
+						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    	color_input_genes2(y);
+					}
+				}
+			}
+
 		// clear universal data
 		function clearUniData() {
 			// GWAS4Color vandana
@@ -2528,10 +2541,10 @@
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-					for (let i of d.nodeNames) {
-						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-				    	color_input_genes2(y);
-					}
+					// for (let i of d.nodeNames) {
+					// 	y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    // 	color_input_genes2(y);
+					// }
 				 },
 				error: function (err) {
 					$("#loader").css('display', 'none')
@@ -3038,7 +3051,7 @@
 
 		//Restart the visualisation after any node and link changes
 		function restart() {
-
+console.log("at restart")
 			link = link.data(graph.links);
 			link.exit().remove();
 			link.enter().insert("line", ".node").attr("class", "link");
@@ -3987,22 +4000,45 @@
 		$("input[name='network_parameters']").change(function () {
 
 			if ($(this).val() === '0') {
-				$('.networkcontainer').hide();
+				resetText();
+			    $('.networkcontainer').hide();
 			} else if ($(this).val() === '1') {
+				resetText();
 				$('.networkcontainer').hide();
 				$('#color_range').show();
 			} else if ($(this).val() === '2') {
+				resetText();
 				$('.networkcontainer').hide();
 				$('#opacity_range').show();
 			} else if ($(this).val() === '3') {
+				resetText();
 				$('.networkcontainer').hide();
 				$('#node_size').show();
 			} else if ($(this).val() === '4') {
+				resetText();
 				$('.networkcontainer').hide();
 				$('#text_size').show();
-			} else if ($(this).val() === '5') {
+			// } else if ($(this).val() === '5') {
+			// 	$('.networkcontainer').hide();
+			// 	$('#zoom_network').show();
+			} else if ($(this).val() === '6') {
+			    highlightNodes();
 				$('.networkcontainer').hide();
-				$('#zoom_network').show();
+				$('#color_range').hide();
+				$('#opacity_range').hide();
+				$('#node_size').hide();
+				$('#text_size').hide();
+				$('#zoom_network').hide();
+
+			} else if ($(this).val() === '7') {
+			    resetText();
+				$('.networkcontainer').hide();
+				$('#color_range').hide();
+				$('#opacity_range').hide();
+				$('#node_size').hide();
+				$('#text_size').hide();
+				$('#zoom_network').hide();
+
 			}
 
 
@@ -4011,6 +4047,29 @@
 
 		// color scheme values and output
 		function colorFinc() {
+			var red = document.getElementById("redRange");
+			var blue = document.getElementById("greenRange");
+			var green = document.getElementById("blueRange");
+			var color_ouput = document.getElementById("color_ouput");
+			var rRange = document.getElementById("rRange");
+			var gRange = document.getElementById("gRange");
+			var bRange = document.getElementById("bRange");
+
+			rRange.innerHTML = red.value
+			gRange.innerHTML = blue.value
+			bRange.innerHTML = green.value
+
+			color_ouput.style.background = `rgb(${red.value},${blue.value},${green.value})`
+			default_node_color = `rgb(${red.value},${blue.value},${green.value})`
+
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				return default_node_color;
+			});
+
+		}
+
+		// color scheme values and output
+		function colorFinc2Vandana() {
 			var red = document.getElementById("redRange");
 			var blue = document.getElementById("greenRange");
 			var green = document.getElementById("blueRange");
