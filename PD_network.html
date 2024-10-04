@@ -128,6 +128,18 @@
 			$('#TE4Color').trigger("chosen:updated");
 		}
 
+	// 	// Adding TE options to the node cut-off in Radial Analysis section
+	// 	var allValues = [];
+	// 	$('#TE4Color option').each(function() {
+    // 		allValues.push($(this).val());
+	// 	});
+	// 	// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
+	// 	var TE_cutOff = allValues.forEach(function(value) {
+    // 		$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
+	// 	});
+    //    $('#nodeDegreeID4Size').trigger("chosen:updated");
+
+
 		// For GDA Color
 		for (var key = 0; key < uniNodeGDA.length; key++) {
 			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
@@ -849,12 +861,21 @@
 							   <option value="none" selected="selected">None</option>
 							   <option value="node_degree">Gene Degree</option>
 						   </select>
-					   </div>
+					   <!-- </div> -->
 					   <!-- Threshold for Degree -->
 					   <div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
 						   <input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
 						   <p class="size">node Degree: <span id="thresh1"></span></p>
 					   </div>
+
+                     <!-- Threshold for TE -->
+						<!-- <div class="slidecontainer" id="TERange" style="padding-bottom:5px;display:none;">
+							<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myTEvalues" style="margin-top: 10px;">
+							<p class="size" style="margin-top: 10px;">TE.: <span id="thresh2"></span></p>
+						</div> -->
+
+					</div>
+
 					   <!-- Gene connections -->
 					   <div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
 						   <input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
@@ -1827,20 +1848,68 @@
 				.attr("class", "link")
 				.style("stroke-width", nominal_stroke)
 				.style("stroke", function (d) {
-					//below code added by Vandana to provide intensity to the edge color
-					if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
-					 else if (isNumber(d.weight) && d.weight > 0 && d.weight <= 0.5) return "#e9e5ed"; 
-					 else if (isNumber(d.weight) && d.weight > 0.5 && d.weight <= 0.6) return "#d8d4dc"; 
-					 else if (isNumber(d.weight) && d.weight > 0.6 && d.weight <= 0.7) return "#b4b0b7"; 
-					 else if (isNumber(d.weight) && d.weight > 0.7 && d.weight <= 0.8) return "#949097"; 
-					 else if (isNumber(d.weight) && d.weight > 0.8 && d.weight <= 0.9) return "#6b686f"; 
-					 else if (isNumber(d.weight) && d.weight > 0.9 && d.weight < 1) return "#4c494f"; 
-					 else if (isNumber(d.weight) &&  d.weight >= 1) return "#2a272d";
-					 else return default_link_color;
+			//below code added by Vandana to provide intensity to the edge color
+                //  if (isNumber(d.weight)){
+				// 	if (d.weight <= 0){
+				// 		return "black";
+				// 	} 
+
+				// 	if (d.weight >= 0.15){  //low
+				// 		if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
+				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	} 
+							
+				// 	if (d.weight >= 0.4){  //medium
+				// 		if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
+				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	}
+
+                // 	if (d.weight >= 0.7){  //high
+				// 		if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
+				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
+				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+				// 		else if (d.weight >= 1) return "#e93e3a"; 
+				// 		else return default_link_color;
+				// 	} 
+
+				// 	if (d.weight >= 0.9){  //highest
+				// 		if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
+				// 	 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
+				// 	 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
+				// 	 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
+				// 	 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
+				// 	 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
+				// 	 	else if (d.weight >= 1) return "#e93e3a"; 
+				// 	 	else return default_link_color;
+				// 	}
+				//   }			
+
+
+					// if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
+					//  else if (isNumber(d.weight) && d.weight > 0 && d.weight <= 0.5) return "#e9e5ed"; 
+					//  else if (isNumber(d.weight) && d.weight > 0.5 && d.weight <= 0.6) return "#d8d4dc"; 
+					//  else if (isNumber(d.weight) && d.weight > 0.6 && d.weight <= 0.7) return "#b4b0b7"; 
+					//  else if (isNumber(d.weight) && d.weight > 0.7 && d.weight <= 0.8) return "#949097"; 
+					//  else if (isNumber(d.weight) && d.weight > 0.8 && d.weight <= 0.9) return "#6b686f"; 
+					//  else if (isNumber(d.weight) && d.weight > 0.9 && d.weight < 1) return "#4c494f"; 
+					//  else if (isNumber(d.weight) &&  d.weight >= 1) return "#2a272d";
+					//  else return default_link_color;
 					//above code added by Vandana to provide intensity to the edge color
-					//commented by Vandana	// if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
+					 if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
 					// else if (isNumber(d.weight) && d.weight > 0.5) return "green"; // color
-					//commented by Vandana	// else return default_link_color;
+					 else return default_link_color;
 				})
 
 			function dragstarted(d) {
@@ -2130,18 +2199,66 @@
 						circle.style(towhite, "white");
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
-                           //below code added by Vandana to provide intensity to the edge color 
-							if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
-					 		else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
-					 		else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#d8d4dc";
-					 		else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return "#b4b0b7";
-					 		else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#949097";
-					 		else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#6b686f";
-					 		else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#4c494f";
-					 		else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
-					 		else return default_link_color;
+                        //below code added by Vandana to provide intensity to the edge color 
+						//    if (isNumber(o.weight)){
+                        //     if (o.weight <= 0){
+						// 		return "black";
+						// 	} 
+
+						// 	if (o.weight >= 0.15){  //low
+						// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
+							
+						// 	if (o.weight >= 0.4){  //medium
+						// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
+
+                        //     if (o.weight >= 0.7){  //high
+					 	// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
+
+						// 	if (o.weight >= 0.9){  //highest
+
+						// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
+					 	// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
+					 	// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
+						// }	
+
+							// if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
+					 		// else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
+					 		// else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#d8d4dc";
+					 		// else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return "#b4b0b7";
+					 		// else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#949097";
+					 		// else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#6b686f";
+					 		// else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#4c494f";
+					 		// else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
+					 		// else return default_link_color;
 							//above code added by Vandana to provide intensity to the edge color
-						//commented by Vandana	// return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
+						 return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
 						});
 					}
 
@@ -3976,7 +4093,6 @@
 
 		document.getElementById("nodeDegreeID4Size").onchange = function () {
 			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
-
 			if (cutoff_type == "node_degree") {
 				$("#NodeDegreeRange").show()
 			} else {
@@ -3994,6 +4110,12 @@
 			} else {
 				$("#NodeDegreeRange").hide()
 			}
+
+			// if (/TE/.test(cutoff_type)) {
+			// 	$("#TERange").show()
+			// } else {
+			// 	$("#TERange").hide()
+			// }
 	  }
 	}
 	
