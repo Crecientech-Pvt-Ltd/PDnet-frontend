@@ -949,6 +949,7 @@
 			Screenshot!
 		</button>
 		<script>
+			
 
 			/***************  Change network type [Not Implemented yet due to unavailability of data]  ***************
 
@@ -1184,6 +1185,7 @@
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
 			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightTwo" aria-expanded="false" aria-controls="collapseRightTwo">Network parameters</button>
 		</div>
+		
 		<div class="collapse show" id="collapseRightTwo">
 		  <div class="b card card-body">
 			<p class="size">
@@ -1192,7 +1194,9 @@
 				<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
 				<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
 				<input type="radio" name="network_parameters" id="linkcolor" value="4"> Text Size<br>
-				<input type="radio" name="network_parameters" id="nodecolor1" value="6"> Highlight Seed Genes<br>
+				<!-- <input type="radio" name="network_parameters1" id="nodecolor1" value="6"> Highlight Seed Genes<br>
+				<input type="radio" name="network_parameters" id="linkColor1" value="7"> Show Edge Color<br> -->
+               
 				<!-- <input type="radio" name="network_parameters" id="nodeColor" value="5"> Text Size<br> -->
 				<!-- <input type="radio" name="network_parameters" id="linkcolor" value="5"> Network Zoom<br> -->
 				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
@@ -1251,6 +1255,19 @@
 			</p>
 		  </div>
 		</div>
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightFour" aria-expanded="false" aria-controls="collapseRightFour">Highlight Node/Edge Color</button>
+		</div>
+		
+		<div class="collapse show" id="collapseRightFour">
+		  <div class="b card card-body">
+			<p class="size">
+				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;"> Highlight Seed Genes<br>
+                <input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show Edge Color<br>
+
+			</p>
+		</div>
+	  </div>
 
 		<!-- <button class="accordion active">Annotations</button>
 		<div class="panel" style="max-height:200px;"> -->
@@ -1294,17 +1311,7 @@
 		<h4 onclick="settingFunc()">Setting &#x2699; </h4>
 	</div>
 	<script>
-			function highlightNodes() {
-			let totalData = getItemFromStorage('pd_net_stringDB');
-			if (totalData != undefined || totalData != null) {
-			let d = JSON.parse(totalData);
-			for (let i of d.nodeNames) {
-						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-				    	color_input_genes2(y);
-					}
-				}
-			}
-
+			
 		// clear universal data
 		function clearUniData() {
 			// GWAS4Color vandana
@@ -1852,6 +1859,7 @@
 			*/
 
 			//Node color scale for linear color range
+
 			expressionColor = d3.scale.linear()
 				.domain([-1.5, 0, +1.5])
 				.range(["green", default_node_color, "red"]);
@@ -1892,66 +1900,9 @@
 				.attr("class", "link")
 				.style("stroke-width", nominal_stroke)
 				.style("stroke", function (d) {
-				  if (isNumber(d.weight)){
-					if (d.weight <= 0){
-						return "black";
-					} 
-
-					if (d.weight >= 0.15){  //low
-						if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
-						else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-						else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-						else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					} 
-							
-					if (d.weight >= 0.4){  //medium
-						if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
-						else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-						else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-						else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					}
-
-                	if (d.weight >= 0.7){  //high
-						if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
-						else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
-						else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-						else if (d.weight >= 1) return "#e93e3a"; 
-						else return default_link_color;
-					} 
-
-					if (d.weight >= 0.9){  //highest
-						if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
-					 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
-					 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
-					 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
-					 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
-					 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
-					 	else if (d.weight >= 1) return "#e93e3a"; 
-					 	else return default_link_color;
-					}
-				  }			
-
-					// if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
-					//  else if (isNumber(d.weight) && d.weight > 0 && d.weight <= 0.5) return "#fff888"; //#e9e5ed"; 
-					//  else if (isNumber(d.weight) && d.weight > 0.5 && d.weight <= 0.6) return "#fff66e"; //"#d8d4dc"; 
-					//  else if (isNumber(d.weight) && d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b";  //"#b4b0b7"; 
-					//  else if (isNumber(d.weight) && d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; //"#949097"; 
-					//  else if (isNumber(d.weight) && d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; //"#6b686f"; 
-					//  else if (isNumber(d.weight) && d.weight > 0.9 && d.weight < 1) return "#ed683c"; //"#4c494f"; 
-					//  else if (isNumber(d.weight) &&  d.weight >= 1) return "#e93e3a";  //"#2a272d";
-					//  else return default_link_color;
-
-					// if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
+					 if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
 					// else if (isNumber(d.weight) && d.weight > 0.5) return "green"; // color
-					// else return default_link_color;
+					 else return default_link_color;
 				})
 
 			function dragstarted(d) {
@@ -2143,6 +2094,7 @@
 					var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
 					var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
 					var tmp3 = d.Description ? "Description: " + d.Description + "<br>" : "";
+					// var tmp6 = d.Description ? "Weight: " + d.Description + "<br>" : "";
 					//################### Update on 8.05.19 #################################//
 					if (nodeSize_sel != "") {
 
@@ -2186,8 +2138,13 @@
 				})
 				//remove tooltip on mouseout
 				.on("mouseout", function (d) {
-					exit_highlight();
-					gbTootip.transition()
+					let verHighlightEdge = document.getElementById("linkColor1").checked;;
+					if (verHighlightEdge == true){
+						edge_highlight();
+					} else {
+						exit_highlight();
+					}
+						gbTootip.transition()
 						.delay(250)
 						.style("display", "none");
 
@@ -2225,7 +2182,15 @@
 						}
 					}
 
-					if (highlight_node === null) exit_highlight();
+					if (highlight_node === null) {
+						// exit_highlight();
+						let verHighlightEdge = document.getElementById("linkColor1").checked;;
+					if (verHighlightEdge == true){
+						edge_highlight();
+					} else {
+						exit_highlight();
+					}
+					}
 					//$("#gene_list").val('');
 				});
 
@@ -2239,57 +2204,57 @@
 						circle.style(towhite, "white");
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
-						if (isNumber(o.weight)){
-                            if (o.weight <= 0){
-								return "black";
-							} 
+						// if (isNumber(o.weight)){
+                        //     if (o.weight <= 0){
+						// 		return "black";
+						// 	} 
 
-							if (o.weight >= 0.15){  //low
-								if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
-					 			else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 			else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 			else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							} 
+						// 	if (o.weight >= 0.15){  //low
+						// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
 							
-							if (o.weight >= 0.4){  //medium
-								if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
-					 			else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 			else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 			else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							}
+						// 	if (o.weight >= 0.4){  //medium
+						// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
+					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
 
-                            if (o.weight >= 0.7){  //high
-					 		  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
-					 			else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
-					 			else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							} 
+                        //     if (o.weight >= 0.7){  //high
+					 	// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
+					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
+					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	} 
 
-							if (o.weight >= 0.9){  //highest
-								// if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 			// else if (o.weight >= 1) return "#e93e3a"; 
-					 			// else return default_link_color;
+						// 	if (o.weight >= 0.9){  //highest
+						// 		// if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+					 	// 		// else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		// else return default_link_color;
 
 
-								if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
-					 			else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
-					 			else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
-					 			else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
-					 			else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
-					 			else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
-					 			else if (o.weight >= 1) return "#e93e3a"; 
-					 			else return default_link_color;
-							}
-						}	
+						// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
+					 	// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
+					 	// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
+					 	// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
+					 	// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
+					 	// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
+					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
+					 	// 		else return default_link_color;
+						// 	}
+						// }	
 
 
 
@@ -2303,13 +2268,93 @@
 					 		// else if (isNumber(o.weight) &&  o.weight >= 1) return "#e93e3a";  //"#2a272d";
 					 		// else return default_link_color;
 
-						// commented by Vandana	// return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
+						 return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
 							
 						});
 					}
 
 				}
 			}
+
+			function edge_highlight() {
+    			highlight_node = null;
+    			if (focus_node === null) {
+        			svg.style("cursor", "move");
+        			if (highlight_color != "white") {
+            			circle.style(towhite, "white");
+            			text.style("font-weight", "normal");
+            			link.style("stroke", function (o) {
+                			let edgeColor ; 
+               			if (o.weight <= 0) {
+                    		edgeColor = "#fff888"; 
+                		} else if (o.weight >= 0.15 && o.weight < 0.4) {
+                    		if (o.weight > 0 && o.weight <= 0.5) {
+                        		edgeColor = "#fff888";  
+                    		} else if (o.weight > 0.5 && o.weight <= 0.6) {
+                        		edgeColor = "#fff66e"; 
+                    		} else if (o.weight > 0.6 && o.weight <= 0.7) {
+                       			edgeColor = "#fff33b"; 
+                    		} else if (o.weight > 0.7 && o.weight <= 0.8) {
+                        		edgeColor = "#fdc70c"; 
+                    		} else if (o.weight > 0.8 && o.weight <= 0.9) {
+                        		edgeColor = "#f3903f";
+                    		} else if (o.weight > 0.9 && o.weight < 1) {
+                        		edgeColor = "#ed683c"; 
+                    		} else if (o.weight >= 1) {
+                        		edgeColor = "#e93e3a"; 
+                    		}
+                		} else if (o.weight >= 0.4 && o.weight < 0.7) {
+							if (o.weight = 0.4 && o.weight <= 0.5) {
+								edgeColor = "#fff888"; 
+							} else if (o.weight > 0.5 && o.weight <= 0.6) {
+								edgeColor = "#fff66e"; 
+							} else if (o.weight > 0.6 && o.weight < 0.7){
+								edgeColor =  "#fff33b"; 
+							} else {
+								edgeColor = default_link_color;
+							}
+                		} else if (o.weight >= 0.7 && o.weight < 0.9) {
+                    		if (o.weight >= 0.7 && o.weight <= 0.8) {
+                        		edgeColor = "#fdc70c";  
+                    		} else if (o.weight > 0.8 && o.weight <= 0.9) {
+                        		edgeColor = "#f3903f";
+                    		} else if (o.weight > 0.9 && o.weight < 1) {
+                        		edgeColor = "#ed683c"; 
+                    		} else if (o.weight >= 1) {
+                        		edgeColor = "#e93e3a"; 
+                    		}
+                		} else if (o.weight >= 0.9){
+						   if (o.weight = 0.9 && o.weight <= 0.92){
+							edgeColor = "#fff888"; 
+						   } else if (o.weight > 0.92 && o.weight <= 0.94){
+							edgeColor = "#fff66e";  
+						   	} else if (o.weight > 0.94 && o.weight <= 0.95) {
+								edgeColor =  "#fff33b"; 
+							} else if (o.weight > 0.95 && o.weight <= 0.97) {
+								edgeColor = "#fdc70c"; 
+							} else if (o.weight > 0.97 && o.weight <= 0.99) {
+								edgeColor = "#f3903f"; 
+							}else if (o.weight > 0.99 && o.weight < 1) {
+								edgeColor = "#ed683c"; 
+							}else if (o.weight >= 1) {
+								edgeColor = "#e93e3a"; 
+							} else {
+								edgeColor = default_link_color;
+							}
+							}
+                        return edgeColor; 
+            		});
+        		}
+    		}
+		}
+
+		$("input[name='highlight_seedEdge'][value='7']").change(function () {
+			if ($(this).is(':checked')){
+				edge_highlight();
+			} else {
+				exit_highlight();
+			}
+		});
 
 			//Function to show the connection and hide others on mouse down.
 			function set_focus(d) {
@@ -2567,7 +2612,6 @@
 				}
 		  	})
 		}
-						
 
 		function keydown() { // this funtion is for key control
 
@@ -2665,6 +2709,7 @@
 						//Edit
 						//prompt(highlight_node)
 					} else {
+						console.log("at 2702");
 						exit_highlight();
 					}
 				}
@@ -3051,7 +3096,6 @@
 
 		//Restart the visualisation after any node and link changes
 		function restart() {
-console.log("at restart")
 			link = link.data(graph.links);
 			link.exit().remove();
 			link.enter().insert("line", ".node").attr("class", "link");
@@ -3085,14 +3129,7 @@ console.log("at restart")
 			//console.log(e)
 			//console.log("INSISE FIND NODE")
 			function highlight_genes(y) {
-				//Edited
 				yed = [];
-				/*y.forEach(function(d){
-					yed.push(d.replace(/'DOT'/g, '\.'));
-					//First change the color of all dots to blue (to reset previous serach)
-					//d = d.replace(/\./g, '');
-					})*/
-				//d3.selectAll(".node").each(function(d){ if (y.indexOf(d.Gene_name)>-1 || y.indexOf(d.ID)>-1) {d3.selectAll("*[id^="+d.ID+"_],"+"*[id$=_"+d.Gene_name+"]").select("stop[offset='100%']").style("stop-color",  "blue");} })
 				d3.selectAll(".node").each(function (d) {
 					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
 						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
@@ -3140,14 +3177,26 @@ console.log("at restart")
 
 		//*********************************Color ******************************************************
 		//Change the data for coloring the node and apply it on network
+		function chkBoxNodeColor(){
+			const cbs_highlightEdgeNode = document.querySelectorAll('input[name="highlight_seedEdge"]');
+            const isNodeColor1Checked = Array.from(cbs_highlightEdgeNode).find(cb_highlightEdgeNode => cb_highlightEdgeNode.id === 'nodecolor1').checked;
 
-		$("input[name='nodeColor']").change(function () {
-			//Reset to default color
-			if ($(this).val() === '0') {
-
+			if (isNodeColor1Checked) {
+				highlightNodes();
+			} else {
 				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 					return default_node_color;
 				});
+			}}
+
+		$("input[name='nodeColor']").change(function () {
+			chkBoxNodeColor();
+			//Reset to default color
+			if ($(this).val() === '0') {
+
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				d3.select("#pathwayInput").style("display", "none");
 				//d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
@@ -3168,9 +3217,9 @@ console.log("at restart")
 			} else if ($(this).val() === '1') { //color based on differential expression (Directions: up/down/none)
 				// $('#Direction').
 				d3.select("#directionInput").style("display", "block");
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/* d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 					   if(d.direction == "UP") {  return "red";}
 					   else if(d.direction == "DOWN") return "green";
@@ -3196,9 +3245,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3223,9 +3272,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				d3.select("#pathwayInput").style("display", "block");
 				//d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
@@ -3247,11 +3296,11 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 					//if(d["trait_Module ID"] && d["trait_Module ID"] != "NA") {return "red";}
 					// if (uniNode.genes[d.ID] && uniNode.genes[d.ID][uniNode.headers["druggability_Module_ID"]] != "NA") { return "red"; }
-					return default_node_color;
-				});
+				// 	return default_node_color;
+				// });
 				d3.select("#druggabilityInput").style("display", "block");
 				d3.select("#pathwayInput").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
@@ -3272,9 +3321,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3299,9 +3348,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3327,9 +3376,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3355,9 +3404,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3383,9 +3432,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3413,9 +3462,9 @@ console.log("at restart")
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
 
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3442,9 +3491,9 @@ console.log("at restart")
 
 				//d3.selectAll(".node").select("path")
 				//.style("fill", function(d) {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				/*d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
 				return expressionColor(Number(d.logFC));
 				});*/
@@ -3467,9 +3516,9 @@ console.log("at restart")
 
 
 			} else if ($(this).val() == '12') {
-				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-					return default_node_color;
-				});
+				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 	return default_node_color;
+				// });
 				d3.select("#logFCInput").style("display", "none");
 				d3.select("#pathwayInput").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
@@ -3492,22 +3541,45 @@ console.log("at restart")
 		// ********************************* Colour based on the selected option ******************************************************
 
 		//on selecting custom color, color the nodes
-
+	
 		document.getElementById("custom4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
+				// if (mks) {
+				// 	let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
+				// 	if (color_arr.includes(mks)) {
+				// 		return mks;
+				// 	}
+				// 	else return default_node_color;
+				// }
+				// else return default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 				if (mks) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
 					if (color_arr.includes(mks)) {
 						return mks;
+					} else {
+						
+						if (isNodeColor1Checked == true){
+							highlightNodes();	
+						} else {
+							removeHighlightNodes();
+						}
+						return default_node_color;	
 					}
-					// else if (mks == "undefined") {
-					// 	return "black"
-					// } 
-					else return default_node_color;
-				}
-				else return default_node_color;
+    			} else {
+					return default_node_color;
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+   				}
 			});
 		}
 
@@ -3528,7 +3600,7 @@ console.log("at restart")
 
 		//on selecting logFC type, color the nodes
 
-		document.getElementById("logFCID4Color").onchange = function () {
+		document.getElementById("logFCID4Color").onchange = function () {			
 			nodeColor_sel = document.getElementById("logFCID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
@@ -3538,7 +3610,22 @@ console.log("at restart")
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("logFCID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+				// return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return expressionColor(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
+				  
 			});
 		}
 
@@ -3548,7 +3635,23 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("GWAS4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
-				return gw && gw >= 1 ? "red" : default_node_color;
+				// return gw && gw >= 1 ? "red" : default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (gw && gw >= 1) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return "red";
+    			} else {
+				
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3559,7 +3662,22 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("DBs4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
-				return dbs && dbs >= 1 ? "red" : default_node_color;
+				// return dbs && dbs >= 1 ? "red" : default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (dbs && dbs >= 1) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return "red";
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3569,7 +3687,23 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("markers4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
-				return mks && mks >= 1 ? "red" : default_node_color;
+				// return mks && mks >= 1 ? "red" : default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (mks && mks >= 1) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return "red";
+    			} else {
+					
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3580,7 +3714,22 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("pathwayID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
-				return pat && pat == 1 ? "red" : default_node_color;
+				// return pat && pat == 1 ? "red" : default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (pat && pat == 1) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return "red";
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3593,7 +3742,22 @@ console.log("at restart")
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+                // console.log("val ==", val)
+				//   return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return expressionColor(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3606,7 +3770,21 @@ console.log("at restart")
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+				// return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return expressionColor(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3616,7 +3794,21 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("GWAS_OR4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+				// return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return expressionColor(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3626,7 +3818,21 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("GWAS_Beta4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
-				return val ? expressionColor(Number(val)) : default_node_color;
+				// return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return expressionColor(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -3636,9 +3842,25 @@ console.log("at restart")
 			nodeColor_sel = document.getElementById("TE4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-				return val ? d3.scale.linear()
+				// return val ? d3.scale.linear()
+				// 	.domain([0, 1])
+				// 	.range([default_node_color, "red"])(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (val) {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					}
+					return d3.scale.linear()
 					.domain([0, 1])
-					.range([default_node_color, "red"])(Number(val)) : default_node_color;
+					.range([default_node_color, "red"])(Number(val));
+    			} else {
+					if (isNodeColor1Checked == true){
+						highlightNodes();	
+					} else {
+						removeHighlightNodes();
+					}
+					return default_node_color;
+   				}
 			});
 		}
 
@@ -4000,50 +4222,39 @@ console.log("at restart")
 		$("input[name='network_parameters']").change(function () {
 
 			if ($(this).val() === '0') {
-				resetText();
+				// resetText();
 			    $('.networkcontainer').hide();
 			} else if ($(this).val() === '1') {
-				resetText();
+				// resetText();
 				$('.networkcontainer').hide();
 				$('#color_range').show();
 			} else if ($(this).val() === '2') {
-				resetText();
+				// resetText();
 				$('.networkcontainer').hide();
 				$('#opacity_range').show();
 			} else if ($(this).val() === '3') {
-				resetText();
+				// resetText();
 				$('.networkcontainer').hide();
 				$('#node_size').show();
 			} else if ($(this).val() === '4') {
-				resetText();
+				// resetText();
 				$('.networkcontainer').hide();
 				$('#text_size').show();
 			// } else if ($(this).val() === '5') {
 			// 	$('.networkcontainer').hide();
 			// 	$('#zoom_network').show();
-			} else if ($(this).val() === '6') {
-			    highlightNodes();
-				$('.networkcontainer').hide();
-				$('#color_range').hide();
-				$('#opacity_range').hide();
-				$('#node_size').hide();
-				$('#text_size').hide();
-				$('#zoom_network').hide();
-
-			} else if ($(this).val() === '7') {
-			    resetText();
-				$('.networkcontainer').hide();
-				$('#color_range').hide();
-				$('#opacity_range').hide();
-				$('#node_size').hide();
-				$('#text_size').hide();
-				$('#zoom_network').hide();
-
 			}
-
-
 		})
 
+		$("input[name='highlight_seedEdge'][value='6']").change(function () {
+					if ($(this).is(':checked')){
+						highlightNodes();
+					}else{
+						removeHighlightNodes();
+					}
+        })
+
+	
 
 		// color scheme values and output
 		function colorFinc() {
@@ -4069,26 +4280,38 @@ console.log("at restart")
 		}
 
 		// color scheme values and output
-		function colorFinc2Vandana() {
-			var red = document.getElementById("redRange");
-			var blue = document.getElementById("greenRange");
-			var green = document.getElementById("blueRange");
-			var color_ouput = document.getElementById("color_ouput");
-			var rRange = document.getElementById("rRange");
-			var gRange = document.getElementById("gRange");
-			var bRange = document.getElementById("bRange");
 
-			rRange.innerHTML = red.value
-			gRange.innerHTML = blue.value
-			bRange.innerHTML = green.value
+		function highlightNodes() {
+			let totalData = getItemFromStorage('pd_net_stringDB');
+			if (totalData != undefined || totalData != null) {
+			let d = JSON.parse(totalData);
+			for (let i of d.nodeNames) {
+						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    	color_input_genes2(y);
+					}
+				}
+			}
 
-			color_ouput.style.background = `rgb(${red.value},${blue.value},${green.value})`
-			default_node_color = `rgb(${red.value},${blue.value},${green.value})`
 
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				return default_node_color;
-			});
+		function removeHighlightNodes() {
+			let totalData = getItemFromStorage('pd_net_stringDB');
+			if (totalData != undefined || totalData != null) {
+				let d = JSON.parse(totalData);
+				for (let i of d.nodeNames) {
+					y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    remove_input_genes(y);
+				}
+			}
+		}
 
+		function remove_input_genes(y) {
+		  	d3.selectAll(".node").each(function (d) {
+		  		if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
+					d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
+					.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']")
+					.style("stop-color", default_node_color);
+				}
+		  	})
 		}
 
 		// link opacity
