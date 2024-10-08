@@ -2457,9 +2457,7 @@
 			//window.focus();
 			// Resizing the window and hide/show nodes/connections on keydown
 			d3.select(window).on("resize", resize).on("keydown", keydown);
-
 			force.on("tick", function () {
-
 				node.attr("transform", function (d) {
 					return "translate(" + d.x + "," + d.y + ")";
 				});
@@ -2486,6 +2484,13 @@
 					.attr("cy", function (d) {
 						return d.y;
 					});
+
+			let verHighlightEdge = document.getElementById("linkColor1").checked;;
+			if (verHighlightEdge == true){
+				edge_highlight();
+			} else {
+				exit_highlight();
+			}
 			});
 
 			function resize() {
