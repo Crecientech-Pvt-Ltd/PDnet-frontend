@@ -1262,7 +1262,7 @@
 		<div class="collapse show" id="collapseRightFour">
 		  <div class="b card card-body">
 			<p class="size">
-				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;"> Highlight Seed Genes<br>
+				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked> Highlight Seed Genes<br>
                 <input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show Edge Color<br>
 
 			</p>
@@ -2591,10 +2591,10 @@
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-					// for (let i of d.nodeNames) {
-					// 	y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-				    // 	color_input_genes2(y);
-					// }
+					for (let i of d.nodeNames) {
+						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    	color_input_genes2(y);
+					}
 				 },
 				error: function (err) {
 					$("#loader").css('display', 'none')
