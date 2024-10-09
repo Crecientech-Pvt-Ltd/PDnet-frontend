@@ -4760,5 +4760,53 @@
 		// });
 	</script>
 
-	<script>
-	</script>
+<!--Show Legends Based on Node Color selection-->
+<script>
+    // Function to reset the legend panel
+    function resetLegends() {
+      d3.select(".legendExpression").attr("opacity", 0); // Hide legendExpression by default
+      d3.select(".legendPathway").attr("opacity", 0);    // Hide legendPathway by default
+     // d3.select(".legendDirection").attr("opacity",0);
+    }
+    // Function to show legendExpression
+    function showLegendExpression() {
+      resetLegends();
+      d3.select(".legendExpression").attr("opacity", 1); // Show the expression legend
+    }
+    // Function to show legendDirection
+    function showLegendDirection(){
+     d3.select(".legendDirection").attr("opacity", 1)
+    }
+    // Function to show legendPathway
+    function showLegendPathway() {
+      resetLegends();
+      d3.select(".legendPathway").attr("opacity", 1); // Show the pathway legend
+    }
+    // Event listener for radio button selection
+    document.querySelectorAll('input[name="nodeColor"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        const selectedValue = this.value;
+        switch (selectedValue) {
+          case "0":
+		  case "8":
+            showLegendDirection();
+            break;
+          case "2": // logFC
+          case "9": // GDA
+          case "5": // Genetics
+          case "4": // Druggability
+          case "12": // TE
+            showLegendExpression(); // Show legendExpression for these options
+            break;
+          case "6": // Databases
+          case "3": // Pathways
+            showLegendPathway();
+            break;
+          default:
+            resetLegends(); // Reset if none or custom options selected
+        }
+      });
+    });
+    // Initialize the legends as hidden
+    resetLegends();
+  </script>
