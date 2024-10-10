@@ -1262,7 +1262,7 @@
 		<div class="collapse show" id="collapseRightFour">
 		  <div class="b card card-body">
 			<p class="size">
-				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;"> Highlight Seed Genes<br>
+				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked> Highlight Seed Genes<br>
                 <input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show Edge Color<br>
 
 			</p>
@@ -2204,72 +2204,7 @@
 						circle.style(towhite, "white");
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
-						// if (isNumber(o.weight)){
-                        //     if (o.weight <= 0){
-						// 		return "black";
-						// 	} 
-
-						// 	if (o.weight >= 0.15){  //low
-						// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
-					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	} 
-							
-						// 	if (o.weight >= 0.4){  //medium
-						// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
-					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	}
-
-                        //     if (o.weight >= 0.7){  //high
-					 	// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	} 
-
-						// 	if (o.weight >= 0.9){  //highest
-						// 		// if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		// else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		// else return default_link_color;
-
-
-						// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
-					 	// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
-					 	// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	}
-						// }	
-
-
-
-							// if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
-					 		// else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#fff888"; //#e9e5ed"; 
-					 		// else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#fff66e"; //"#d8d4dc"; 
-					 		// else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b";  //"#b4b0b7";
-					 		// else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; //"#949097"; 
-					 		// else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; //"#6b686f"; 
-					 		// else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#ed683c"; //"#4c494f"; 
-					 		// else if (isNumber(o.weight) &&  o.weight >= 1) return "#e93e3a";  //"#2a272d";
-					 		// else return default_link_color;
-
 						 return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
-							
 						});
 					}
 
@@ -2284,64 +2219,139 @@
             			circle.style(towhite, "white");
             			text.style("font-weight", "normal");
             			link.style("stroke", function (o) {
-                			let edgeColor ; 
-               			if (o.weight <= 0) {
-                    		edgeColor = "#fff888"; 
-                		} else if (o.weight >= 0.15 && o.weight < 0.4) {
-                    		if (o.weight > 0 && o.weight <= 0.5) {
-                        		edgeColor = "#fff888";  
-                    		} else if (o.weight > 0.5 && o.weight <= 0.6) {
-                        		edgeColor = "#fff66e"; 
-                    		} else if (o.weight > 0.6 && o.weight <= 0.7) {
-                       			edgeColor = "#fff33b"; 
-                    		} else if (o.weight > 0.7 && o.weight <= 0.8) {
-                        		edgeColor = "#fdc70c"; 
-                    		} else if (o.weight > 0.8 && o.weight <= 0.9) {
-                        		edgeColor = "#f3903f";
-                    		} else if (o.weight > 0.9 && o.weight < 1) {
-                        		edgeColor = "#ed683c"; 
-                    		} else if (o.weight >= 1) {
-                        		edgeColor = "#e93e3a"; 
-                    		}
-                		} else if (o.weight >= 0.4 && o.weight < 0.7) {
-							if (o.weight = 0.4 && o.weight <= 0.5) {
-								edgeColor = "#fff888"; 
-							} else if (o.weight > 0.5 && o.weight <= 0.6) {
-								edgeColor = "#fff66e"; 
-							} else if (o.weight > 0.6 && o.weight < 0.7){
-								edgeColor =  "#fff33b"; 
-							} else {
-								edgeColor = default_link_color;
+                			let edgeColor; 
+							let pWeight = o.weight; 
+							if (pWeight <= 0) {
+                    			edgeColor = "#fff888"; 
+							} else if (pWeight > 0 && pWeight < 0.15) {
+                    			if (pWeight > 0 && pWeight <= 0.1) {
+                        			edgeColor = "#fff888";  
+                    			} else if (pWeight > 0.1 && pWeight <= 0.15) {
+                        			edgeColor = "#fff66e"; 
+                    			} 
+                			} else if (pWeight > 0.15 && pWeight < 0.4) {
+                    			if (pWeight > 0 && pWeight <= 0.1) {
+                        			edgeColor = "#fff888";  
+                    			} else if (pWeight > 0.1 && pWeight <= 0.2) {
+                        			edgeColor = "#fff66e"; 
+                    			} else if (pWeight > 0.2 && pWeight <= 0.3) {
+                       				edgeColor = "#fff33b"; 
+                    			} else if (pWeight > 0.3 && pWeight < 0.4) {
+                        			edgeColor = "#fdc70c"; 
+                    			} 
+								
+                			} else if (pWeight >= 0.4 && pWeight < 0.7) {
+								if (pWeight >= 0.4 && pWeight <= 0.5) {
+									edgeColor = "#fff888"; 
+								} else if (pWeight > 0.5 && pWeight <= 0.6) {
+									edgeColor = "#fff66e"; 
+								} else if (pWeight > 0.6 && pWeight < 0.7){
+									edgeColor =  "#fff33b"; 
+								} else {
+									edgeColor = default_link_color;
+								}
+                			} else if (pWeight >= 0.7 && pWeight < 0.9) {
+                    			if (pWeight >= 0.7 && pWeight <= 0.8) {
+                        			edgeColor = "#fdc70c";  
+                    			} else if (pWeight > 0.8 && pWeight <= 0.9) {
+                        			edgeColor = "#f3903f";
+                    			} else if (pWeight > 0.9 && pWeight < 1) {
+                        			edgeColor = "#ed683c"; 
+                    			} else if (pWeight >= 1) {
+                        			edgeColor = "#e93e3a"; 
+                    			}
+                			} else if (pWeight >= 0.9){
+						   		if (pWeight == 0.9 && pWeight <= 0.92){
+									edgeColor = "#ed943c"; 
+							 		// edgeColor = "#fff888"; 
+						   		} else if (pWeight > 0.92 && pWeight <= 0.94){
+									edgeColor = "#ed863c"; 
+							  		// edgeColor = "#fff66e";  
+						   		} else if (pWeight > 0.94 && pWeight <= 0.95) {
+									edgeColor =  "#ed773c"; 
+									// edgeColor =  "#fff33b"; 
+								} else if (pWeight > 0.95 && pWeight <= 0.97) {
+									edgeColor = "#ed683c"; 
+									// edgeColor = "#fdc70c"; 
+								} else if (pWeight > 0.97 && pWeight <= 0.99) {
+									edgeColor = "#ed593c";
+									// edgeColor = "#f3903f"; 
+								}else if (pWeight > 0.99 && pWeight < 1) {
+									edgeColor = "#ed4a3c";
+									// edgeColor = "#ed683c"; 
+								}else if (pWeight >= 1) {
+									edgeColor = "#e93e3a"; 
+									// edgeColor = "#e93e3a"; 
+								} else {
+									edgeColor = "#c11916";
+									// edgeColor = default_link_color;
+								}
 							}
-                		} else if (o.weight >= 0.7 && o.weight < 0.9) {
-                    		if (o.weight >= 0.7 && o.weight <= 0.8) {
-                        		edgeColor = "#fdc70c";  
-                    		} else if (o.weight > 0.8 && o.weight <= 0.9) {
-                        		edgeColor = "#f3903f";
-                    		} else if (o.weight > 0.9 && o.weight < 1) {
-                        		edgeColor = "#ed683c"; 
-                    		} else if (o.weight >= 1) {
-                        		edgeColor = "#e93e3a"; 
-                    		}
-                		} else if (o.weight >= 0.9){
-						   if (o.weight = 0.9 && o.weight <= 0.92){
-							edgeColor = "#fff888"; 
-						   } else if (o.weight > 0.92 && o.weight <= 0.94){
-							edgeColor = "#fff66e";  
-						   	} else if (o.weight > 0.94 && o.weight <= 0.95) {
-								edgeColor =  "#fff33b"; 
-							} else if (o.weight > 0.95 && o.weight <= 0.97) {
-								edgeColor = "#fdc70c"; 
-							} else if (o.weight > 0.97 && o.weight <= 0.99) {
-								edgeColor = "#f3903f"; 
-							}else if (o.weight > 0.99 && o.weight < 1) {
-								edgeColor = "#ed683c"; 
-							}else if (o.weight >= 1) {
-								edgeColor = "#e93e3a"; 
-							} else {
-								edgeColor = default_link_color;
-							}
-							}
+               			// if (o.weight <= 0) {
+                    	// 	edgeColor = "#fff888"; 
+                		// } else if (o.weight >= 0.15 && o.weight < 0.4) {
+                    	// 	if (o.weight > 0 && o.weight <= 0.5) {
+                        // 		edgeColor = "#fff888";  
+                    	// 	} else if (o.weight > 0.5 && o.weight <= 0.6) {
+                        // 		edgeColor = "#fff66e"; 
+                    	// 	} else if (o.weight > 0.6 && o.weight <= 0.7) {
+                       	// 		edgeColor = "#fff33b"; 
+                    	// 	} else if (o.weight > 0.7 && o.weight <= 0.8) {
+                        // 		edgeColor = "#fdc70c"; 
+                    	// 	} else if (o.weight > 0.8 && o.weight <= 0.9) {
+                        // 		edgeColor = "#f3903f";
+                    	// 	} else if (o.weight > 0.9 && o.weight < 1) {
+                        // 		edgeColor = "#ed683c"; 
+                    	// 	} else if (o.weight >= 1) {
+                        // 		edgeColor = "#e93e3a"; 
+                    	// 	}
+                		// } else if (o.weight >= 0.4 && o.weight < 0.7) {
+						// 	if (o.weight = 0.4 && o.weight <= 0.5) {
+						// 		edgeColor = "#fff888"; 
+						// 	} else if (o.weight > 0.5 && o.weight <= 0.6) {
+						// 		edgeColor = "#fff66e"; 
+						// 	} else if (o.weight > 0.6 && o.weight < 0.7){
+						// 		edgeColor =  "#fff33b"; 
+						// 	} else {
+						// 		edgeColor = default_link_color;
+						// 	}
+                		// } else if (o.weight >= 0.7 && o.weight < 0.9) {
+                    	// 	if (o.weight >= 0.7 && o.weight <= 0.8) {
+                        // 		edgeColor = "#fdc70c";  
+                    	// 	} else if (o.weight > 0.8 && o.weight <= 0.9) {
+                        // 		edgeColor = "#f3903f";
+                    	// 	} else if (o.weight > 0.9 && o.weight < 1) {
+                        // 		edgeColor = "#ed683c"; 
+                    	// 	} else if (o.weight >= 1) {
+                        // 		edgeColor = "#e93e3a"; 
+                    	// 	}
+                		// } else if (o.weight >= 0.9){
+						//    if (o.weight == 0.9 && o.weight <= 0.92){
+						// 	edgeColor = "#ed943c"; 
+						// 	 // edgeColor = "#fff888"; 
+						//    } else if (o.weight > 0.92 && o.weight <= 0.94){
+						// 	edgeColor = "#ed863c"; 
+						// 	  // edgeColor = "#fff66e";  
+						//    	} else if (o.weight > 0.94 && o.weight <= 0.95) {
+						// 		edgeColor =  "#ed773c"; 
+						// 		// edgeColor =  "#fff33b"; 
+						// 	} else if (o.weight > 0.95 && o.weight <= 0.97) {
+						// 		edgeColor = "#ed683c"; 
+						// 		// edgeColor = "#fdc70c"; 
+						// 	} else if (o.weight > 0.97 && o.weight <= 0.99) {
+						// 		edgeColor = "#ed593c";
+						// 		// edgeColor = "#f3903f"; 
+						// 	}else if (o.weight > 0.99 && o.weight < 1) {
+						// 		edgeColor = "#ed4a3c";
+						// 		// edgeColor = "#ed683c"; 
+						// 	}else if (o.weight >= 1) {
+						// 		edgeColor = "#e93e3a"; 
+						// 		// edgeColor = "#e93e3a"; 
+						// 	} else {
+						// 		edgeColor = "#c11916";
+						// 		// edgeColor = default_link_color;
+						// 	}
+						// }
                         return edgeColor; 
             		});
         		}
@@ -2457,9 +2467,7 @@
 			//window.focus();
 			// Resizing the window and hide/show nodes/connections on keydown
 			d3.select(window).on("resize", resize).on("keydown", keydown);
-
 			force.on("tick", function () {
-
 				node.attr("transform", function (d) {
 					return "translate(" + d.x + "," + d.y + ")";
 				});
@@ -2486,6 +2494,13 @@
 					.attr("cy", function (d) {
 						return d.y;
 					});
+
+			let verHighlightEdge = document.getElementById("linkColor1").checked;;
+			if (verHighlightEdge == true){
+				edge_highlight();
+			} else {
+				exit_highlight();
+			}
 			});
 
 			function resize() {
@@ -2586,10 +2601,10 @@
 					startD3(currentUniversal);
 					getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-					// for (let i of d.nodeNames) {
-					// 	y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-				    // 	color_input_genes2(y);
-					// }
+					for (let i of d.nodeNames) {
+						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+				    	color_input_genes2(y);
+					}
 				 },
 				error: function (err) {
 					$("#loader").css('display', 'none')
@@ -4755,5 +4770,53 @@
 		// });
 	</script>
 
-	<script>
-	</script>
+<!--Show Legends Based on Node Color selection-->
+<script>
+    // Function to reset the legend panel
+    function resetLegends() {
+      d3.select(".legendExpression").attr("opacity", 0); // Hide legendExpression by default
+      d3.select(".legendPathway").attr("opacity", 0);    // Hide legendPathway by default
+     // d3.select(".legendDirection").attr("opacity",0);
+    }
+    // Function to show legendExpression
+    function showLegendExpression() {
+      resetLegends();
+      d3.select(".legendExpression").attr("opacity", 1); // Show the expression legend
+    }
+    // Function to show legendDirection
+    function showLegendDirection(){
+     d3.select(".legendDirection").attr("opacity", 1)
+    }
+    // Function to show legendPathway
+    function showLegendPathway() {
+      resetLegends();
+      d3.select(".legendPathway").attr("opacity", 1); // Show the pathway legend
+    }
+    // Event listener for radio button selection
+    document.querySelectorAll('input[name="nodeColor"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        const selectedValue = this.value;
+        switch (selectedValue) {
+          case "0":
+		  case "8":
+            showLegendDirection();
+            break;
+          case "2": // logFC
+          case "9": // GDA
+          case "5": // Genetics
+          case "4": // Druggability
+          case "12": // TE
+            showLegendExpression(); // Show legendExpression for these options
+            break;
+          case "6": // Databases
+          case "3": // Pathways
+            showLegendPathway();
+            break;
+          default:
+            resetLegends(); // Reset if none or custom options selected
+        }
+      });
+    });
+    // Initialize the legends as hidden
+    resetLegends();
+  </script>

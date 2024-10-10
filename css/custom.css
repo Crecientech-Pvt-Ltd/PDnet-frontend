@@ -400,8 +400,35 @@ span.down_arrow {
     /* padding: 20px 0; */
 }
 
+/* .input-file {
+    border: 1px solid #bbb;
+} */
+
 .input-file {
     border: 1px solid #bbb;
+    margin:0px;
+    padding: 0px;
+    border-radius: 4px;
+   
+} 
+
+input[type="file"] {
+    border: none; 
+   
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    height:36px;
+}
+
+.form-control{
+    padding: 4px;
+    margin:0px;
+    
+}
+.geneFileNames{
+    padding: 0px;
+    margin: 0px;
+   
 }
 
 .middle-item {
