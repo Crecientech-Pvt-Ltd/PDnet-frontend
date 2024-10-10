@@ -2074,7 +2074,26 @@
 						return d.Gene_name == "NA" ? '\u2002' + d.ID : '\u2002' + d.Gene_name;
 					});
 
+
+		link.on("mouseover", function( d) {
+        	const sourceGene = d.source;
+          	const targetGene = d.target;
+          	if (!sourceGene || !targetGene) {
+           	 	return;
+          	}
+          	gbTootip.transition().duration(500);
+          	gbTootip.html(`<strong>Weight:</strong> ${d.weight}`)
+            .style("left", (event.pageX + 5) + "px")
+            .style("top", (event.pageY - 28) + "px");
+          	gbTootip.style("display", "block");
+        })
+		
+      .on("mouseout", function() {
+        gbTootip.style("display", "none");
+      });
+
 			//Highlight connection of a node and show tooltip on mouseover event
+
 			node.on("mouseover", function (d) {
 				set_highlight(d);
 
