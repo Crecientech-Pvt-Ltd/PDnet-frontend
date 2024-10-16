@@ -1710,9 +1710,9 @@
 		}
 
 		function clearSelectedNode() {
-			node.selectAll("path").classed("selected",false).each(function(d){
-						d.selected = false;
-			});
+			// node.selectAll("path").classed("selected",false).each(function(d){
+			// 			d.selected = false;
+			// });
 			nodeDetails = [];
 			gene_info.innerHTML = "";
 			tableInfo.innerHTML = "";
@@ -1801,17 +1801,17 @@
 				$('#sgene_list').val(x.toString())
 			});
 
-			d3.select("svg")
-        	.on("click",function(event){
-          		node.selectAll("path").classed("selected",false).each(function(d){
-            		d.selected = false;
-         	 	});
-          		let gInfo = document.getElementById("gene_info");
-          		let tableInfo=document.getElementById("table_data-ip");
-          		gInfo.innerHTML="";
-          		tableInfo.innerHTML="";
-          		$('#sgene_list').val('');
-        	})
+			// d3.select("svg")
+        	// .on("click",function(event){
+          	// 	node.selectAll("path").classed("selected",false).each(function(d){
+            // 		d.selected = false;
+         	//  	});
+          	// 	let gInfo = document.getElementById("gene_info");
+          	// 	let tableInfo=document.getElementById("table_data-ip");
+          	// 	gInfo.innerHTML="";
+          	// 	tableInfo.innerHTML="";
+          	// 	$('#sgene_list').val('');
+        	// })
 
 		var svg_graph = svg.append('svg:g').call(zoomer);
 
