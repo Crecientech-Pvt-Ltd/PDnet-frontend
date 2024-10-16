@@ -1817,6 +1817,20 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 			window.location.href = "PD_network.html?fileName=cointeraction/" + selectPPIPathway.value + "_" + selectPPIPathwayRegion.value
 		})
 	</script>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		  const selectElement = document.getElementById('confidence');
+		  // Clear sessionStorage when the page is refreshed
+		  window.addEventListener('beforeunload', function() {
+			  sessionStorage.removeItem('selectedvalue');
+		  });
+		  selectElement.addEventListener('change', function() {
+			  console.log('Selected Value:', selectElement.value);
+			  sessionStorage.setItem('selectedvalue', selectElement.value);
+		  });
+	  });
+	  </script>
 
 </body>
 
