@@ -840,20 +840,27 @@
 						const threshDisplay = document.getElementById('thresh');
 						const selectedvalue = sessionStorage.getItem('selectedvalue');
 						const value = selectedvalue ? parseFloat(selectedvalue) : 0.7;
-		
-						
 						slider.min = value;
 						slider.value = value;
 						threshDisplay.textContent = value;
 						slider.max="1";
-						
-						const stepValue = ((1 - value) / 10).toFixed(3);
+						const stepValue1 = (1 - value).toFixed(1);
+						const stepValue = (stepValue1 / 10)
+						// const stepValue = ((1 - value) / 10).toFixed(3);
 						slider.step = stepValue; 
-						// console.log(slider.step);
+						console.log(slider.step);
+						if(value === 0.15){
+							slider.min = 0.15;
+   							slider.max = 1;   
+    						slider.step = 0.01;
+    						slider.value = value; 
+					    }
 						slider.addEventListener('input', function() {
 								threshDisplay.textContent = slider.value; 
-								// console.log(threshDisplay.textContent);
+								 console.log(threshDisplay.textContent);
 						});
+						
+						
 				});
 		</script>
 			<!-- node weight dropdown options  -->
