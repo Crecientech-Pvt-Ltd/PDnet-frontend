@@ -848,7 +848,7 @@
 						const stepValue = (stepValue1 / 10)
 						// const stepValue = ((1 - value) / 10).toFixed(3);
 						slider.step = stepValue; 
-						console.log(slider.step);
+						// console.log(slider.step);
 						if(value === 0.15){
 							slider.min = 0.15;
    							slider.max = 1;   
@@ -857,7 +857,7 @@
 					    }
 						slider.addEventListener('input', function() {
 								threshDisplay.textContent = slider.value; 
-								 console.log(threshDisplay.textContent);
+								//  console.log(threshDisplay.textContent);
 						});
 						
 						
@@ -3115,54 +3115,104 @@
 			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
 		}
 
+
 		function TEdegreeFun() {
-			TEdegreeOutput.innerHTML = this.value || 0;
-			if (typeof this.value == "undefined") {
-				this.value = 0;
-			}
-			var degreeValTE = this.value || 0;
-			const totalNodes = d3.selectAll(".node")
-				.filter(d => {
-					return d.weight >= degreeValTE;
-				})
-				.style("display", "inline").size();
-			d3.selectAll(".node")
-				.filter(d => {
-					return d.weight < degreeValTE;
-				})
-				.style("display", "none");
-			const totalEdges = d3.selectAll(".link")
-				.filter(d => {
-					return d.target.weight >= degreeValTE
-				})
-				.style("display", "inline").size();
-			d3.selectAll(".link")
-				.filter(d => {
-					return d.source.weight >= degreeValTE
-				})
-				.style("display", "inline");
-			d3.selectAll(".link")
-				.filter(d => {
-					return d.target.weight < degreeValTE
-				})
-				.style("display", "none");
-			d3.selectAll(".link")
-				.filter(d => {
-					return d.source.weight < degreeValTE
-				})
-				.style("display", "none");
-			d3.selectAll(".text")
-				.filter(d => {
-					return d.weight >= degreeValTE;
-				})
-				.style("display", "inline");
-			d3.selectAll(".text")
-				.filter(d => {
-					return d.weight < degreeValTE;
-				}).style("display", "none");
-			$('#network_details').empty();
-			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+    		var degreeValTE = parseFloat(this.value) || 0;
+    		TEdegreeOutput.innerHTML = degreeValTE;
+    		// Function to get the score for a node
+    		function getScore(d) {
+        		const cutoffType = document.getElementById("nodeDegreeID4Size").value; // Get the current cutoff type
+        		if (cutoffType && currentUniversal?.genes[geneIndexMap[d?.ID]]) {
+            		const geneData = currentUniversal.genes[geneIndexMap[d.ID]];
+            		const scoreValue = geneData[cutoffType] !== undefined ? parseFloat(geneData[cutoffType]) : 0;
+            		return isNaN(scoreValue) ? 0 : scoreValue;
+        		}
+        		return 0; // Default to 0 if score is not available
+   			}
+    		// Filter nodes based on the score threshold
+    		const totalNodes = d3.selectAll(".node")
+        	.style("display", function(d) {
+            	const score = getScore(d);
+            	const isVisible = score >= degreeValTE;
+            	// console.log(`Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+            	return isVisible ? "inline" : "none";
+        	})
+       		.filter(d => getScore(d) >= degreeValTE)
+        	.size();
+    		// Filter links based on the visibility of connected nodes
+    		const totalEdges = d3.selectAll(".link")
+        	.style("display", function(d) {
+            	const sourceScore = getScore(d.source);
+            	const targetScore = getScore(d.target);
+            	const isVisible = sourceScore >= degreeValTE && targetScore >= degreeValTE;
+            	// console.log(`Link from Node ${d.source.id} to Node ${d.target.id}: Source Score: ${sourceScore}, Target Score: ${targetScore}, Threshold: ${degreeValTE}, Link Visible: ${isVisible}`);
+           		 return isVisible ? "inline" : "none";
+        	})
+        	.filter(d => getScore(d.source) >= degreeValTE && getScore(d.target) >= degreeValTE)
+        	.size();
+    		// Filter text labels based on the score threshold
+    		d3.selectAll(".text")
+        	.style("display", function(d) {
+            	const score = getScore(d);
+            	const isVisible = score >= degreeValTE;
+            	// console.log(`Text for Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+           	 return isVisible ? "inline" : "none";
+        	});
+    		// Update network details
+    		$('#network_details').empty();
+    		$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+    		// Restart or update the graph if needed
+    		restart();
 		}
+
+		// function TEdegreeFun() {
+		// 	TEdegreeOutput.innerHTML = this.value || 0;
+		// 	if (typeof this.value == "undefined") {
+		// 		this.value = 0;
+		// 	}
+		// 	var degreeValTE = this.value || 0;
+		// 	const totalNodes = d3.selectAll(".node")
+		// 		.filter(d => {
+		// 			return d.weight >= degreeValTE;
+		// 		})
+		// 		.style("display", "inline").size();
+		// 	d3.selectAll(".node")
+		// 		.filter(d => {
+		// 			return d.weight < degreeValTE;
+		// 		})
+		// 		.style("display", "none");
+		// 	const totalEdges = d3.selectAll(".link")
+		// 		.filter(d => {
+		// 			return d.target.weight >= degreeValTE
+		// 		})
+		// 		.style("display", "inline").size();
+		// 	d3.selectAll(".link")
+		// 		.filter(d => {
+		// 			return d.source.weight >= degreeValTE
+		// 		})
+		// 		.style("display", "inline");
+		// 	d3.selectAll(".link")
+		// 		.filter(d => {
+		// 			return d.target.weight < degreeValTE
+		// 		})
+		// 		.style("display", "none");
+		// 	d3.selectAll(".link")
+		// 		.filter(d => {
+		// 			return d.source.weight < degreeValTE
+		// 		})
+		// 		.style("display", "none");
+		// 	d3.selectAll(".text")
+		// 		.filter(d => {
+		// 			return d.weight >= degreeValTE;
+		// 		})
+		// 		.style("display", "inline");
+		// 	d3.selectAll(".text")
+		// 		.filter(d => {
+		// 			return d.weight < degreeValTE;
+		// 		}).style("display", "none");
+		// 	$('#network_details').empty();
+		// 	$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+		// }
 
 
 		// slider.oninput =  function() {
