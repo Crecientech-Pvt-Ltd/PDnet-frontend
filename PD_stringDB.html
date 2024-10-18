@@ -834,6 +834,28 @@
 				<br>
 				<p class="size">Edge Weight: <span id="thresh"></span></p>
 			</div>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+						const slider = document.getElementById('myRange');
+						const threshDisplay = document.getElementById('thresh');
+						const selectedvalue = sessionStorage.getItem('selectedvalue');
+						const value = selectedvalue ? parseFloat(selectedvalue) : 0.7;
+		
+						
+						slider.min = value;
+						slider.value = value;
+						threshDisplay.textContent = value;
+						slider.max="1";
+						
+						const stepValue = ((1 - value) / 10).toFixed(3);
+						slider.step = stepValue; 
+						// console.log(slider.step);
+						slider.addEventListener('input', function() {
+								threshDisplay.textContent = slider.value; 
+								// console.log(threshDisplay.textContent);
+						});
+				});
+		</script>
 			<!-- node weight dropdown options  -->
 			<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
 				Select Interaction Type:
@@ -1264,6 +1286,7 @@
 			<p class="size">
 				<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked> Highlight Seed Genes<br>
                 <input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show Edge Color<br>
+				<!-- <input type="checkbox" name="highlight_seedEdge" id="legendColor" value="8" style="margin-top: 10px;"> Show  Edge Legend<br> -->
 
 			</p>
 		</div>
@@ -1303,6 +1326,11 @@
 		<button class="accordion">Legends</button>
 		<div class="panel" id="legendPanel">
 			<p></p>
+		</div>
+
+		<button class="accordion">Edge Legends</button>
+		<div class="panel" id="legendEdge" style="display: none;">
+			<p ></p>
 		</div>
 
 	</div>
@@ -1464,6 +1492,12 @@
 
 			}
 			//$(".country option:selected")
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (isNodeColor1Checked == true){
+				highlightNodes();	
+			} else {
+				removeHighlightNodes();
+			}
 		}
 	</script>
 	<script>
@@ -1681,6 +1715,9 @@
 		}
 
 		function clearSelectedNode() {
+			node.selectAll("path").classed("selected",false).each(function(d){
+            d.selected = false;
+          });
 			nodeDetails = [];
 			gene_info.innerHTML = "";
 			tableInfo.innerHTML = "";
@@ -1704,18 +1741,24 @@
 			$("#node-modal-background-2").css("flex-direction", "row");
 		}
 
+		
 		var brusher = d3.svg.brush()
 			.x(xScale)
 			.y(yScale)
 			.on("brushstart", function (d) {
-				node.selectAll("path").each(function (d) {
+				
 					//console.log(d)
-					d.previouslySelected = shiftKey && d.selected;
-				});
+					$("#gene_info").empty();
+					$("table_data-ip").empty();
+					node.selectAll("path").each(function(d){
+						d.previouslySelected = shiftKey && d.selected;
+					})
+					
+	
 			})
 			.on("brush", function () {
 				var extent = d3.event.target.extent();
-
+				
 				node.selectAll("path").classed("selected", function (d) {
 
 					return d.selected = d.previouslySelected ^
@@ -1725,6 +1768,8 @@
 			})
 
 			.on("brushend", function () {
+				
+	
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
 				//########################
@@ -1747,27 +1792,36 @@
 							tableInfo.innerHTML = "";
 						}
 					});
-				nodeDetails.forEach((i, index) => {
-					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
-					$("#table_data-ip")
-						.append(`<tr>
-      				  	<td style="width: 50px; padding: 5px;">${index + 1}.</td>
-      					<td>${i.Gene_name}</td>
-      					<td>${i.ID}</td>
-      					<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
-      				</tr>`);
-				});
-				$("#gene_info").append(
-					`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
-				);
-				$("#gene_info").append(
-					`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
-				)
-				$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
-				// }
-				// }); // NEW ADDED
-				$('#sgene_list').val(x.toString())
+					if(nodeDetails.length > 0){
+						nodeDetails.forEach((i, index) => {
+							$("#gene_info").append(`<p>${i.Gene_name}</p>`)
+							$("#table_data-ip")
+								.append(`<tr>
+											<td style="width: 50px; padding: 5px;">${index + 1}.</td>
+										<td>${i.Gene_name}</td>
+										<td>${i.ID}</td>
+										<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
+									</tr>`);
+						});
+						$("#gene_info").append(
+							`<button onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+						);
+						$("#gene_info").append(
+							`<button onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+						)
+						$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
+						// }
+						// }); // NEW ADDED
+						$('#sgene_list').val(x.toString())
+					}else{
+						$("#gene_info").empty();
+						$("#table_data-ip").empty();
+					}
+					
 			});
+			
+
+
 
 		var svg_graph = svg.append('svg:g').call(zoomer);
 
@@ -1808,6 +1862,7 @@
 
 		brush.select('.background').style('cursor', 'auto')
 			.on("click", function (d) {
+				gene_info.innerHTML = "";
 				$('#sgene_list').val("");
 			});
 
@@ -2081,6 +2136,13 @@
           	if (!sourceGene || !targetGene) {
            	 	return;
           	}
+						
+						d3.select(this)
+							.style("stroke","blue")
+							.style("stroke-width",3);
+						
+							
+
           	gbTootip.transition().duration(500);
           	gbTootip.html(`<strong>Weight:</strong> ${d.weight}`)
             .style("left", (event.pageX + 5) + "px")
@@ -2089,6 +2151,20 @@
         })
 		
       .on("mouseout", function() {
+				d3.select(this)
+					
+					.style("stroke",default_link_color)
+					.style("stroke-width",nominal_stroke);
+				
+
+				let verHighlightEdge = document.getElementById("linkColor1").checked;;
+          if (verHighlightEdge == true){
+            edge_highlight();
+          } 
+					else {
+            exit_highlight();
+          }
+		
         gbTootip.style("display", "none");
       });
 
@@ -2157,7 +2233,7 @@
 				})
 				//remove tooltip on mouseout
 				.on("mouseout", function (d) {
-					let verHighlightEdge = document.getElementById("linkColor1").checked;;
+					let verHighlightEdge = document.getElementById("linkColor1").checked;
 					if (verHighlightEdge == true){
 						edge_highlight();
 					} else {
@@ -3228,9 +3304,10 @@
 			//Reset to default color
 			if ($(this).val() === '0') {
 
-				// d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				// 	return default_node_color;
-				// });
+				d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+					return default_node_color;
+				});
+
 				d3.select("#pathwayInput").style("display", "none");
 				//d3.select("#druggabilityInput4Size").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
@@ -3248,6 +3325,14 @@
 				d3.select("#GWAS_Beta_Input").style("display", "none");
 				d3.select("#TEInput").style("display", "none");
 
+
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (isNodeColor1Checked == true){
+				  highlightNodes();	
+			    } else {
+				  removeHighlightNodes();
+			    }
 			} else if ($(this).val() === '1') { //color based on differential expression (Directions: up/down/none)
 				// $('#Direction').
 				d3.select("#directionInput").style("display", "block");
@@ -4839,3 +4924,60 @@
     // Initialize the legends as hidden
     resetLegends();
   </script>
+
+  <!-- JavaScript -->
+<script>
+    // Get the checkbox and the legend panel elements
+    // const checkbox = document.getElementById('legendColor');
+    const checkbox = document.getElementById('linkColor1');
+    const legendPanel = document.getElementById('legendEdge');
+    // Add an event listener to the checkbox
+    checkbox.addEventListener('change', function() {
+        // Toggle the visibility of the legend panel based on checkbox state
+        if (this.checked) {
+            legendPanel.style.display = 'block';
+			createLegendEdge();
+
+        } else {
+            legendPanel.style.display = 'none';
+        }
+    });
+
+	 // Function to create legend for edges
+    function createLegendEdge() {
+        // Clear any existing legend to avoid duplicates
+        d3.select("div#legendEdge svg").remove();
+
+        // Create an SVG element for the edge legend
+        var svgEdge = d3.select("div#legendEdge").append("svg")
+            .attr("width", 150)
+            .attr("height", 100)
+            .attr("class", "legendSVG");
+
+        // Create a color scale for edges
+        var linearEdge = d3.scale.linear()
+            .domain([0, 5, 7])
+            .range(["red", "orange", "yellow"]);
+
+        // Define the edge legend
+        var legendEdgeExpression = d3.legend.color()
+		.shapeWidth(20) 
+        .shapeHeight(10) 
+        .cells([0, 1, 2, 3, 4, 5,6,7])
+        .shapePadding(0) 
+        .orient("vertical")
+        .labelOffset(5)
+        .scale(linearEdge)
+        .labels(["1", "", "", "", "", "", "", "0",]) // Labels for the heatmap
+        .labelAlign("end");
+        // Append the legend to the SVG
+        svgEdge.append("g")
+            .attr("class", "legendEdgeExpression")
+            .attr("transform", "translate(50,0)")
+            .style("font-size", "18px")
+            .call(legendEdgeExpression);
+
+
+			
+    }
+</script>
