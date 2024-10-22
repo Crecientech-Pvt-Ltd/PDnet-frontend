@@ -248,6 +248,23 @@
 							<i class="lni lni-video me-3"></i>
 							<span class="sb_item"> Watch Tutorial Video</span></a>
 
+
+				    <a class="nav-link" id="v-pills-documentation-tab" data-toggle="pill" data-url="https://jianna-manager.gitbook.io/help-manual" href="#"
+							role="tab" aria-controls="v-pills-documentation" aria-selected="false"
+							style="color: rgb(255, 247, 247) !important; font-weight: bold;" target="_blank"
+							onclick="openDocumentation(event)">
+							<i class="lni lni-clipboard me-3"></i>
+							Documentation
+					</a>
+					<script>
+						 function openDocumentation(event) {
+							 event.preventDefault();
+							 const url = event.currentTarget.getAttribute('data-url');
+							 window.open(url, '_blank');
+						 }
+					</script>
+
+
 					<!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
 						role="tab" aria-controls="v-pills-messages" aria-selected="true"style="color: rgb(255, 247, 247) !important; font-weight: bold;"><i class="lni lni-database me-3"></i><span class="sb_item"> Pre-uploaded datasets</span></a> -->
 					<!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages2"
