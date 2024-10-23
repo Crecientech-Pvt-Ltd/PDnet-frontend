@@ -420,7 +420,7 @@
 				<table class="fixed_header">
 					<thead>
 						<tr>
-							<th style="width: 50px; min-width: 50px;">No.</th>
+							<th style="width: 50px;">No.</th>
 							<th>Gene Set</th>
 							<th>Overlap</th>
 							<th>P-value</th>
@@ -431,6 +431,16 @@
 						</tr>
 					</thead>
 					<tbody id="table_data-ip-3">
+						<tr>
+							<td>row 1-0</td>
+							<td>row 1-1</td>
+							<td>row 1-2</td>
+							<td>row 1-3</td>
+							<td>row 1-4</td>
+							<td>row 1-5</td>
+							<td>row 1-6</td>
+							<td>row 1-7</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -1975,6 +1985,8 @@
 			.on("click", function (d) {
 				gene_info.innerHTML = "";
 				$('#sgene_list').val("");
+				$("#gsea_info").empty();
+				$("#table_data-ip-3").empty();
 			});
 
 
@@ -3826,18 +3838,20 @@
 
 		let d = JSON.parse(totalData);
 		let nodeNames = Array.isArray(d.nodeNames) ? d.nodeNames : [];
-
+		
+		
 		document.getElementById("custom4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
-
-				if (nodeNames.includes(geneID)) {
-                console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-                return "blue";
-                 }
-
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+                // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                	return "blue";
+                } else {
+					 return default_node_color;
+				}
 				if (mks) {
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
 					if (color_arr.includes(mks)) {
@@ -3878,8 +3892,13 @@ document.getElementById("logFCID4Color").onchange = function () {
         let val = currentUniversal?.genes[geneIndex]?.[nodeColor_sel];
       //  console.log("Value from Current Universal Genes:", val);
         if (nodeNames.includes(geneID)) {
-            console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-            return "blue";
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (isNodeColor1Checked == true) {
+            	//  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+            	return "blue"; 
+			} else {
+				return default_node_color;
+			}
         } else {
            // console.log(`Gene ID ${geneID} is not matched. Applying expression color.`);
             return val ? expressionColor(Number(val)) : default_node_color;
@@ -3894,14 +3913,13 @@ document.getElementById("logFCID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
 				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
-
-				if (nodeNames.includes(geneID)) {
+                let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
                   //  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
                  return "blue";
-           }
-				 return gw && gw >= 1 ? "red" : default_node_color;
-
-		
+                } else {
+					return gw && gw >= 1 ? "red" : default_node_color;
+				}
 			});
 		}
 
@@ -3914,11 +3932,14 @@ document.getElementById("logFCID4Color").onchange = function () {
 				let geneID = d.ID;
 				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
 				
-				if (nodeNames.includes(geneID)) {
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
                   // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
                      return "blue";
-            }
-				 return dbs && dbs >= 1 ? "red" : default_node_color;
+                } else {
+					return dbs && dbs >= 1 ? "red" : default_node_color;
+				}
+				 
 
 			
 			});
@@ -3929,11 +3950,14 @@ document.getElementById("logFCID4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("markers4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
         	let geneID = d.ID;
-				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
-				if (nodeNames.includes(geneID)) {
+			var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
               return "blue";
-           }
-				 return mks && mks >= 1 ? "red" : default_node_color;
+            } else {
+				return mks && mks >= 1 ? "red" : default_node_color;
+			}
+				 
 			});
 		}
 
@@ -3945,10 +3969,13 @@ document.getElementById("logFCID4Color").onchange = function () {
         		let geneID = d.ID;
     			var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
 
-    			if (nodeNames.includes(geneID)) {
+    			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
         			return "blue";
-    			}
-     			return pat && pat == 1 ? "red" : default_node_color;
+    			} else {
+					return pat && pat == 1 ? "red" : default_node_color;
+
+				}
 			});
 		}
 
@@ -3966,10 +3993,10 @@ document.getElementById("logFCID4Color").onchange = function () {
                 // console.log("val ==", val)
 				//   return val ? expressionColor(Number(val)) : default_node_color;
 
-				if(nodeNames.includes(geneID)){
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
-				}
-				else{
+				} else{
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
@@ -3987,10 +4014,10 @@ document.getElementById("logFCID4Color").onchange = function () {
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				if(nodeNames.includes(geneID)){
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
-				}
-				else{
+				} else {
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
@@ -4003,10 +4030,10 @@ document.getElementById("logFCID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				if(nodeNames.includes(geneID)){
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
-				}
-				else{
+				} else {
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
@@ -4019,10 +4046,10 @@ document.getElementById("logFCID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				if(nodeNames.includes(geneID)){
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
-				}
-				else{
+				} else {
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
@@ -4035,15 +4062,16 @@ document.getElementById("logFCID4Color").onchange = function () {
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
 				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-				if (nodeNames.includes(geneID)) {
-                console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-                return "blue";
-                 }
-				return val ? d3.scale.linear()
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+                // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                	return "blue";
+                } else {
+					return val ? d3.scale.linear()
 					.domain([0, 1])
 					.range([default_node_color, "red"])(Number(val)) : default_node_color;
-				
-			    });
+				}
+			});
 		}
 
 
