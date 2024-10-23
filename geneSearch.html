@@ -1041,11 +1041,15 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 							td.innerHTML = "";
 							// OPEN TABLE =======================================>>>>
 							let z = 1;
-							for (let r of response.data.getGenes) {
-								// r = { mapt: [{ ... }, { ... }, { ... }] }
-								// k = mapt;
-								// r[k] = [{ ... },{ ... }, { ... }]
-								if (r.ID.length > 0) {
+
+							// for (let r of response.data.getGenes) {
+							// if (r.ID.length > 0) {
+							for (let geneName of genes2) {
+               				 // r = { mapt: [{ ... }, { ... }, { ... }] }
+                			// k = mapt;
+                			// r[k] = [{ ... },{ ... }, { ... }]
+                				let r = response.data.getGenes.find(g => g.hgnc_gene_symbol.toUpperCase() === geneName.toUpperCase());
+                				if (r && r.ID && r.ID.length > 0) {
 									gene_exists.push(r.ID);
 									// k = { ... }
 									$('#gene_exists_table')
@@ -1067,15 +1071,16 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 													</tr>`
 										);
 								} else {
-									gene_dont_exists.push(r);
+									// gene_dont_exists.push(r);
+									gene_dont_exists.push(geneName);
 									$('#gene_exists_table')
 										.append(
-											`<tr class="dont_exists">
-													<td>${r}</td>
+											`<tr class="dont_exists" style="background-color:#FF7F50">
+													<td>${z++}</td>
 													<td>---</td>
+													<td>${geneName}</td>
 													<td>---</td>
-													<td>---</td>
-													<td>---</td>
+													<td>This node is not available.</td>
 												</tr>`
 										);
 								}

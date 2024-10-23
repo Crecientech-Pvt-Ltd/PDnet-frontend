@@ -3405,7 +3405,7 @@
 					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
 						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
 							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
-								"stop-color", "blue");
+								"stop-color", "red");
 					}
 				})
 
@@ -3822,45 +3822,32 @@
 		// ********************************* Colour based on the selected option ******************************************************
 
 		//on selecting custom color, color the nodes
+		let totalData = getItemFromStorage('pd_net_stringDB');
+
+		let d = JSON.parse(totalData);
+		let nodeNames = Array.isArray(d.nodeNames) ? d.nodeNames : [];
 
 		document.getElementById("custom4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
-				// if (mks) {
-				// 	let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
-				// 	if (color_arr.includes(mks)) {
-				// 		return mks;
-				// 	}
-				// 	else return default_node_color;
-				// }
-				// else return default_node_color;
 
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID)) {
+                console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                return "blue";
+                 }
+
 				if (mks) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
 					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
 					if (color_arr.includes(mks)) {
 						return mks;
-					} else {
-
-						if (isNodeColor1Checked == true) {
-							highlightNodes();
-						} else {
-							removeHighlightNodes();
-						}
-						return default_node_color;
 					}
-				} else {
-					return default_node_color;
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
+					else return default_node_color;
 				}
+				else return default_node_color;
+
+			
 			});
 		}
 
@@ -3880,195 +3867,135 @@
 		}
 
 		//on selecting logFC type, color the nodes
+document.getElementById("logFCID4Color").onchange = function () {			
+    nodeColor_sel = document.getElementById("logFCID4Color").value;
+  //  console.log("Selected Color Option:", nodeColor_sel);
 
-		document.getElementById("logFCID4Color").onchange = function () {
-			nodeColor_sel = document.getElementById("logFCID4Color").value;
-			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				// uniNode.genes[d.ID] ? "" : console.log(d.ID);
-				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("logFCID4Color").value]])) : "black";
-				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-				// 	.getElementById("logFCID4Color").value]])) : default_node_color;
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("logFCID4Color").value];
-				// return val ? expressionColor(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return expressionColor(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
-
-			});
-		}
+    d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        let geneID = d.ID;
+      //  console.log("Current Gene ID:", geneID);
+        let geneIndex = geneIndexMap[geneID];
+        let val = currentUniversal?.genes[geneIndex]?.[nodeColor_sel];
+      //  console.log("Value from Current Universal Genes:", val);
+        if (nodeNames.includes(geneID)) {
+            console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+            return "blue";
+        } else {
+           // console.log(`Gene ID ${geneID} is not matched. Applying expression color.`);
+            return val ? expressionColor(Number(val)) : default_node_color;
+        }
+    });
+};
 
 		//on selecting GWAS type, color the nodes
 
 		document.getElementById("GWAS4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("GWAS4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
 				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
-				// return gw && gw >= 1 ? "red" : default_node_color;
 
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (gw && gw >= 1) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return "red";
-				} else {
+				if (nodeNames.includes(geneID)) {
+                  //  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                 return "blue";
+           }
+				 return gw && gw >= 1 ? "red" : default_node_color;
 
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
+		
 			});
 		}
 
 
-		//on selecting Databases type, color the nodes
+			//on selecting Databases type, color the nodes
 
-		document.getElementById("DBs4Color").onchange = function () {
+			document.getElementById("DBs4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("DBs4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
 				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
-				// return dbs && dbs >= 1 ? "red" : default_node_color;
+				
+				if (nodeNames.includes(geneID)) {
+                  // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                     return "blue";
+            }
+				 return dbs && dbs >= 1 ? "red" : default_node_color;
 
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (dbs && dbs >= 1) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return "red";
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
+			
 			});
 		}
-
 		//on selecting Celltype Markers, color the nodes
 
 		document.getElementById("markers4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("markers4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        	let geneID = d.ID;
 				var mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("markers4Color").value] ?? undefined;
-				// return mks && mks >= 1 ? "red" : default_node_color;
-
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (mks && mks >= 1) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return "red";
-				} else {
-
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
+				if (nodeNames.includes(geneID)) {
+              return "blue";
+           }
+				 return mks && mks >= 1 ? "red" : default_node_color;
 			});
 		}
 
 
 		//on selecting pathway name, color the nodes
-
 		document.getElementById("pathwayID4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("pathwayID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-				var pat = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("pathwayID4Color").value] ?? undefined;
-				// return pat && pat == 1 ? "red" : default_node_color;
+        		let geneID = d.ID;
+    			var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
 
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (pat && pat == 1) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return "red";
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
+    			if (nodeNames.includes(geneID)) {
+        			return "blue";
+    			}
+     			return pat && pat == 1 ? "red" : default_node_color;
 			});
 		}
 
-		// on selecting Druggability for color change
+	// on selecting Druggability for color change
 
-		document.getElementById("druggabilityID4Color").onchange = function () {
+	document.getElementById("druggabilityID4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
+				let geneIndex = geneIndexMap[geneID];
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
-				// console.log("val ==", val)
+                // console.log("val ==", val)
 				//   return val ? expressionColor(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return expressionColor(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
+
+				if(nodeNames.includes(geneID)){
+					return "blue";
+				}
+				else{
+					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
 		}
 
-		// on selecting GDA for color change
 
-		document.getElementById("GDAID4Color").onchange = function () {
+	// on selecting GDA for color change
+
+	document.getElementById("GDAID4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("GDAID4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return expressionColor(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
+				if(nodeNames.includes(geneID)){
+					return "blue";
+				}
+				else{
+					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
 		}
-
+		
 		// on selecting GWAS OR for color change
 
 		document.getElementById("GWAS_OR4Color").onchange = function () {
@@ -4076,43 +4003,27 @@
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_OR4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return expressionColor(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
+				if(nodeNames.includes(geneID)){
+					return "blue";
+				}
+				else{
+					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
 		}
 
 		// on selecting GWAS Beta for color change
-
+	
 		document.getElementById("GWAS_Beta4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("GWAS_Beta4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS_Beta4Color").value];
 				// return val ? expressionColor(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return expressionColor(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
+				if(nodeNames.includes(geneID)){
+					return "blue";
+				}
+				else{
+					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
 		}
@@ -4122,27 +4033,17 @@
 		document.getElementById("TE4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("TE4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
 				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-				// return val ? d3.scale.linear()
-				// 	.domain([0, 1])
-				// 	.range([default_node_color, "red"])(Number(val)) : default_node_color;
-				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (val) {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					}
-					return d3.scale.linear()
-						.domain([0, 1])
-						.range([default_node_color, "red"])(Number(val));
-				} else {
-					if (isNodeColor1Checked == true) {
-						highlightNodes();
-					} else {
-						removeHighlightNodes();
-					}
-					return default_node_color;
-				}
-			});
+				if (nodeNames.includes(geneID)) {
+                console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                return "blue";
+                 }
+				return val ? d3.scale.linear()
+					.domain([0, 1])
+					.range([default_node_color, "red"])(Number(val)) : default_node_color;
+				
+			    });
 		}
 
 
@@ -4973,6 +4874,35 @@
 
 		d3.select(".legendExpression").attr("opacity", 0);
 
+		
+//legendExpressionTE
+
+var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
+			.attr("transform", "translate(50,0)")
+			.style("font-size", "18px");
+
+		var color = d3.scale.category10();
+		var linear = d3.scale.linear()
+			.domain([0,  10])
+			.range(["red", default_node_color,]);
+		//.range(["red", "rgb(105,105,105)", "green"]);
+
+
+		var legendExpressionTE = d3.legend.color()
+			.shapeWidth(10)
+			.shapeHeight(10)
+			.cells([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+			.shapePadding(6)
+			.labelOffset(10)
+			.scale(linear)
+			//.orient("horizontal")
+			.labels(["", "Up", "", "", "", "", "", "", "", "Down"])
+			.labelAlign("start");
+
+		svg2.select(".legendExpressionTE")
+			.call(legendExpressionTE);
+
+		d3.select(".legendExpressionTE").attr("opacity", 0);
 
 		//Circle legend
 
@@ -5037,109 +4967,143 @@
 	</script>
 
 	<!--Show Legends Based on Node Color selection-->
-	<script>
-		// Function to reset the legend panel
-		function resetLegends() {
-			d3.select(".legendExpression").attr("opacity", 0); // Hide legendExpression by default
-			d3.select(".legendPathway").attr("opacity", 0);    // Hide legendPathway by default
-			// d3.select(".legendDirection").attr("opacity",0);
-		}
-		// Function to show legendExpression
-		function showLegendExpression() {
-			resetLegends();
-			d3.select(".legendExpression").attr("opacity", 1); // Show the expression legend
-		}
-		// Function to show legendDirection
-		function showLegendDirection() {
-			d3.select(".legendDirection").attr("opacity", 1)
-		}
-		// Function to show legendPathway
-		function showLegendPathway() {
-			resetLegends();
-			d3.select(".legendPathway").attr("opacity", 1); // Show the pathway legend
-		}
-		// Event listener for radio button selection
-		document.querySelectorAll('input[name="nodeColor"]').forEach((radio) => {
-			radio.addEventListener('change', function () {
-				const selectedValue = this.value;
-				switch (selectedValue) {
-					case "0":
-					case "8":
-						showLegendDirection();
-						break;
-					case "2": // logFC
-					case "9": // GDA
-					case "5": // Genetics
-					case "4": // Druggability
-					case "12": // TE
-						showLegendExpression(); // Show legendExpression for these options
-						break;
-					case "6": // Databases
-					case "3": // Pathways
-						showLegendPathway();
-						break;
-					default:
-						resetLegends(); // Reset if none or custom options selected
-				}
-			});
-		});
-		// Initialize the legends as hidden
-		resetLegends();
-	</script>
+<script>
+    // Function to reset the legend panel
+    function resetLegends() {
+      d3.select(".legendExpression").attr("opacity", 0); // Hide legendExpression by default
+      d3.select(".legendPathway").attr("opacity", 0);    // Hide legendPathway by default
+	 d3.select(".legendExpressionTE").attr("opacity",0)
+      //d3.select(".legendDirection").attr("opacity",0);
+    }
+    // Function to show legendExpression
+    function showLegendExpression() {
+      resetLegends();
+      d3.select(".legendExpression").attr("opacity", 1); // Show the expression legend
+    }
+    // Function to show legendDirection
+    function showLegendDirection(){
+		resetLegends()
+     d3.select(".legendDirection").attr("opacity", 1)
+    }
+    // Function to show legendPathway
+    function showLegendPathway() {
+      resetLegends();
+      d3.select(".legendPathway").attr("opacity", 1); // Show the pathway legend
+    }
 
-	<!-- JavaScript -->
-	<script>
-		// Get the checkbox and the legend panel elements
-		// const checkbox = document.getElementById('legendColor');
-		const checkbox = document.getElementById('linkColor1');
-		const legendPanel = document.getElementById('legendEdge');
-		// Add an event listener to the checkbox
-		checkbox.addEventListener('change', function () {
-			// Toggle the visibility of the legend panel based on checkbox state
-			if (this.checked) {
-				legendPanel.style.display = 'block';
-				createLegendEdge();
+	function showLegendExpressionTE(){
+        resetLegends()
+		d3.select(".legendExpressionTE").attr("opacity",1)
+	}
 
-			} else {
-				legendPanel.style.display = 'none';
-			}
-		});
+    // Event listener for radio button selection
+    document.querySelectorAll('input[name="nodeColor"]').forEach((radio) => {
+      radio.addEventListener('change', function () {
+        const selectedValue = this.value;
+        switch (selectedValue) {
+          case "0":
+		  case "8":
+            showLegendDirection();
+            break;
+          case "2": // logFC
+          case "9": // GDA
+          case "5": // Genetics
+          case "4": // Druggability
+		  showLegendExpression(); 
+		  break;
+		
+          case "12": // TE
+		  showLegendExpressionTE()
+            break;
+          case "6": // Databases
+          case "3": // Pathways
+            showLegendPathway();
+            break;
+          default:
+            resetLegends(); // Reset if none or custom options selected
+        }
+      });
+    });
+    // Initialize the legends as hidden
+    resetLegends();
+  </script>
+  
 
-		// Function to create legend for edges
-		function createLegendEdge() {
-			// Clear any existing legend to avoid duplicates
-			d3.select("div#legendEdge svg").remove();
+ 
 
-			// Create an SVG element for the edge legend
-			var svgEdge = d3.select("div#legendEdge").append("svg")
-				.attr("width", 150)
-				.attr("height", 100)
-				.attr("class", "legendSVG");
+  <!-- JavaScript -->
+<script>
+    // Get the checkbox and the legend panel elements
+    // const checkbox = document.getElementById('legendColor');
+    const checkbox = document.getElementById('linkColor1');
+    const legendPanel = document.getElementById('legendEdge');
+    // Add an event listener to the checkbox
+    checkbox.addEventListener('change', function() {
+        // Toggle the visibility of the legend panel based on checkbox state
+        if (this.checked) {
+            legendPanel.style.display = 'block';
+			createLegendEdge();
 
-			// Create a color scale for edges
-			var linearEdge = d3.scale.linear()
-				.domain([0, 5, 7])
-				.range(["red", "orange", "yellow"]);
+        } else {
+            legendPanel.style.display = 'none';
+        }
+    });
 
-			// Define the edge legend
-			var legendEdgeExpression = d3.legend.color()
-				.shapeWidth(20)
-				.shapeHeight(10)
-				.cells([0, 1, 2, 3, 4, 5, 6, 7])
-				.shapePadding(0)
-				.orient("vertical")
-				.labelOffset(5)
-				.scale(linearEdge)
-				.labels(["1", "", "", "", "", "", "", "0",]) // Labels for the heatmap
-				.labelAlign("end");
-			// Append the legend to the SVG
-			svgEdge.append("g")
-				.attr("class", "legendEdgeExpression")
-				.attr("transform", "translate(50,0)")
-				.style("font-size", "18px")
-				.call(legendEdgeExpression);
+	 // Function to create legend for edges
+    function createLegendEdge() {
+        // Clear any existing legend to avoid duplicates
+        d3.select("div#legendEdge svg").remove();
+
+        // Create an SVG element for the edge legend
+        var svgEdge = d3.select("div#legendEdge").append("svg")
+            .attr("width", 150)
+            .attr("height", 100)
+            .attr("class", "legendSVG");
+
+        // Create a color scale for edges
+        var linearEdge = d3.scale.linear()
+            .domain([0, 5, 7])
+            .range(["red", "orange", "yellow"]);
+
+        // Define the edge legend
+        var legendEdgeExpression = d3.legend.color()
+		.shapeWidth(20) 
+        .shapeHeight(10) 
+        .cells([0, 1, 2, 3, 4, 5,6,7])
+        .shapePadding(0) 
+        .orient("vertical")
+        .labelOffset(5)
+        .scale(linearEdge)
+        .labels(["1", "", "", "", "", "", "", "0",]) // Labels for the heatmap
+        .labelAlign("end");
+        // Append the legend to the SVG
+        svgEdge.append("g")
+            .attr("class", "legendEdgeExpression")
+            .attr("transform", "translate(50,0)")
+            .style("font-size", "18px")
+            .call(legendEdgeExpression);
 
 
+			
+    }
+</script>
 
-		}
-	</script>
+<!--LegendExpression For Genetics-->
+<script>
+    $(document).ready(function() {
+    // Event listener for changes in the GWAS4Color dropdown
+    $('#GWAS4Color').on('change', function() {
+        var selectedValue = $(this).val();
+        d3.select(".legendExpression").attr("opacity", 0);
+        d3.select(".legendExpressionTE").attr("opacity", 0);
+        if (selectedValue === "none"){
+            d3.select(".legendExpression").attr("opacity", 1);
+        }
+        else if (selectedValue.startsWith("GWAS_OR_")) {
+            d3.select(".legendExpressionTE").attr("opacity", 1);
+        } else if (selectedValue.startsWith("GWAS_Beta_")) {
+            d3.select(".legendExpression").attr("opacity", 1);
+        }
+    });
+});
+  </script>
