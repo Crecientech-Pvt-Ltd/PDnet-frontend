@@ -1901,7 +1901,8 @@
 					if (geneListQueryParam.length === 0) return;
 					geneListQueryParam = geneListQueryParam.slice(0, -1);
 					$.ajax({
-						url: `https://pdnet-rnd-papis.crecientech.com/gsea?gene_list=${encodeURIComponent(geneListQueryParam)}`,
+						url: `http://papis.tdp-dev.alexion.cloud/gsea?gene_list=${encodeURIComponent(geneListQueryParam)}`,
+						// url: `https://pdnet-rnd-papis.crecientech.com/gsea?gene_list=${encodeURIComponent(geneListQueryParam)}`,
 						type: 'GET',
 						contentType: 'application/json',
 						crossDomain: true,
