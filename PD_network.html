@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script type="text/javascript" src="script/jquery-3.3.1.js"></script>
 <script defer type="text/javascript" src="script/jquery.csv.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
@@ -37,22 +38,22 @@
 <!-- Chosen JS -->
 <script src="/node_modules/chosen-js/chosen.jquery.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
 <!-- <script src="./.url.js"></script> -->
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 <script>
 	if (localStorage.getItem('isLoggedIn') !== 'true') {
-			window.location.href = 'index.html'; 
+		window.location.href = 'index.html';
 	}
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 
@@ -128,16 +129,16 @@
 			$('#TE4Color').trigger("chosen:updated");
 		}
 
-	// 	// Adding TE options to the node cut-off in Radial Analysis section
-	// 	var allValues = [];
-	// 	$('#TE4Color option').each(function() {
-    // 		allValues.push($(this).val());
-	// 	});
-	// 	// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
-	// 	var TE_cutOff = allValues.forEach(function(value) {
-    // 		$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
-	// 	});
-    //    $('#nodeDegreeID4Size').trigger("chosen:updated");
+		// 	// Adding TE options to the node cut-off in Radial Analysis section
+		// 	var allValues = [];
+		// 	$('#TE4Color option').each(function() {
+		// 		allValues.push($(this).val());
+		// 	});
+		// 	// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
+		// 	var TE_cutOff = allValues.forEach(function(value) {
+		// 		$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
+		// 	});
+		//    $('#nodeDegreeID4Size').trigger("chosen:updated");
 
 
 		// For GDA Color
@@ -418,6 +419,35 @@
 		</div>
 	</div>
 
+	<div style="display:none" id="node-modal-background-3">
+		<div id="nodeModal-3">
+			<div class="modal-header">
+				<span class="header-text">
+					GSEA Analysis Results
+				</span>
+				<button class="modal-close-btn" onclick="closeModalGSEA()">x</button>
+			</div>
+			<div class="modal-body">
+				<table class="fixed_header">
+					<thead>
+						<tr>
+							<th style="width: 50px;">No.</th>
+							<th>Gene Set</th>
+							<th>Overlap</th>
+							<th>P-value</th>
+							<th>Adjusted P-value</th>
+							<th>Odds Ratio</th>
+							<th>Combined Score</th>
+							<th>Genes</th>
+						</tr>
+					</thead>
+					<tbody id="table_data-ip-3">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
 	<!-- Following DIV will display FORCE DIRECTED GRAPH-->
 	<div class="network" style="float:left; width:100%; position:relative; outline: 0;">
 		<div id="openDraw"
@@ -439,59 +469,59 @@
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">
 					Disease Map:<span>+</span>
 				</div> -->
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne" aria-expanded="false" aria-controls="collapseExampleOne">Disease Map:</button>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleOne"
+					aria-expanded="false" aria-controls="collapseExampleOne">Disease Map:</button>
 			</div>
 			<!-- <div class="panel" style="max-height:600px;"> -->
 			<div class="collapse show" id="collapseExampleOne">
-			<div class="b card card-body">
-			<p class="size">
-				<div class="padding-16" style="padding:10px 0;">
-					<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
+				<div class="b card card-body">
+					<p class="size">
+					<div class="padding-16" style="padding:10px 0;">
+						<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
 					left: 162px;
 					bottom: 22px;" class="chosen-select" onchange="updateTooltip()">
-						<option value="ALS">ALS</option>
-						<option value="FTD">FTD</option>
-						<option value="OI">OI</option>
-						<option value="PSP">PSP</option>
-					</select>
-					<div class="tooltiptext" id="tooltipContainer">
-						<span data-toggle="tooltip" data-placement="bottom"
-							style="position:relative; left: 160px; bottom: 20px;">
-							<img src="../images/icons/info6.png" class="info-image" id="tooltipImage">
-							<div class="tooltip-content" id="tooltipContent">Initial Tooltip Text</div>
-						</span>
+							<option value="ALS">ALS</option>
+							<option value="FTD">FTD</option>
+							<option value="OI">OI</option>
+							<option value="PSP">PSP</option>
+						</select>
+						<div class="tooltiptext" id="tooltipContainer">
+							<span data-toggle="tooltip" data-placement="bottom" style="position:relative; left: 160px; bottom: 20px;">
+								<img src="../images/icons/info6.png" class="info-image" id="tooltipImage">
+								<div class="tooltip-content" id="tooltipContent">Initial Tooltip Text</div>
+							</span>
+						</div>
 					</div>
-				</div>
-				<script>
-					function updateTooltip() {
-						const selectElement = document.getElementById('diseaseMap');
-						const selectedText = selectElement.options[selectElement.selectedIndex].text;
-						const tooltipContentElement = document.getElementById('tooltipContent');
-						const tooltipImageElement = document.getElementById('tooltipImage');
+					<script>
+						function updateTooltip() {
+							const selectElement = document.getElementById('diseaseMap');
+							const selectedText = selectElement.options[selectElement.selectedIndex].text;
+							const tooltipContentElement = document.getElementById('tooltipContent');
+							const tooltipImageElement = document.getElementById('tooltipImage');
 
-						tooltipContentElement.textContent = getTooltipText(selectedText);
-					}
-
-					function getTooltipText(selectedValue) {
-						switch (selectedValue) {
-							case 'ALS':
-								return 'Amyotrophic Lateral Sclerosis.';
-							case 'FTD':
-								return 'Frontotemporal Dementia.';
-							case 'OI':
-								return 'Osteogenesis Imperfecta.';
-							case 'PSP':
-								return 'Progressive Supranuclear Palsy.';
-							default:
-								return 'Select a disease to see more information.';
+							tooltipContentElement.textContent = getTooltipText(selectedText);
 						}
-					}
 
-					window.onload = updateTooltip;
-				</script>
-			</p>
-		</div>
-	       </div>
+						function getTooltipText(selectedValue) {
+							switch (selectedValue) {
+								case 'ALS':
+									return 'Amyotrophic Lateral Sclerosis.';
+								case 'FTD':
+									return 'Frontotemporal Dementia.';
+								case 'OI':
+									return 'Osteogenesis Imperfecta.';
+								case 'PSP':
+									return 'Progressive Supranuclear Palsy.';
+								default:
+									return 'Select a disease to see more information.';
+							}
+						}
+
+						window.onload = updateTooltip;
+					</script>
+					</p>
+				</div>
+			</div>
 
 			<!-- <button class="accordion active">Node Color</button> -->
 
@@ -500,9 +530,11 @@
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 				  Node Color<span>+</span>
 				</div> -->
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Node Color</button>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+					aria-expanded="false" aria-controls="collapseExample">Node
+					Color</button>
 			</div>
-			  <div class="collapse show" id="collapseExample">
+			<div class="collapse show" id="collapseExample">
 				<div class="b card card-body">
 					<p class="size">
 						<input type="radio" name="nodeColor" id="none" value="0" checked> None <br>
@@ -524,7 +556,7 @@
 							<img src="../images/icons/info6.png" class="info-image">
 						</span>
 						<br>
-				
+
 						<input type="radio" name="nodeColor" id="Pathways" value="3">
 						Pathways
 						<span data-toggle="tooltip" data-placement="bottom" title="Pathway membership from MSigDB.">
@@ -540,8 +572,7 @@
 						<br>
 						<input type="radio" name="nodeColor" id="tissue_enh" value="12">
 						TE
-						<span data-toggle="tooltip" data-placement="bottom"
-							title="Tissue-specific expression from GTEX and HPA.">
+						<span data-toggle="tooltip" data-placement="bottom" title="Tissue-specific expression from GTEX and HPA.">
 							<img src="../images/icons/info6.png" class="info-image">
 						</span>
 						<br>
@@ -557,18 +588,18 @@
 							<img src="../images/icons/info6.png" class="info-image">
 						</span>
 						<br>
-	
+
 					<div>
-	
+
 						<div id="logFCInput" class="size" style="padding-bottom:5px;display:none;">
 							Select logFC:
 							<!-- <div class="panel1" style="max-height:300px;"></div> -->
 							<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
 								<option value="none" selected="selected">None</option>
 							</select>
-	
+
 						</div>
-	
+
 						<div id="GDAInput" class="size" style="padding-bottom:5px;display:none;">
 							Select GDA:
 							<select id="GDAID4Color" name="GDAID4Color" style="max-width:90%;" class="chosen-select">
@@ -584,12 +615,11 @@
 						</div>
 						<div id="pathwayInput" class="size" style="padding-bottom:5px;display:none;">
 							Select Pathway:
-							<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;"
-								class="chosen-select">
+							<select id="pathwayID4Color" name="pathwayID4Color" style="max-width:90%;" class="chosen-select">
 								<option value="none" selected="selected">None</option>
 							</select>
 						</div>
-	
+
 						<div id="druggabilityInput" class="size" style="padding-bottom:5px;display:none;">
 							Select Druggability:
 							<select id="druggabilityID4Color" name="druggabilityID4Color" style="max-width:90%;"
@@ -610,7 +640,7 @@
 								<option value="none" selected="selected">None</option>
 							</select>
 						</div>
-	
+
 						<!-- Direction Dropdown to highlight nodes-->
 						<div id="directionInput" class="size" style="padding-bottom:5px;display:none;">
 							Select Direction:
@@ -647,109 +677,111 @@
 								<option value="none" selected="selected">None</option>
 							</select>
 						</div>
-	
+
 					</div>
 					</p>
 				</div>
-			  </div>
+			</div>
 
 			<!-- Node size change button -->
 			<!-- <button class="accordion active">Node Size</button> -->
 			<div class="d-inline-flex justify-content-between gap-1 w-100">
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">Node Size</button>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo"
+					aria-expanded="false" aria-controls="collapseExampleTwo">Node
+					Size</button>
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleTwo" aria-expanded="false" aria-controls="collapseExampleTwo">
 					Node Size<span>+</span>
 				</div> -->
-			</div> 
+			</div>
 			<div class="collapse show" id="collapseExampleTwo">
-			  <div class="b card card-body">
-			    <p class="size">
-			<!-- <div class="panel" style="max-height: 300px;margin-left:-20px;" > -->
-			<!-- <div class="panel" style="max-height: 300px;">
+				<div class="b card card-body">
+					<p class="size">
+						<!-- <div class="panel" style="max-height: 300px;margin-left:-20px;" > -->
+						<!-- <div class="panel" style="max-height: 300px;">
 				<p> -->
-					<!-- <button class= "sub_btn">Disease Dependent</button> -->
-					<!-- <p class="margin_left"> -->
-					<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
-					<input type="radio" name="nodeSize" id="GlogFC" value="1">
-					LogFC
-					<span  class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
-						title="Differential Expression in Log2 fold change.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeSize" id="GDA4Size" value="5">
-					GDA
-					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom" title="Gene Disease Association score.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeSize" id="GWAS4Size" value="3">
-					Genetics
-					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
-						title="Odd ratio or Beta-values from population studies.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<!-- </p> -->
-					<!-- <button class= "sub_btn">Disease Independent</button> -->
-					<!-- <p class="margin_left"> -->
-					<input type="radio" name="nodeSize" id="druggability4Size" value="2">
-					Druggability
-					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
-						title="Druggability score from MantisML and Open Target.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<input type="radio" name="nodeSize" id="direction4Size" value="4">
-					TE
-					<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
-						title="Tissue-specific expression from GTEX and HPA.">
-						<img src="../images/icons/info6.png" class="info-image">
-					</span>
-					<br>
-					<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
-					<!-- </p> -->
-					<!-- Genomic logFC Dropdown to change the node size-->
-				<div>
-				 <div id="GlogFCInput4Size" class="size" style="padding-bottom:5px;display:none;">
-					Select logFC:
-					<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!----GDAID4Size------>
-				<div id="GDAInput4Size" class="size" style="padding-bottom:5px;display:none;">
-					Select GDA:
-					<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- Trait P-values Dropdown to change the node size-->
-				<div id="druggabilityInput4Size" class="size" style="padding-bottom:5px;display:none;">
-					Select Druggability:
-					<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;"
-						class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
-				<!-- GWAS Dropdown to change the node size-->
-				<div id="gwasInput4Size" class="size" style="padding-bottom:5px;display:none;">
-					Select Genetics:
-					<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
-				</div>
+						<!-- <button class= "sub_btn">Disease Dependent</button> -->
+						<!-- <p class="margin_left"> -->
+						<input type="radio" name="nodeSize" id="none" value="0" checked> None <br>
+						<input type="radio" name="nodeSize" id="GlogFC" value="1">
+						LogFC
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Differential Expression in Log2 fold change.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeSize" id="GDA4Size" value="5">
+						GDA
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Gene Disease Association score.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeSize" id="GWAS4Size" value="3">
+						Genetics
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Odd ratio or Beta-values from population studies.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<!-- </p> -->
+						<!-- <button class= "sub_btn">Disease Independent</button> -->
+						<!-- <p class="margin_left"> -->
+						<input type="radio" name="nodeSize" id="druggability4Size" value="2">
+						Druggability
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Druggability score from MantisML and Open Target.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<input type="radio" name="nodeSize" id="direction4Size" value="4">
+						TE
+						<span class="tool-tip-font" data-toggle="tooltip" data-placement="bottom"
+							title="Tissue-specific expression from GTEX and HPA.">
+							<img src="../images/icons/info6.png" class="info-image">
+						</span>
+						<br>
+						<!-- <input type="radio" name="nodeSize" id="STE" value="4"> Tissue Enr. <br>						 -->
+						<!-- </p> -->
+						<!-- Genomic logFC Dropdown to change the node size-->
+					<div>
+						<div id="GlogFCInput4Size" class="size" style="padding-bottom:5px;display:none;">
+							Select logFC:
+							<select id="GlogFCID4Size" name="GlogFCID4Size" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!----GDAID4Size------>
+						<div id="GDAInput4Size" class="size" style="padding-bottom:5px;display:none;">
+							Select GDA:
+							<select id="GDAID4Size" name="GDAID4Size" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- Trait P-values Dropdown to change the node size-->
+						<div id="druggabilityInput4Size" class="size" style="padding-bottom:5px;display:none;">
+							Select Druggability:
+							<select id="druggabilityID4Size" name="druggabilityID4Size" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+						<!-- GWAS Dropdown to change the node size-->
+						<div id="gwasInput4Size" class="size" style="padding-bottom:5px;display:none;">
+							Select Genetics:
+							<select id="gwasID4Size" name="gwasID4Size" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
 
-				<div id="directionInput4Size" class="size" style="padding-bottom:5px;display:none;">
-					Select TE Options:
-					<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
-						<option value="none" selected="selected">None</option>
-					</select>
+						<div id="directionInput4Size" class="size" style="padding-bottom:5px;display:none;">
+							Select TE Options:
+							<select id="directionID4Size" name="directionID4Size" style="max-width:90%;" class="chosen-select">
+								<option value="none" selected="selected">None</option>
+							</select>
+						</div>
+					</div>
+					</p>
 				</div>
 			</div>
-			</p>
-		</div>
-	      </div>
 
 
 			<!-- Node Shape -->
@@ -822,53 +854,54 @@
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">
 					Radial Analysis<span>+</span>
 				</div> -->
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree" aria-expanded="false" aria-controls="collapseExampleThree">Radial Analysis</button>
-			</div>	
-				<div class="collapse show" id="collapseExampleThree">
-					<div class="b card card-body">
-					   <p class="size">
-						   <input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
-						   <input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
-						   <br>
-						   <input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
-						   <input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
-						   <!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
-						   <!-- Threshold for weight -->
-					   <div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
-						   <input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
-						   <br>
-						   <p class="size">Edge Weight: <span id="thresh"></span></p>
-					   </div>
-					   <!-- node weight dropdown options  -->
-					   <div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
-						   Select Interaction Type:
-						   <select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
-							   style="width:100%;">
-							   <option value="combined_score" selected="selected">Combined score</option>
-							   <option value="textmining">Textmining</option>
-							   <option value="experiments">Experiments</option>
-							   <option value="database">Databases</option>
-							   <option value="coexpression">Co-expression</option>
-							   <option value="neighborhood">Neighborhood</option>
-							   <option value="fusion">Gene Fusion</option>
-							   <option value="cooccurrence">Co-occurrence</option>
-						   </select>
-					   </div>
-					   <!-- node degree dropdown options  -->
-					   <div id="nodeDegreeInput4Size" class="slidecontainer size" style="padding-bottom:5px;display:none;">
-						   Select Node cutoff:
-						   <select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
-							   <option value="none" selected="selected">None</option>
-							   <option value="node_degree">Gene Degree</option>
-						   </select>
-					   <!-- </div> -->
-					   <!-- Threshold for Degree -->
-					   <div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
-						   <input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
-						   <p class="size">node Degree: <span id="thresh1"></span></p>
-					   </div>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleThree"
+					aria-expanded="false" aria-controls="collapseExampleThree">Radial Analysis</button>
+			</div>
+			<div class="collapse show" id="collapseExampleThree">
+				<div class="b card card-body">
+					<p class="size">
+						<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
+						<input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
+						<br>
+						<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
+						<input type="radio" name="radialAnylisis" id="HubGenes" value="3"> Hub genes <br>
+						<!-- <input type="radio" name="radialAnylisis" id="stringDBchanal" value="4"> Interaction Type <br> -->
+						<!-- Threshold for weight -->
+					<div class="slidecontainer" id="EdgeWeightCutOffRange" style="padding-bottom:5px;display:none;">
+						<input type="range" min="0" max="1" step=".1" value="0" class="slider" id="myRange">
+						<br>
+						<p class="size">Edge Weight: <span id="thresh"></span></p>
+					</div>
+					<!-- node weight dropdown options  -->
+					<div id="db4weight" class="slidecontainer" style="padding-bottom:5px;display:none;" class="chosen-select">
+						Select Interaction Type:
+						<select onchange="changedWeight()" id="stringDBchanal4weight" name="stringDBchanal4weight"
+							style="width:100%;">
+							<option value="combined_score" selected="selected">Combined score</option>
+							<option value="textmining">Textmining</option>
+							<option value="experiments">Experiments</option>
+							<option value="database">Databases</option>
+							<option value="coexpression">Co-expression</option>
+							<option value="neighborhood">Neighborhood</option>
+							<option value="fusion">Gene Fusion</option>
+							<option value="cooccurrence">Co-occurrence</option>
+						</select>
+					</div>
+					<!-- node degree dropdown options  -->
+					<div id="nodeDegreeInput4Size" class="slidecontainer size" style="padding-bottom:5px;display:none;">
+						Select Node cutoff:
+						<select id="nodeDegreeID4Size" name="nodeDegreeID4Size" style="max-width:90%;" class="chosen-select">
+							<option value="none" selected="selected">None</option>
+							<option value="node_degree">Gene Degree</option>
+						</select>
+						<!-- </div> -->
+						<!-- Threshold for Degree -->
+						<div class="slidecontainer" id="NodeDegreeRange" style="padding-bottom:5px;display:none;">
+							<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myDegree">
+							<p class="size">node Degree: <span id="thresh1"></span></p>
+						</div>
 
-                     <!-- Threshold for TE -->
+						<!-- Threshold for TE -->
 						<!-- <div class="slidecontainer" id="TERange" style="padding-bottom:5px;display:none;">
 							<input type="range" min="0" max="20" step="1" value="0" class="slider" id="myTEvalues" style="margin-top: 10px;">
 							<p class="size" style="margin-top: 10px;">TE.: <span id="thresh2"></span></p>
@@ -876,16 +909,16 @@
 
 					</div>
 
-					   <!-- Gene connections -->
-					   <div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
-						   <input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
-						   <br>
-						   <p class="size">Hub Node Size: <span id="thresh2"></span></p>
-					   </div>
-					   <div id="hub_genes_button_div"></div>
-				   </p>
-			     </div>
+					<!-- Gene connections -->
+					<div class="slidecontainer" id="HubGenesRange" style="padding-bottom:5px;display:none;">
+						<input type="range" min="0" max="50" step="1" value="0" class="slider" id="myConnection">
+						<br>
+						<p class="size">Hub Node Size: <span id="thresh2"></span></p>
+					</div>
+					<div id="hub_genes_button_div"></div>
+					</p>
 				</div>
+			</div>
 
 
 
@@ -895,27 +928,28 @@
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">
 					Custom search<span>+</span>
 				</div> -->
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour" aria-expanded="false" aria-controls="collapseExampleFour">Custom search</button>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFour"
+					aria-expanded="false" aria-controls="collapseExampleFour">Custom search</button>
 			</div>
 			<div class="collapse show" id="collapseExampleFour">
 				<div class="b card card-body">
-				   <p class="size">
-			   <!-- <div class="panel"> -->
-				   <div id="geneinput">
-					   <form name="geneinput">
-						   <br>
-						   <p class="size">Find Node<span id="thresh1"></span></p>
-						   <textarea class="size" rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
-							   placeholder="Enter Genes list (comma seperated)"></textarea>
-						   <!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
-						   <input class="size" type="submit" id="submit" value="Submit" />
-						   <button class="size" type="reset" value="Reset" onclick="resetText()">Reset </button>
-						   <a id="currentgenesymbol"></a>
-					   </form>
-				   </div>
-			     </p>
-		       </div>
-			 </div>
+					<p class="size">
+						<!-- <div class="panel"> -->
+					<div id="geneinput">
+						<form name="geneinput">
+							<br>
+							<p class="size">Find Node<span id="thresh1"></span></p>
+							<textarea class="size" rows="2" style="width:90%" id="gene_list" name="gene_list" form="form3"
+								placeholder="Enter Genes list (comma seperated)"></textarea>
+							<!-- <input id="genesymbol" type="text" value="" name="genesymbol" placeholder="Gene symbol"/> -->
+							<input class="size" type="submit" id="submit" value="Submit" />
+							<button class="size" type="reset" value="Reset" onclick="resetText()">Reset </button>
+							<a id="currentgenesymbol"></a>
+						</form>
+					</div>
+					</p>
+				</div>
+			</div>
 			<!-- <button class="accordion active">Add Paper</button> -->
 			<!-- <button class="accordion active">Custom Upload</button> -->
 
@@ -923,25 +957,27 @@
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">
 					Custom Upload<span>+</span>
 				</div> -->
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive" aria-expanded="false" aria-controls="collapseExampleFive">Custom Upload</button>
+				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleFive"
+					aria-expanded="false" aria-controls="collapseExampleFive">Custom Upload</button>
 			</div>
 			<div class="collapse show" id="collapseExampleFive">
 				<div class="b card card-body">
-				   <p class="size">
-				   <div class="size"style=" margin: 10px">
-					   <b>Add a file:</b>
-					   <div id="">
-						   <input type="file" id="universal_ext" accept="text/csv,.csv">
-						   <button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
-						   <button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
-							   Universal</button>
-						   <div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
-						   <div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
-					   </div>
-				   </div>
-				  </p>
+					<p class="size">
+					<div class="size" style=" margin: 10px">
+						<b>Add a file:</b>
+						<div id="">
+							<input type="file" id="universal_ext" accept="text/csv,.csv">
+							<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+							<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
+								Universal</button>
+							<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...
+							</div>
+							<div id="uploaded_custom_universal" style="display: none ;margin: 10px 0">Done</div>
+						</div>
+					</div>
+					</p>
 				</div>
-			  </div>
+			</div>
 			<button id="button_snap" style="outline: 0;" type="button" class="btn btn-default">Take a
 				Screenshot!
 			</button>
@@ -1103,105 +1139,106 @@
 		<!-- <button class="accordion active">Network layout</button>
 		<div class="panel" style="max-height: 202px;"> -->
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
-			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightOne" aria-expanded="false" aria-controls="collapseRightOne">Network layout</button>
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightOne"
+				aria-expanded="false" aria-controls="collapseRightOne">Network layout</button>
 		</div>
 		<div class="collapse show" id="collapseRightOne">
 			<div class="b card card-body">
-			  <p class="size">
-				<input type="radio" name="force_setting" id="none" value="0" checked> None <br>
-				<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
-				<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
-				<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
-			<p class="size">
-				<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
-			</p>
-			<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
+				<p class="size">
+					<input type="radio" name="force_setting" id="none" value="0" checked> None <br>
+					<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
+					<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
+					<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
+				<p class="size">
+					<button onclick="stopAnimation()" style="color: black">Stop Animation</button>
+				</p>
+				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
 				<input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
-			<!-- Threshold for weight -->
-			<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
-				<br>
-				<p class="size">link distance: <span id="linkdistanceinput"></span></p>
-			</div>
+				<!-- Threshold for weight -->
+				<div class="forcecontainer" id="linkdistanceRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="1" max="100" step="1" value="0" class="slider" id="linkdistance">
+					<br>
+					<p class="size">link distance: <span id="linkdistanceinput"></span></p>
+				</div>
 
-			<!-- Threshold for Degree -->
-			<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
-				<br>
-				<p class="size">node charge: <span id="linkchargeinput"></span></p>
-			</div>
+				<!-- Threshold for Degree -->
+				<div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
+					<br>
+					<p class="size">node charge: <span id="linkchargeinput"></span></p>
+				</div>
 
-			<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
-				<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
-				<br>
-				<p class="size">distance: <span id="linkStrengthinput"></span></p>
-			</div>
-			<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
+				<div class="forcecontainer" id="linkStrengthRange" style="padding-bottom:5px;display:none;">
+					<input type="range" min="1" max="1000" step="10" value="1" class="slider" id="linkStrength">
+					<br>
+					<p class="size">distance: <span id="linkStrengthinput"></span></p>
+				</div>
+				<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="resetLayout()">Reset
 					</button> -->
-			<!-- Gene connections -->
+				<!-- Gene connections -->
 
-			</p>
-		</div>
+				</p>
+			</div>
 		</div>
 		<!-- <button class="accordion active">Network parameters</button>
 		<div class="panel" style="max-height:400px;"> -->
-		
-			<!-- <p> -->
+
+		<!-- <p> -->
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
-		  <button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightTwo" aria-expanded="false" aria-controls="collapseRightTwo">Network parameters</button>
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightTwo"
+				aria-expanded="false" aria-controls="collapseRightTwo">Network parameters</button>
 		</div>
 		<div class="collapse show" id="collapseRightTwo">
-		  <div class="b card card-body">
-			<p class="size">
-				<input type="radio" name="network_parameters" id="none" value="0" checked> None <br>
-				<input type="radio" name="network_parameters" id="nodecolor" value="1"> Node Color Change<br>
-				<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
-				<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
-				<input type="radio" name="network_parameters" id="linkcolor" value="4"> Text Size<br>
-				<!-- <input type="radio" name="network_parameters" id="linkcolor" value="5"> Network Zoom<br> -->
-				<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
+			<div class="b card card-body">
+				<p class="size">
+					<input type="radio" name="network_parameters" id="none" value="0" checked> None <br>
+					<input type="radio" name="network_parameters" id="nodecolor" value="1"> Node Color Change<br>
+					<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
+					<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
+					<input type="radio" name="network_parameters" id="linkcolor" value="4"> Text Size<br>
+					<!-- <input type="radio" name="network_parameters" id="linkcolor" value="5"> Network Zoom<br> -->
+					<!-- <input type="radio" name="force_setting" id="gravity" value="3"> Link Distance<br>
 			<input type="radio" name="force_setting" id="theta" value="1"> Link Distance<br> -->
 
 
-				<!-- Threshold for weight -->
-			<div class="networkcontainer" id="color_range" style="padding-bottom:5px;display:none;">
-				<div class="colorParam" id="color_ouput" style="background: rgb(23,190,207)"></div>
-				<p class="size">color R: <span id="rRange">23</span></p>
-				<input type="range" min="0" max="255" step="1" value="23" class="slider" id="redRange"
-					onchange="colorFinc()">
-				<br>
-				<p class="size">color G: <span id="gRange">190</span></p>
-				<input type="range" min="0" max="255" step="1" value="190" class="slider" id="greenRange"
-					onchange="colorFinc()">
-				<br>
-				<p class="size">color B: <span id="bRange">207</span></p>
-				<input type="range" min="0" max="255" step="1" value="207" class="slider" id="blueRange"
-					onchange="colorFinc()">
-			</div>
-			<div class="networkcontainer" id="opacity_range" style="padding-bottom:5px;display:none;">
-				<p class="size">opacity: <span id="oRange">1</span></p>
-				<input type="range" min="0" max="1" step=".1" value="1" class="slider" id="opacityRange"
-					onchange="opacityFunc()">
-			</div>
-			<div class="networkcontainer" id="node_size" style="padding-bottom:5px;display:none;">
-				<p class="size">node size: <span id="nRange">8</span></p>
-				<input type="range" min="8" max="15" step="1" value="8" class="slider" id="nodeRange"
-					onchange="nodeSizeFunc()">
-			</div>
-			<div class="networkcontainer" id="text_size" style="padding-bottom:5px;display:none;">
+					<!-- Threshold for weight -->
+				<div class="networkcontainer" id="color_range" style="padding-bottom:5px;display:none;">
+					<div class="colorParam" id="color_ouput" style="background: rgb(23,190,207)"></div>
+					<p class="size">color R: <span id="rRange">23</span></p>
+					<input type="range" min="0" max="255" step="1" value="23" class="slider" id="redRange" onchange="colorFinc()">
+					<br>
+					<p class="size">color G: <span id="gRange">190</span></p>
+					<input type="range" min="0" max="255" step="1" value="190" class="slider" id="greenRange"
+						onchange="colorFinc()">
+					<br>
+					<p class="size">color B: <span id="bRange">207</span></p>
+					<input type="range" min="0" max="255" step="1" value="207" class="slider" id="blueRange"
+						onchange="colorFinc()">
+				</div>
+				<div class="networkcontainer" id="opacity_range" style="padding-bottom:5px;display:none;">
+					<p class="size">opacity: <span id="oRange">1</span></p>
+					<input type="range" min="0" max="1" step=".1" value="1" class="slider" id="opacityRange"
+						onchange="opacityFunc()">
+				</div>
+				<div class="networkcontainer" id="node_size" style="padding-bottom:5px;display:none;">
+					<p class="size">node size: <span id="nRange">8</span></p>
+					<input type="range" min="8" max="15" step="1" value="8" class="slider" id="nodeRange"
+						onchange="nodeSizeFunc()">
+				</div>
+				<div class="networkcontainer" id="text_size" style="padding-bottom:5px;display:none;">
 
-				<p class="size">text size: <span id="tRange">8</span></p>
-				<input type="range" min="2" max="15" step="1" value="8" class="slider" id="textRange"
-					onchange="textSizeFunc()">
-				<!--CHANGE IS NEEDED-->
-			</div>
-			<!-- <div class="networkcontainer" id="zoom_network" style="padding-bottom:5px;display:none;">
+					<p class="size">text size: <span id="tRange">8</span></p>
+					<input type="range" min="2" max="15" step="1" value="8" class="slider" id="textRange"
+						onchange="textSizeFunc()">
+					<!--CHANGE IS NEEDED-->
+				</div>
+				<!-- <div class="networkcontainer" id="zoom_network" style="padding-bottom:5px;display:none;">
 				<button class="zoom_btn" id="zoom_in">+</button>
 				<button class="zoom_btn" id="zoom_out">-</button>
 			</div> -->
 
-			<!-- Threshold for Degree -->
-			<!-- <div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
+				<!-- Threshold for Degree -->
+				<!-- <div class="forcecontainer" id="linkchargeRange" style="padding-bottom:5px;display:none;">
 				<input type="range" min="-300" max="50" step="1" value="-200" class="slider" id="linkcharge">
 				<br>
 				<p>node charge: <span id="linkchargeinput"></span></p>
@@ -1212,24 +1249,37 @@
 				<br>
 				<p>distance: <span id="linkStrengthinput"></span></p>
 			</div> -->
-			<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="reset_param()">Reset
+				<!-- <button type="reset" value="Reset" class="networklayoutreset" onclick="reset_param()">Reset
 				</button> -->
-			<!-- Gene connections -->
+				<!-- Gene connections -->
 
-			</p>
+				</p>
+			</div>
 		</div>
-	</div>
-<!-- <button class="accordion active">Annotations</button>
+		<!-- <button class="accordion active">Annotations</button>
 		<div class="panel" style="max-height:200px;"> -->
-			<div class="d-inline-flex justify-content-between gap-1 w-100">
-				<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightThree" aria-expanded="false" aria-controls="collapseRightThree">Annotations</button>
-			   </div>
-			   <div class="collapse show" id="collapseRightThree">
-				 <div class="b card card-body">
-				   <div class="size" id="gene_info"></div>
-			   </div>
-			   </div>
-			   
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightThree"
+				aria-expanded="false" aria-controls="collapseRightThree">Annotations</button>
+		</div>
+		<div class="collapse show" id="collapseRightThree">
+			<div class="b card card-body">
+				<div class="size" id="gene_info"></div>
+			</div>
+		</div>
+
+		<!-- GSEA Part -->
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightFive"
+				aria-expanded="false" aria-controls="collapseRightFive">GSEA</button>
+		</div>
+		<div class="collapse show" id="collapseRightFive">
+			<div class="b card card-body">
+				<div class="size" id="gsea_info" style="overflow-y: scroll; max-height: 150px;">
+				</div>
+			</div>
+		</div>
+
 		<div style="margin: 10px">
 			<b class="size">NETWORK INFO:</b>
 			<div id="network_details">
@@ -1334,6 +1384,9 @@
 			$("#node-modal-background-2").css("display", "none");
 		}
 
+		function closeModalGSEA() {
+			$("#node-modal-background-3").css("display", "none");
+		}
 
 		//Open left menu function
 		function openNav() {
@@ -1493,8 +1546,8 @@
 
 		//linear scale for coloring nodes
 		/*var color = d3.scale.linear()
-		  .domain([min_score, (min_score+max_score)/2, max_score])
-		  .range(["lime", "yellow", "red"]); */
+			.domain([min_score, (min_score+max_score)/2, max_score])
+			.range(["lime", "yellow", "red"]); */
 
 
 
@@ -1635,9 +1688,19 @@
 		}
 
 		function clearSelectedNode() {
+			node.selectAll("path").classed("selected", false).each(function (d) {
+				d.selected = false;
+			});
 			nodeDetails = [];
 			gene_info.innerHTML = "";
-			tableInfo.innerHTML = "";
+		}
+
+		function clearGSEA() {
+			node.selectAll("path").classed("selected", false).each(function (d) {
+				d.selected = false;
+			});
+			$("#gsea_info").empty();
+			$("#table_data-ip-3").empty();
 		}
 
 		function showModal() {
@@ -1658,10 +1721,22 @@
 			$("#node-modal-background-2").css("flex-direction", "row");
 		}
 
+		function showModalGSEA() {
+			$('#table_data-ip-3').animate({
+				scrollTop: 0
+			}, 500);
+			$("#node-modal-background-3").css("display", "block");
+			$("#node-modal-background-3").css("display", "flex");
+			$("#node-modal-background-3").css("flex-direction", "row");
+		}
+
 		var brusher = d3.svg.brush()
 			.x(xScale)
 			.y(yScale)
 			.on("brushstart", function (d) {
+				$("#gsea_info").empty();
+				$("#gene_info").empty();
+				$("table_data-ip").empty();
 				node.selectAll("path").each(function (d) {
 					//console.log(d)
 					d.previouslySelected = shiftKey && d.selected;
@@ -1682,11 +1757,12 @@
 				d3.event.target.clear();
 				d3.select(this).call(d3.event.target);
 				//########################
-				let x = [];
 				let nodeDetails = []; // NEW ADDED
+				let geneListQueryParam = '';
 				d3.selectAll('.node').each(function (d) {
 					if (d.selected) {
 						nodeDetails.push(d);
+						geneListQueryParam += d.Gene_name + ',';
 					}
 				});
 				let gInfo = document.getElementById("gene_info");
@@ -1701,6 +1777,7 @@
 							tableInfo.innerHTML = "";
 						}
 					});
+				
 				nodeDetails.forEach((i, index) => {
 					$("#gene_info").append(`<p>${i.Gene_name}</p>`)
 					$("#table_data-ip")
@@ -1720,7 +1797,42 @@
 				$("#gene_info").append(`<div style="float: left">${nodeDetails.length} nodes selected</div>`);
 				// 	}
 				// }); // NEW ADDED
-				$('#sgene_list').val(x.toString())
+				$("#gsea_info").empty();
+					$("#table_data-ip-3").empty();
+					if (geneListQueryParam.length === 0) return;
+					geneListQueryParam = geneListQueryParam.slice(0, -1);
+					$.ajax({
+						url: `https://pdnet-rnd-papis.crecientech.com/gsea?gene_list=${encodeURIComponent(geneListQueryParam)}`,
+						type: 'GET',
+						contentType: 'application/json',
+						crossDomain: true,
+						success: function (data) {
+							$("#gsea_info").empty();
+							data.forEach((val, idx) => {
+								$("#gsea_info").append(`<p>${val.Gene_set}</p>`);
+								$("#table_data-ip-3").append(`<tr>
+									<td style="width: 50px; min-width: 50px; padding: 5px;">${idx + 1}</td>
+									<td>${val.Gene_set}</td>
+									<td>${val.Overlap}</td>
+									<td>${val['P-value']}</td>
+									<td>${val['Adjusted P-value']}</td>
+									<td>${val['Odds Ratio']}</td>
+									<td>${val['Combined Score']}</td>
+									<td style="word-break: break-all;">${val['Genes']}</td>
+								</tr>`);
+							});
+							$("#gsea_info").append(
+								`<button type="button" onclick="showModalGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Analysis Details</button>`
+							);
+							$("#gsea_info").append(
+								`<button type="button" onclick="clearGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+							)
+							$("#gsea_info").append(`<div style="float: left; margin-bottom: 10px">${data.length} Pathway found</div>`);
+						},
+						error: function (err) {
+							console.error(err);
+						}
+					});
 			});
 
 		var svg_graph = svg.append('svg:g').call(zoomer);
@@ -1848,53 +1960,53 @@
 				.attr("class", "link")
 				.style("stroke-width", nominal_stroke)
 				.style("stroke", function (d) {
-			//below code added by Vandana to provide intensity to the edge color
-                //  if (isNumber(d.weight)){
-				// 	if (d.weight <= 0){
-				// 		return "black";
-				// 	} 
+					//below code added by Vandana to provide intensity to the edge color
+					//  if (isNumber(d.weight)){
+					// 	if (d.weight <= 0){
+					// 		return "black";
+					// 	} 
 
-				// 	if (d.weight >= 0.15){  //low
-				// 		if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
-				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-				// 		else if (d.weight >= 1) return "#e93e3a"; 
-				// 		else return default_link_color;
-				// 	} 
-							
-				// 	if (d.weight >= 0.4){  //medium
-				// 		if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
-				// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
-				// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
-				// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
-				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
-				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-				// 		else if (d.weight >= 1) return "#e93e3a"; 
-				// 		else return default_link_color;
-				// 	}
+					// 	if (d.weight >= 0.15){  //low
+					// 		if (d.weight > 0 && d.weight <= 0.5) return "#fff888";  
+					// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+					// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+					// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+					// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+					// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+					// 		else if (d.weight >= 1) return "#e93e3a"; 
+					// 		else return default_link_color;
+					// 	} 
 
-                // 	if (d.weight >= 0.7){  //high
-				// 		if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
-				// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
-				// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
-				// 		else if (d.weight >= 1) return "#e93e3a"; 
-				// 		else return default_link_color;
-				// 	} 
+					// 	if (d.weight >= 0.4){  //medium
+					// 		if (d.weight = 0.4 && d.weight <= 0.5) return "#fff888";  
+					// 		else if (d.weight > 0.5 && d.weight <= 0.6) return "#fff66e";  
+					// 		else if (d.weight > 0.6 && d.weight <= 0.7) return  "#fff33b"; 
+					// 		else if (d.weight > 0.7 && d.weight <= 0.8) return "#fdc70c"; 
+					// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f"; 
+					// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+					// 		else if (d.weight >= 1) return "#e93e3a"; 
+					// 		else return default_link_color;
+					// 	}
 
-				// 	if (d.weight >= 0.9){  //highest
-				// 		if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
-				// 	 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
-				// 	 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
-				// 	 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
-				// 	 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
-				// 	 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
-				// 	 	else if (d.weight >= 1) return "#e93e3a"; 
-				// 	 	else return default_link_color;
-				// 	}
-				//   }			
+					// 	if (d.weight >= 0.7){  //high
+					// 		if (d.weight = 0.7 && d.weight <= 0.8) return "#fdc70c";  
+					// 		else if (d.weight > 0.8 && d.weight <= 0.9) return "#f3903f";
+					// 		else if (d.weight > 0.9 && d.weight < 1) return "#ed683c"; 
+					// 		else if (d.weight >= 1) return "#e93e3a"; 
+					// 		else return default_link_color;
+					// 	} 
+
+					// 	if (d.weight >= 0.9){  //highest
+					// 		if (d.weight = 0.9 && d.weight <= 0.92) return "#fff888";  
+					// 	 	else if (d.weight > 0.92 && d.weight <= 0.94) return "#fff66e";  
+					// 	 	else if (d.weight > 0.94 && d.weight <= 0.95) return  "#fff33b"; 
+					// 	 	else if (d.weight > 0.95 && d.weight <= 0.97) return "#fdc70c"; 
+					// 	 	else if (d.weight > 0.97 && d.weight <= 0.99) return "#f3903f"; 
+					// 	 	else if (d.weight > 0.99 && d.weight < 1) return "#ed683c"; 
+					// 	 	else if (d.weight >= 1) return "#e93e3a"; 
+					// 	 	else return default_link_color;
+					// 	}
+					//   }			
 
 
 					// if (isNumber(d.weight) && d.weight <= 0) return "red"; // initialize with red if weight is 0
@@ -1907,9 +2019,9 @@
 					//  else if (isNumber(d.weight) &&  d.weight >= 1) return "#2a272d";
 					//  else return default_link_color;
 					//above code added by Vandana to provide intensity to the edge color
-					 if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
+					if (isNumber(d.weight) && d.weight < 0) return "red"; // initialize with red if weight is 0
 					// else if (isNumber(d.weight) && d.weight > 0.5) return "green"; // color
-					 else return default_link_color;
+					else return default_link_color;
 				})
 
 			function dragstarted(d) {
@@ -2199,66 +2311,66 @@
 						circle.style(towhite, "white");
 						text.style("font-weight", "normal");
 						link.style("stroke", function (o) {
-                        //below code added by Vandana to provide intensity to the edge color 
-						//    if (isNumber(o.weight)){
-                        //     if (o.weight <= 0){
-						// 		return "black";
-						// 	} 
+							//below code added by Vandana to provide intensity to the edge color 
+							//    if (isNumber(o.weight)){
+							//     if (o.weight <= 0){
+							// 		return "black";
+							// 	} 
 
-						// 	if (o.weight >= 0.15){  //low
-						// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
-					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	} 
-							
-						// 	if (o.weight >= 0.4){  //medium
-						// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
-					 	// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
-					 	// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	}
+							// 	if (o.weight >= 0.15){  //low
+							// 		if (o.weight > 0 && o.weight <= 0.5) return "#fff888";  
+							// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+							// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+							// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+							// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+							// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+							// 		else if (o.weight >= 1) return "#e93e3a"; 
+							// 		else return default_link_color;
+							// 	} 
 
-                        //     if (o.weight >= 0.7){  //high
-					 	// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
-					 	// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
-					 	// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	} 
+							// 	if (o.weight >= 0.4){  //medium
+							// 		if (o.weight = 0.4 && o.weight <= 0.5) return "#fff888";  
+							// 		else if (o.weight > 0.5 && o.weight <= 0.6) return "#fff66e";  
+							// 		else if (o.weight > 0.6 && o.weight <= 0.7) return  "#fff33b"; 
+							// 		else if (o.weight > 0.7 && o.weight <= 0.8) return "#fdc70c"; 
+							// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f"; 
+							// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+							// 		else if (o.weight >= 1) return "#e93e3a"; 
+							// 		else return default_link_color;
+							// 	}
 
-						// 	if (o.weight >= 0.9){  //highest
+							//     if (o.weight >= 0.7){  //high
+							// 	  if (o.weight = 0.7 && o.weight <= 0.8) return "#fdc70c";  
+							// 		else if (o.weight > 0.8 && o.weight <= 0.9) return "#f3903f";
+							// 		else if (o.weight > 0.9 && o.weight < 1) return "#ed683c"; 
+							// 		else if (o.weight >= 1) return "#e93e3a"; 
+							// 		else return default_link_color;
+							// 	} 
 
-						// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
-					 	// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
-					 	// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
-					 	// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
-					 	// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
-					 	// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
-					 	// 		else if (o.weight >= 1) return "#e93e3a"; 
-					 	// 		else return default_link_color;
-						// 	}
-						// }	
+							// 	if (o.weight >= 0.9){  //highest
+
+							// 		if (o.weight = 0.9 && o.weight <= 0.92) return "#fff888";  
+							// 		else if (o.weight > 0.92 && o.weight <= 0.94) return "#fff66e";  
+							// 		else if (o.weight > 0.94 && o.weight <= 0.95) return  "#fff33b"; 
+							// 		else if (o.weight > 0.95 && o.weight <= 0.97) return "#fdc70c"; 
+							// 		else if (o.weight > 0.97 && o.weight <= 0.99) return "#f3903f"; 
+							// 		else if (o.weight > 0.99 && o.weight < 1) return "#ed683c"; 
+							// 		else if (o.weight >= 1) return "#e93e3a"; 
+							// 		else return default_link_color;
+							// 	}
+							// }	
 
 							// if (isNumber(o.weight) && o.weight <= 0) return "red"; // initialize with red if weight is 0
-					 		// else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
-					 		// else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#d8d4dc";
-					 		// else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return "#b4b0b7";
-					 		// else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#949097";
-					 		// else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#6b686f";
-					 		// else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#4c494f";
-					 		// else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
-					 		// else return default_link_color;
+							// else if (isNumber(o.weight) && o.weight > 0 && o.weight <= 0.5) return "#e9e5ed"; 
+							// else if (isNumber(o.weight) && o.weight > 0.5 && o.weight <= 0.6) return "#d8d4dc";
+							// else if (isNumber(o.weight) && o.weight > 0.6 && o.weight <= 0.7) return "#b4b0b7";
+							// else if (isNumber(o.weight) && o.weight > 0.7 && o.weight <= 0.8) return "#949097";
+							// else if (isNumber(o.weight) && o.weight > 0.8 && o.weight <= 0.9) return "#6b686f";
+							// else if (isNumber(o.weight) && o.weight > 0.9 && o.weight < 1) return "#4c494f";
+							// else if (isNumber(o.weight) &&  o.weight >= 1) return "#2a272d";
+							// else return default_link_color;
 							//above code added by Vandana to provide intensity to the edge color
-						 return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
+							return (isNumber(o.score) && o.score >= 0) ? color(o.score) : default_link_color
 						});
 					}
 
@@ -2525,7 +2637,7 @@
 								if (totalNodes >= 5000) {
 									$('#node-modal-background-alert').css('display', 'block')
 								}
-                    			//code added by Vandana (End)
+								//code added by Vandana (End)
 								initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 								$("#loader").css('display', 'none')
 								startD3(currentUniversal);
@@ -2722,30 +2834,30 @@
 		/*EDITED
 
 		function findLargest() {
-		  var largest = null,
-		  weight = 0;
-		  node.each(function(d) {
-		   var connections = link.filter(function(l) {
-			  return l.source.index == d.index || l.target.index == d.index
+			var largest = null,
+			weight = 0;
+			node.each(function(d) {
+			 var connections = link.filter(function(l) {
+				return l.source.index == d.index || l.target.index == d.index
 			});
 			d.weight = connections.size();
 			if (d.weight > weight) {
-			  largest = {
+				largest = {
 				node: this,
 				links: connections
-			  };
-			  weight = d.weight;
+				};
+				weight = d.weight;
 
 			}
-		  });
-		  /*if (largest) {
+			});
+			/*if (largest) {
 			d3.select(largest.node).select("circle")
-			  .style("fill", "red")
-			  .style("stroke-width", 3);
+				.style("fill", "red")
+				.style("stroke-width", 3);
 			largest.links.each(function() {
-			  d3.select(this).style("stroke", "red").style("stroke-width", 3);;
+				d3.select(this).style("stroke", "red").style("stroke-width", 3);;
 			})
-		  }
+			}
 		}
 		/* END EDITED */
 
@@ -2965,10 +3077,10 @@
 		var slider1 = document.getElementById("myDegree");
 		var output1 = document.getElementById("thresh1");
 		slider1.oninput = function() {
-		  //var textval=10
-		  output1.innerHTML = this.value;
+			//var textval=10
+			output1.innerHTML = this.value;
 
-		  graph.links.splice(0, graph.links.length);
+			graph.links.splice(0, graph.links.length);
 
 			for (var i = 0; i < graphRec.links.length; i++) {
 				if (graphRec.links[i].weight > this.value) {graph.links.push(graphRec.links[i]);}
@@ -3101,10 +3213,10 @@
 					return default_node_color;
 				});
 				/* d3.selectAll("stop[offset='100%']").style("stop-color",  function(d) {
-					   if(d.direction == "UP") {  return "red";}
-					   else if(d.direction == "DOWN") return "green";
-					   else return default_node_color;
-				   }); */
+						 if(d.direction == "UP") {  return "red";}
+						 else if(d.direction == "DOWN") return "green";
+						 else return default_node_color;
+					 }); */
 				d3.select("#pathwayInput").style("display", "none");
 				d3.select(".legendExpression").attr("opacity", 0);
 				d3.select(".legendPathway").attr("opacity", 0);
@@ -4102,23 +4214,23 @@
 
 
 		document.getElementById("collapseExampleThree").onchange = function () {
-		  var nodeDegreeId = document.getElementById("NodeDegree").value;
-		  if (nodeDegreeId == "2") {		
-			var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
-			if (cutoff_type == "node_degree") {
-				$("#NodeDegreeRange").show()
-			} else {
-				$("#NodeDegreeRange").hide()
-			}
+			var nodeDegreeId = document.getElementById("NodeDegree").value;
+			if (nodeDegreeId == "2") {
+				var cutoff_type = document.getElementById("nodeDegreeID4Size").value;
+				if (cutoff_type == "node_degree") {
+					$("#NodeDegreeRange").show()
+				} else {
+					$("#NodeDegreeRange").hide()
+				}
 
-			// if (/TE/.test(cutoff_type)) {
-			// 	$("#TERange").show()
-			// } else {
-			// 	$("#TERange").hide()
-			// }
-	  }
-	}
-	
+				// if (/TE/.test(cutoff_type)) {
+				// 	$("#TERange").show()
+				// } else {
+				// 	$("#TERange").hide()
+				// }
+			}
+		}
+
 		//on selecting Genomic LogFC, change the size of nodes
 
 		document.getElementById("GlogFCID4Size").onchange = function () {
