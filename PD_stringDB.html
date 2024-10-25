@@ -3171,6 +3171,14 @@ function formatAdjusted(AdjustedPvalue){
 		ConnectionOutput.innerHTML = 0;
 		document.getElementById("myConnection").value = 0;
 
+
+		    // Set the node degree dropdown back to "None"
+			const nodeDegreeDropdown = document.getElementById('nodeDegreeID4Size');
+    nodeDegreeDropdown.value = "none";
+
+
+		
+
         // Call functions to reflect the changes
         DegreeFun();
         TEdegreeFun();
@@ -5002,7 +5010,7 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			.labelOffset(10)
 			.scale(linear)
 			//.orient("horizontal")
-			.labels(["", "Up", "", "", "", "", "", "", "", "Down"])
+			.labels(["", "Maximum", "", "", "", "", "", "", "", "Minimum"])
 			.labelAlign("start");
 
 		svg2.select(".legendExpressionTE")
