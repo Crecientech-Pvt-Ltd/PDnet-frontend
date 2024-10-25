@@ -861,7 +861,7 @@
 		<div class="collapse show" id="collapseExampleThree">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="radio" name="radialAnylisis" id="none" value="0" checked> None <br>
+					<input type="radio" name="radialAnylisis" id="none" value="0" onclick="onClickNone()" checked> None <br>
 					<input type="radio" name="radialAnylisis" id="EdgeWeightCutOff" value="1"> Edge weight cut-off
 					<br>
 					<input type="radio" name="radialAnylisis" id="NodeDegree" value="2"> Node cutoff <br>
@@ -1908,14 +1908,32 @@
 						crossDomain: true,
 						success: function (data) {
 							$("#gsea_info").empty();
+
+													 // Sort the data based on the calculated P-value in ascending order
+													 data.sort((a, b) => {
+                                 const pValueA = calculatePValue(a['P-value']);
+                                  const pValueB = calculatePValue(b['P-value']);
+								//  console.log(`Original P-value A: ${a['P-value']}, Calculated P-value A: ${pValueA}`);
+								//  console.log(`Original P-value B: ${b['P-value']}, Calculated P-value B: ${pValueB}`);
+                                         return pValueA - pValueB;
+                                      });
+							 // Log the overall sorted data
+                               data.forEach((val, idx) => {
+                                 const calculatedPValue = calculatePValue(val['P-value']);
+                                console.log(`Index: ${idx + 1}, Original P-value: ${val['P-value']}, Calculated P-value: ${calculatedPValue}`);
+                                     });
+
+
 							data.forEach((val, idx) => {
+								const formattedPValue = formatPValue(val['P-value']);
+								const formattedAdjustedPvalue = formatAdjusted(val['Adjusted P-value'])
 								$("#gsea_info").append(`<p>${val.Gene_set}</p>`);
 								$("#table_data-ip-3").append(`<tr>
 									<td style="width: 50px; min-width: 50px; padding: 5px;">${idx + 1}</td>
 									<td>${val.Gene_set}</td>
 									<td>${val.Overlap}</td>
-									<td>${val['P-value']}</td>
-									<td>${val['Adjusted P-value']}</td>
+									<td>${formattedPValue}</td>
+									<td>${formattedAdjustedPvalue}</td>
 									<td>${val['Odds Ratio']}</td>
 									<td>${val['Combined Score']}</td>
 									<td style="word-break: break-all;">${val['Genes']}</td>
@@ -1941,6 +1959,29 @@
 				}
 
 			});
+
+
+
+function calculatePValue(pValue) {
+    const [base, exponent] = pValue.split('e').map(Number);
+    const e = 2.7182818;
+    const calculatedValue = base * Math.pow(e, exponent); // Calculated P-value
+   console.log(`P-value calculation: ${base} * e^(${exponent}) = ${calculatedValue}`);
+    return calculatedValue;
+}
+
+
+function formatPValue(pValue) {
+    const [base, exponent] = pValue.split('e');
+    return `${base}e^(${exponent})`; 
+}
+
+
+function formatAdjusted(AdjustedPvalue){
+	const [base, exponent] = AdjustedPvalue.split('e');
+	return `${base}e^(${exponent})`
+
+}
 
 
 
@@ -3106,6 +3147,51 @@
 		degree.addEventListener("change", DegreeFun);
 		slider.addEventListener("change", weightFunc);
 		TEdegree.addEventListener("change", TEdegreeFun);
+
+
+    	function onClickNone() {
+	let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+         if(isNodeColor1Checked ){
+			highlightNodes()
+		 }
+		 else{
+			removeHighlightNodes()
+		 }
+        // Reset the slider to the stored value or default
+		const threshDisplay = document.getElementById('thresh')
+        const selectedValue = sessionStorage.getItem('selectedvalue');
+        const value = selectedValue ? parseFloat(selectedValue) : 0.7;
+        slider.value = value;
+        output.innerHTML = value;
+
+        // Reset other values
+        degreeOutput.innerHTML = 0;
+        document.getElementById("myDegree").value = 0;
+        TEdegreeOutput.innerHTML = 0;
+        document.getElementById("myTEvalues").value = 0;
+		ConnectionOutput.innerHTML = 0;
+		document.getElementById("myConnection").value = 0;
+
+
+		    // Set the node degree dropdown back to "None"
+			const nodeDegreeDropdown = document.getElementById('nodeDegreeID4Size');
+    nodeDegreeDropdown.value = "none";
+
+
+		
+
+        // Call functions to reflect the changes
+        DegreeFun();
+        TEdegreeFun();
+        weightFunc();
+	//	ConnectionFun();
+        restart();
+
+	 // Update the display
+	 thresh.textContent = slider.value;
+    }
+
+
 		function weightFunc() {
 			//var textval=10
 			// console.log('LINK CUT', this.value || 1);
@@ -4925,7 +5011,7 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			.labelOffset(10)
 			.scale(linear)
 			//.orient("horizontal")
-			.labels(["", "Up", "", "", "", "", "", "", "", "Down"])
+			.labels(["", "Maximum", "", "", "", "", "", "", "", "Minimum"])
 			.labelAlign("start");
 
 		svg2.select(".legendExpressionTE")
