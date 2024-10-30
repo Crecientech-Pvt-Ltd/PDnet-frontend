@@ -868,7 +868,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 					</div>
 				</div>
 				<!-- all form div end -->
-				<div class="popup_card">
+				<!-- <div class="popup_card">
 					<table id="ttt">
 						<tbody>
 							<tr class="shadow">
@@ -888,7 +888,53 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 					<div class="buttons">
 						<button onclick="getNetworkFromGenes()">Confirm</button>
 						<button onclick="pop_cancel()">Cancel</button>
-					</div>
+					</div> -->
+
+					<div class="popup_card">
+						<ul class="nav nav-tabs" id="geneTabs" style="width:900px ; margin:auto;background-color: #82B2C8;">
+						  <li class="nav-item">
+							  <a class="nav-link active" data-toggle="tab" href="#found" >Available Genes</a>
+						  </li>
+						  <li class="nav-item">
+							  <a class="nav-link" data-toggle="tab" href="#notFound">Unavailable Genes</a>
+						  </li>
+					  </ul>
+					  <div class="tab-content" style="width:900px;margin:auto;">
+						  <div id="found" class="tab-pane fade show active">
+							  <table id="gene_exists_table" class = "cardss" style="width: 100%; background: rgb(208, 199, 199);">
+								  <thead>
+									  <tr class="shadow">
+										  <th>Index</th>
+										  <th>ENSG_ID</th>
+										  <th>SYMBOL</th>
+										  <th>Alias</th>
+										  <th>Description</th>
+									  </tr>
+								  </thead>
+								  <tbody>
+								  </tbody>
+							  </table>
+						  </div>
+						  <div id="notFound" class="tab-pane fade">
+							  <table id="gene_not_exists_table" class = "cardss" style="width: 100%; background: white;">
+								  <thead>
+									  <tr class="shadow">
+										<th>Index</th>
+										<th>ENSG_ID</th>
+										<th>SYMBOL</th>
+										<th>Alias</th>
+										<th>Description</th>
+									  </tr>
+								  </thead>
+								  <tbody>
+								  </tbody>
+							  </table>
+						  </div>
+					  </div>
+					  <div class="buttons">
+						  <button onclick="getNetworkFromGenes()">Confirm</button>
+						  <button onclick="pop_cancel()">Cancel</button>
+					  </div>
 				</div>
 			</div>
 		</div>
@@ -1037,11 +1083,17 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 							$('#wait').css('display', 'none');
 							gene_dont_exists = []
 							gene_exists = []
-							let td = document.getElementById('gene_exists_table');
-							td.innerHTML = "";
+							// let td = document.getElementById('gene_exists_table');
+							// td.innerHTML = "";
+							let foundTable = $('#gene_exists_table tbody');
+        					let notFoundTable = $('#gene_not_exists_table tbody');
+        					foundTable.empty();
+        					notFoundTable.empty();
 							// OPEN TABLE =======================================>>>>
-							let z = 1;
 
+							// let z = 1;
+							let foundIndex = 1;
+							let notFoundIndex = 1;
 							// for (let r of response.data.getGenes) {
 							// if (r.ID.length > 0) {
 							for (let geneName of genes2) {
@@ -1052,41 +1104,91 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
                 				if (r && r.ID && r.ID.length > 0) {
 									gene_exists.push(r.ID);
 									// k = { ... }
-									$('#gene_exists_table')
-										.append(
-											`<tr class="exists">
-														<td>${z++}</td>
-														<td>
-															${r.ID}
-														</td>
-														<td>
-															${r.hgnc_gene_symbol}
-														</td>
-														<td>
-															${r.hgnc_gene_id}
-														</td>
-														<td>
-															${r.Description}
-														</td>
-													</tr>`
-										);
+									// $('#gene_exists_table')
+									// 	.append(
+									// 		`<tr class="exists">
+									// 					<td>${z++}</td>
+									// 					<td>
+									// 						${r.ID}
+									// 					</td>
+									// 					<td>
+									// 						${r.hgnc_gene_symbol}
+									// 					</td>
+									// 					<td>
+									// 						${r.hgnc_gene_id}
+									// 					</td>
+									// 					<td>
+									// 						${r.Description}
+									// 					</td>
+									// 				</tr>`
+									// 	);
+
+									foundTable.append(
+                  					  `<tr class="exists">
+                        					<td>${foundIndex++}</td>
+                        					<td>
+                         				 		${r.ID}
+                       						</td>
+                        					<td>
+                          						${r.hgnc_gene_symbol}
+                        					</td>
+                        					<td>
+                          						${r.hgnc_gene_id}
+                        					</td>
+                        					<td>
+                          						${r.Description}
+                        					</td>
+                    					</tr>`
+                					);
 								} else {
 									// gene_dont_exists.push(r);
+
+									// gene_dont_exists.push(geneName);
+									// $('#gene_exists_table')
+									// 	.append(
+									// 		`<tr class="exists" style="color:#FFA500">
+									// 				<td>${z++}</td>
+									// 				<td>---</td>
+									// 				<td>${geneName}</td>
+									// 				<td>---</td>
+									// 				<td>This node is not available.</td>
+									// 			</tr>`
+									// 	);
+
 									gene_dont_exists.push(geneName);
-									$('#gene_exists_table')
-										.append(
-											`<tr class="exists" style="color:#FFA500">
-													<td>${z++}</td>
-													<td>---</td>
-													<td>${geneName}</td>
-													<td>---</td>
-													<td>This node is not available.</td>
-												</tr>`
-										);
+                					notFoundTable.append(
+                    				 `<tr class="not-found" style="color:#FFA500">
+                        				<td>${notFoundIndex++}</td>
+                        				<td>-----</td>
+                        				<td>${geneName}</td>
+                        				<td>-----</td>
+                        				<td>This node is not available.</td>
+                    				 </tr>`
+                					);
 								}
 							}
+							const hasAvailableGenes = gene_exists.length > 0;
+    						const hasUnavailableGenes = gene_dont_exists.length > 0;
+    						if (hasAvailableGenes) {
+        						$('#found').removeClass('d-none');
+       							$('#geneTabs a[href="#found"]').parent().removeClass('d-none');
+    						} else {
+        						$('#found').addClass('d-none');
+        						$('#geneTabs a[href="#found"]').parent().addClass('d-none');
+    						}
+    						if (hasUnavailableGenes) {
+        						$('#notFound').removeClass('d-none');
+        						$('#geneTabs a[href="#notFound"]').parent().removeClass('d-none');
+    						} else {
+        						$('#notFound').addClass('d-none');
+        						$('#geneTabs a[href="#notFound"]').parent().addClass('d-none');
+    						}
+    						if (hasAvailableGenes) {
+        						$('#geneTabs a[href="#found"]').tab('show');
+    						} else if (hasUnavailableGenes) {
+        						$('#geneTabs a[href="#notFound"]').tab('show');
+    						}
 							$('.popup_card').css('display', 'block');
-
 						},
 						error: (err) => {
 							$('#wait').css('display', 'none');
