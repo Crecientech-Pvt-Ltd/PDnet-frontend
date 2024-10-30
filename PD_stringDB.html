@@ -1219,7 +1219,8 @@
 		<div class="collapse show" id="collapseRightOne">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="radio" name="force_setting" id="none" value="0" checked> None <br>
+					<!-- <input type="radio" name="force_setting" id="none" value="0" checked> None <br> -->
+					<input type="radio" name="force_setting" id="none" value="0" checked onclick="resetNetworkLayout()"> None <br>
 					<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
 					<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
 					<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
@@ -1262,7 +1263,8 @@
 		<div class="collapse show" id="collapseRightTwo">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="radio" name="network_parameters" id="none" value="0" checked> None <br>
+					<!-- <input type="radio" name="network_parameters" id="none" value="0" checked> None <br> -->
+					<input type="radio" name="network_parameters" id="none" value="0"  onclick="resetNetworkParameter()"  checked> None <br>
 					<input type="radio" name="network_parameters" id="nodecolor" value="1"> Node Color Change<br>
 					<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
 					<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
@@ -3503,7 +3505,7 @@ function formatAdjusted(AdjustedPvalue){
 					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
 						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
 							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
-								"stop-color", "red");
+								"stop-color", "#FFAA33");
 					}
 				})
 
@@ -4680,6 +4682,21 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 			force.start()
 		}
+
+		function resetNetworkLayout(){
+            resetLayout()
+        }
+        function resetNetworkParameter(){
+            let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+         if(isNodeColor1Checked ){
+            reset_param()
+            highlightNodes()
+         }
+         else{
+            removeHighlightNodes()
+            reset_param()
+         }
+        }
 
 
 		function reset_param() {
