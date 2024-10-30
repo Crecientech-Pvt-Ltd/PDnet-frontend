@@ -3503,7 +3503,7 @@ function formatAdjusted(AdjustedPvalue){
 					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
 						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
 							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
-								"stop-color", "#FFAA33");
+								"stop-color", "red");
 					}
 				})
 

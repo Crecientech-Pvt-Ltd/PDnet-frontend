@@ -85,11 +85,6 @@ border: 1px solid #39b5ca !important;
     background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
 }
 
-.not-found{
-    color: white;
-    background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important;
-}
-
 .dont_exists {
     background: rgb(175, 155, 155);
 }
@@ -172,10 +167,3 @@ button:hover {
     align-items: center;
     height: 90vh; 
 }
-
-.nav-tabs .nav-link {
-    color: white;
-   }
-.nav-tabs .nav-link.active {
-    color: black;
- }
