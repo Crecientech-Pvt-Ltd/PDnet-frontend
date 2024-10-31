@@ -94,10 +94,28 @@
 				}
 			});
 		}
+		const selectElement = document.getElementById('diseaseMap');
+		const selectedText = selectElement.options[selectElement.selectedIndex].text;
+		
+
+			  // Filter uniNodeLogFC based on the selectedText (disease abbreviation)
+			  var uniNodeLogFC = uniNodeHeaders.filter((header) => 
+        header.toLowerCase().startsWith(`logfc_${selectedText.toLowerCase()}`)
+    );
+	
+
+
+	var uniNodeGDA = uniNodeHeaders.filter((header) => 
+        header.toLowerCase().startsWith(`gda_${selectedText.toLowerCase()}`)
+    );
+
+//	console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
+//	console.log("Filtered uniNodeGDA:", uniNodeGDA)
+
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+	//	var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
 		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
-		var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
 		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
 		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
@@ -109,7 +127,7 @@
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
 		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
-		var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
+	//	var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
@@ -138,13 +156,51 @@
 
 		};
 
-		// For GDA Color
-		for (var key = 0; key < uniNodeGDA.length; key++) {
-			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
-			$('#GDAID4Color').trigger("chosen:updated");
-			$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
-			$('#GDAID4Size').trigger("chosen:updated");
-		}
+
+		// if(uniNodeGDA.length === 0){
+
+
+		// }
+
+		// $('#GDAID4Color').empty();
+		// $('#GDAID4Size').empty()
+
+		// // For GDA Color
+		// for (var key = 0; key < uniNodeGDA.length; key++) {
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
+		// 	$('#GDAID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
+		// 	$('#GDAID4Size').trigger("chosen:updated");
+		// }
+
+		// Assuming uniNodeGDA is defined and populated before this check
+if (uniNodeGDA.length === 0) {
+    // Clear the dropdowns
+    $('#GDAID4Color').empty();
+    $('#GDAID4Size').empty();
+
+    // Optionally, add a default option to indicate no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Size');
+
+    // Trigger the chosen plugin to update the dropdowns
+    $('#GDAID4Color').trigger("chosen:updated");
+    $('#GDAID4Size').trigger("chosen:updated");
+} else {
+    // Populate GDA Color and Size dropdowns if options are available
+    $('#GDAID4Color').empty(); // Clear previous options
+    $('#GDAID4Size').empty(); // Clear previous options
+
+    // For GDA Color
+    for (var key = 0; key < uniNodeGDA.length; key++) {
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
+        $('#GDAID4Color').trigger("chosen:updated");
+
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
+        $('#GDAID4Size').trigger("chosen:updated");
+    }
+}
+
 
 		// Populate Druggability dropdown
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
@@ -161,11 +217,48 @@
 			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
 		}
 
-		for (var key = 0; key < uniNodeLogFC.length; key++) {
-			$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
-				'#logFCID4Color')
-			$('#logFCID4Color').trigger("chosen:updated");
-		};
+     
+
+
+		// Clear previous options in the dropdowns
+$('#logFCID4Color').empty();
+$('#GlogFCID4Size').empty();
+
+// Check if uniNodeLogFC is empty
+if (uniNodeLogFC.length === 0) {
+    // Add a default option indicating no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#logFCID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
+} else {
+    // Populate the dropdowns with logFC options
+    for (var key = 0; key < uniNodeLogFC.length; key++) {
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
+    }
+}
+
+// Trigger the Chosen plugin to update the dropdowns after modifications
+$('#logFCID4Color').trigger("chosen:updated");
+$('#GlogFCID4Size').trigger("chosen:updated");
+
+
+		// $('#logFCID4Color').empty();
+		// $('#GlogFCID4Size').empty()
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// };
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
 
 		//For Direction Color
 		for (var key = 0; key < uniNodeDirection.length; key++) {
@@ -206,11 +299,11 @@
 		};
 
 
-		for (var key = 0; key < uniNodeGLogFC.length; key++) {
-			$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo(
-				'#GlogFCID4Size')
-			$('#GlogFCID4Size').trigger("chosen:updated");
-		};
+		// for (var key = 0; key < uniNodeGLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
 
 		//Trait for Size
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
@@ -499,10 +592,14 @@
 						function updateTooltip() {
 							const selectElement = document.getElementById('diseaseMap');
 							const selectedText = selectElement.options[selectElement.selectedIndex].text;
+							let d = JSON.parse(localStorage.getItem('pd_net_stringDB')) || {};
+							d.disease = selectedText
+							localStorage.setItem('pd_net_stringDB', JSON.stringify(d));
 							const tooltipContentElement = document.getElementById('tooltipContent');
 							const tooltipImageElement = document.getElementById('tooltipImage');
 
 							tooltipContentElement.textContent = getTooltipText(selectedText);
+							     triggerApiCall(d);
 						}
 
 						function getTooltipText(selectedValue) {
@@ -525,6 +622,86 @@
 					<!-- </p> -->
 				</div>
 			</div>
+
+
+			<script>
+				function triggerApiCall(d) {
+				$.ajax({
+					url: `https://pdnet-rnd-apis.crecientech.com/graphql`,
+					type: "POST",
+					dataType: 'json',
+					data: JSON.stringify({
+						query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!, $interactionType: String!) {
+							getGeneInteractions(input: 
+							{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType }, order: $order) {
+								genes {
+									ID
+									hgnc_gene_id
+									hgnc_gene_symbol
+									Description
+									Gene_name
+									common
+									${d.disease}
+								}
+								links {
+									gene1 {
+										ID
+										index
+									}
+									gene2 {
+										ID
+										index
+									}
+									score
+								}
+							}
+						}`,
+						variables: {
+							"geneIDs": d.nodeNames,
+							"minScore": d.score,
+							"order": d.order,
+							"interactionType": d.type
+						}
+					}),
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					},
+					success: function (result) {
+						console.log("AJAX Request Successful");
+					//	console.log("New Data:", result);
+						currentUniversal = result.data?.getGeneInteractions;
+						
+						currentUniversal?.genes.forEach((gene, idx) => {
+							geneIndexMap[gene.ID] = idx;
+							geneIndexMap[gene?.Gene_name] = idx;
+							Object.keys(gene.common).forEach((key) => {
+								gene[key] = gene.common[key];
+							});
+							delete gene.common;
+							Object.keys(gene[d?.disease]).forEach((key) => {
+								gene[key] = gene[d?.disease][key];
+							});
+							delete gene[d?.disease];
+						});
+			
+					//	console.log("Updated Gene Index Map:", geneIndexMap);
+						
+			
+						getUniversal(currentUniversal);
+						initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
+						// Here you can add any specific actions with the new data
+					},
+					error: function (err) {
+						console.error("New AJAX Request Failed:", err);
+						alert(err.responseJSON ? err.responseJSON.message : "An issue occurred. Please try again.");
+					}
+				});
+			}
+			
+			</script>
+
+
 
 
 
@@ -1219,7 +1396,8 @@
 		<div class="collapse show" id="collapseRightOne">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="radio" name="force_setting" id="none" value="0" checked> None <br>
+					<!-- <input type="radio" name="force_setting" id="none" value="0" checked> None <br> -->
+					<input type="radio" name="force_setting" id="none" value="0" checked onclick="resetNetworkLayout()"> None <br>
 					<input type="radio" name="force_setting" id="link_distance" value="1"> Link Distance<br>
 					<input type="radio" name="force_setting" id="charge" value="2"> Link Charge <br>
 					<input type="radio" name="force_setting" id="link_Strength" value="3"> Distance<br>
@@ -1262,7 +1440,8 @@
 		<div class="collapse show" id="collapseRightTwo">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="radio" name="network_parameters" id="none" value="0" checked> None <br>
+					<!-- <input type="radio" name="network_parameters" id="none" value="0" checked> None <br> -->
+					<input type="radio" name="network_parameters" id="none" value="0"  onclick="resetNetworkParameter()"  checked> None <br>
 					<input type="radio" name="network_parameters" id="nodecolor" value="1"> Node Color Change<br>
 					<input type="radio" name="network_parameters" id="linkcolor" value="2"> Link Color Opacity<br>
 					<input type="radio" name="network_parameters" id="linkcolor" value="3"> Node Size<br>
@@ -3504,7 +3683,7 @@ function formatAdjusted(AdjustedPvalue){
 					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
 						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
 							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
-								"stop-color", "red");
+								"stop-color", "#FFAA33");
 					}
 				})
 
@@ -4681,6 +4860,21 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 			force.start()
 		}
+
+		function resetNetworkLayout(){
+            resetLayout()
+        }
+        function resetNetworkParameter(){
+            let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+         if(isNodeColor1Checked ){
+            reset_param()
+            highlightNodes()
+         }
+         else{
+            removeHighlightNodes()
+            reset_param()
+         }
+        }
 
 
 		function reset_param() {
