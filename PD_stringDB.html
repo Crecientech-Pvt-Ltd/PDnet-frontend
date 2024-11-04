@@ -417,13 +417,6 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			<div class="circle-core"></div>
 		</div>
 	</div>
-
-	<div id="spinnerOverlay" class="spinner-overlay" style="display: none;">
-		<div class="spinner"></div>
-		<p>Please wait...</p>
-	  </div>
-	  
-
 	<!-- table for selected nodes -->
 	<div style="display: none;" id="node-modal-background-alert">
 		<div id="alertModal">
@@ -580,11 +573,13 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					<div class="size" style="padding:10px 0; max-height:600px;">
 						<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
 					left: 162px;
-					bottom: 22px;" class="chosen-select" onchange="showSpinnerAndUpdateTooltip()">
+					bottom: 22px;" class="chosen-select" onchange="updateTooltip()">
 							<option value="ALS">ALS</option>
 							<option value="FTD">FTD</option>
 							<option value="OI">OI</option>
 							<option value="PSP">PSP</option>
+
+
 						</select>
 						<div class="tooltiptext" id="tooltipContainer">
 							<span data-toggle="tooltip" data-placement="bottom" style="position:relative; left: 160px; bottom: 20px;">
@@ -593,21 +588,6 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							</span>
 						</div>
 					</div>
-
-					<script>
-					function showSpinnerAndUpdateTooltip() {
-                    const spinnerOverlay = document.getElementById('spinnerOverlay');
-					// Show the spinner
-                    spinnerOverlay.style.display = 'flex';
-					 // Call updateTooltip function
-					  updateTooltip();
-					   setTimeout(() => {
-                     spinnerOverlay.style.display = 'none';
-                    }, 6000);
-                   }
-
-					</script>
-
 					<script>
 						function updateTooltip() {
 							const selectElement = document.getElementById('diseaseMap');
@@ -617,6 +597,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							localStorage.setItem('pd_net_stringDB', JSON.stringify(d));
 							const tooltipContentElement = document.getElementById('tooltipContent');
 							const tooltipImageElement = document.getElementById('tooltipImage');
+
 							tooltipContentElement.textContent = getTooltipText(selectedText);
 							     triggerApiCall(d);
 						}
@@ -719,6 +700,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			}
 			
 			</script>
+
+
+
 
 
 
