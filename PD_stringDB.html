@@ -48,6 +48,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
 <script>
 	if (localStorage.getItem('isLoggedIn') !== 'true') {
 		window.location.href = 'index.html';
@@ -508,6 +510,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					GSEA Analysis Results
 				</span>
 				<button class="modal-close-btn" onclick="closeModalGSEA()">x</button>
+				<div>
+					<button onclick="exportToExcel()" style="padding:10px 10px;margin-left:180%;margin-bottom:10px;width:120px;font-size: 14px;margin-top:8px;">Export Details</button>
+				  </div>
 			</div>
 			<div class="modal-body">
 				<table class="fixed_header">
@@ -539,6 +544,25 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			</div>
 		</div>
 	</div>
+
+	<script>
+		function exportToExcel() {
+		const wb = XLSX.utils.book_new();
+		const table = document.querySelector('#nodeModal-3 table');
+		const wsData = [];
+		const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.innerText);
+		wsData.push(headers);
+		const rows = table.querySelectorAll('tbody tr');
+		rows.forEach(row => {
+			const rowData = Array.from(row.querySelectorAll('td')).map(td => td.innerText);
+			wsData.push(rowData);
+		});
+		const ws = XLSX.utils.aoa_to_sheet(wsData);
+		XLSX.utils.book_append_sheet(wb, ws, "GSEA Results");
+		XLSX.writeFile(wb, 'GSEA_Analysis_Results.xlsx');
+	}
+	  </script>
+	  
 	<!-- Following DIV will display FORCE DIRECTED GRAPH-->
 	<div class="network" style="float:left; width:100%; position:relative; outline: 0;">
 		<div id="openDraw"
