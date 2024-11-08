@@ -428,6 +428,20 @@ body {
       pointer-events: all;
       /* opacity: 1; */
   }
+
+
+  #nodeModal-4 {
+    /* position: absolute;
+    top: 0px;
+    left: 20%; */
+    margin: 5% auto;
+    background-color: white;
+    max-height: 70vh;
+    max-width: 90vw;
+    z-index: 9;
+    pointer-events: all;
+    /* opacity: 1; */
+}
   
   #node-modal-background {
       position: absolute;
@@ -493,6 +507,20 @@ body {
       z-index: 9;
       /* pointer-events: none; */
   }
+
+  
+  #node-modal-background-4 {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+}
   
   .modal-close-btn {
       float: right;
@@ -515,6 +543,13 @@ body {
       padding: 16px;
      
   }
+
+  .modal-header-1 {
+    text-align: left;
+    justify-content: left;
+    padding: 16px;
+   
+}
   
   .header-text {
       font-size: 16px;
@@ -559,6 +594,40 @@ body {
     text-align: left;
     min-width: 180px;
   }
+
+  /* ===== fixed_header-1 ====== */
+  .fixed_header-1{
+    /* width: 100%; */
+    table-layout: fixed;
+    border-collapse: collapse;
+    height: 65vh;
+}
+
+.fixed_header-1 tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  font-size: 14px;
+}
+.fixed_header-1 tbody tr {
+    border-bottom: 1px solid rgba(119, 119, 119, 0.22);
+    background: #f3f3f3;
+}
+.fixed_header-1 thead tr {
+   display: block;
+}
+
+.fixed_header-1 thead {
+    background: #25b0ba;
+    color:#fff;
+}
+
+.fixed_header-1 th, .fixed_header-1 td {
+  padding: 5px;
+  text-align: left;
+  min-width: 180px;
+}
 
   /* ========================== loader ========================= */
   
