@@ -19,6 +19,10 @@
 <script type="text/javascript" src="script/math.js"></script>
 <link rel="stylesheet" type="text/css" href="css/network.css">
 
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Chosen CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
@@ -47,6 +51,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 <script>
 	if (localStorage.getItem('isLoggedIn') !== 'true') {
@@ -99,21 +105,21 @@
 		
 
 			  // Filter uniNodeLogFC based on the selectedText (disease abbreviation)
-			  var uniNodeLogFC = uniNodeHeaders.filter((header) => 
-        header.toLowerCase().startsWith(`logfc_${selectedText.toLowerCase()}`)
-    );
+	// 		  var uniNodeLogFC = uniNodeHeaders.filter((header) => 
+    //     header.toLowerCase().startsWith(`logfc_${selectedText.toLowerCase()}`)
+    // );
 	
-
+	let  d = JSON.parse(localStorage.getItem('pd_net_stringDB')) || {};
 
 	var uniNodeGDA = uniNodeHeaders.filter((header) => 
-        header.toLowerCase().startsWith(`gda_${selectedText.toLowerCase()}`)
+        header.toLowerCase().startsWith(`gda_${d.disease.toLowerCase()}`)
     );
 
-//	console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
-//	console.log("Filtered uniNodeGDA:", uniNodeGDA)
-
+	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
+	// console.log("Filtered uniNodeGDA:", uniNodeGDA)
+	  
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-	//	var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith(`logfc_${d.disease.toLowerCase()}`));
 		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
 		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
 		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
@@ -127,8 +133,11 @@
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
 		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
-	//	var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
+		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
+		//console.log("Filtered Druggability",uniNodeDruggability)
+		console.log("Filtered uniNodeGDA:", uniNodeGDA)
+		
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
 
@@ -283,6 +292,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 
 
+       //$('#custom4Color').empty()
+
 		//For Custom color
 		for (var key = 0; key < uniNodeCustomColors.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
@@ -290,6 +301,10 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 				'#custom4Color')
 			$('#custom4Color').trigger("chosen:updated");
 		};
+
+		$('#custom4Color').trigger("chosen:updated");
+
+
 
 		//For Pathways Shape
 		for (var key = 0; key < uniNodePathway.length; key++) {
@@ -417,6 +432,12 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			<div class="circle-core"></div>
 		</div>
 	</div>
+
+	<div id="spinnerOverlay" class="spinner-overlay" style="display: none;">
+		<div class="spinner"></div>
+		<p>Please wait...</p>
+	  </div>
+
 	<!-- table for selected nodes -->
 	<div style="display: none;" id="node-modal-background-alert">
 		<div id="alertModal">
@@ -508,6 +529,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					GSEA Analysis Results
 				</span>
 				<button class="modal-close-btn" onclick="closeModalGSEA()">x</button>
+				<div>
+					<button onclick="exportToExcel()" style="padding:10px 10px;margin-left:180%;margin-bottom:10px;width:120px;font-size: 14px;margin-top:8px;">Export Details</button>
+				  </div>
 			</div>
 			<div class="modal-body">
 				<table class="fixed_header">
@@ -539,6 +563,25 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			</div>
 		</div>
 	</div>
+
+	<script>
+		function exportToExcel() {
+		const wb = XLSX.utils.book_new();
+		const table = document.querySelector('#nodeModal-3 table');
+		const wsData = [];
+		const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.innerText);
+		wsData.push(headers);
+		const rows = table.querySelectorAll('tbody tr');
+		rows.forEach(row => {
+			const rowData = Array.from(row.querySelectorAll('td')).map(td => td.innerText);
+			wsData.push(rowData);
+		});
+		const ws = XLSX.utils.aoa_to_sheet(wsData);
+		XLSX.utils.book_append_sheet(wb, ws, "GSEA Results");
+		XLSX.writeFile(wb, 'GSEA_Analysis_Results.xlsx');
+	}
+	  </script>
+	  
 	<!-- Following DIV will display FORCE DIRECTED GRAPH-->
 	<div class="network" style="float:left; width:100%; position:relative; outline: 0;">
 		<div id="openDraw"
@@ -573,7 +616,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					<div class="size" style="padding:10px 0; max-height:600px;">
 						<select id="diseaseMap" name="diseaseMap" style="width:100%; position: relative;
 					left: 162px;
-					bottom: 22px;" class="chosen-select" onchange="updateTooltip()">
+					bottom: 22px;" class="chosen-select" onchange="showSpinnerAndUpdateTooltip()">
 							<option value="ALS">ALS</option>
 							<option value="FTD">FTD</option>
 							<option value="OI">OI</option>
@@ -588,6 +631,20 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							</span>
 						</div>
 					</div>
+           
+					<script>
+			function showSpinnerAndUpdateTooltip() {
+                    const spinnerOverlay = document.getElementById('spinnerOverlay');
+					// Show the spinner
+                    spinnerOverlay.style.display = 'flex';
+					 // Call updateTooltip function
+					  updateTooltip();
+					   setTimeout(() => {
+                     spinnerOverlay.style.display = 'none';
+                    }, 6000);
+                   }
+					</script>
+
 					<script>
 						function updateTooltip() {
 							const selectElement = document.getElementById('diseaseMap');
@@ -1176,7 +1233,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					<b>Add a file:</b>
 					<div id="">
 						<input type="file" id="universal_ext" accept="text/csv,.csv">
-						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">submit</button>
+						<button onclick="universal_ext_update()" style="color: black; margin-top: 5px;">Submit</button>
 						<button onclick="resetUniversals()" style="color: black; margin-top: 5px;">Reset
 							Universal</button>
 						<div id="uploading_custom_universal" style="display: none ;margin: 10px 0">Processing...</div>
@@ -1612,46 +1669,132 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			$("#diseaseMap option[value='Custom Universal']").remove();
 			getUniversal(initialUniversal);
 		}
-		// new value to universal file
+		// // new value to universal file
+		// function universal_ext_update() {
+		// 	let file = document.getElementById('universal_ext')?.files[0];
+		// 	if (!file) {
+		// 		alert('No file found!');
+		// 		return;
+		// 	}
+		// 	$('#uploading_custom_universal').css('display', 'block');
+		// 	const reader = new FileReader();
+		// 	reader.onload = function (e) {
+		// 		const csvData = e.target.result;
+		// 		let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+		// 		let csvFormattedData = $.csv.toObjects(csvData);
+		// 		csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
+		// 			acc[key.trim()] = obj[key].trim();
+		// 			return acc;
+		// 		}, {}));
+		// 		const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+		// 		csvFormattedData.forEach((gene, idx) => {
+		// 			currentUniversal.genes[geneIndexMap[gene.ID]] = {
+		// 				...headers.reduce((obj, key) => {
+		// 					obj[key] = gene[key];
+		// 					return obj;
+		// 				}, {}),
+		// 				...currentUniversal.genes[geneIndexMap[gene.ID]]
+		// 			}
+		// 		});
+		// 		$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
+		// 		$("#diseaseMap").val('Custom Universal');
+		// 		document.getElementById("universal_ext").value = "";
+		// 		clearUniData();
+		// 		getUniversal(currentUniversal, headers);
+		// 		$('#uploading_custom_universal').css('display', 'none');
+		// 		$('#uploaded_custom_universal').css('display', 'block');
+		// 		setTimeout(() => {
+		// 			$('#uploaded_custom_universal').css('display', 'none');
+		// 		}, 2000)
+		// 	}
+		// 	reader.readAsText(file);
+		// }
+
 		function universal_ext_update() {
-			let file = document.getElementById('universal_ext')?.files[0];
-			if (!file) {
-				alert('No file found!');
-				return;
+	let file = document.getElementById('universal_ext')?.files[0];
+	if (!file) {
+		alert('No file found!');
+		return;
+	}
+	$('#uploading_custom_universal').css('display', 'block');
+	const reader = new FileReader();
+	reader.onload = function (e) {
+		const csvData = e.target.result;
+		let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+		let csvFormattedData = $.csv.toObjects(csvData);
+		csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
+			acc[key.trim()] = obj[key].trim();
+			return acc;
+		}, {}));
+		const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+
+		// Arrays to store matched and unmatched genes
+		let matchedGenes = [];
+		let unmatchedGenes = [];
+
+		// Map data to existing genes with console logs
+		csvFormattedData.forEach((gene, idx) => {
+			const geneId = gene.ID;  // Assuming 'ID' is the gene identifier in the CSV data
+			const geneData = headers.reduce((obj, key) => {
+				obj[key] = gene[key];
+				return obj;
+			}, {});
+
+			// Check if geneId is in geneIndexMap
+			if (geneIndexMap[geneId] === undefined) {
+				// Add unmatched gene to the list
+				unmatchedGenes.push(geneId);
+			} else {
+				// Console log for each gene's data
+				console.log(`Updating gene with ID: ${geneId}`);
+				console.log(`Data to be updated:`, geneData);
+
+				// Update the gene in currentUniversal.genes
+				currentUniversal.genes[geneIndexMap[geneId]] = {
+					...geneData,
+					...currentUniversal.genes[geneIndexMap[geneId]]
+				};
+
+				//console.log("all genes",geneIndexMap)
+
+				// Add matched gene to the list
+				matchedGenes.push(geneId);
 			}
-			$('#uploading_custom_universal').css('display', 'block');
-			const reader = new FileReader();
-			reader.onload = function (e) {
-				const csvData = e.target.result;
-				let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
-				let csvFormattedData = $.csv.toObjects(csvData);
-				csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
-					acc[key.trim()] = obj[key].trim();
-					return acc;
-				}, {}));
-				const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
-				csvFormattedData.forEach((gene, idx) => {
-					currentUniversal.genes[geneIndexMap[gene.ID]] = {
-						...headers.reduce((obj, key) => {
-							obj[key] = gene[key];
-							return obj;
-						}, {}),
-						...currentUniversal.genes[geneIndexMap[gene.ID]]
-					}
-				});
-				$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
-				$("#diseaseMap").val('Custom Universal');
-				document.getElementById("universal_ext").value = "";
-				clearUniData();
-				getUniversal(currentUniversal, headers);
-				$('#uploading_custom_universal').css('display', 'none');
-				$('#uploaded_custom_universal').css('display', 'block');
-				setTimeout(() => {
-					$('#uploaded_custom_universal').css('display', 'none');
-				}, 2000)
-			}
-			reader.readAsText(file);
+		});
+
+		// Check if no matched genes were found
+		if (matchedGenes.length === 0) {
+			alert('All genes provided in the custom upload is not matching with the current network!!');
+		} else if (unmatchedGenes.length > 0) {
+			// If there are unmatched genes, display them in the modal
+			const tableBody = document.getElementById("table_data-ip-4");
+			tableBody.innerHTML = ""; // Clear existing data
+
+			unmatchedGenes.forEach((gene, index) => {
+				const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+				tableBody.innerHTML += row;
+			});
+
+			// Show the modal with unmatched gene details
+		//	showModalDetails();
 		}
+
+		$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
+		$("#diseaseMap").val('Custom Universal');
+		document.getElementById("universal_ext").value = "";
+		clearUniData();
+		getUniversal(currentUniversal, headers);
+		$('#uploading_custom_universal').css('display', 'none');
+		$('#uploaded_custom_universal').css('display', 'block');
+		setTimeout(() => {
+			$('#uploaded_custom_universal').css('display', 'none');
+		}, 2000);
+	};
+	reader.readAsText(file);
+}
+
+
+
 		function closeAlert() {
 			$("#node-modal-background-alert").css("display", "none");
 		}
@@ -1666,6 +1809,10 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		function closeModalGSEA() {
 			$("#node-modal-background-3").css("display", "none");
+		}
+
+		function closeDetails(){
+			$("#node-modal-background-4").css("display", "none");
 		}
 
 
@@ -2005,6 +2152,16 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			$("#node-modal-background-3").css("display", "block");
 			$("#node-modal-background-3").css("display", "flex");
 			$("#node-modal-background-3").css("flex-direction", "row");
+		}
+
+
+		function showModalDetails(){
+			$('#table_data-ip-4').animate({
+				scrollTop: 0
+			}, 500);
+			$("#node-modal-background-4").css("display", "block");
+			$("#node-modal-background-4").css("display", "flex");
+			$("#node-modal-background-4").css("flex-direction", "row");
 		}
 
 		var brusher = d3.svg.brush()
@@ -4112,23 +4269,17 @@ function formatAdjusted(AdjustedPvalue){
 				let geneID = d.ID;
 				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-                // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-                	return "blue";
-                } else {
-					 return default_node_color;
-				}
-				if (mks) {
-					let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange']
-					if (color_arr.includes(mks)) {
-						return mks;
-					}
-					else return default_node_color;
-				}
-				else return default_node_color;
+             if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+            return "blue";  
+            }
 
-			
-			});
+            let color_arr = ['red', 'green', 'yellow', 'black', 'blue', 'orange'];
+           if (mks && color_arr.includes(mks)) {
+            return mks;
+              }
+          
+		    return default_node_color;
+		});
 		}
 
 		//on selecting Direction type, color the nodes
@@ -5416,3 +5567,40 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
     });
 });
   </script>
+
+
+<!--Custom Upload Details-->
+
+<div  style="display: none;" id="node-modal-background-4">
+	<div id="nodeModal-4">
+		<div class="modal-header-1">
+			<span class="header-text">
+				List of genes not available in the current network
+			</span>
+			<!-- <button class="modal-close-btn" onclick="closeDetails()">x</button> -->
+		</div>
+
+		<div class="modal-body">
+			<table class="fixed_header-1">
+				<thead>
+					<tr>
+						<th style="width: 50px;">No.</th>
+						<th>Genes</th>
+						<!-- <th>Ensemble</th>
+						<th>Description</th> -->
+					</tr>
+				</thead>
+				<tbody id="table_data-ip-4">
+					<tr>
+						<td>row 1-0</td>
+						<td>row 1-1</td>
+						<!-- <td>row 1-2</td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
