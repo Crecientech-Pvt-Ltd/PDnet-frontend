@@ -1674,13 +1674,14 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					return acc;
 				}, {}));
 				const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+				const ID = csvData.split('\n').shift().split(',').shift().trim();
 				csvFormattedData.forEach((gene, idx) => {
-					currentUniversal.genes[geneIndexMap[gene.ID]] = {
+					currentUniversal.genes[geneIndexMap[gene[ID]]] = {
 						...headers.reduce((obj, key) => {
 							obj[key] = gene[key];
 							return obj;
 						}, {}),
-						...currentUniversal.genes[geneIndexMap[gene.ID]]
+						...currentUniversal.genes[geneIndexMap[gene[ID]]]
 					}
 				});
 				$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
