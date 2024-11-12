@@ -742,11 +742,12 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							delete gene[d?.disease];
 						});
 			
-					//	console.log("Updated Gene Index Map:", geneIndexMap);
+						console.log("Updated Gene Index Map:", geneIndexMap);
 						
 			
 						getUniversal(currentUniversal);
 						initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
+						//console.log(initialUniversal)
 						// Here you can add any specific actions with the new data
 					},
 					error: function (err) {
@@ -1710,87 +1711,102 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		// 	reader.readAsText(file);
 		// }
 
-		function universal_ext_update() {
-	let file = document.getElementById('universal_ext')?.files[0];
-	if (!file) {
-		alert('No file found!');
-		return;
-	}
-	$('#uploading_custom_universal').css('display', 'block');
-	const reader = new FileReader();
-	reader.onload = function (e) {
-		const csvData = e.target.result;
-		let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
-		let csvFormattedData = $.csv.toObjects(csvData);
-		csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
-			acc[key.trim()] = obj[key].trim();
-			return acc;
-		}, {}));
-		const headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 
-		// Arrays to store matched and unmatched genes
-		let matchedGenes = [];
-		let unmatchedGenes = [];
+		let headers = [];
 
-		// Map data to existing genes with console logs
-		csvFormattedData.forEach((gene, idx) => {
-			const geneId = gene.ID;  // Assuming 'ID' is the gene identifier in the CSV data
-			const geneData = headers.reduce((obj, key) => {
-				obj[key] = gene[key];
-				return obj;
-			}, {});
+function universal_ext_update() {
+    let file = document.getElementById('universal_ext')?.files[0];
+    if (!file) {
+        alert('No file found!');
+        return;
+    }
 
-			// Check if geneId is in geneIndexMap
-			if (geneIndexMap[geneId] === undefined) {
-				// Add unmatched gene to the list
-				unmatchedGenes.push(geneId);
-			} else {
-				// Console log for each gene's data
-				console.log(`Updating gene with ID: ${geneId}`);
-				console.log(`Data to be updated:`, geneData);
+    $('#uploading_custom_universal').css('display', 'block');
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const csvData = e.target.result;
+        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+        let csvFormattedData = $.csv.toObjects(csvData);
+        csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
+            acc[key.trim()] = obj[key].trim();
+            return acc;
+        }, {}));
 
-				// Update the gene in currentUniversal.genes
-				currentUniversal.genes[geneIndexMap[geneId]] = {
-					...geneData,
-					...currentUniversal.genes[geneIndexMap[geneId]]
-				};
+        // Set headers for confirmDetails to use
+        headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 
-				//console.log("all genes",geneIndexMap)
+        let matchedGenes = [];
+        let unmatchedGenes = [];
 
-				// Add matched gene to the list
-				matchedGenes.push(geneId);
-			}
-		});
+        csvFormattedData.forEach((gene) => {
+            const geneId = gene.ID;
+            const geneData = headers.reduce((obj, key) => {
+                obj[key] = gene[key];
+                return obj;
+            }, {});
 
-		// Check if no matched genes were found
+            if (geneIndexMap[geneId] === undefined) {
+                unmatchedGenes.push(geneId);
+            } else {
+                //console.log(`Updating gene with ID: ${geneId}`);
+               // console.log(`Data to be updated:`, geneData);
+
+                currentUniversal.genes[geneIndexMap[geneId]] = {
+                    ...geneData,
+                    ...currentUniversal.genes[geneIndexMap[geneId]]
+                };
+
+                matchedGenes.push(geneId);
+            }
+        });
+
 		if (matchedGenes.length === 0) {
-			alert('All genes provided in the custom upload is not matching with the current network!!');
-		} else if (unmatchedGenes.length > 0) {
-			// If there are unmatched genes, display them in the modal
-			const tableBody = document.getElementById("table_data-ip-4");
-			tableBody.innerHTML = ""; // Clear existing data
+            alert('All genes provided in the custom upload do not match with the current network!');
+        }
 
-			unmatchedGenes.forEach((gene, index) => {
-				const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
-				tableBody.innerHTML += row;
-			});
 
-			// Show the modal with unmatched gene details
-		//	showModalDetails();
+		else if (matchedGenes.length > 0 && unmatchedGenes.length > 0 ){
+
+			    // Populate unmatched genes in table_data-ip-4
+				const unmatchedTableBody = document.getElementById("table_data-ip-4");
+        unmatchedTableBody.innerHTML = "";
+        unmatchedGenes.forEach((gene, index) => {
+            const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+            unmatchedTableBody.innerHTML += row;
+        });
+
+        // Populate matched genes in table_data-ip-5
+        const matchedTableBody = document.getElementById("table_data-ip-5");
+        matchedTableBody.innerHTML = "";
+        matchedGenes.forEach((gene, index) => {
+            const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+            matchedTableBody.innerHTML += row;
+        });
+
+        showModalDetails();
 		}
 
-		$("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
-		$("#diseaseMap").val('Custom Universal');
-		document.getElementById("universal_ext").value = "";
-		clearUniData();
-		getUniversal(currentUniversal, headers);
-		$('#uploading_custom_universal').css('display', 'none');
-		$('#uploaded_custom_universal').css('display', 'block');
-		setTimeout(() => {
-			$('#uploaded_custom_universal').css('display', 'none');
-		}, 2000);
-	};
-	reader.readAsText(file);
+        $("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
+        $("#diseaseMap").val('Custom Universal');
+        document.getElementById("universal_ext").value = "";
+        clearUniData();
+
+        $('#uploading_custom_universal').css('display', 'none');
+        $('#uploaded_custom_universal').css('display', 'block');
+        setTimeout(() => {
+            $('#uploaded_custom_universal').css('display', 'none');
+        }, 2000);
+    };
+    reader.readAsText(file);
+}
+
+function confirmDetails() {
+    if (headers.length > 0) {
+        getUniversal(currentUniversal, headers);
+        $("#node-modal-background-4").css("display", "none");
+    } else {
+        alert('No data available to confirm. Please upload a file first.');
+    }
 }
 
 
@@ -5568,38 +5584,107 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
   </script>
 
 
-<!--Custom Upload Details-->
 
-<div  style="display: none;" id="node-modal-background-4">
-	<div id="nodeModal-4">
-		<div class="modal-header-1">
+	
+	<div style="display: none;" id="node-modal-background-4">
+		<div id="nodeModal-4">
 			<span class="header-text">
-				List of genes not available in the current network
+				List of genes  available in the current network
 			</span>
-			<!-- <button class="modal-close-btn" onclick="closeDetails()">x</button> -->
-		</div>
-
-		<div class="modal-body">
-			<table class="fixed_header-1">
-				<thead>
-					<tr>
-						<th style="width: 50px;">No.</th>
-						<th>Genes</th>
-						<!-- <th>Ensemble</th>
-						<th>Description</th> -->
-					</tr>
-				</thead>
-				<tbody id="table_data-ip-4">
-					<tr>
-						<td>row 1-0</td>
-						<td>row 1-1</td>
-						<!-- <td>row 1-2</td> -->
-					</tr>
-				</tbody>
-			</table>
+			<div class="modal-header-1">
+				<span class="header-text">
+					<ul class="tab-header">
+						<li>
+							<a href="#" onclick="showTab('available-gene', this)" class="active-tab">Available Genes</a>
+						</li>
+						<li>
+							<a href="#" onclick="showTab('unavailable-gene', this)" class="inactive-tab">Unavailable Genes</a>
+						</li>
+					</ul>
+				</span>
+			</div>
+	
+			<!-- Available Gene Content -->
+			<div class="modal-body" id="available-gene" style="display: block;">
+				<table class="fixed_header-1">
+					<thead>
+						<tr>
+							<th style="width: 50px;">No.</th>
+							<th>Genes</th>
+						</tr>
+					</thead>
+					<tbody id="table_data-ip-5">
+						<tr>
+							<td>1</td>
+							<td>Gene A</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Gene B</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<!-- Unavailable Gene Content -->
+			<div class="modal-body" id="unavailable-gene" style="display: none;">
+				<table class="fixed_header-1">
+					<thead>
+						<tr>
+							<th style="width: 50px;">No.</th>
+							<th>Genes</th>
+						</tr>
+					</thead>
+					<tbody id="table_data-ip-4" style="color:#FFA500;">
+						<tr>
+							<td>1</td>
+							<td>Gene X</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Gene Y</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div class="buttons-btn">
+				<button class="confirm-btn" onclick="confirmDetails()">Confirm</button>
+				<button class="cancel-btn" onclick="closeDetails()">Cancel</button>
+			</div>
 		</div>
 	</div>
-</div>
+	
+	<script>
+	function showTab(tabId, element) {
+		// Hide both modal bodies
+		document.getElementById('available-gene').style.display = 'none';
+		document.getElementById('unavailable-gene').style.display = 'none';
+	
+		// Show the selected tab
+		document.getElementById(tabId).style.display = 'block';
+	
+		// Remove active class from all tabs and set inactive class
+		const tabs = document.querySelectorAll('.tab-header a');
+		tabs.forEach(tab => tab.classList.remove('active-tab'));
+		tabs.forEach(tab => tab.classList.add('inactive-tab'));
+
+		document.getElementById(tabId).style.display = 'block';
+	
+		// Set active class for the selected tab
+		element.classList.add('active-tab');
+		element.classList.remove('inactive-tab');
+
+		 // Update the header text based on the selected tab
+		 const headerText = tabId === 'available-gene'
+        ? 'List of genes available in the current network'
+        : 'List of genes unavailable in the current network';
+    document.querySelector('#nodeModal-4 .header-text').textContent = headerText;
+	}
+	</script>
+	
+
+
 
 
 

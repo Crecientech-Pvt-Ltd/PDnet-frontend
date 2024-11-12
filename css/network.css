@@ -436,7 +436,7 @@ body {
     left: 20%; */
     margin: 5% auto;
     background-color: white;
-    max-height: 70vh;
+    max-height: 52vh;
     max-width: 90vw;
     z-index: 9;
     pointer-events: all;
@@ -600,7 +600,7 @@ body {
     /* width: 100%; */
     table-layout: fixed;
     border-collapse: collapse;
-    height: 65vh;
+    height: 44vh;
 }
 
 .fixed_header-1 tbody{
@@ -626,7 +626,29 @@ body {
 .fixed_header-1 th, .fixed_header-1 td {
   padding: 5px;
   text-align: left;
-  min-width: 180px;
+  min-width: 202px;
+  padding-left: 35px;
+}
+
+.buttons-btn{
+    text-align: center;
+    margin: 20px;
+}
+
+.confirm-btn{
+    background: linear-gradient(45deg, rgba(18, 76, 103, 1) 0%, rgba(9, 114, 121, 1) 35%, rgba(0, 0, 0, 1) 100%) !important;
+    color: white;
+    padding: 5px 25px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.cancel-btn{
+    background: linear-gradient(45deg, rgba(18, 76, 103, 1) 0%, rgba(9, 114, 121, 1) 35%, rgba(0, 0, 0, 1) 100%) !important;
+    color: white;
+    padding: 5px 25px;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
   /* ========================== loader ========================= */
@@ -877,3 +899,29 @@ body {
     font-size: 18px;
     /* margin-top: 20px; */
   }
+
+
+  	/* Basic styling for tabs */
+	.tab-header {
+		display: flex;
+		list-style: none;
+		padding: 0;
+	}
+	.tab-header li {
+		margin-right: 10px;
+	}
+	.tab-header a {
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+		cursor: pointer;
+		padding: 10px;
+	}
+	.inactive-tab {
+		background-color: #f1f1f1; 
+		color: #333;
+	}
+	.active-tab {
+		background-color: #007bff; 
+		color: white;
+	}
