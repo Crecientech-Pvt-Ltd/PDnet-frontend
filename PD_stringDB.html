@@ -728,7 +728,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					},
 					success: function (result) {
 						console.log("AJAX Request Successful");
-						console.log("New Data:", result);
+					//	console.log("New Data:", result);
 						currentUniversal = result.data?.getGeneInteractions;
 						
 						currentUniversal?.genes.forEach((gene, idx) => {
@@ -3315,7 +3315,7 @@ function formatAdjusted(AdjustedPvalue){
 
 				},
 				success: function (result) {
-					console.log(result)
+				//	console.log(result)
 					const graphName = result.data.getGeneInteractions.graphName
 					localStorage.setItem("graphName",graphName)
 					$("#loader").css('display', 'none')
