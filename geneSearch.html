@@ -1067,6 +1067,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 						},
 						data: JSON.stringify({
 							query: `query GeneVerification($geneIDs: [String!]!) {
+							   getUserID
 								getGenes(input: {
 									geneIDs: $geneIDs
 								}) {
@@ -1081,6 +1082,14 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 							}
 						}),
 						success: (response) => {
+							console.log(response)
+							const userID = response.data.getUserID;
+							 // Check if userID is already in localStorage
+                             if (!localStorage.getItem("userID")) {
+                             // If userID is not present, set it in localStorage
+                              localStorage.setItem("userID", userID);
+                               }
+							//localStorage.setItem("userID", userID);
 							$('#wait').css('display', 'none');
 							gene_dont_exists = []
 							gene_exists = []
