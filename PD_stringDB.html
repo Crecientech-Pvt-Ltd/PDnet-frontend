@@ -199,7 +199,8 @@ if (uniNodeGDA.length === 0) {
     // Populate GDA Color and Size dropdowns if options are available
     $('#GDAID4Color').empty(); // Clear previous options
     $('#GDAID4Size').empty(); // Clear previous options
-
+	document.getElementById('GDAID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     // For GDA Color
     for (var key = 0; key < uniNodeGDA.length; key++) {
         $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
@@ -240,6 +241,8 @@ if (uniNodeLogFC.length === 0) {
     $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
 } else {
     // Populate the dropdowns with logFC options
+	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     for (var key = 0; key < uniNodeLogFC.length; key++) {
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
