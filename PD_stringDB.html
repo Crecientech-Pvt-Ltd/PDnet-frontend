@@ -1643,7 +1643,8 @@ function applyResolution() {
   //  const isWeighted = document.getElementById("weightedCheckbox").checked;
   const graphName = localStorage.getItem("graphName");
     $.ajax({
-        url: `https://pdnet-rnd-apis.crecientech.com/algorithm/louvain`,
+      //  url: `https://pdnet-rnd-apis.crecientech.com/algorithm/louvain`,
+	   url: `http://api.tdp-dev.alexion.cloud/algorithm/louvain`,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
