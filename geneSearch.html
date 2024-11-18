@@ -406,8 +406,8 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 												<div>
 													<select class="form-select" aria-label="Default select example"
 														name="order" id="confidence">
-														<option selected value="0.7">High (0.7)</option>
-														<option value="0.9">Highest (0.9)</option>
+														<option  value="0.7">High (0.7)</option>
+														<option selected value="0.9">Highest (0.9)</option>
 														<option value="0.4">Medium (0.4)</option>
 														<option value="0.15">Low (0.15)</option>
 													</select>
@@ -1068,6 +1068,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 						},
 						data: JSON.stringify({
 							query: `query GeneVerification($geneIDs: [String!]!) {
+							   getUserID
 								getGenes(input: {
 									geneIDs: $geneIDs
 								}) {
@@ -1082,6 +1083,14 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 							}
 						}),
 						success: (response) => {
+						//	console.log(response)
+							const userID = response.data.getUserID;
+							 // Check if userID is already in localStorage
+                             if (!localStorage.getItem("userID")) {
+                             // If userID is not present, set it in localStorage
+                              localStorage.setItem("userID", userID);
+                               }
+							//localStorage.setItem("userID", userID);
 							$('#wait').css('display', 'none');
 							gene_dont_exists = []
 							gene_exists = []

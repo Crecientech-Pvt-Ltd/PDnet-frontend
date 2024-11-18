@@ -136,7 +136,7 @@
 		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
 		//console.log("Filtered Druggability",uniNodeDruggability)
-		console.log("Filtered uniNodeGDA:", uniNodeGDA)
+		//console.log("Filtered uniNodeGDA:", uniNodeGDA)
 		
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
@@ -199,7 +199,8 @@ if (uniNodeGDA.length === 0) {
     // Populate GDA Color and Size dropdowns if options are available
     $('#GDAID4Color').empty(); // Clear previous options
     $('#GDAID4Size').empty(); // Clear previous options
-
+	document.getElementById('GDAID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     // For GDA Color
     for (var key = 0; key < uniNodeGDA.length; key++) {
         $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
@@ -240,6 +241,8 @@ if (uniNodeLogFC.length === 0) {
     $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
 } else {
     // Populate the dropdowns with logFC options
+	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     for (var key = 0; key < uniNodeLogFC.length; key++) {
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
@@ -711,6 +714,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 									}
 									score
 								}
+									graphName
 							}
 						}`,
 						variables: {
@@ -722,7 +726,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					}),
 					headers: {
 						'Content-Type': 'application/json',
-						'Accept': 'application/json'
+						'Accept': 'application/json',
+						'x-user-id':localStorage.getItem("userID") || ''
 					},
 					success: function (result) {
 						console.log("AJAX Request Successful");
@@ -1113,7 +1118,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						const slider = document.getElementById('myRange');
 						const threshDisplay = document.getElementById('thresh');
 						const selectedvalue = sessionStorage.getItem('selectedvalue');
-						const value = selectedvalue ? parseFloat(selectedvalue) : 0.7;
+						const value = selectedvalue ? parseFloat(selectedvalue) : 0.9;
 						slider.min = value;
 						slider.value = value;
 						threshDisplay.textContent = value;
@@ -1564,6 +1569,134 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 				</p>
 			</div>
 		</div>
+
+		<div class="d-inline-flex justify-content-between gap-1 w-100">
+			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightAnalysis"
+				aria-expanded="false" aria-controls="collapseRightAnalysis">Algorithmic Analysis</button>
+		</div>
+
+		<div class="collapse show" id="collapseRightAnalysis" >
+        <div class="b card card-body">
+			<p class="size">
+				<input type="radio" name="Algorithmic_Analysis" id="none" value="0" checked onclick="toggleResolution()"> None <br>
+				<input type="radio" name="Algorithmic_Analysis" id="louvain" value="1" onclick="toggleResolution()"> Louvain <br>
+			  </p>
+
+			<div class="networkcontainer"  id="resolution"  style="padding-bottom:5px;display: none;" >
+		
+				<p class="size">Resolution: <span id="Range">0.1</span></p>
+				<input type="range" min="0" max="1" step="0.1" value="0.1" class="slider" id="resolutionValue" onchange="resolutionFunc()">
+			</p>
+			<p class="size">
+				Weighted
+				<input type="checkbox"  style="margin-left: 7px;" checked>
+			</p>
+			<p class="size">
+				<button  style="color: black ;  height: 30px;width: 75px;position: relative;left: 100px;" onclick="applyResolution()">Apply</button>
+			</p>
+
+		</div>
+
+		</div>
+		</div>
+
+		<script>
+			function toggleResolution() {
+			  const resolutionDiv = document.getElementById("resolution");
+			  const louvainRadio = document.getElementById("louvain");
+		  
+			  if (louvainRadio.checked) {
+				resolutionDiv.style.display = "block";
+			  } else {
+				resolutionDiv.style.display = "none";
+				const slider = document.getElementById("resolutionValue");
+			    const nRange = document.getElementById("Range");   
+				slider.value = 0; 
+                nRange.textContent = 0;
+			  }
+			  
+
+			  const isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+	        if(isNodeColor1Checked){
+          d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+	       highlightNodes()
+	      return default_node_color;
+          });
+	}
+	else{
+		d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+	    removeHighlightNodes()
+	     return default_node_color;
+});
+	}
+			}
+
+
+		function resolutionFunc() {
+    const slider = document.getElementById("resolutionValue");
+    const nRange = document.getElementById("Range");
+    nRange.textContent = slider.value;
+  }
+
+function applyResolution() {
+    const resolutionValue = document.getElementById("resolutionValue").value;
+  //  const isWeighted = document.getElementById("weightedCheckbox").checked;
+  const graphName = localStorage.getItem("graphName");
+    $.ajax({
+        url: `https://pdnet-rnd-apis.crecientech.com/algorithm/louvain`,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        data: {
+            graphName: graphName,
+            resolution: resolutionValue,
+            weighted: true
+        },
+        success: function(response) {
+          //console.log("Response:", response);
+            updateNodeColors(response);
+        },
+        error: function(error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+
+function updateNodeColors(response) {
+    const communities = Object.values(response);
+    let totalData = getItemFromStorage('pd_net_stringDB');
+    let d = JSON.parse(totalData);
+    let nodeNames = Array.isArray(d.nodeNames) ? d.nodeNames : [];
+
+    d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+        const geneID = d.ID;
+
+        // Check if the gene ID is in nodeNames
+        if (nodeNames.includes(geneID)) {
+            let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+            if (isNodeColor1Checked) {
+                return "blue"; 
+            }
+        }
+
+        // Check for community and apply community color
+        for (let community of communities) {
+            if (community.genes.includes(geneID)) {
+                return community.color; 
+            }
+        }
+
+        // Default color if no match found
+        return default_node_color;
+    });
+}
+
+		  </script>
+
+
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
 			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightFour"
 				aria-expanded="false" aria-controls="collapseRightFour">Highlight Node/Edge Color</button>
@@ -2272,7 +2405,7 @@ function confirmDetails() {
 							 // Log the overall sorted data
                                data.forEach((val, idx) => {
                                  const calculatedPValue = calculatePValue(val['P-value']);
-                                console.log(`Index: ${idx + 1}, Original P-value: ${val['P-value']}, Calculated P-value: ${calculatedPValue}`);
+                             //   console.log(`Index: ${idx + 1}, Original P-value: ${val['P-value']}, Calculated P-value: ${calculatedPValue}`);
                                      });
 
 
@@ -3169,6 +3302,7 @@ function formatAdjusted(AdjustedPvalue){
 										}
 										score
 									}
+										graphName
 							  	}
 							}`,
 					variables: {
@@ -3180,9 +3314,14 @@ function formatAdjusted(AdjustedPvalue){
 				}),
 				headers: {
 					'Content-Type': 'application/json',
-					'Accept': 'application/json'
+					'Accept': 'application/json',
+					'x-user-id':localStorage.getItem("userID") || ''
+
 				},
 				success: function (result) {
+				//	console.log(result)
+					const graphName = result.data.getGeneInteractions.graphName
+					localStorage.setItem("graphName",graphName)
 					$("#loader").css('display', 'none')
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
