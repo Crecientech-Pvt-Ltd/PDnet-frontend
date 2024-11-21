@@ -281,7 +281,15 @@
 									<div class="input-section">
 										<div class="mb-3">
 											<label for="exampleFormControlTextarea1" class="form-label">Seed
-												Genes</label>
+												Genes
+												<span 
+												data-bs-toggle="tooltip" 
+												data-bs-placement="top" 
+												title="Please enter input genes, with a limit of 5000.">
+												<img src="../images/icons/info2.png" class="info-image">
+											  </span>
+											</label>
+						
 											<textarea class="form-control" id="string_db_input"
 												placeholder="Enter genes" rows="3">
 MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
@@ -1052,6 +1060,12 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 					if (e.trim() != "")
 						genes2.push(e.trim().toUpperCase());
 				})
+
+				   // Check if the number of genes exceeds the limit
+		// 	if (genes2.length > 5000) {
+        // alert('You have exceeded the limit of 5000 input genes. Please reduce the number of genes.');
+        // return;
+        //      }
 				if (genes2.length <= 1 && geneFileData == undefined) {
 					alert('please enter atleast more than one gene');
 					return;
@@ -1112,16 +1126,26 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
                				 // r = { mapt: [{ ... }, { ... }, { ... }] }
                 			// k = mapt;
                 			// r[k] = [{ ... },{ ... }, { ... }]
+							// let r = response.data.getGenes.find(g =>
+            				// g.hgnc_gene_symbol.toUpperCase() === geneName.toUpperCase() ||
+            				// g.ID.toUpperCase() === geneName.toUpperCase()
+        					// );
+
 							let r = response.data.getGenes.find(g =>
-            				g.hgnc_gene_symbol.toUpperCase() === geneName.toUpperCase() ||
-            				g.ID.toUpperCase() === geneName.toUpperCase()
-        					);
+    (g?.hgnc_gene_symbol?.toUpperCase() === geneName?.toUpperCase() || 
+     g?.ID?.toUpperCase() === geneName?.toUpperCase())
+);
+
+// console.log('Genes:', response.data.getGenes);
+// console.log('Gene Name:', geneName);
+
+
 
 							if (r && r.ID && r.ID.length > 0) {
-            					if (!existingIDs.has(r.ID) && !existingNames.has(r.hgnc_gene_symbol.toUpperCase())) {
+            					if (!existingIDs.has(r.ID) && !existingNames.has(r.hgnc_gene_symbol?.toUpperCase())) {
                 					gene_exists.push(r.ID);
                 					existingIDs.add(r.ID);
-                					existingNames.add(r.hgnc_gene_symbol.toUpperCase());
+                					existingNames.add(r.hgnc_gene_symbol?.toUpperCase());
 									// k = { ... }
 									// $('#gene_exists_table')
 									// 	.append(
