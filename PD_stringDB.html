@@ -1585,11 +1585,11 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			<div class="networkcontainer"  id="resolution"  style="padding-bottom:5px;display: none;" >
 		
 				<p class="size">Resolution: <span id="Range">0.1</span></p>
-				<input type="range" min="0" max="1" step="0.1" value="0.1" class="slider" id="resolutionValue" onchange="resolutionFunc()">
+				<input type="range" min="0.1" max="4.0" step="0.1" value="1.0" class="slider" id="resolutionValue" onchange="resolutionFunc()">
 			</p>
 			<p class="size">
 				Weighted
-				<input type="checkbox"  style="margin-left: 7px;" checked>
+				<input type="checkbox"  id="weightedCheckbox" style="margin-left: 7px;" checked>
 			</p>
 			<p class="size">
 				<button  style="color: black ;  height: 30px;width: 75px;position: relative;left: 100px;" onclick="applyResolution()">Apply</button>
@@ -1640,7 +1640,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 function applyResolution() {
     const resolutionValue = document.getElementById("resolutionValue").value;
-  //  const isWeighted = document.getElementById("weightedCheckbox").checked;
+    const isWeighted = document.getElementById("weightedCheckbox").checked;
   const graphName = localStorage.getItem("graphName");
     $.ajax({
       //  url: `https://pdnet-rnd-apis.crecientech.com/algorithm/louvain`,
@@ -1653,10 +1653,10 @@ function applyResolution() {
         data: {
             graphName: graphName,
             resolution: resolutionValue,
-            weighted: true
+            weighted: isWeighted
         },
         success: function(response) {
-          //console.log("Response:", response);
+         // console.log("Response:", response);
             updateNodeColors(response);
         },
         error: function(error) {
