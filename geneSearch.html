@@ -962,6 +962,81 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 		</div>
 	</div>
 
+
+	<div  id="Warning" class="closeWarning" style="display: none;">
+		<div class="alert_message" >
+			<div class="warning_message">
+				<p style="font-size: 25px;">Warning</p>
+				You have entered more than 25 input seed genes for First/Second order. Do you want to continue?
+				</p>
+			</div>
+			<!-- <div class="warning_message">
+				<p style="font-size: 25px;">Warning</p>
+				You have exceeded the limit of 1000 input genes. Do you want to continue?
+				</p>
+			</div> -->
+		</div>
+		<div class="buttons-btn">
+			<button class="btn-1" >Yes</button>
+			<button class="btn-1" onclick="closeWarning()" >No</button>
+		</div>
+		
+	</div>
+
+
+	<div  id="Warning-1" class="closeWarning" style="display: none;">
+		<div class="alert_message" >
+			<div class="warning_message">
+				<p style="font-size: 25px;">Warning</p>
+				You have entered more than 1000 input seed genes for Zero order. Do you want to continue?
+				</p>
+			</div>
+		</div>
+		<div class="buttons-btn">
+			<button class="btn-2" >Yes</button>
+			<button class="btn-1" onclick="closePopUp()" >No</button>
+		</div>
+		
+	</div>
+
+	<div  id="stop" style="display: none;">
+		<div class="alert_message">
+			<!-- <div class="stop_message">
+				<div class="close_button" onclick="closeAlert()">×</div>
+				<p style="font-size: 25px;">Stop</p>
+					You have exceeded the limit of 5000 input genes. Please reduce the number of genes and try again.
+				</p>	
+			</div> -->
+			<div class="stop_message">
+				<div class="close_button" onclick="closeAlert()">×</div>
+				<p style="font-size: 25px;">Stop</p>
+				You have entered more than 50 input seed genes for First/Second order. Please reduce the number of genes and try again.
+				</p>	
+			</div>
+		</div>	
+	</div>
+
+	<div  id="stop-1" style="display: none;">
+		<div class="alert_message">
+			<div class="stop_message">
+				<div class="close_button" onclick="closeAlertTwo()">×</div>
+				<p style="font-size: 25px;">Stop</p>
+				You have entered more than 5000 input seed genes for Zero order. Please reduce the number of genes and try again.
+				</p>	
+			</div>
+		</div>	
+	</div>
+
+	<!-- <script>
+		function closeAlert() {
+			$('.alert_message').css("display", "none")
+		}
+
+		function closeWarning(){
+			$('.closeWarning').css("display","none")
+		}
+	</script> -->
+	
 	<script>
 		function getItemFromStorage(key) {
 			if (window.location.pathname.split('/').includes("pdnet_dev")) { return localStorage.getItem(key + '_dev'); } else { return localStorage.getItem(key); }
@@ -972,51 +1047,149 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 		}
 
 		//====================================CONFIRMED GENES NETWORK ==================================
-		function getNetworkFromGenes() {
-			console.log(gene_dont_exists.length > 0 && gene_exists.length > 0)
-			console.log(gene_dont_exists.length, gene_exists.length)
-			if (gene_dont_exists.length > 0 && gene_exists.length > 0) {
-				var apicall = confirm('Some genes are not available. Do you want to continue ?');
-				console.log(apicall)
-				if (apicall) {
-					console.log('gene_exists', gene_exists);
-					// localStorage.setItem('list_proteo', JSON.stringify(gene_exists));
-					// window.open('/ProteostasisNET/unitest.html?filename='+""+'&folderName='+""+'&fromAGene=true');
-					let d = {
-						nodeNames: gene_exists,
-						order: parseInt(order),
-						analysedWeight: channel,
-						score: parseFloat(score),
-						type: interaction_type_dropdown,
-						disease: $('#disease_dropdown').val()
-					}
-					d = JSON.stringify(d)
-					setItemToStorage('pd_net_stringDB', d);
-					window.open("PD_stringDB.html");
-					$('.popup_card').css('display', 'none');
-				} else {
-					$('.popup_card').css('display', 'none');
-				}
-			} else if (gene_dont_exists.length > 0 && gene_exists == 0) {
-				alert('No genes exist in database!');
-			} else {
-				// localStorage.setItem('list_proteo', JSON.stringify(gene_exists));
-				// window.open('/ProteostasisNET/unitest.html?filename='+""+'&folderName='+""+'&fromAGene=true');
-				let d = {
-					nodeNames: gene_exists,
-					order: parseInt(order),
-					analysedWeight: channel,
-					score: parseFloat(score),
-					type: interaction_type_dropdown,
-					disease: $('#disease_dropdown').val()
-				}
-				console.log(d)
-				d = JSON.stringify(d)
-				setItemToStorage('pd_net_stringDB', d);
-				window.open("PD_stringDB.html");
-				$('.popup_card').css('display', 'none');
-			}
-		}
+		// function getNetworkFromGenes() {
+		// 	console.log(gene_dont_exists.length > 0 && gene_exists.length > 0)
+		// 	console.log(gene_dont_exists.length, gene_exists.length)
+		// 	if (gene_dont_exists.length > 0 && gene_exists.length > 0) {
+		// 		var apicall = confirm('Some genes are not available. Do you want to continue ?');
+		// 		console.log(apicall)
+		// 		if (apicall) {
+		// 			console.log('gene_exists', gene_exists);
+		// 			// localStorage.setItem('list_proteo', JSON.stringify(gene_exists));
+		// 			// window.open('/ProteostasisNET/unitest.html?filename='+""+'&folderName='+""+'&fromAGene=true');
+		// 			let d = {
+		// 				nodeNames: gene_exists,
+		// 				order: parseInt(order),
+		// 				analysedWeight: channel,
+		// 				score: parseFloat(score),
+		// 				type: interaction_type_dropdown,
+		// 				disease: $('#disease_dropdown').val()
+		// 			}
+		// 			d = JSON.stringify(d)
+		// 			setItemToStorage('pd_net_stringDB', d);
+		// 			window.open("PD_stringDB.html");
+		// 			$('.popup_card').css('display', 'none');
+		// 		} else {
+		// 			$('.popup_card').css('display', 'none');
+		// 		}
+		// 	} else if (gene_dont_exists.length > 0 && gene_exists == 0) {
+		// 		alert('No genes exist in database!');
+		// 	} else {
+		// 		// localStorage.setItem('list_proteo', JSON.stringify(gene_exists));
+		// 		// window.open('/ProteostasisNET/unitest.html?filename='+""+'&folderName='+""+'&fromAGene=true');
+		// 		let d = {
+		// 			nodeNames: gene_exists,
+		// 			order: parseInt(order),
+		// 			analysedWeight: channel,
+		// 			score: parseFloat(score),
+		// 			type: interaction_type_dropdown,
+		// 			disease: $('#disease_dropdown').val()
+		// 		}
+		// 		console.log(d)
+		// 		d = JSON.stringify(d)
+		// 		setItemToStorage('pd_net_stringDB', d);
+		// 		window.open("PD_stringDB.html");
+		// 		$('.popup_card').css('display', 'none');
+		// 	}
+		// }
+
+
+function getNetworkFromGenes() {
+    console.log(gene_dont_exists.length > 0 && gene_exists.length > 0);
+    console.log(gene_dont_exists.length, gene_exists.length);
+    
+    const totalGenes = gene_exists.length;
+    const parsedOrder = parseInt(order);
+
+    // Warning and Stop Conditions
+    if ((totalGenes > 25 && (parsedOrder === 1 || parsedOrder === 2)) && totalGenes <= 50) {
+			$('.popup_card').css('display', 'none');
+        document.getElementById('Warning').style.display = 'block';
+        document.querySelector('.btn-1').onclick = function () {
+            document.getElementById('Warning').style.display = 'none';
+            checkGeneExistenceAndProceed();
+        };
+        return;
+    }
+	
+    
+    if ((totalGenes > 50 && (parsedOrder === 1 || parsedOrder === 2)) ) {
+			$('.popup_card').css('display', 'none');
+        document.getElementById('stop').style.display = 'block';
+        return;
+    }
+
+	if (totalGenes > 1000 && parsedOrder === 0 && totalGenes <=5000) {
+		$('.popup_card').css('display', 'none');
+        document.getElementById('Warning-1').style.display = 'block';
+        document.querySelector('.btn-2').onclick = function () {
+            document.getElementById('Warning-1').style.display = 'none';
+            checkGeneExistenceAndProceed();
+        };
+        return;
+	}
+
+	if(totalGenes > 5000 && parsedOrder === 0){
+
+		$('.popup_card').css('display', 'none');
+        document.getElementById('stop-1').style.display = 'block';
+        return;
+	}
+
+
+    // Proceed with normal functionality
+    checkGeneExistenceAndProceed();
+}
+
+
+function checkGeneExistenceAndProceed() {
+    if (gene_dont_exists.length > 0 && gene_exists.length > 0) {
+        const apicall = confirm('Some genes are not available. Do you want to continue?');
+        if (!apicall) {
+            $('.popup_card').css('display', 'none');
+            return;
+        }
+    } else if (gene_dont_exists.length > 0 && gene_exists.length === 0) {
+        alert('No genes exist in the database!');
+        return;
+    }
+
+    proceedWithGeneAnalysis();
+}
+
+function proceedWithGeneAnalysis() {
+    let d = {
+        nodeNames: gene_exists,
+        order: parseInt(order),
+        analysedWeight: channel,
+        score: parseFloat(score),
+        type: interaction_type_dropdown,
+        disease: $('#disease_dropdown').val()
+    };
+    console.log(d);
+    d = JSON.stringify(d);
+    setItemToStorage('pd_net_stringDB', d);
+    window.open("PD_stringDB.html");
+    $('.popup_card').css('display', 'none');
+}
+
+function closeWarning() {
+    document.getElementById('Warning').style.display = 'none';
+}
+
+function closePopUp(){
+	document.getElementById('Warning-1').style.display = 'none';
+}
+
+function closeAlert() {
+    document.getElementById('stop').style.display = 'none';
+}
+
+function closeAlertTwo() {
+    document.getElementById('stop-1').style.display = 'none';
+}
+
+
 		// ======================================== CLOSE POPUP TABLE ===================================
 		function pop_cancel() {
 			$('.popup_card').css("display", "none")
@@ -1147,6 +1320,8 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
                 					gene_exists.push(r.ID);
                 					existingIDs.add(r.ID);
                 					existingNames.add(r.hgnc_gene_symbol?.toUpperCase());
+									//console.log(`Current length of existingIDs: ${existingIDs.size}`);
+
 									// k = { ... }
 									// $('#gene_exists_table')
 									// 	.append(
@@ -1183,6 +1358,8 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
                         				</td>
                     				  </tr>`
                 					);
+
+									
 								}
 				
 							} else {
