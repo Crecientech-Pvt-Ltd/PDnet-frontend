@@ -463,6 +463,107 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			</div>
 		</div>
 	</div>
+
+	<!--Warning Message Nodes-->
+	<div style="display: none;"   id="node-modal-warning-alert">
+		<div id="alertWarning">
+			<button class="modal-close-btn" onclick="closeAlert_Warning()">x</button>
+			<div class="modal-header">
+				<span class="alert header-text">
+					Warning
+				</span>	
+			</div>
+			<div class="modal-body">
+				<ul>
+					<!-- <li style="font-size: 14px">
+						Network is bigger in size. Number of nodes are high.
+					</li> -->
+					<li style="font-size: 14px">
+						The current network displayed more than 1,000 nodes.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!---->
+
+		<!--Warning Message Edges-->
+		<div style="display: none;"   id="node-modal-warning-edges">
+			<div id="alertWarning">
+				<button class="modal-close-btn" onclick="close_Warning()">x</button>
+				<div class="modal-header">
+					<span class="alert header-text">
+						Warning
+					</span>	
+				</div>
+				<div class="modal-body">
+					<ul>
+						<!-- <li style="font-size: 14px">
+							Network is bigger in size. Number of nodes are high.
+						</li> -->
+						<li style="font-size: 14px">
+							The current network displayed more than 10,000 edges.
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!---->
+
+	<!--Stop Message  Nodes -->
+	<div  style="display: none;" id="node-modal-stop-alert">
+		<div id="alertStop">
+			<!-- <button class="modal-close-btn">x</button> -->
+			<div class="modal-header">
+				<span class="alert header-text">
+				  Stop
+				</span>	
+			</div>
+			<div class="modal-body">
+				<ul>
+					<li style="font-size: 14px">
+					 The Current Network  displayed  more than 5000 nodes.
+					</li>
+					<li style="font-size: 14px">
+						Please modify the input.
+						<!-- The Network for 5000 genes are render slow. -->
+					</li>
+				</ul>
+			</div>
+			<div style="display: flex; justify-content: center;">
+				<button type="button" class="btn btn-light" style="height: 35px ;width: 53px; font-size: 13px;" onclick="closeAlert_Stop()">OK</button>
+			</div>
+	</div>
+	</div>
+	<!---->
+
+	<!--Stop Message Edges-->
+
+	<div  style="display: none;" id="node-modal-stop-edges">
+		<div id="alertStop">
+			<!-- <button class="modal-close-btn">x</button> -->
+			<div class="modal-header">
+				<span class="alert header-text">
+				  Stop
+				</span>	
+			</div>
+			<div class="modal-body">
+				<ul>
+					<li style="font-size: 14px">
+					 The Current Network  displayed  more than 50,000 edges.
+					</li>
+					<li style="font-size: 14px">
+						Please modify the input.
+						<!-- The Network for 5000 genes are render slow. -->
+					</li>
+				</ul>
+			</div>
+			<div style="display: flex; justify-content: center;">
+				<button type="button" class="btn btn-light" style="height: 35px ;width: 53px; font-size: 13px;" onclick="close_Stop()">OK</button>
+			</div>
+	</div>
+	</div>
+
 	<!-- table for selected nodes -->
 	<div style="display: none;" id="node-modal-background">
 		<div id="nodeModal">
@@ -1440,6 +1541,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
             </div> -->
 	</div>
 	</div>
+
 	<div class="setting_wrapper" id="mysetting" style="display: none">
 		<div class="setting_close">
 			close
@@ -1585,7 +1687,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			<div class="networkcontainer"  id="resolution"  style="padding-bottom:5px;display: none;" >
 		
 				<p class="size">Resolution: <span id="Range">0.1</span></p>
-				<input type="range" min="0.1" max="4.0" step="0.1" value="1.0" class="slider" id="resolutionValue" onchange="resolutionFunc()">
+				<input type="range" min="0.1" max="4.0" step="0.1" value="0.1" class="slider" id="resolutionValue" onchange="resolutionFunc()">
 			</p>
 			<p class="size">
 				Weighted
@@ -1947,6 +2049,23 @@ function confirmDetails() {
 		function closeAlert() {
 			$("#node-modal-background-alert").css("display", "none");
 		}
+
+		function closeAlert_Warning() {
+			$("#node-modal-warning-alert").css("display", "none");
+		}
+
+		function close_Warning() {
+			$("#node-modal-warning-edges").css("display", "none");
+		}
+
+		function closeAlert_Stop() {
+          window.location.href = './geneSearch.html';
+       }
+
+	   function close_Stop() {
+          window.location.href = './geneSearch.html';
+       }
+
 
 		function closeModal() {
 			$("#node-modal-background").css("display", "none");
@@ -2450,7 +2569,7 @@ function calculatePValue(pValue) {
     const [base, exponent] = pValue.split('e').map(Number);
     const e = 2.7182818;
     const calculatedValue = base * Math.pow(e, exponent); // Calculated P-value
-   console.log(`P-value calculation: ${base} * e^(${exponent}) = ${calculatedValue}`);
+//   console.log(`P-value calculation: ${base} * e^(${exponent}) = ${calculatedValue}`);
     return calculatedValue;
 }
 
@@ -3329,9 +3448,31 @@ function formatAdjusted(AdjustedPvalue){
 					// 	$('#node-modal-background-alert').css('display', 'block')
 					// }  //commented by Vandana.
 					//below code added by Vandana (Start)
-					if (totalNodes >= 5000) {
-						$('#node-modal-background-alert').css('display', 'block')
-					}
+					// if (totalNodes >= 5000) {
+					// 	$('#node-modal-background-alert').css('display', 'block')
+					// }
+
+					// Handle node-related warnings and stops
+					if (totalNodes > 1000) {
+                if (totalNodes <= 5000) {
+                   $('#node-modal-warning-alert').show();
+                 } else {
+                   $('#node-modal-stop-alert').show();
+                  return;
+                 }
+               }
+
+			   // Handle edges-related warnings and stops
+
+			   if (totalEdges > 10000) {
+              if (totalEdges <= 50000) {
+                 $('#node-modal-warning-edges').show();
+             } else {
+             $('#node-modal-stop-edges').show();
+               return;
+              }
+              }
+					
 					//code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
 					$("#loader").css('display', 'none')
@@ -4467,13 +4608,13 @@ document.getElementById("logFCID4Color").onchange = function () {
 			if (isNodeColor1Checked == true) {
             	//  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
             	return "blue"; 
-			} else {
-				return default_node_color;
-			}
-        } else {
+			} 
+			else {
            // console.log(`Gene ID ${geneID} is not matched. Applying expression color.`);
             return val ? expressionColor(Number(val)) : default_node_color;
         }
+        } 
+		return default_node_color;
     });
 };
 
@@ -5742,6 +5883,23 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 					</ul>
 				</span>
 			</div>
+
+			<!-- <div  class="size"  style="padding:10px 0; max-height:600px;" >
+				<select  name="diseaseMap" style="width:100%; position: relative;
+				left: 162px;
+				bottom: 22px;" class="chosen-select">
+						<option value="ALS">ALS</option>
+						<option value="FTD">FTD</option>
+						<option value="OI">OI</option>
+						<option value="PSP">PSP</option>	
+					</select>
+
+			</div> -->
+
+		
+
+			
+
 	
 			<!-- Available Gene Content -->
 			<div class="modal-body" id="available-gene" style="display: block;">
