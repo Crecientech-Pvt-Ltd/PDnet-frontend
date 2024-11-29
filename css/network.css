@@ -379,6 +379,35 @@ body {
       pointer-events: all;
       /* opacity: 1; */
   }
+
+  #alertWarning {
+    /* position: absolute;
+    top: 0px;
+    left: 20%; */
+    margin: 5% auto;
+    background-color: #FFFFC5;
+    height: 200px;
+    width: 400px;
+    z-index: 9;
+    pointer-events: all;
+    border-radius: 15px;
+    /* opacity: 1; */
+}
+
+
+#alertStop {
+    /* position: absolute;
+    top: 0px;
+    left: 20%; */
+    margin: 5% auto;
+    background-color: hsl(0, 84%, 59%);
+    height: 200px;
+    width: 400px;
+    z-index: 9;
+    pointer-events: all;
+    border-radius: 15px;
+    /* opacity: 1; */
+}
   
   #nodeModal {
       /* position: absolute;
@@ -468,6 +497,61 @@ body {
       z-index: 9;
       /* pointer-events: none; */
   }
+
+    
+  #node-modal-warning-alert {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+}
+
+#node-modal-warning-edges {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+}
+
+  #node-modal-stop-alert {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+  }
+
+
+  #node-modal-stop-edges {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+  }
+
   
   #loader-back {
           position: absolute;
@@ -559,7 +643,7 @@ body {
   .alert.header-text {
       font-size: 20px;
       font-weight: bold;
-      color: #e07272;
+      color: hsl(0, 3%, 8%);
   }
   
   .fixed_header{

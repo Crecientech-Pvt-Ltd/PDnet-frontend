@@ -865,7 +865,9 @@ margin-left: 20px;
     text-align: center;
     margin: 20px;
     position: relative;
-    bottom: 290px;
+    bottom: 368px;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-1{
