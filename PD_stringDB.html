@@ -1704,34 +1704,38 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<script>
 			function toggleResolution() {
-			  const resolutionDiv = document.getElementById("resolution");
-			  const louvainRadio = document.getElementById("louvain");
-		  
-			  if (louvainRadio.checked) {
-				resolutionDiv.style.display = "block";
-			  } else {
-				resolutionDiv.style.display = "none";
-				const slider = document.getElementById("resolutionValue");
-			    const nRange = document.getElementById("Range");   
-				slider.value = 0; 
-                nRange.textContent = 0;
-			  }
-			  
+  const resolutionDiv = document.getElementById("resolution");
+  const louvainRadio = document.getElementById("louvain");
 
-			  const isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-	        if(isNodeColor1Checked){
-          d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-	       highlightNodes()
-	      return default_node_color;
-          });
-	}
-	else{
-		d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-	    removeHighlightNodes()
-	     return default_node_color;
-});
-	}
-			}
+  // Fetch and parse the data from storage
+  const totalData = getItemFromStorage('pd_net_stringDB');
+  const d = totalData ? JSON.parse(totalData) : {};
+  const nodeNames = Array.isArray(d.nodeNames) ? d.nodeNames : [];
+
+  // Toggle resolution slider visibility
+  if (louvainRadio.checked) {
+    resolutionDiv.style.display = "block";
+  } else {
+    resolutionDiv.style.display = "none";
+
+    // Reset slider values when "None" is selected
+    const slider = document.getElementById("resolutionValue");
+    const nRange = document.getElementById("Range");
+    slider.value = "0";
+    nRange.textContent = "0";
+  }
+
+  // Update node colors based on condition
+  const isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+
+  d3.selectAll("stop[offset='100%']").style("stop-color", function (node) {
+    const nodeName = node?.ID || ""; 
+    if (isNodeColor1Checked && nodeNames.includes(nodeName)) {
+      return "blue"; 
+    }
+    return default_node_color; 
+  });
+}
 
 
 		function resolutionFunc() {
@@ -4603,18 +4607,15 @@ document.getElementById("logFCID4Color").onchange = function () {
         let geneIndex = geneIndexMap[geneID];
         let val = currentUniversal?.genes[geneIndex]?.[nodeColor_sel];
       //  console.log("Value from Current Universal Genes:", val);
-        if (nodeNames.includes(geneID)) {
-			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-			if (isNodeColor1Checked == true) {
-            	//  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-            	return "blue"; 
-			} 
-			else {
-           // console.log(`Gene ID ${geneID} is not matched. Applying expression color.`);
-            return val ? expressionColor(Number(val)) : default_node_color;
-        }
-        } 
-		return default_node_color;
+
+		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+        			return "blue";
+    			} else {
+					return val ? expressionColor(Number(val)) : default_node_color;
+				}
+
+				
     });
 };
 
