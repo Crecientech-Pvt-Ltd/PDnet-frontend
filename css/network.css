@@ -525,6 +525,31 @@ body {
     /* pointer-events: none; */
 }
 
+#null-message-id {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+}
+
+
+#alertNullWarning{
+    margin: 5% auto;
+    background-color: #FFFFC5;
+    height: 148px;
+    width: 370px;
+    z-index: 9;
+    pointer-events: all;
+    border-radius: 15px;
+    opacity: 1;
+}
+
   #node-modal-stop-alert {
     position: absolute;
     top: 0;
