@@ -116,7 +116,7 @@
     });
   }
 
- // console.log("Final UniNode Headers:", uniNodeHeaders);
+//console.log("Final UniNode Headers:", uniNodeHeaders);
 		// const selectElement = document.getElementById('diseaseMap');
 		// const selectedText = selectElement.options[selectElement.selectedIndex].text;
 		
@@ -454,6 +454,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		//console.log("uniNode: ", uniNode)
 
 	}
+
+
+
 	// 	statusCode: {
 	// 		404: function () {
 	// 			alert('There was a problem with the server.  Try again soon!');
@@ -663,6 +666,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
+				<div><button onclick="closeModal()" style = "padding:5px 20px;margin-left: 722px;font-size: 14px;margin-top: 15px;">Close</button></div>
 			</div>
 		</div>
 	</div>
@@ -704,9 +708,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					GSEA Analysis Results
 				</span>
 				<button class="modal-close-btn" onclick="closeModalGSEA()">x</button>
-				<div>
+				<!-- <div>
 					<button onclick="exportToExcel()" style="padding:10px 10px;margin-left:180%;margin-bottom:10px;width:120px;font-size: 14px;margin-top:8px;">Export Details</button>
-				  </div>
+				  </div> -->
 			</div>
 			<div class="modal-body">
 				<table class="fixed_header">
@@ -735,6 +739,12 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
+				<div style="margin-left: 1120px;">
+					
+					<button onclick="exportToExcel()" style="padding:10px 20px;font-size: 14px;margin-top: 10px;">Export Details</button>
+						
+					<button onclick="closeModalGSEA()" style = "padding:10px 20px;font-size: 14px;margin-top: 10px;">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -2062,7 +2072,6 @@ function universal_ext_update() {
                     ...geneData,
                     ...currentUniversal.genes[geneIndexMap[geneId]]
                 };
-
                 matchedGenes.push(geneId);
 				
             }
@@ -2110,7 +2119,7 @@ function universal_ext_update() {
 
 function confirmDetails() {
     if (headers.length > 0) {
-        getUniversal(currentUniversal, headers);
+       // getUniversal(currentUniversal, headers);
         $("#node-modal-background-4").css("display", "none");
     } else {
         alert('No data available to confirm. Please upload a file first.');
@@ -2624,7 +2633,7 @@ function confirmDetails() {
 								const formattedAdjustedPvalue = formatAdjusted(val['Adjusted P-value'])
 								$("#gsea_info").append(`<p style="font-size: 13px;">${val.Gene_set}</p>`);
 								$("#table_data-ip-3").append(`<tr>
-									<td style="width: 50px; min-width: 50px; padding: 5px;">${idx + 1}</td>
+									<td style="width: 50px; padding: 5px;">${idx + 1}</td>
 									<td>${val.Gene_set}</td>
 									<td>${val.Overlap}</td>
 									<td>${formattedPValue}</td>
@@ -4058,120 +4067,120 @@ function formatAdjusted(AdjustedPvalue){
 		}
 
 
-		function TEdegreeFun() {
-			var degreeValTE = parseFloat(this.value) || 0;
-			TEdegreeOutput.innerHTML = degreeValTE;
-			// Function to get the score for a node
-			function getScore(d) {
-				const cutoffType = document.getElementById("nodeDegreeID4Size").value; // Get the current cutoff type
-				if (cutoffType && currentUniversal?.genes[geneIndexMap[d?.ID]]) {
-					const geneData = currentUniversal.genes[geneIndexMap[d.ID]];
-					const scoreValue = geneData[cutoffType] !== undefined ? parseFloat(geneData[cutoffType]) : 0;
-					return isNaN(scoreValue) ? 0 : scoreValue;
-				}
-				return 0; // Default to 0 if score is not available
-			}
-			// Filter nodes based on the score threshold
-			const totalNodes = d3.selectAll(".node")
-				.style("display", function (d) {
-					const score = getScore(d);
-					const isVisible = score >= degreeValTE;
-					// console.log(`Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				})
-				.filter(d => getScore(d) >= degreeValTE)
-				.size();
-			// Filter links based on the visibility of connected nodes
-			const totalEdges = d3.selectAll(".link")
-				.style("display", function (d) {
-					const sourceScore = getScore(d.source);
-					const targetScore = getScore(d.target);
-					const isVisible = sourceScore >= degreeValTE && targetScore >= degreeValTE;
-					// console.log(`Link from Node ${d.source.id} to Node ${d.target.id}: Source Score: ${sourceScore}, Target Score: ${targetScore}, Threshold: ${degreeValTE}, Link Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				})
-				.filter(d => getScore(d.source) >= degreeValTE && getScore(d.target) >= degreeValTE)
-				.size();
-			// Filter text labels based on the score threshold
-			d3.selectAll(".text")
-				.style("display", function (d) {
-					const score = getScore(d);
-					const isVisible = score >= degreeValTE;
-					// console.log(`Text for Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				});
-			// Update network details
-			$('#network_details').empty();
-			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
-			// Restart or update the graph if needed
-			restart();
-		}
-
 		// function TEdegreeFun() {
-		// 	TEdegreeOutput.innerHTML = this.value || 0;
-		// 	if (typeof this.value == "undefined") {
-		// 		this.value = 0;
+		// 	var degreeValTE = parseFloat(this.value) || 0;
+		// 	TEdegreeOutput.innerHTML = degreeValTE;
+		// 	// Function to get the score for a node
+		// 	function getScore(d) {
+		// 		const cutoffType = document.getElementById("nodeDegreeID4Size").value; // Get the current cutoff type
+		// 		if (cutoffType && currentUniversal?.genes[geneIndexMap[d?.ID]]) {
+		// 			const geneData = currentUniversal.genes[geneIndexMap[d.ID]];
+		// 			const scoreValue = geneData[cutoffType] !== undefined ? parseFloat(geneData[cutoffType]) : 0;
+		// 			return isNaN(scoreValue) ? 0 : scoreValue;
+		// 		}
+		// 		return 0; // Default to 0 if score is not available
 		// 	}
-		// 	var degreeValTE = this.value || 0;
+		// 	// Filter nodes based on the score threshold
 		// 	const totalNodes = d3.selectAll(".node")
-		// 		.filter(d => {
-		// 			return d.weight >= degreeValTE;
+		// 		.style("display", function (d) {
+		// 			const score = getScore(d);
+		// 			const isVisible = score >= degreeValTE;
+		// 			// console.log(`Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
 		// 		})
-		// 		.style("display", "inline").size();
-		// 	d3.selectAll(".node")
-		// 		.filter(d => {
-		// 			return d.weight < degreeValTE;
-		// 		})
-		// 		.style("display", "none");
+		// 		.filter(d => getScore(d) >= degreeValTE)
+		// 		.size();
+		// 	// Filter links based on the visibility of connected nodes
 		// 	const totalEdges = d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.target.weight >= degreeValTE
+		// 		.style("display", function (d) {
+		// 			const sourceScore = getScore(d.source);
+		// 			const targetScore = getScore(d.target);
+		// 			const isVisible = sourceScore >= degreeValTE && targetScore >= degreeValTE;
+		// 			// console.log(`Link from Node ${d.source.id} to Node ${d.target.id}: Source Score: ${sourceScore}, Target Score: ${targetScore}, Threshold: ${degreeValTE}, Link Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
 		// 		})
-		// 		.style("display", "inline").size();
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.source.weight >= degreeValTE
-		// 		})
-		// 		.style("display", "inline");
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.target.weight < degreeValTE
-		// 		})
-		// 		.style("display", "none");
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.source.weight < degreeValTE
-		// 		})
-		// 		.style("display", "none");
+		// 		.filter(d => getScore(d.source) >= degreeValTE && getScore(d.target) >= degreeValTE)
+		// 		.size();
+		// 	// Filter text labels based on the score threshold
 		// 	d3.selectAll(".text")
-		// 		.filter(d => {
-		// 			return d.weight >= degreeValTE;
-		// 		})
-		// 		.style("display", "inline");
-		// 	d3.selectAll(".text")
-		// 		.filter(d => {
-		// 			return d.weight < degreeValTE;
-		// 		}).style("display", "none");
+		// 		.style("display", function (d) {
+		// 			const score = getScore(d);
+		// 			const isVisible = score >= degreeValTE;
+		// 			// console.log(`Text for Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
+		// 		});
+		// 	// Update network details
 		// 	$('#network_details').empty();
 		// 	$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
-		// }
-
-
-		// slider.oninput =  function() {
-		//   //var textval=10
-		//   output.innerHTML = this.value;
-		//   var myinout = this.value;
-		//   graph.links.splice(0, graph.links.length);
-
-		//   graphRec.links.forEach(function(val){
-		// 		if(val.weight > myinout){
-		// 			graph.links.push(val);
-		// 		}
-		// 	});
-
-		// 	console.log(graph.links,"kkkk",graph.nodes)
+		// 	// Restart or update the graph if needed
 		// 	restart();
 		// }
+
+		function TEdegreeFun() {
+			TEdegreeOutput.innerHTML = this.value || 0;
+			if (typeof this.value == "undefined") {
+				this.value = 0;
+			}
+			var degreeValTE = this.value || 0;
+			const totalNodes = d3.selectAll(".node")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".node")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				})
+				.style("display", "none");
+			const totalEdges = d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight >= degreeValTE
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight >= degreeValTE
+				})
+				.style("display", "inline");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				}).style("display", "none");
+			$('#network_details').empty();
+			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+		}
+
+
+		slider.oninput =  function() {
+		  //var textval=10
+		  output.innerHTML = this.value;
+		  var myinout = this.value;
+		  graph.links.splice(0, graph.links.length);
+
+		  graphRec.links.forEach(function(val){
+				if(val.weight > myinout){
+					graph.links.push(val);
+				}
+			});
+
+			console.log(graph.links,"kkkk",graph.nodes)
+			restart();
+		}
 
 		// function filternodes(){
 		// 	graph.nodes.splice(0, graph.nodes.length);
@@ -5534,24 +5543,24 @@ function getNodeSizeScale(nss) {
 				}
 				let val2;
 				if (/TE/.test(cutoff_type)) {
-					var allTEvalues = [];
-					d3.selectAll(".node").select("path")
-						.attr("dTest", d3.svg.symbol()
-							.size(function (dTest) {
-								val2 = (currentUniversal?.genes[geneIndexMap[dTest.ID]][document.getElementById("nodeDegreeID4Size").value]) ?? 0;
-								allTEvalues.push(val2);
-							})
-						);
-					let newVal;
-					const minTEval = Math.min(...allTEvalues).toFixed(2);
-					const maxTEval = Math.max(...allTEvalues).toFixed(2);
-					const TErangeInput = document.getElementById('myTEvalues');
-					TErangeInput.min = minTEval;
-					TErangeInput.max = maxTEval;
-					TErangeInput.addEventListener('input', function () {
-						document.getElementById('thresh3').textContent = this.value;
-					});
-					document.getElementById('thresh3').textContent = TErangeInput.value;
+					// var allTEvalues = [];
+					// d3.selectAll(".node").select("path")
+					// 	.attr("dTest", d3.svg.symbol()
+					// 		.size(function (dTest) {
+					// 			val2 = (currentUniversal?.genes[geneIndexMap[dTest.ID]][document.getElementById("nodeDegreeID4Size").value]) ?? 0;
+					// 			allTEvalues.push(val2);
+					// 		})
+					// 	);
+					// let newVal;
+					// const minTEval = Math.min(...allTEvalues).toFixed(2);
+					// const maxTEval = Math.max(...allTEvalues).toFixed(2);
+					// const TErangeInput = document.getElementById('myTEvalues');
+					// TErangeInput.min = minTEval;
+					// TErangeInput.max = maxTEval;
+					// TErangeInput.addEventListener('input', function () {
+					// 	document.getElementById('thresh3').textContent = this.value;
+					// });
+					// document.getElementById('thresh3').textContent = TErangeInput.value;
 					$("#TERange").show()
 				} else {
 					$("#TERange").hide()

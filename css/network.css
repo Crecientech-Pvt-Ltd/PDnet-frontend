@@ -460,16 +460,15 @@ body {
 
 
   #nodeModal-4 {
-    /* position: absolute;
-    top: 0px;
-    left: 20%; */
     margin: 5% auto;
     background-color: white;
-    max-height: 52vh;
-    max-width: 90vw;
+    max-height: 75vh;
+    max-width: 91vw;
     z-index: 9;
     pointer-events: all;
+    padding: 23px;
     /* opacity: 1; */
+    border-radius: 44px;
 }
   
   #node-modal-background {
@@ -599,7 +598,7 @@ body {
       right: 0;
       background: rgba(37, 37, 37, 0.81);
       /* opacity: .8; */
-      height: 110%;
+      height: 100%;
       z-index: 9;
       /* pointer-events: none; */
   }
@@ -612,7 +611,7 @@ body {
       right: 0;
       background: rgba(37, 37, 37, 0.81);
       /* opacity: .8; */
-      height: 110%;
+      height: 100%;
       z-index: 9;
       /* pointer-events: none; */
   }
@@ -742,6 +741,7 @@ body {
 .buttons-btn{
     text-align: center;
     margin: 20px;
+    margin-top: 12px;
 }
 
 .confirm-btn{
@@ -1025,16 +1025,28 @@ body {
 		font-weight: bold;
 		cursor: pointer;
 		padding: 10px;
+        font-size: 14px;
+        /* border-radius: 10px; */
 	}
 	.inactive-tab {
 		background-color: #f1f1f1; 
 		color: #333;
 	}
+
+    #node-modal-background-4 .tab-header a.inactive-tab {
+        background-color: white;
+        color: #333;
+    }
+
 	.active-tab {
 		background-color: #007bff; 
 		color: white;
 	}
-
+    #node-modal-background-4 .tab-header a.active-tab {
+        background-color: #007BFF;
+        color: white;
+        border-radius: 4px;
+    }
 
     #nodeModal-3 .modal-header ,#nodeModal .modal-header{
         position: relative;
@@ -1044,4 +1056,138 @@ body {
         top: 5px;
         right: 10px;
         font-size: 20px;
+    }
+
+   
+
+    #node-modal-background th:nth-child(1) {
+       min-width: 80px;
+    }
+
+    #node-modal-background td:nth-child(1) {
+        min-width: 80px;
+     }
+
+
+     #node-modal-background th:nth-child(2) {
+        min-width: 130px;
+     }
+
+     #node-modal-background td:nth-child(2) {
+        min-width: 130px;
+     }
+
+     #node-modal-background th:nth-child(3) {
+        min-width: 225px;
+     }
+     
+     #node-modal-background td:nth-child(3) {
+        min-width: 225px;
+     }
+
+
+    #node-modal-background-3 th:nth-child(1){
+        min-width: 70px;
+    }
+
+    #node-modal-background-3 td:nth-child(1){
+        min-width: 70px;
+    }
+
+    #node-modal-background-3 th:nth-child(2){
+        min-width: 280px;
+    }
+
+    #node-modal-background-3 td:nth-child(2){
+        min-width: 280px;
+    }
+
+    #node-modal-background-3 th:nth-child(3){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 td:nth-child(3){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 th:nth-child(4){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 td:nth-child(4){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 th:nth-child(5){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 td:nth-child(5){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 th:nth-child(6){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 td:nth-child(6){
+        min-width: 140px;
+    }
+    #node-modal-background-3 th:nth-child(7){
+        min-width: 140px;
+    }
+
+    #node-modal-background-3 td:nth-child(7){
+        min-width: 140px;
+    }
+    #node-modal-background-3 th:nth-child(8){
+        min-width: 300px;
+    }
+
+    #node-modal-background-3 td:nth-child(8){
+        min-width: 300px;
+    }
+
+    #node-modal-background-3 th , #node-modal-background th{
+        font-size: 13px;
+    }
+
+    /* #node-modal-background-4 th:nth-child(1){
+        min-width:100px;
+    }
+
+    #node-modal-background-4 td:nth-child(1){
+        min-width:100px;
+    }
+
+    #node-modal-background-4 th:nth-child(2){
+        min-width:270px;
+    }
+
+    #node-modal-background-4 td:nth-child(2){
+        min-width:270px;
+    } */
+
+    #node-modal-background-2 th:nth-child(1){
+        min-width: 90px;
+    }
+
+    #node-modal-background-2 td:nth-child(1){
+        min-width: 90px;
+    }
+
+    #node-modal-background-2 th:nth-child(2){
+        min-width: 150px;
+    }
+
+    #node-modal-background-2 td:nth-child(2){
+        min-width: 150px;
+    }
+
+    #node-modal-background-2 th:nth-child(3){
+        min-width: 185px;
+    }
+
+    #node-modal-background-2 td:nth-child(3){
+        min-width: 185px;
     }
