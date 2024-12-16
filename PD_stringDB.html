@@ -102,9 +102,6 @@
 	// 	}
 	function getUniversal(commonData, diseaseData) {
   console.log("uniNode loaded");
-  // Log the data for debugging
-  //console.log("Common Data:", commonData);
- // console.log("Disease Data:", diseaseData);
 
   // Example: Handling `common` and `disease`
   let uniNodeHeaders = diseaseData; // Use `disease` as headers
@@ -117,6 +114,350 @@
   }
 
 //console.log("Final UniNode Headers:", uniNodeHeaders);
+
+
+	   var uniNodeGDA = uniNodeHeaders.filter((header) => 
+        header.toLowerCase().includes("gda_".toLowerCase())
+             );
+
+	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
+	// console.log("Filtered uniNodeGDA:", uniNodeGDA)
+	  
+		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().includes("logfc_".toLowerCase()));
+
+		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
+		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
+		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
+		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
+		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
+		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
+		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
+		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
+		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
+		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
+		//console.log("Filtered Druggability",uniNodeDruggability)
+		//console.log("Filtered uniNodeGWAS:", uniNodeGWAS)
+		
+		//************************* TO POPULATE DROP DOWNS
+		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
+		
+		
+		$('#TE4Color').empty();
+		// For TE Color
+		document.getElementById('TE4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color')
+			$('#TE4Color').trigger("chosen:updated");
+		}
+		// Adding TE options to the node cut-off in Radial Analysis section
+		var allValues = [];
+		$('#TE4Color option').each(function () {
+			allValues.push($(this).val());
+		});
+		// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
+		var TE_cutOff = allValues.forEach(function (value) {
+			$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
+		});
+		$('#nodeDegreeID4Size').trigger("chosen:updated");
+
+		$('#TE4Size').empty();
+		document.getElementById('TE4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//For TE Size
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
+				'#TE4Size')
+			$('#TE4Size').trigger("chosen:updated");
+
+		};
+
+
+		// if(uniNodeGDA.length === 0){
+
+
+		// }
+
+		// $('#GDAID4Color').empty();
+		// $('#GDAID4Size').empty()
+
+		// // For GDA Color
+		// for (var key = 0; key < uniNodeGDA.length; key++) {
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
+		// 	$('#GDAID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
+		// 	$('#GDAID4Size').trigger("chosen:updated");
+		// }
+
+		// Assuming uniNodeGDA is defined and populated before this check
+if (uniNodeGDA.length === 0) {
+    // Clear the dropdowns
+    $('#GDAID4Color').empty();
+    $('#GDAID4Size').empty();
+
+    // Optionally, add a default option to indicate no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Size');
+
+    // Trigger the chosen plugin to update the dropdowns
+    $('#GDAID4Color').trigger("chosen:updated");
+    $('#GDAID4Size').trigger("chosen:updated");
+} else {
+    // Populate GDA Color and Size dropdowns if options are available
+    $('#GDAID4Color').empty(); // Clear previous options
+    $('#GDAID4Size').empty(); // Clear previous options
+	document.getElementById('GDAID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    // For GDA Color
+    for (var key = 0; key < uniNodeGDA.length; key++) {
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
+        $('#GDAID4Color').trigger("chosen:updated");
+
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
+        $('#GDAID4Size').trigger("chosen:updated");
+    }
+}
+
+     $('#druggabilityID4Color').empty();
+     document.getElementById('druggabilityID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+
+		// Populate Druggability dropdown
+		for (var key = 0; key < uniNodeDruggability.length; key++) {
+			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color')
+			$('#druggabilityID4Color').trigger("chosen:updated");
+		}
+		// Populate GWAS OR dropdown
+		for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
+			$('<option/>').val(uniNodeGWAS_OR[key]).text(jsUcFirst(uniNodeGWAS_OR[key])).appendTo('#GWAS_OR4Color');
+		}
+
+		// Populate GWAS Beta dropdown
+		for (var key = 0; key < uniNodeGWAS_Beta.length; key++) {
+			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
+		}
+
+		// Clear previous options in the dropdowns
+$('#logFCID4Color').empty();
+$('#GlogFCID4Size').empty();
+
+// Check if uniNodeLogFC is empty
+if (uniNodeLogFC.length === 0) {
+    // Add a default option indicating no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#logFCID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
+} else {
+    // Populate the dropdowns with logFC options
+	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    for (var key = 0; key < uniNodeLogFC.length; key++) {
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
+    }
+}
+
+// Trigger the Chosen plugin to update the dropdowns after modifications
+$('#logFCID4Color').trigger("chosen:updated");
+$('#GlogFCID4Size').trigger("chosen:updated");
+
+
+		// $('#logFCID4Color').empty();
+		// $('#GlogFCID4Size').empty()
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// };
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
+
+		//For Direction Color
+		for (var key = 0; key < uniNodeDirection.length; key++) {
+			$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
+				'#directionID4Color')
+			$('#directionID4Color').trigger("chosen:updated");
+		};
+
+
+		//For Direction Shape
+		//for (var key = 0; key < uniNodeDirection.length; key++) {
+		//$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo('#directionID4Shape')
+		//};
+
+		$('#pathwayID4Color').empty()
+		document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//For Pathways color
+		for (var key = 0; key < uniNodePathway.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+				'#pathwayID4Color')
+			$('#pathwayID4Color').trigger("chosen:updated");
+		};
+
+
+
+       //$('#custom4Color').empty()
+
+		//For Custom color
+		for (var key = 0; key < uniNodeCustomColors.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodeCustomColors[key]).text(jsUcFirst(uniNodeCustomColors[key])).appendTo(
+				'#custom4Color')
+			$('#custom4Color').trigger("chosen:updated");
+		};
+
+		$('#custom4Color').trigger("chosen:updated");
+
+
+
+		//For Pathways Shape
+		for (var key = 0; key < uniNodePathway.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+				'#pathwayID4Shape')
+		};
+
+
+		// for (var key = 0; key < uniNodeGLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
+
+		$('#druggabilityID4Size').empty();
+		document.getElementById('druggabilityID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//Trait for Size
+		for (var key = 0; key < uniNodeDruggability.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
+			$('#druggabilityID4Size').trigger("chosen:updated");
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+		//GWAS 4 color
+		$('#GWAS4Color').empty();
+		$('#gwasID4Size').empty();
+
+		if (uniNodeGWAS.length === 0){
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#GWAS4Color');
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#gwasID4Size');
+		}
+
+		else{
+			document.getElementById('GWAS4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    for (var key = 0; key < uniNodeGWAS.length; key++) {
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#GWAS4Color');
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#gwasID4Size');
+    }
+		}
+
+   $('#GWAS4Color').trigger("chosen:updated");
+  $('#gwasID4Size').trigger("chosen:updated");
+
+
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#GWAS4Color')
+		// 	$('#GWAS4Color').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+		//GWAS 4 shape
+		for (var key = 0; key < uniNodeGWAS.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+				uniNodeGWAS[key])).appendTo('#GWAS4Shape')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+		//GWAS 4 Size
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#gwasID4Size')
+		// 	$('#gwasID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+
+		$('#DBs4Color').empty();
+		document.getElementById('DBs4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//Databases 4 color
+		for (var key = 0; key < uniNodeDBs.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
+				uniNodeDBs[key])).appendTo('#DBs4Color')
+			$('#DBs4Color').trigger("chosen:updated");
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//Databases 4 Shape
+		for (var key = 0; key < uniNodeDBs.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
+				uniNodeDBs[key])).appendTo('#DBs4Shape')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//CellType_Markers 4 color
+		for (var key = 0; key < uniNodeMarkers.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeMarkers[key] != "markers_Module_ID") $('<option/>').val(uniNodeMarkers[key]).text(
+				jsUcFirst(uniNodeMarkers[key])).appendTo('#markers4Color')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//CellType_Markers 4 shape
+		for (var key = 0; key < uniNodeMarkers.length; key++) {
+
+			if (uniNodeMarkers[key] != "markers_Module_ID") $('<option/>').val(uniNodeMarkers[key]).text(
+				jsUcFirst(uniNodeMarkers[key])).appendTo('#markers4Shape')
+
+		};
+
+		// for (var key = 0; key < uniNodeDruggability.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+		// 		jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
+		// 	$('#nodeDegreeID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+
+		//  relevence in  radial analysis
+		// for(let key=0; key<uniNodeRelevence.length; key++){
+		// 	$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo('#nodeDegreeID4Size')
+		// }
+
+		//console.log("uniNode: ", uniNode)
+
+	}
+
+
+
+	function getUniversalTwo(data, headers) {
+		console.log("uniNode loaded ")
+		uniNode = data;
+		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+		if (headers) {
+			headers.forEach((header) => {
+				if (!uniNodeHeaders.includes(header)) {
+					uniNodeHeaders.push(header);
+				}
+			});
+		}
+
+  console.log("Final UniNode Headers:", uniNodeHeaders);
 		// const selectElement = document.getElementById('diseaseMap');
 		// const selectedText = selectElement.options[selectElement.selectedIndex].text;
 		
@@ -457,6 +798,35 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 
 
+
+// function getUniversalTwo(data, headers) {
+//     console.log("uniNode loaded");
+//     uniNode = data;
+//     var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+
+//     if (headers) {
+//         headers.forEach((header) => {
+//             if (!uniNodeHeaders.includes(header)) {
+//                 uniNodeHeaders.push(header);
+//             }
+//         });
+//     }
+
+//     console.log("Final UniNode Headers:", uniNodeHeaders);
+
+	
+
+//     // Log each header with its respective value for all genes
+//     uniNode.genes.forEach((gene, index) => {
+//         console.log(`Gene ${index + 1}:`);
+//         uniNodeHeaders.forEach((header) => {
+//             console.log(`  ${header}: ${gene[header] || 'N/A'}`); // Logs 'N/A' if the value is undefined
+//         });
+//     });
+// }
+
+
+
 	// 	statusCode: {
 	// 		404: function () {
 	// 			alert('There was a problem with the server.  Try again soon!');
@@ -666,7 +1036,15 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
-				<div><button onclick="closeModal()" style = "padding:5px 20px;margin-left: 722px;font-size: 14px;margin-top: 15px;">Close</button></div>
+				<div style="
+                display: flex;
+                justify-content: flex-end; /* Centers horizontally */
+                margin-top: 15px;">
+                <button onclick="closeModal()" 
+                    style="padding: 8px 20px; font-size: 14px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
 			</div>
 		</div>
 	</div>
@@ -739,7 +1117,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
-				<div style="margin-left: 1120px;">
+				<div class="button-container">
 					
 					<button onclick="exportToExcel()" style="padding:10px 20px;font-size: 14px;margin-top: 10px;">Export Details</button>
 						
@@ -902,12 +1280,15 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						  }
 						}
 						window.onload = function () {
-                      setTimeout(() => {    
+					//	preventReadyFunctionExecution = false
+                      setTimeout(() => { 
+						console.log('loading...')   
                             makeRequest()
                             .then(() => updateTooltip())
                             .catch((error) => {
                           console.error("Error during initialization:", error);
                            });}, 3500); 
+						  
                              };	
 						// Call `updateTooltip` on page load to initialize
 						//window.onload = updateTooltip;
@@ -1980,13 +2361,34 @@ function updateNodeColors(response) {
 		}
 
 		// Reset universal
+		// function resetUniversals() {
+		// 	preventReadyFunctionExecution = false
+		// 	makeRequest()
+		// 	resetText()
+		// 	clearUniData()
+		// 	$("#diseaseMap").val(JSON.parse(getItemFromStorage('pd_net_stringDB')).disease);
+		// 	$("#diseaseMap option[value='Custom Universal']").remove();
+		// 	getUniversal(initialUniversal);
+		// }
+
 		function resetUniversals() {
-			resetText()
-			clearUniData()
-			$("#diseaseMap").val(JSON.parse(getItemFromStorage('pd_net_stringDB')).disease);
-			$("#diseaseMap option[value='Custom Universal']").remove();
-			getUniversal(initialUniversal);
-		}
+        // Show the spinner
+        const spinnerOverlay = document.getElementById("spinnerOverlay");
+        spinnerOverlay.style.display = "flex";
+		 // Execute the rest of the function after the delay
+            preventReadyFunctionExecution = false;
+            makeRequest();
+             resetText();
+             clearUniData();
+            // $("#diseaseMap").val(JSON.parse(getItemFromStorage('pd_net_stringDB')).disease);
+            // $("#diseaseMap option[value='Custom Universal']").remove();
+            // getUniversal(initialUniversal);
+        // Simulate a delay for the spinner (e.g., 3 seconds)
+        setTimeout(() => { 
+            // Hide the spinner after the task is done
+            spinnerOverlay.style.display = "none";
+        }, 700); 
+    }
 		// // new value to universal file
 		// function universal_ext_update() {
 		// 	let file = document.getElementById('universal_ext')?.files[0];
@@ -2051,6 +2453,7 @@ function universal_ext_update() {
 
         // Set headers for confirmDetails to use
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+				updateDropdownVisibility(headers);
 
         let matchedGenes = [];
         let unmatchedGenes = [];
@@ -2073,7 +2476,7 @@ function universal_ext_update() {
                     ...currentUniversal.genes[geneIndexMap[geneId]]
                 };
                 matchedGenes.push(geneId);
-				
+				console.log(currentUniversal)
             }
         });
 
@@ -2106,7 +2509,7 @@ function universal_ext_update() {
         $("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
         $("#diseaseMap").val('Custom Universal');
         document.getElementById("universal_ext").value = "";
-        clearUniData();
+//clearUniData();
 
         $('#uploading_custom_universal').css('display', 'none');
         $('#uploaded_custom_universal').css('display', 'block');
@@ -2117,12 +2520,54 @@ function universal_ext_update() {
     reader.readAsText(file);
 }
 
+function updateDropdownVisibility(headers) {
+	const dropdownMapping = {
+		logFCID4Color: headers.filter(header => header.toLowerCase().includes("logfc")),
+		GlogFCID4Size: headers.filter(header => header.toLowerCase().includes("logfc")),
+		GDAID4Color: headers.filter(header => header.toLowerCase().includes("gda")),
+		GDAID4Size: headers.filter(header => header.toLowerCase().includes("gda")),
+		druggabilityID4Color: headers.filter(header => header.toLowerCase().includes("druggability")),
+		druggabilityID4Size: headers.filter(header => header.toLowerCase().includes("druggability")),
+		TE4Color: headers.filter(header => header.toLowerCase().includes("te_")),
+		TE4Size: headers.filter(header => header.toLowerCase().includes("te_")),
+		pathwayID4Color: headers.filter(header => header.toLowerCase().includes("pathway_")),
+		pathwayID4Size: headers.filter(header => header.toLowerCase().includes("pathway_")),
+		GWAS4Color: headers.filter(header => header.toLowerCase().includes("genetics")),
+		gwasID4Size: headers.filter(header => header.toLowerCase().includes("genetics")),
+		customColorID4: headers.filter(header => header.toLowerCase().includes("custom_color")),
+		DBs4Color: headers.filter(header => header.toLowerCase().includes("database_")),
+
+
+
+	};
+
+	// Update each dropdown based on the presence of matching headers
+	Object.keys(dropdownMapping).forEach(dropdownId => {
+			const dropdownElement = document.getElementById(dropdownId);
+
+			if (dropdownElement) {
+					if (dropdownMapping[dropdownId].length > 0) {
+							// Matching headers found: show dropdown
+							// $(dropdownElement).parent().show(); // Assuming dropdowns have a parent wrapper
+					} else {
+							// No matching headers: hide dropdown or set to "None"
+							$(dropdownElement).empty().append('<option value="none" selected>None</option>');
+							$(dropdownElement).parent().hide();
+					}
+					$(dropdownElement).trigger("chosen:updated");
+			}
+	});
+}
+
+let preventReadyFunctionExecution = false;
 function confirmDetails() {
     if (headers.length > 0) {
-       // getUniversal(currentUniversal, headers);
+        getUniversalTwo(currentUniversal, headers);
         $("#node-modal-background-4").css("display", "none");
+		preventReadyFunctionExecution = true;
     } else {
         alert('No data available to confirm. Please upload a file first.');
+	
     }
 }
 
@@ -3539,20 +3984,26 @@ function formatAdjusted(AdjustedPvalue){
 
 				},
 				success: function (result) {
-				//	console.log(result)
+					console.log(result)
 					const graphName = result.data.getGeneInteractions.graphName
 					localStorage.setItem("graphName",graphName)
 					const geneIDs = result.data.getGeneInteractions.genes.map(gene => gene.ID);
 				//	console.log("Extracted Gene IDs:", geneIDs);
 				$(document).ready(function () {
-                  $("#logFCID4Color, #GDAID4Color, #GWAS4Color, #pathwayID4Color,#druggabilityID4Color,#DBs4Color,#TE4Color,#GlogFCID4Size,#GDAID4Size,#druggabilityID4Size,#gwasID4Size,#TE4Size").on("change", function () {
-                   makeSecondRequestColour(geneIDs);
+                  $("#logFCID4Color, #GDAID4Color, #GWAS4Color, #pathwayID4Color,#druggabilityID4Color,#DBs4Color,#TE4Color").on("change", function () {
+                 //  makeSecondRequestColour(geneIDs);
+				 if (!preventReadyFunctionExecution) {
+            makeSecondRequestColour(geneIDs);
+                     }
                  });
                       });
 
 					  $(document).ready(function () {
                   $("#GlogFCID4Size,#GDAID4Size,#druggabilityID4Size,#gwasID4Size,#TE4Size").on("change", function () {
-				   makeSecondRequestSize(geneIDs);
+				 //  makeSecondRequestSize(geneIDs);
+				 if (!preventReadyFunctionExecution) {
+					makeSecondRequestSize(geneIDs);
+               }
                  });
                       });
 				//	makeSecondRequest(geneIDs);
@@ -4240,7 +4691,9 @@ function formatAdjusted(AdjustedPvalue){
 		// }
 
 function getNodeSizeScale(nss) {
-    let a = [];
+
+	if(!preventReadyFunctionExecution){
+  let a = [];
     // console.log("Starting to get node size scale for:", nss); 
     $.each(geneDataMap, function (idx, gene) {
         // console.log("Processing gene:", gene.ID); 
@@ -4263,6 +4716,25 @@ function getNodeSizeScale(nss) {
 
     // console.log("Node size scale created:", scale); 
     return scale;
+	}
+  
+
+	if(preventReadyFunctionExecution){
+		let a = [];
+			$.each(uniNode.genes, function (idx, d) {
+				if (d[nss] != undefined || d[nss] != null || Number(d[nss]) != NaN) {
+					a.push(Math.abs(Number(d[nss])));
+				} else {
+					a.push(0);
+				}
+			});
+			//d3.min((uniNode.genes, function(d){console.log(uniNode.genes[d][uniNode.headers[nodeSize]]);}))
+			return d3.scale.linear()
+				.domain([d3.min(a), d3.max(a)])
+				.range([min_base_node_size, max_base_node_size1]);
+	}
+		
+	
 }
 
 
@@ -4737,44 +5209,50 @@ function getNodeSizeScale(nss) {
 		}
 
 // 		//on selecting logFC type, color the nodes
-// document.getElementById("logFCID4Color").onchange = function () {			
-//     nodeColor_sel = document.getElementById("logFCID4Color").value;
-//   	console.log("Selected Color Option:", nodeColor_sel);
+document.getElementById("logFCID4Color").onchange = function () {		
+	if (preventReadyFunctionExecution) {
 
-//     d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-//         let geneID = d.ID;
-//       //  console.log("Current Gene ID:", geneID);
-//         let geneIndex = geneIndexMap[geneID];
-//         let val = currentUniversal?.genes[geneIndex]?.[nodeColor_sel];
-//       //  console.log("Value from Current Universal Genes:", val);
+    nodeColor_sel = document.getElementById("logFCID4Color").value;
+  	console.log("Selected Color Option:", nodeColor_sel);
 
-// 		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-// 			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-//         			return "blue";
-//     			} else {
-// 					return val ? expressionColor(Number(val)) : default_node_color;
-// 				}
+    d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        let geneID = d.ID;
+      //  console.log("Current Gene ID:", geneID);
+        let geneIndex = geneIndexMap[geneID];
+        let val = currentUniversal?.genes[geneIndex]?.[nodeColor_sel];
+      //  console.log("Value from Current Universal Genes:", val);
+
+		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+        			return "blue";
+    			} else {
+					return val ? expressionColor(Number(val)) : default_node_color;
+				}
 
 				
-//     });
-// };
+    });
+	}
+};
 
 		//on selecting GWAS type, color the nodes
 
-		// document.getElementById("GWAS4Color").onchange = function () {
-		// 	nodeColor_sel = document.getElementById("GWAS4Color").value;
-		// 	d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-		// 		let geneID = d.ID;
-		// 		let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
-    //             let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-		// 		if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-    //               //  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-    //              return "blue";
-    //             } else {
-		// 			return gw && gw >= 1 ? "red" : default_node_color;
-		// 		}
-		// 	});
-		// }
+		document.getElementById("GWAS4Color").onchange = function () {
+		if (preventReadyFunctionExecution) {
+
+			nodeColor_sel = document.getElementById("GWAS4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
+				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
+                let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+                  //  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                 return "blue";
+                } else {
+					return gw && gw >= 1 ? "red" : default_node_color;
+				}
+			});
+		}
+	}
 
 
 			//on selecting Databases type, color the nodes
@@ -4816,65 +5294,78 @@ function getNodeSizeScale(nss) {
 
 
 		//on selecting pathway name, color the nodes
-		// document.getElementById("pathwayID4Color").onchange = function () {
-		// 	nodeColor_sel = document.getElementById("pathwayID4Color").value;
-		// 	d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-    //     		let geneID = d.ID;
-    // 			var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
 
-    // 			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-		// 	    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-    //     			return "blue";
-    // 			} else {
-		// 			return pat && pat == 1 ? "red" : default_node_color;
+		document.getElementById("pathwayID4Color").onchange = function () {
+		if (preventReadyFunctionExecution) {
+			
+				console.log("in custom upload");
+			nodeColor_sel = document.getElementById("pathwayID4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        		let geneID = d.ID;
+    			var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
 
-		// 		}
-		// 	});
-		// }
+    			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+        			return "blue";
+    			} else {
+					return pat && pat == 1 ? "red" : default_node_color;
+
+				}
+			});
+		
+		}
+	}
 
 	// on selecting Druggability for color change
+	
 
-	// document.getElementById("druggabilityID4Color").onchange = function () {
-	// 		nodeColor_sel = document.getElementById("druggabilityID4Color").value;
-	// 		d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-	// 			let geneID = d.ID;
-	// 			let geneIndex = geneIndexMap[geneID];
-	// 			//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-	// 			// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-	// 			// 	.getElementById("druggabilityID4Color").value]])) : "black";
-	// 			let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
-  //               // console.log("val ==", val)
-	// 			//   return val ? expressionColor(Number(val)) : default_node_color;
+	document.getElementById("druggabilityID4Color").onchange = function () {
+		if (preventReadyFunctionExecution) {
 
-	// 			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-	// 		    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-	// 				return "blue";
-	// 			} else{
-	// 				return val ? expressionColor(Number(val)) : default_node_color;
-	// 			}
-	// 		});
-	// 	}
+			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
+				let geneIndex = geneIndexMap[geneID];
+				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("druggabilityID4Color").value]])) : "black";
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
+                // console.log("val ==", val)
+				//   return val ? expressionColor(Number(val)) : default_node_color;
+
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+					return "blue";
+				} else{
+					return val ? expressionColor(Number(val)) : default_node_color;
+				}
+			});
+		}
+	}
 
 
 	// on selecting GDA for color change
 
-	// document.getElementById("GDAID4Color").onchange = function () {
-	// 		nodeColor_sel = document.getElementById("GDAID4Color").value;
-	// 		d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-	// 			let geneID = d.ID;
-	// 			//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
-	// 			// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
-	// 			// 	.getElementById("druggabilityID4Color").value]])) : "black";
-	// 			let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
-	// 			// return val ? expressionColor(Number(val)) : default_node_color;
-	// 			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-	// 			if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-	// 				return "blue";
-	// 			} else {
-	// 				return val ? expressionColor(Number(val)) : default_node_color;
-	// 			}
-	// 		});
-	// 	}
+	document.getElementById("GDAID4Color").onchange = function () {
+		if (preventReadyFunctionExecution) {
+
+			nodeColor_sel = document.getElementById("GDAID4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
+				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+				// 	.getElementById("druggabilityID4Color").value]])) : "black";
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
+				// return val ? expressionColor(Number(val)) : default_node_color;
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+					return "blue";
+				} else {
+					return val ? expressionColor(Number(val)) : default_node_color;
+				}
+			});
+		}
+		}
 		
 		// on selecting GWAS OR for color change
 
@@ -4910,22 +5401,25 @@ function getNodeSizeScale(nss) {
 
 		// on selecting TE Score for color change
 
-		// document.getElementById("TE4Color").onchange = function () {
-		// 	nodeColor_sel = document.getElementById("TE4Color").value;
-		// 	d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-		// 		let geneID = d.ID;
-		// 		let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-		// 		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-		// 		if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-    //             // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-    //             	return "blue";
-    //             } else {
-		// 			return val ? d3.scale.linear()
-		// 			.domain([0, 1])
-		// 			.range([default_node_color, "red"])(Number(val)) : default_node_color;
-		// 		}
-		// 	});
-		// }
+		document.getElementById("TE4Color").onchange = function () {
+		if (preventReadyFunctionExecution) {
+
+			nodeColor_sel = document.getElementById("TE4Color").value;
+			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				let geneID = d.ID;
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
+				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+                // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+                	return "blue";
+                } else {
+					return val ? d3.scale.linear()
+					.domain([0, 1])
+					.range([default_node_color, "red"])(Number(val)) : default_node_color;
+				}
+			});
+		}
+		}
 
 
 		//*********************************SIZE ******************************************************
@@ -5570,92 +6064,101 @@ function getNodeSizeScale(nss) {
 
 		//on selecting Genomic LogFC, change the size of nodes
 
-		// document.getElementById("GlogFCID4Size").onchange = function () {
+		document.getElementById("GlogFCID4Size").onchange = function () {
+		if (preventReadyFunctionExecution) {
 
-		// 	// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
-		// 	nodeSize = document.getElementById("GlogFCID4Size").value;
-		// 	nodeSize_sel = nodeSize;
+			console.log(" in logfc size");
+			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			nodeSize = document.getElementById("GlogFCID4Size").value;
+			nodeSize_sel = nodeSize;
 
-		// 	nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
-		// 	d3.selectAll(".node").select("path")
-		// 		.attr("d", d3.svg.symbol()
-		// 			//.size(function(d) { return 600 })
-		// 			//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
-		// 			.size(function (d) {
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					//.size(function(d) { return 600 })
+					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
+					.size(function (d) {
 
-		// 				//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-		// 				//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
-		// 				let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GlogFCID4Size").value]) ?? undefined;
-		// 				let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
-		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
-		// 					thisNodeSize || nominal_base_node_size, 2);
-		// 				//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
-		// 			})
-		// 			.type(function (d) {
-		// 				return "circle"; /*d.type;*/
-		// 			}));
-		// }
+						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
+						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GlogFCID4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+		}
 		///=======
 
 		//on selecting GWAS score, change the size of nodes
 
-		// document.getElementById("gwasID4Size").onchange = function () {
+		document.getElementById("gwasID4Size").onchange = function () {
+		if (preventReadyFunctionExecution) {
 
-		// 	// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
-		// 	nodeSize = document.getElementById("gwasID4Size").value;
-		// 	nodeSize_sel = nodeSize;
 
-		// 	nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			nodeSize = document.getElementById("gwasID4Size").value;
+			nodeSize_sel = nodeSize;
 
-		// 	d3.selectAll(".node").select("path")
-		// 		.attr("d", d3.svg.symbol()
-		// 			//.size(function(d) { return 600 })
-		// 			//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
-		// 			.size(function (d) {
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
-		// 				//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-		// 				//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
-		// 				let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("gwasID4Size").value]) ?? undefined;
-		// 				let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
-		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
-		// 					thisNodeSize || nominal_base_node_size, 2);
-		// 				//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
-		// 			})
-		// 			.type(function (d) {
-		// 				return "circle"; /*d.type;*/
-		// 			}));
-		// }
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					//.size(function(d) { return 600 })
+					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
+					.size(function (d) {
+
+						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
+						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("gwasID4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+		}
 		///=======
 
 
-		// document.getElementById("GDAID4Size").onchange = function () {
+		document.getElementById("GDAID4Size").onchange = function () {
+		if (preventReadyFunctionExecution) {
 
-		// 	// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
-		// 	nodeSize = document.getElementById("GDAID4Size").value;
-		// 	nodeSize_sel = nodeSize;
 
-		// 	nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+			nodeSize = document.getElementById("GDAID4Size").value;
+			nodeSize_sel = nodeSize;
 
-		// 	d3.selectAll(".node").select("path")
-		// 		.attr("d", d3.svg.symbol()
-		// 			//.size(function(d) { return 600 })
-		// 			//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
-		// 			.size(function (d) {
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
-		// 				//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-		// 				//console.log(uniNode.genes[d.ID])
-		// 				//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
-		// 				let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Size").value]) ?? undefined;
-		// 				let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
-		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
-		// 					thisNodeSize || nominal_base_node_size, 2);
-		// 				//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
-		// 			})
-		// 			.type(function (d) {
-		// 				return "circle"; /*d.type;*/
-		// 			}));
-		// }
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					//.size(function(d) { return 600 })
+					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
+					.size(function (d) {
+
+						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
+						//console.log(uniNode.genes[d.ID])
+						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+		}
 
 
 		//on selecting Proteomic LogFC, change the size of nodes
@@ -5695,48 +6198,55 @@ function getNodeSizeScale(nss) {
 
 		//on selecting trait name, change the size of nodes
 
-		// document.getElementById("druggabilityID4Size").onchange = function () {
-		// 	nodeSize = document.getElementById("druggabilityID4Size").value;
-		// 	nodeSize_sel = nodeSize;
+		document.getElementById("druggabilityID4Size").onchange = function () {
+		if (preventReadyFunctionExecution) {
 
-		// 	nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			nodeSize = document.getElementById("druggabilityID4Size").value;
+			nodeSize_sel = nodeSize;
 
-		// 	d3.selectAll(".node").select("path")
-		// 		.attr("d", d3.svg.symbol()
-		// 			//.size(function(d) { return 600 })
-		// 			//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
-		// 			.size(function (d) {
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 
-		// 				//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
-		// 				//console.log(uniNode.genes[d.ID])
-		// 				let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Size").value]) ?? undefined;
-		// 				let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
-		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
-		// 					thisNodeSize || nominal_base_node_size, 2);
-		// 				//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
-		// 			})
-		// 			.type(function (d) {
-		// 				return "circle"; /*d.type;*/
-		// 			}));
-		// }
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					//.size(function(d) { return 600 })
+					//.size(function(d) { return Math.PI*Math.pow(nominal_base_node_size,2); })
+					.size(function (d) {
+
+						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
+						//console.log(uniNode.genes[d.ID])
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+		}
 
 
-		// document.getElementById("TE4Size").onchange = function () {
-		// 	nodeSize = document.getElementById("TE4Size").value;
-		// 	nodeSize_sel = nodeSize;
-		// 	nodeSizeScale = getNodeSizeScale(nodeSize_sel);
-		// 	d3.selectAll(".node").select("path")
-		// 		.attr("d", d3.svg.symbol()
-		// 			.size(function (d) {
-		// 				let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("TE4Size").value]) ?? undefined;
-		// 				let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
-		// 				return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
-		// 					thisNodeSize || nominal_base_node_size, 2);
-		// 			})
-		// 			.type(function (d) {
-		// 				return "circle"; /*d.type;*/
-		// 			}));
-		// }
+		document.getElementById("TE4Size").onchange = function () {
+		if (preventReadyFunctionExecution) {
+
+			nodeSize = document.getElementById("TE4Size").value;
+			console.log("in te size")
+			nodeSize_sel = nodeSize;
+			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			d3.selectAll(".node").select("path")
+				.attr("d", d3.svg.symbol()
+					.size(function (d) {
+						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("TE4Size").value]) ?? undefined;
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+		}
 
 		//Gradient Legend for the network
 
@@ -6660,15 +7170,45 @@ if (thisDisease !== undefined && thisDisease !== null) {
  //Node Size Changes
  if (logFCValueSize && logFCValueSize !== "none") {
     propertiesForDisease.push(logFCValueSize);
-  }
+  }else if(logFCValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
 
   if (GDAValueSize && GDAValueSize !== "none") {
     propertiesForDisease.push(GDAValueSize);
-  }
+  }else if(GDAValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
 
   if (GWASValueSize && GWASValueSize !== "none") {
     propertiesForDisease.push(GWASValueSize);
-  }
+  }else if(GWASValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
 
   if (druggabilityValueSize && druggabilityValueSize !== "none") {
     propertiesForRemaining.push(druggabilityValueSize);
@@ -6686,7 +7226,18 @@ if (thisDisease !== undefined && thisDisease !== null) {
 
   if (TEvalueSize && TEvalueSize !== "none") {
     propertiesForRemaining.push(TEvalueSize);
-  }
+  }else if(TEvalueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
 
   // Prepare query variables
   const variables = {
@@ -6771,8 +7322,10 @@ if (thisDisease !== undefined && thisDisease !== null) {
 			}
 
 			if(TEvalueSize && TEvalueSize !== "none"){
+
 				nodeSize = TEvalueSize;
 				nodeSize_sel = nodeSize;
+
 				nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 				d3.selectAll(".node").select("path")
 					.attr("d", d3.svg.symbol()
@@ -6799,7 +7352,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 						let geneID = d.ID;
 						let geneData = geneDataMap[geneID];
 						let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("GlogFCID4Size").value]) ?? undefined;
-						console.log(val)
+						//console.log(val)
 						    // Handle null value
 							if (val === 0 || val === undefined) {
                     

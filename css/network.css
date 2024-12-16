@@ -1191,3 +1191,11 @@ body {
     #node-modal-background-2 td:nth-child(3){
         min-width: 185px;
     }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 10px;
+        justify-content: flex-end;
+        margin: auto;
+    }
