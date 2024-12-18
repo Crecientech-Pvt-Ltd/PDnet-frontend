@@ -446,6 +446,26 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 										</div> -->
 
 										<button onclick="getGeneNamesForStringDB()" class="list-submit">Submit</button>
+										<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+											Launch demo modal
+										  </button> -->
+										  <!-- Modal -->
+										  <!-- <div class="modal fade" id="Warning" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+											  <div class="modal-content warning_center p-3">
+												<div class="">
+													<div class="warning_center">
+														<p style="font-size: 25px;">Warning</p>
+														<div>
+															You have entered more than 25 input seed genes for First/Second order. Do you want to continue?
+														</div>
+														<button class="btn-1"  data-dismiss="modal"  >Yes</button>
+														<button class="btn-1" data-dismiss="modal" aria-label="Close" >No</button>
+													</div>
+											  </div>
+											  </div>
+											</div>
+										  </div> -->
 									</div>
 								</div>
 							</div>
@@ -925,6 +945,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 							  </tbody>
 						  </table>
 						  <div class="buttons" style="background: linear-gradient(45deg, rgba(18,76,103,1) 0%, rgba(9,114,121,1) 35%, rgba(0,0,0,1) 100%) !important; padding:6px;margin: 0px;text-align: right;padding-top:10px ;">
+							<!-- <button onclick="getNetworkFromGenes()" style="margin-right: 10px; background: 0066cc !important;"  data-toggle="modal" data-target="#Warning">Confirm</button> -->
 							<button onclick="getNetworkFromGenes()" style="margin-right: 10px; background: 0066cc !important;">Confirm</button>
 							<button onclick="pop_cancel()" style="margin-right: 15px;">Cancel</button>
 						</div>
@@ -979,6 +1000,10 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 				<p style="font-size: 25px;">Warning</p>
 				You have entered more than 25 input seed genes for First/Second order. Do you want to continue?
 				</p>
+				<div class="buttons-btn">
+					<button class="btn-1" >Yes</button>
+					<button class="btn-1" onclick="closeWarning()" >No</button>
+				</div>
 			</div>
 			<!-- <div class="warning_message">
 				<p style="font-size: 25px;">Warning</p>
@@ -986,10 +1011,7 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 				</p>
 			</div> -->
 		</div>
-		<div class="buttons-btn">
-			<button class="btn-1" >Yes</button>
-			<button class="btn-1" onclick="closeWarning()" >No</button>
-		</div>
+	
 		
 	</div>
 
@@ -1000,12 +1022,13 @@ MAPT, STX6, EIF2AK3, MOBP, DCTN1, LRRK2 </textarea>
 				<p style="font-size: 25px;">Warning</p>
 				You have entered more than 1000 input seed genes for Zero order. Do you want to continue?
 				</p>
+				<div class="buttons-btn">
+					<button class="btn-1" >Yes</button>
+					<button class="btn-1" onclick="closePopUp()" >No</button>
+				</div>
 			</div>
 		</div>
-		<div class="buttons-btn">
-			<button class="btn-2" >Yes</button>
-			<button class="btn-1" onclick="closePopUp()" >No</button>
-		</div>
+	
 		
 	</div>
 
