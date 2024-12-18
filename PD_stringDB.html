@@ -1216,6 +1216,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						}
 					  
 						function updateTooltip() {
+							preventReadyFunctionExecution = false
 						  return new Promise((resolve) => {
 							const selectElement = document.getElementById('diseaseMap');
 							const selectedText = selectElement.options[selectElement.selectedIndex].text;
@@ -2133,7 +2134,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
 			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightAnalysis"
-				aria-expanded="false" aria-controls="collapseRightAnalysis">Algorithmic Analysis</button>
+				aria-expanded="false" aria-controls="collapseRightAnalysis">Network Analysis</button>
 		</div>
 
 		<div class="collapse show" id="collapseRightAnalysis" >
@@ -2454,6 +2455,8 @@ function universal_ext_update() {
         // Set headers for confirmDetails to use
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 				updateDropdownVisibility(headers);
+
+		console.log(headers)
 
         let matchedGenes = [];
         let unmatchedGenes = [];
@@ -3481,62 +3484,239 @@ function formatAdjusted(AdjustedPvalue){
 
 					gbTootip.style("display", "none");
 				});
-
 			//Highlight connection of a node and show tooltip on mouseover event
+// 			node.on("mouseover", function (d) {
+// 				set_highlight(d);
 
-			node.on("mouseover", function (d) {
-				set_highlight(d);
+// 				// document.getElementById("mysetting").style.display ="block"
+// 				var gene_info = document.getElementById("gene_info");
+// 				//  gene info on hover  on side tab 
+// 				// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d.ID}"  target='_blank'>Id: ${d.ID} </a>` + "<br>"+
+// 				//  "<p class='gene_info'>Description :</p>" + d.Description  + "<br>"+
+// 				//  "<p class='gene_info'>label :</p>" + d.Gene_name + "<br>"+
+// 				//  "<p class='gene_info'>weight :</p>" + d.weight
 
-				// document.getElementById("mysetting").style.display ="block"
-				var gene_info = document.getElementById("gene_info");
-				//  gene info on hover  on side tab 
-				// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d.ID}"  target='_blank'>Id: ${d.ID} </a>` + "<br>"+
-				//  "<p class='gene_info'>Description :</p>" + d.Description  + "<br>"+
-				//  "<p class='gene_info'>label :</p>" + d.Gene_name + "<br>"+
-				//  "<p class='gene_info'>weight :</p>" + d.weight
+// 				gbTootip.transition().duration(500);
+// 				gbTootip.style("top", d3.event.pageY - 5 + "px");
+// 				gbTootip.style("left", d3.event.pageX + 5 + "px");
 
-				gbTootip.transition().duration(500);
-				gbTootip.style("top", d3.event.pageY - 5 + "px");
-				gbTootip.style("left", d3.event.pageX + 5 + "px");
-				gbTootip.html(function () {
-					//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
-					var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
-					var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
-					var tmp3 = d.Description ? "Description: " + d.Description + "<br>" : "";
-					// var tmp6 = d.Description ? "Weight: " + d.Description + "<br>" : "";
-					//################### Update on 8.05.19 #################################//
-					if (nodeSize_sel != "") {
+                
 
-						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
+// 				gbTootip.html(function () {
+// 					//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
+// 					var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
+// 					var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
+// 					var tmp3 = d.Description ? "Description: " + d.Description + "<br>" : "";
+// 					// var tmp6 = d.Description ? "Weight: " + d.Description + "<br>" : "";
+// 					//################### Update on 8.05.19 #################################//
+
+// 				//	var data  = geneDataMap
+// 					//console.log(data)
+
+				
+
+// 					if (nodeSize_sel != "") {
+
+// 						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
 						
-					}
-					// console.log("Node Size",tmp4)
-					if (nodeColor_sel != "") {
-						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
-					}
+// 					}
+// 					// console.log("Node Size",tmp4)
+// 					if (nodeColor_sel != "") {
+// 						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
+// 					}
+
+
+// 			let data = geneDataMap; // This is the response data
+//               console.log(data);
+
+
+
+// let geneDescription = data?.[d?.ID]?.Description || "NA";
+// let geneName = data?.[d?.ID]?.Gene_name || "NA";
+// let geneID = data?.[d?.ID]?.ID || "NA";
+// let disease = data?.[d?.ID]?.disease?.[diseaseValue] || "NA";
+
+// let commonContent = "";
+// if (data?.[d?.ID]?.common) {
+//   Object.entries(data[d.ID].common).forEach(([key, value]) => {
+//     commonContent += `<b>${key}:</b> ${value} <br>`;
+//   });
+// }
+
+// let diseaseContent = "";
+// if (data?.[d?.ID]?.disease) {
+//   const diseaseData = data[d.ID].disease?.[diseaseValue];
+//   if (diseaseData && typeof diseaseData === "object") {
+//     Object.entries(diseaseData).forEach(([key, value]) => {
+//       // Check if the value is an object
+//       if (typeof value === "object") {
+//         // Convert nested object to a JSON string or format it further
+//         diseaseContent += `<b>${key}:</b> ${JSON.stringify(value, null, 2)} <br>`;
+//       } else {
+//         diseaseContent += `<b>${key}:</b> ${value} <br>`;
+//       }
+//     });
+//   } else {
+//     diseaseContent += `<b>${diseaseValue}:</b> ${diseaseData || "N/A"} <br>`;
+//   }
+// }
+
+// // Combine all content dynamically
+// let dynamicContent = `
+//    <b>ID:</b> ${geneID} <br>
+//     <b>Gene Name:</b> ${geneName} <br>
+//     <b>Description:</b> ${geneDescription} <br>
+//     ${commonContent}
+//     ${diseaseContent}
+// `;
+
+// console.log("Dynamic Content:", dynamicContent);
+
+// // Insert the dynamic content into the card body
+// //document.getElementById('dynamicContent').innerHTML = dynamicContent;
 
 				
 					
-					//################### End_Update on 8.05.19 #################################//
-					//var tmp4 = "logFC: " + d.logFC.toExponential(2) + "<br>";
-					//d.proteomics_fc == "NA" || typeof d.proteomics_fc == "undefined" ? tmp5 = "" : tmp5 = "Proteomic logFC: " + d.proteomics_fc.toExponential(2) + "<br>"
-					//var tmp6 =  d.pvalue ? "P-value: " + d.pvalue.toExponential(2) : "";
+// 					//################### End_Update on 8.05.19 #################################//
+// 					//var tmp4 = "logFC: " + d.logFC.toExponential(2) + "<br>";
+// 					//d.proteomics_fc == "NA" || typeof d.proteomics_fc == "undefined" ? tmp5 = "" : tmp5 = "Proteomic logFC: " + d.proteomics_fc.toExponential(2) + "<br>"
+// 					//var tmp6 =  d.pvalue ? "P-value: " + d.pvalue.toExponential(2) : "";
 
-					//console.log(d.logFC);
-					//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
-					//console.log("Node size")
-					//console.log(nodSize)
-					let result = tmp1 + tmp2 + tmp3;
-					if (nodeSize_sel != "") {
-						result += tmp4;
-					}
-					if (nodeColor_sel != "") {
-						result += tmp5;
-					}
-					return result;
-				})
-				gbTootip.style("display", "block");
-			})
+// 					//console.log(d.logFC);
+// 					//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
+// 					//console.log("Node size")
+// 					//console.log(nodSize)
+// 					let result = tmp1 + tmp2 + tmp3;
+// 					if (nodeSize_sel != "") {
+// 						result += tmp4;
+// 					}
+// 					if (nodeColor_sel != "") {
+// 						result += tmp5;
+// 					}
+// 					return result;
+// 				})
+// 				gbTootip.style("display", "block");
+// 			})
+
+node.on("mouseover", function (d) {
+  set_highlight(d);
+
+  // Tooltip setup
+  gbTootip.transition().duration(500);
+  gbTootip.style("top", d3.event.pageY - 5 + "px");
+  gbTootip.style("left", d3.event.pageX + 5 + "px");
+
+  // Determine if geneDataMap is empty
+  const isGeneDataMapEmpty =
+    Object.keys(geneDataMap || {}).length === 0 && 
+    Object.keys(geneDataMapColour || {}).length === 0;
+
+  // Function to generate content when geneDataMap is empty
+  const getDefaultGeneInfo = (nodeData) => {
+    return `
+      <b>ID:</b> ${nodeData.ID || "NA"} <br>
+      <b>Gene Name:</b> ${nodeData.Gene_name || "NA"} <br>
+      <b>Description:</b> ${nodeData.Description || "NA"} <br>
+    `;
+  };
+
+  // Function to generate content from geneDataMap
+  const getGeneInfoFromMap = (nodeData) => {
+    const data = geneDataMap[nodeData.ID] || {};
+    const dataTwo = geneDataMapColour[nodeData.ID] || {};
+
+    // Extract values from geneDataMap
+    const geneID = data.ID || dataTwo.ID || "NA";
+    const geneName = data.Gene_name || dataTwo.Gene_name || "NA";
+    const geneDescription = data.Description || dataTwo.Description || "NA";
+
+    // Common content from geneDataMap
+    let commonContent = "";
+    if (data.common) {
+      Object.entries(data.common).forEach(([key, value]) => {
+        commonContent += `<b>${key}:</b> ${value} <br>`;
+      });
+    }
+
+    // Common content from geneDataMapColour
+    let commonContentColour = "";
+    if (dataTwo.common) {
+      Object.entries(dataTwo.common).forEach(([key, value]) => {
+        commonContentColour += `<b>${key}:</b> ${value} <br>`;
+      });
+    }
+
+    // Disease-specific content from geneDataMap
+    let diseaseContent = "";
+    if (data.disease) {
+      const diseaseData = data.disease[diseaseValue];
+      if (diseaseData && typeof diseaseData === "object") {
+        Object.entries(diseaseData).forEach(([key, value]) => {
+          diseaseContent += `<b>${key}:</b> ${
+            typeof value === "object"
+              ? JSON.stringify(value, null, 2)
+              : value
+          } <br>`;
+        });
+      } else {
+        diseaseContent += `<b>${diseaseValue}:</b> ${diseaseData || "N/A"} <br>`;
+      }
+    }
+
+    // Disease-specific content from geneDataMapColour
+    let diseaseContentColour = "";
+    if (dataTwo.disease) {
+      const diseaseData = dataTwo.disease[diseaseValue];
+      if (diseaseData && typeof diseaseData === "object") {
+        Object.entries(diseaseData).forEach(([key, value]) => {
+          diseaseContentColour += `<b>${key}:</b> ${
+            typeof value === "object"
+              ? JSON.stringify(value, null, 2)
+              : value
+          } <br>`;
+        });
+      } else {
+        diseaseContentColour += `<b>${diseaseValue}:</b> ${diseaseData || "N/A"} <br>`;
+      }
+    }
+
+	if ($('input[name="nodeColor"][value="0"]').is(':checked')) {
+  
+   commonContentColour = "";
+   diseaseContentColour = "";
+}
+
+
+if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
+  
+  commonContent = "";
+  diseaseContent = "";
+}
+
+
+
+    return `
+      <b>ID:</b> ${geneID} <br>
+      <b>Gene Name:</b> ${geneName} <br>
+      <b>Description:</b> ${geneDescription} <br>
+      ${commonContent}
+      ${diseaseContent}
+      ${commonContentColour}
+      ${diseaseContentColour}
+    `;
+  };
+
+  // Generate tooltip content based on geneDataMap
+  const tooltipContent = isGeneDataMapEmpty
+    ? getDefaultGeneInfo(d)
+    : getGeneInfoFromMap(d);
+
+  // Update the tooltip HTML
+  gbTootip.html(tooltipContent);
+  gbTootip.style("display", "block");
+})
+
+
 
 				//highlight connections & remove tooltip on mousedown event and get back to previous stat on mouseup
 				.on("mousedown", function (d) {
@@ -4698,7 +4878,7 @@ function getNodeSizeScale(nss) {
     $.each(geneDataMap, function (idx, gene) {
         // console.log("Processing gene:", gene.ID); 
         let value = gene.common[nss] || gene.disease?.[diseaseValue][nss] ;
-        // console.log("Gene value for", nss, ":", value);  
+       //  console.log("Gene value for", nss, ":", value);  
         if (value != undefined || value != null || Number(value) != NaN) {
             // console.log("Valid value:", value); 
             a.push(Math.abs(Number(value)));
@@ -6680,7 +6860,7 @@ function makeRequest() {
  </script> -->
 
  <script>
-
+let geneDataMapColour = {}
 function makeSecondRequestColour(geneIDs) {
 
 	let thisDisease = localStorage.getItem("pd_net_stringDB"); // Example of retrieving from localStorage
@@ -6868,7 +7048,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
     	// Create a map of gene data by ID for easier lookup
 				 
 				response.data.getGenes.forEach(gene => {
-					geneDataMap[gene.ID] = gene;  // Store gene data using the gene ID as the key
+					geneDataMapColour[gene.ID] = gene;  // Store gene data using the gene ID as the key
 					
 				});
 
@@ -6905,15 +7085,15 @@ if (thisDisease !== undefined && thisDisease !== null) {
 
     d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
         let geneID = d.ID;
-        let geneData = geneDataMap[geneID];
+        let geneData = geneDataMapColour[geneID];
         let val = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; // Check for the property in gene data
 
-        // Handle null value
-        if (val === null) {
-            document.getElementById("null-message-id").style.display = "block";
-        } else {
-            document.getElementById("null-message-id").style.display = "none";
-        }
+        // // Handle null value
+        // if (val === null) {
+        //     document.getElementById("null-message-id").style.display = "block";
+        // } else {
+        //     document.getElementById("null-message-id").style.display = "none";
+        // }
 
         let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
         if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
@@ -6938,14 +7118,14 @@ if (thisDisease !== undefined && thisDisease !== null) {
 						// 	.getElementById("druggabilityID4Color").value]])) : "black";
 						
 						// let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
-						let geneData = geneDataMap[geneID];
+						let geneData = geneDataMapColour[geneID];
 						let val = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; 
 						  // Handle null value
-						  if (val === null) {
-                      document.getElementById("null-message-id").style.display = "block";
-                       } else {
-                        document.getElementById("null-message-id").style.display = "none";
-                      }
+					// 	  if (val === null) {
+                    //   document.getElementById("null-message-id").style.display = "block";
+                    //    } else {
+                    //     document.getElementById("null-message-id").style.display = "none";
+                    //   }
 					//	console.log("val",val);
 						// return val ? expressionColor(Number(val)) : default_node_color;
 						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
@@ -6968,7 +7148,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 						let geneID = d.ID;
 						// let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
 
-						let geneData = geneDataMap[geneID];
+						let geneData = geneDataMapColour[geneID];
 						let gw = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; 
 						  // Handle null value
 						  if (gw === null) {
@@ -6998,7 +7178,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 								let geneID = d.ID;
 							// var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
 							
-							let geneData = geneDataMap[geneID];
+							let geneData = geneDataMapColour[geneID];
 							let pat = geneData?.common?.[nodeColor_sel] ?? undefined;
 							// console.log("pat",pat);
 							let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
@@ -7023,7 +7203,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 						// console.log("Node Data (d):", d);
 
 						// Get the gene data for the current node from the map
-						let geneData = geneDataMap[geneID];
+						let geneData = geneDataMapColour[geneID];
 						let val = geneData?.common?.[nodeColor_sel] ?? undefined; // If 'common' or other property is found in the gene data
 					// console.log("Gene Value:", val);
 						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
@@ -7044,7 +7224,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 						let geneID = d.ID;
 						// let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-						let geneData = geneDataMap[geneID];
+						let geneData = geneDataMapColour[geneID];
 					let val = geneData?.common?.[nodeColor_sel] ?? undefined; 
 					//  console.log("val",val);
 						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
@@ -7068,7 +7248,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 						let geneID = d.ID;
 						// let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
-						let geneData = geneDataMap[geneID];
+						let geneData = geneDataMapColour[geneID];
 						let dbs = geneData?.common?.[nodeColor_sel] ?? undefined;
 
 						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
@@ -7138,6 +7318,8 @@ $("#TE4Color").change(function() {
 });
 
  </script>
+
+
 
 <script>
 let geneDataMap = {};
@@ -7276,7 +7458,8 @@ if (thisDisease !== undefined && thisDisease !== null) {
       "Accept": "application/json"
     },
     success: function (response) {
-     // console.log("GraphQL Response:", response);
+	
+      console.log("GraphQL Response:", response);
 			if (response.data && response.data.getGenes) {
     
     	// Create a map of gene data by ID for easier lookup
@@ -7287,6 +7470,10 @@ if (thisDisease !== undefined && thisDisease !== null) {
 				});
 
 				
+
+				
+
+				//let nodeSize_sel
 
 
 				if (druggabilityValueSize && druggabilityValueSize !== "none") {
@@ -7354,13 +7541,13 @@ if (thisDisease !== undefined && thisDisease !== null) {
 						let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("GlogFCID4Size").value]) ?? undefined;
 						//console.log(val)
 						    // Handle null value
-							if (val === 0 || val === undefined) {
+				// 			if (val === 0 || val === undefined) {
                     
-                    document.getElementById("null-message-id").style.display = "block";
-                } else {
+                //     document.getElementById("null-message-id").style.display = "block";
+                // } else {
                     
-                    document.getElementById("null-message-id").style.display = "none";
-                }
+                //     document.getElementById("null-message-id").style.display = "none";
+                // }
 						  // Handle null value
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
@@ -7383,13 +7570,13 @@ if (thisDisease !== undefined && thisDisease !== null) {
 							let geneID = d.ID;
 							let geneData = geneDataMap[geneID];
 							let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("GDAID4Size").value]) ?? undefined;
-							if (val === 0 || val === undefined) {
+				// 			if (val === 0 || val === undefined) {
                     
-                    document.getElementById("null-message-id").style.display = "block";
-                } else {
+                //     document.getElementById("null-message-id").style.display = "block";
+                // } else {
                     
-                    document.getElementById("null-message-id").style.display = "none";
-                }
+                //     document.getElementById("null-message-id").style.display = "none";
+                // }
 							let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
 							return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 								thisNodeSize || nominal_base_node_size, 2);
@@ -7512,3 +7699,6 @@ $("#TE4Size").change(function() {
 });
 
 	</script>
+
+
+  
