@@ -3602,8 +3602,11 @@ function formatAdjusted(AdjustedPvalue){
   gbTootip.style("left", d3.event.pageX + 5 + "px");
 
   // Determine if geneDataMap is empty
-  const isGeneDataMapEmpty =
-    Object.keys((geneDataMap && geneDataMapColour) || {}).length === 0;
+//   const isGeneDataMapEmpty =
+//     Object.keys((geneDataMap && geneDataMapColour) || {}).length === 0; 
+const isGeneDataMapEmpty =
+    Object.keys(geneDataMap || {}).length === 0 && 
+    Object.keys(geneDataMapColour || {}).length === 0;
 
   // Function to generate content when geneDataMap is empty
   const getDefaultGeneInfo = (nodeData) => {
@@ -3675,7 +3678,8 @@ function formatAdjusted(AdjustedPvalue){
             diseaseContent += `<b>${key}:</b> ${value} <br>`;
           }
         });
-      } else {
+      } 
+	  else {
         diseaseContent += `<b>${diseaseValue}:</b> ${
           diseaseData || "N/A"
         } <br>`;
@@ -4892,7 +4896,7 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 				}
 			});
 			//d3.min((uniNode.genes, function(d){console.log(uniNode.genes[d][uniNode.headers[nodeSize]]);}))
-			console.log("a",a);
+			//console.log("a",a);
 			return d3.scale.linear()
 				.domain([d3.min(a), d3.max(a)])
 				.range([min_base_node_size, max_base_node_size1]);
@@ -6927,24 +6931,31 @@ if (thisDisease !== undefined && thisDisease !== null) {
   const TEvalue = $("#TE4Color").val();
 
 	if (logFCValue && logFCValue.toLowerCase().includes("custom")) {
+	geneDataMapColour = {};
     return;  
   }
 	if (GDAValue && GDAValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 	if (GWASValue && GWASValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 	if (pathwayValue && pathwayValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 	if (druggabilityValue && druggabilityValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 	if (databaseValue && databaseValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 	if (TEvalue && TEvalue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
     return;  
   }
 
@@ -7406,18 +7417,23 @@ if (thisDisease !== undefined && thisDisease !== null) {
   const TEvalueSize = $("#TE4Size").val()
 
 	if (logFCValueSize && logFCValueSize.toLowerCase().includes("custom")) {
+       geneDataMap = {}
     return;  
   }
 	if (GDAValueSize && GDAValueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
     return;  
   }
 	if (druggabilityValueSize && druggabilityValueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
     return;  
   }
 	if ( GWASValueSize && GWASValueSize .toLowerCase().includes("custom")) {
+		geneDataMap = {}
     return;  
   }
 	if ( TEvalueSize && TEvalueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
     return;  
   }
 
@@ -7552,7 +7568,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 				});
 
 				
-				
+				let nodeSize_sel;
 
 				if (druggabilityValueSize && druggabilityValueSize !== "none") {
 					nodeSize = druggabilityValueSize;
