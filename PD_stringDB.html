@@ -871,8 +871,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 	<!--Warning Message Nodes-->
 	<div style="display: none;"   id="node-modal-warning-alert">
-		<div id="alertWarning">
-			<button class="modal-close-btn" onclick="closeAlert_Warning()">x</button>
+		<div id="alertWarning" style="position: relative;">
+			<button class="modal-close-btn" onclick="closeAlert_Warning()"  style="position: absolute; top: 10px;right: 15px; font-size: 18px;">x</button>
 			<div class="modal-header">
 				<span class="alert header-text">
 					Warning
@@ -894,8 +894,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<!--Warning Message Edges-->
 		<div style="display: none;"   id="node-modal-warning-edges">
-			<div id="alertWarning">
-				<button class="modal-close-btn" onclick="close_Warning()">x</button>
+			<div id="alertWarning" style="position: relative;">
+				<button class="modal-close-btn" onclick="close_Warning()" style="position: absolute; top: 10px;right: 15px; font-size: 18px;">x</button>
 				<div class="modal-header">
 					<span class="alert header-text">
 						Warning
@@ -1279,6 +1279,14 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						console.log('loading...')   
                             makeRequest()
                             .then(() => updateTooltip())
+							.then(() =>{ 
+					   	if (currentUniversal.genes.length > 1000 && currentUniversal.genes.length <= 5000) {
+                                   $('#node-modal-warning-alert').show();
+                         }
+							if ( currentUniversal.links.length > 10000 && currentUniversal.links.length <= 50000) {
+								$('#node-modal-warning-edges').show();
+							}
+											})
                             .catch((error) => {
                           console.error("Error during initialization:", error);
                            });}, 3500); 
@@ -4227,25 +4235,35 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 					// }
 
 					// Handle node-related warnings and stops
-					if (totalNodes > 1000) {
-                if (totalNodes <= 5000) {
-                   $('#node-modal-warning-alert').show();
-                 } else {
-                   $('#node-modal-stop-alert').show();
-                  return;
-                 }
-               }
+			// 		if (totalNodes > 1000) {
+            //     if (totalNodes <= 5000) {
+            //        $('#node-modal-warning-alert').show();
+            //      } else {
+            //        $('#node-modal-stop-alert').show();
+            //       return;
+            //      }
+            //    }
 
 			   // Handle edges-related warnings and stops
 
-			   if (totalEdges > 10000) {
-              if (totalEdges <= 50000) {
-                 $('#node-modal-warning-edges').show();
-             } else {
-             $('#node-modal-stop-edges').show();
-               return;
-              }
-              }
+			//    if (totalEdges > 10000) {
+            //   if (totalEdges <= 50000) {
+            //      $('#node-modal-warning-edges').show();
+            //  } else {
+            //  $('#node-modal-stop-edges').show();
+            //    return;
+            //   }
+            //   }
+
+			if (totalNodes > 5000) {
+					$('#node-modal-stop-alert').show();
+					return;
+				}
+
+				if (totalEdges > 50000) {
+					$('#node-modal-stop-edges').show();
+					return;
+				}
 					
 					//code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
