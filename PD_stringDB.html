@@ -2135,7 +2135,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
 			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightAnalysis"
-				aria-expanded="false" aria-controls="collapseRightAnalysis">Algorithmic Analysis</button>
+				aria-expanded="false" aria-controls="collapseRightAnalysis">Network Analysis</button>
 		</div>
 
 		<div class="collapse show" id="collapseRightAnalysis" >
@@ -3716,18 +3716,19 @@ const isGeneDataMapEmpty =
       }
     }
 
-	if ($('input[name="nodeColor"][value="0"]').is(':checked')) {
-  
+if ($('input[name="nodeColor"][value="0"]').is(':checked')) {
   commonContentColour = "";
   diseaseContentColour = "";
+  
 }
 
 
 if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
- 
  commonContent = "";
  diseaseContent = "";
+ 
 }
+
 
     return `
       <b>ID:</b> ${geneID} <br>
