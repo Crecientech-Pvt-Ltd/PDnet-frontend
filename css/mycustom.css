@@ -180,3 +180,17 @@ button:hover {
 .nav-tabs .nav-link.active {
     color: black;
  }
+
+
+ .popup_card h3 {
+    text-align: left;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(45deg, rgba(18, 76, 103, 1) 0%, rgba(9, 114, 121, 1) 35%, rgba(0, 0, 0, 1) 100%);
+    width: 100%; 
+    padding-left: 15px;
+    padding: 5px;
+    max-width: 900px;
+    margin: auto;
+}

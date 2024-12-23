@@ -89,37 +89,43 @@
 	// 	dataType: 'json',
 	// 	// crossDomain: 'http://*',
 	// 	success: function (data) {
-	function getUniversal(data, headers) {
-		console.log("uniNode loaded ")
-		uniNode = data;
-		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
-		if (headers) {
-			headers.forEach((header) => {
-				if (!uniNodeHeaders.includes(header)) {
-					uniNodeHeaders.push(header);
-				}
-			});
-		}
-		const selectElement = document.getElementById('diseaseMap');
-		const selectedText = selectElement.options[selectElement.selectedIndex].text;
-		
+	// function getUniversal(data, headers) {
+	// 	console.log("uniNode loaded ")
+	// 	uniNode = data;
+	// 	var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+	// 	if (headers) {
+	// 		headers.forEach((header) => {
+	// 			if (!uniNodeHeaders.includes(header)) {
+	// 				uniNodeHeaders.push(header);
+	// 			}
+	// 		});
+	// 	}
+	function getUniversal(commonData, diseaseData) {
+  console.log("uniNode loaded");
 
-			  // Filter uniNodeLogFC based on the selectedText (disease abbreviation)
-	// 		  var uniNodeLogFC = uniNodeHeaders.filter((header) => 
-    //     header.toLowerCase().startsWith(`logfc_${selectedText.toLowerCase()}`)
-    // );
-	
-	let  d = JSON.parse(localStorage.getItem('pd_net_stringDB')) || {};
+  // Example: Handling `common` and `disease`
+  let uniNodeHeaders = diseaseData; // Use `disease` as headers
+  if (commonData) {
+    commonData.forEach((item) => {
+      if (!uniNodeHeaders.includes(item)) {
+        uniNodeHeaders.push(item);
+      }
+    });
+  }
 
-	var uniNodeGDA = uniNodeHeaders.filter((header) => 
-        header.toLowerCase().startsWith(`gda_${d.disease.toLowerCase()}`)
-    );
+//console.log("Final UniNode Headers:", uniNodeHeaders);
+
+
+	   var uniNodeGDA = uniNodeHeaders.filter((header) => 
+        header.toLowerCase().includes("gda_".toLowerCase())
+             );
 
 	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
 	// console.log("Filtered uniNodeGDA:", uniNodeGDA)
 	  
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith(`logfc_${d.disease.toLowerCase()}`));
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().includes("logfc_".toLowerCase()));
+
 		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
 		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
 		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
@@ -127,7 +133,7 @@
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
@@ -136,12 +142,15 @@
 		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
 		//console.log("Filtered Druggability",uniNodeDruggability)
-		//console.log("Filtered uniNodeGDA:", uniNodeGDA)
+		//console.log("Filtered uniNodeGWAS:", uniNodeGWAS)
 		
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
-
+		
+		
+		$('#TE4Color').empty();
 		// For TE Color
+		document.getElementById('TE4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color')
 			$('#TE4Color').trigger("chosen:updated");
@@ -157,6 +166,8 @@
 		});
 		$('#nodeDegreeID4Size').trigger("chosen:updated");
 
+		$('#TE4Size').empty();
+		document.getElementById('TE4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//For TE Size
 		for (var key = 0; key < uniNodeTE.length; key++) {
 			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
@@ -165,24 +176,6 @@
 
 		};
 
-
-		// if(uniNodeGDA.length === 0){
-
-
-		// }
-
-		// $('#GDAID4Color').empty();
-		// $('#GDAID4Size').empty()
-
-		// // For GDA Color
-		// for (var key = 0; key < uniNodeGDA.length; key++) {
-		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
-		// 	$('#GDAID4Color').trigger("chosen:updated");
-		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
-		// 	$('#GDAID4Size').trigger("chosen:updated");
-		// }
-
-		// Assuming uniNodeGDA is defined and populated before this check
 if (uniNodeGDA.length === 0) {
     // Clear the dropdowns
     $('#GDAID4Color').empty();
@@ -211,6 +204,8 @@ if (uniNodeGDA.length === 0) {
     }
 }
 
+     $('#druggabilityID4Color').empty();
+     document.getElementById('druggabilityID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 
 		// Populate Druggability dropdown
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
@@ -226,9 +221,6 @@ if (uniNodeGDA.length === 0) {
 		for (var key = 0; key < uniNodeGWAS_Beta.length; key++) {
 			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
 		}
-
-     
-
 
 		// Clear previous options in the dropdowns
 $('#logFCID4Color').empty();
@@ -285,6 +277,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		//$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo('#directionID4Shape')
 		//};
 
+		$('#pathwayID4Color').empty()
+		document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//For Pathways color
 		for (var key = 0; key < uniNodePathway.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
@@ -323,6 +317,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		// 	$('#GlogFCID4Size').trigger("chosen:updated");
 		// };
 
+		$('#druggabilityID4Size').empty();
+		document.getElementById('druggabilityID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//Trait for Size
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
@@ -332,13 +328,34 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 color
-		for (var key = 0; key < uniNodeGWAS.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
-				uniNodeGWAS[key])).appendTo('#GWAS4Color')
-			$('#GWAS4Color').trigger("chosen:updated");
-			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-		};
+		$('#GWAS4Color').empty();
+		$('#gwasID4Size').empty();
+
+		if (uniNodeGWAS.length === 0){
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#GWAS4Color');
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#gwasID4Size');
+		}
+
+		else{
+			document.getElementById('GWAS4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    for (var key = 0; key < uniNodeGWAS.length; key++) {
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#GWAS4Color');
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#gwasID4Size');
+    }
+		}
+
+   $('#GWAS4Color').trigger("chosen:updated");
+  $('#gwasID4Size').trigger("chosen:updated");
+
+
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#GWAS4Color')
+		// 	$('#GWAS4Color').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
 		//GWAS 4 shape
 		for (var key = 0; key < uniNodeGWAS.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
@@ -347,14 +364,17 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
 		//GWAS 4 Size
-		for (var key = 0; key < uniNodeGWAS.length; key++) {
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
 
-			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
-				uniNodeGWAS[key])).appendTo('#gwasID4Size')
-			$('#gwasID4Size').trigger("chosen:updated");
-			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-		};
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#gwasID4Size')
+		// 	$('#gwasID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+
+		$('#DBs4Color').empty();
+		document.getElementById('DBs4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//Databases 4 color
 		for (var key = 0; key < uniNodeDBs.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
@@ -404,6 +424,391 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		//console.log("uniNode: ", uniNode)
 
 	}
+
+
+
+	function getUniversalTwo(data, headers) {
+		console.log("uniNode loaded ")
+		uniNode = data;
+		var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+		if (headers) {
+			headers.forEach((header) => {
+				if (!uniNodeHeaders.includes(header)) {
+					uniNodeHeaders.push(header);
+				}
+			});
+		}
+
+  console.log("Final UniNode Headers:", uniNodeHeaders);
+		// const selectElement = document.getElementById('diseaseMap');
+		// const selectedText = selectElement.options[selectElement.selectedIndex].text;
+		
+
+			  // Filter uniNodeLogFC based on the selectedText (disease abbreviation)
+	// 		  var uniNodeLogFC = uniNodeHeaders.filter((header) => 
+    //     header.toLowerCase().startsWith(`logfc_${selectedText.toLowerCase()}`)
+    // );
+	
+	// let  d = JSON.parse(localStorage.getItem('pd_net_stringDB')) || {};
+
+	var uniNodeGDA = uniNodeHeaders.filter((header) => 
+        header.toLowerCase().includes("gda_".toLowerCase())
+    );
+
+	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
+	// console.log("Filtered uniNodeGDA:", uniNodeGDA)
+	  
+		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().includes("logfc_".toLowerCase()));
+
+		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
+		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
+		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
+		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
+		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
+		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
+		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
+		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
+		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
+		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
+		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
+		//console.log("Filtered Druggability",uniNodeDruggability)
+		//console.log("Filtered uniNodeGWAS:", uniNodeGWAS)
+		
+		//************************* TO POPULATE DROP DOWNS
+		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
+		
+		
+		$('#TE4Color').empty();
+		// For TE Color
+		document.getElementById('TE4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color')
+			$('#TE4Color').trigger("chosen:updated");
+		}
+		// Adding TE options to the node cut-off in Radial Analysis section
+		var allValues = [];
+		$('#TE4Color option').each(function () {
+			allValues.push($(this).val());
+		});
+		// Add each value from allValues to the #nodeDegreeID4Size dropdown after "Gene Degree"
+		var TE_cutOff = allValues.forEach(function (value) {
+			$('<option/>').val(value).text(value).insertAfter('#nodeDegreeID4Size option[value="node_degree"]');
+		});
+		$('#nodeDegreeID4Size').trigger("chosen:updated");
+
+		$('#TE4Size').empty();
+		document.getElementById('TE4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//For TE Size
+		for (var key = 0; key < uniNodeTE.length; key++) {
+			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
+				'#TE4Size')
+			$('#TE4Size').trigger("chosen:updated");
+
+		};
+
+
+		// if(uniNodeGDA.length === 0){
+
+
+		// }
+
+		// $('#GDAID4Color').empty();
+		// $('#GDAID4Size').empty()
+
+		// // For GDA Color
+		// for (var key = 0; key < uniNodeGDA.length; key++) {
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color')
+		// 	$('#GDAID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size')
+		// 	$('#GDAID4Size').trigger("chosen:updated");
+		// }
+
+		// Assuming uniNodeGDA is defined and populated before this check
+if (uniNodeGDA.length === 0) {
+    // Clear the dropdowns
+    $('#GDAID4Color').empty();
+    $('#GDAID4Size').empty();
+
+    // Optionally, add a default option to indicate no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GDAID4Size');
+
+    // Trigger the chosen plugin to update the dropdowns
+    $('#GDAID4Color').trigger("chosen:updated");
+    $('#GDAID4Size').trigger("chosen:updated");
+} else {
+    // Populate GDA Color and Size dropdowns if options are available
+    $('#GDAID4Color').empty(); // Clear previous options
+    $('#GDAID4Size').empty(); // Clear previous options
+	document.getElementById('GDAID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    // For GDA Color
+    for (var key = 0; key < uniNodeGDA.length; key++) {
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
+        $('#GDAID4Color').trigger("chosen:updated");
+
+        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
+        $('#GDAID4Size').trigger("chosen:updated");
+    }
+}
+
+     $('#druggabilityID4Color').empty();
+     document.getElementById('druggabilityID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+
+		// Populate Druggability dropdown
+		for (var key = 0; key < uniNodeDruggability.length; key++) {
+			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color')
+			$('#druggabilityID4Color').trigger("chosen:updated");
+		}
+		// Populate GWAS OR dropdown
+		for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
+			$('<option/>').val(uniNodeGWAS_OR[key]).text(jsUcFirst(uniNodeGWAS_OR[key])).appendTo('#GWAS_OR4Color');
+		}
+
+		// Populate GWAS Beta dropdown
+		for (var key = 0; key < uniNodeGWAS_Beta.length; key++) {
+			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
+		}
+
+		// Clear previous options in the dropdowns
+$('#logFCID4Color').empty();
+$('#GlogFCID4Size').empty();
+
+// Check if uniNodeLogFC is empty
+if (uniNodeLogFC.length === 0) {
+    // Add a default option indicating no available options
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#logFCID4Color');
+    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
+} else {
+    // Populate the dropdowns with logFC options
+	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    for (var key = 0; key < uniNodeLogFC.length; key++) {
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
+        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
+    }
+}
+
+// Trigger the Chosen plugin to update the dropdowns after modifications
+$('#logFCID4Color').trigger("chosen:updated");
+$('#GlogFCID4Size').trigger("chosen:updated");
+
+
+		// $('#logFCID4Color').empty();
+		// $('#GlogFCID4Size').empty()
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// };
+
+		// for (var key = 0; key < uniNodeLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#logFCID4Color')
+		// 	$('#logFCID4Color').trigger("chosen:updated");
+		// 	$('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
+
+		//For Direction Color
+		for (var key = 0; key < uniNodeDirection.length; key++) {
+			$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
+				'#directionID4Color')
+			$('#directionID4Color').trigger("chosen:updated");
+		};
+
+
+		//For Direction Shape
+		//for (var key = 0; key < uniNodeDirection.length; key++) {
+		//$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo('#directionID4Shape')
+		//};
+
+		$('#pathwayID4Color').empty()
+		document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//For Pathways color
+		for (var key = 0; key < uniNodePathway.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+				'#pathwayID4Color')
+			$('#pathwayID4Color').trigger("chosen:updated");
+		};
+
+
+
+       //$('#custom4Color').empty()
+
+		//For Custom color
+		for (var key = 0; key < uniNodeCustomColors.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodeCustomColors[key]).text(jsUcFirst(uniNodeCustomColors[key])).appendTo(
+				'#custom4Color')
+			$('#custom4Color').trigger("chosen:updated");
+		};
+
+		$('#custom4Color').trigger("chosen:updated");
+
+
+
+		//For Pathways Shape
+		for (var key = 0; key < uniNodePathway.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+				'#pathwayID4Shape')
+		};
+
+
+		// for (var key = 0; key < uniNodeGLogFC.length; key++) {
+		// 	$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo(
+		// 		'#GlogFCID4Size')
+		// 	$('#GlogFCID4Size').trigger("chosen:updated");
+		// };
+
+		$('#druggabilityID4Size').empty();
+		document.getElementById('druggabilityID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//Trait for Size
+		for (var key = 0; key < uniNodeDruggability.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
+			$('#druggabilityID4Size').trigger("chosen:updated");
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+		//GWAS 4 color
+		$('#GWAS4Color').empty();
+		$('#gwasID4Size').empty();
+
+		if (uniNodeGWAS.length === 0){
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#GWAS4Color');
+			$('<option/>').val('').text('None').prop('disabled', true).appendTo('#gwasID4Size');
+		}
+
+		else{
+			document.getElementById('GWAS4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+    for (var key = 0; key < uniNodeGWAS.length; key++) {
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#GWAS4Color');
+        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#gwasID4Size');
+    }
+		}
+
+   $('#GWAS4Color').trigger("chosen:updated");
+  $('#gwasID4Size').trigger("chosen:updated");
+
+
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#GWAS4Color')
+		// 	$('#GWAS4Color').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+		//GWAS 4 shape
+		for (var key = 0; key < uniNodeGWAS.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+				uniNodeGWAS[key])).appendTo('#GWAS4Shape')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+		//GWAS 4 Size
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#gwasID4Size')
+		// 	$('#gwasID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+
+		$('#DBs4Color').empty();
+		document.getElementById('DBs4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		//Databases 4 color
+		for (var key = 0; key < uniNodeDBs.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
+				uniNodeDBs[key])).appendTo('#DBs4Color')
+			$('#DBs4Color').trigger("chosen:updated");
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//Databases 4 Shape
+		for (var key = 0; key < uniNodeDBs.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
+				uniNodeDBs[key])).appendTo('#DBs4Shape')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//CellType_Markers 4 color
+		for (var key = 0; key < uniNodeMarkers.length; key++) {
+			//var val = sample[0]+"_"+pathwayList[key];
+			if (uniNodeMarkers[key] != "markers_Module_ID") $('<option/>').val(uniNodeMarkers[key]).text(
+				jsUcFirst(uniNodeMarkers[key])).appendTo('#markers4Color')
+			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		};
+
+		//CellType_Markers 4 shape
+		for (var key = 0; key < uniNodeMarkers.length; key++) {
+
+			if (uniNodeMarkers[key] != "markers_Module_ID") $('<option/>').val(uniNodeMarkers[key]).text(
+				jsUcFirst(uniNodeMarkers[key])).appendTo('#markers4Shape')
+
+		};
+
+		// for (var key = 0; key < uniNodeDruggability.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
+		// 		jsUcFirst(uniNodeDruggability[key])).appendTo('#nodeDegreeID4Size')
+		// 	$('#nodeDegreeID4Size').trigger("chosen:updated");
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
+
+		//  relevence in  radial analysis
+		// for(let key=0; key<uniNodeRelevence.length; key++){
+		// 	$('<option/>').val(uniNodeGLogFC[key]).text(jsUcFirst(uniNodeGLogFC[key])).appendTo('#nodeDegreeID4Size')
+		// }
+
+		//console.log("uniNode: ", uniNode)
+
+	}
+
+
+
+
+// function getUniversalTwo(data, headers) {
+//     console.log("uniNode loaded");
+//     uniNode = data;
+//     var uniNodeHeaders = Object.keys(uniNode?.genes?.[0]);
+
+//     if (headers) {
+//         headers.forEach((header) => {
+//             if (!uniNodeHeaders.includes(header)) {
+//                 uniNodeHeaders.push(header);
+//             }
+//         });
+//     }
+
+//     console.log("Final UniNode Headers:", uniNodeHeaders);
+
+	
+
+//     // Log each header with its respective value for all genes
+//     uniNode.genes.forEach((gene, index) => {
+//         console.log(`Gene ${index + 1}:`);
+//         uniNodeHeaders.forEach((header) => {
+//             console.log(`  ${header}: ${gene[header] || 'N/A'}`); // Logs 'N/A' if the value is undefined
+//         });
+//     });
+// }
+
+
+
 	// 	statusCode: {
 	// 		404: function () {
 	// 			alert('There was a problem with the server.  Try again soon!');
@@ -466,8 +871,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 	<!--Warning Message Nodes-->
 	<div style="display: none;"   id="node-modal-warning-alert">
-		<div id="alertWarning">
-			<button class="modal-close-btn" onclick="closeAlert_Warning()">x</button>
+		<div id="alertWarning" style="position: relative;">
+			<button class="modal-close-btn" onclick="closeAlert_Warning()"  style="position: absolute; top: 10px;right: 15px; font-size: 18px;">x</button>
 			<div class="modal-header">
 				<span class="alert header-text">
 					Warning
@@ -489,8 +894,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<!--Warning Message Edges-->
 		<div style="display: none;"   id="node-modal-warning-edges">
-			<div id="alertWarning">
-				<button class="modal-close-btn" onclick="close_Warning()">x</button>
+			<div id="alertWarning" style="position: relative;">
+				<button class="modal-close-btn" onclick="close_Warning()" style="position: absolute; top: 10px;right: 15px; font-size: 18px;">x</button>
 				<div class="modal-header">
 					<span class="alert header-text">
 						Warning
@@ -501,7 +906,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						<!-- <li style="font-size: 14px">
 							Network is bigger in size. Number of nodes are high.
 						</li> -->
-						<li style="font-size: 14px">
+						<li style="font-size: 15px">
 							The current network displayed more than 10,000 edges.
 						</li>
 					</ul>
@@ -509,6 +914,27 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			</div>
 		</div>
 		<!---->
+
+		<div style="display: none;"    id="null-message-id">
+			<div id="alertNullWarning">
+				<button class="modal-close-btn" style=" font-size: 20px;position: relative;	right: 10px;"  onclick="close_Null()">x</button>
+				<div class="modal-header">
+					<span class="alert header-text">
+						Alert!
+					</span>	
+				</div>
+				<div class="modal-body">
+					<ul>
+						<!-- <li style="font-size: 14px">
+							Network is bigger in size. Number of nodes are high.
+						</li> -->
+						<li style="font-size: 16px">
+							The currently selected option score value is null.
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
 	<!--Stop Message  Nodes -->
 	<div  style="display: none;" id="node-modal-stop-alert">
@@ -592,6 +1018,15 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
+				<div style="
+                display: flex;
+                justify-content: flex-end; /* Centers horizontally */
+                margin-top: 15px;">
+                <button onclick="closeModal()" 
+                    style="padding: 8px 20px; font-size: 14px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
 			</div>
 		</div>
 	</div>
@@ -633,9 +1068,9 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					GSEA Analysis Results
 				</span>
 				<button class="modal-close-btn" onclick="closeModalGSEA()">x</button>
-				<div>
+				<!-- <div>
 					<button onclick="exportToExcel()" style="padding:10px 10px;margin-left:180%;margin-bottom:10px;width:120px;font-size: 14px;margin-top:8px;">Export Details</button>
-				  </div>
+				  </div> -->
 			</div>
 			<div class="modal-body">
 				<table class="fixed_header">
@@ -664,6 +1099,12 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						</tr>
 					</tbody>
 				</table>
+				<div class="button-container">
+					
+					<button onclick="exportToExcel()" style="padding:10px 20px;font-size: 14px;margin-top: 10px;">Export Details</button>
+						
+					<button onclick="closeModalGSEA()" style = "padding:10px 20px;font-size: 14px;margin-top: 10px;">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -690,7 +1131,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 	<div class="network" style="float:left; width:100%; position:relative; outline: 0;">
 		<div id="openDraw"
 			style="font-size:20px;cursor:pointer;display:inline-block; background: rgb(255, 255, 255, 0.3); position:absolute; top: 0px;"
-			onclick="openNav()">&#9776; open</div>
+			onclick="openNav()">&#9776; Open</div>
 		<!-- Open Menu Button-->
 	</div>
 	<!-- Following DIV will create a LEFT MENU for network filters/modifications features-->
@@ -737,19 +1178,124 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 					</div>
            
 					<script>
-			function showSpinnerAndUpdateTooltip() {
-                    const spinnerOverlay = document.getElementById('spinnerOverlay');
-					// Show the spinner
-                    spinnerOverlay.style.display = 'flex';
-					 // Call updateTooltip function
-					  updateTooltip();
-					   setTimeout(() => {
-                     spinnerOverlay.style.display = 'none';
-                    }, 6000);
-                   }
-					</script>
+						let diseaseValue = "ALS"; // Default value
+						const thisCheck = localStorage.getItem('pd_net_stringDB');
+						if (thisCheck !== undefined && thisCheck !== null) {
+						  const parsedData = JSON.parse(thisCheck);
+						  diseaseValue = parsedData?.disease ?? "ALS"; 
+						}
+					  
+						function showSpinnerAndUpdateTooltip() {
+						  const spinnerOverlay = document.getElementById('spinnerOverlay');
+						  spinnerOverlay.style.display = 'flex'; // Show the spinner
+						  resetText()
+						  clearUniData()
+						  updateTooltip()
+							.then(() => makeRequest())
+							.finally(() => {
+							  // Hide spinner once request completes
+							  spinnerOverlay.style.display = 'none';
+								console.log("isfileuploaded",isfileuploaded);
+							if(isfileuploaded){
+								var modifiedHeaders = headers.map(function(header) {
+            return header + "-custom";
+        });
+								//console.log("headers",modifiedHeaders);
+								appendOptionsBasedOnHeaders(modifiedHeaders,diseaseValue)
 
-					<script>
+
+							}
+							});
+							
+						}
+					  
+						function updateTooltip() {
+						  return new Promise((resolve) => {
+							const selectElement = document.getElementById('diseaseMap');
+							const selectedText = selectElement.options[selectElement.selectedIndex].text;
+					  
+							// Update localStorage with the selected value
+							let d = JSON.parse(localStorage.getItem('pd_net_stringDB')) || {};
+							d.disease = selectedText;
+							localStorage.setItem('pd_net_stringDB', JSON.stringify(d));
+					  
+							// Update tooltip content
+							const tooltipContentElement = document.getElementById('tooltipContent');
+							tooltipContentElement.textContent = getTooltipText(selectedText);
+					  
+							// Update `diseaseValue`
+							diseaseValue = selectedText;
+							resolve(); // Resolve the promise
+						  });
+						}
+					  
+						function makeRequest() {
+						  return $.ajax({
+							url: 'http://api.tdp-dev.alexion.cloud/graphql',
+							type: "POST",
+							contentType: "application/json",
+							accept: "application/json",
+							data: JSON.stringify({
+							  query: `query GetHeaders($disease: String) {
+								getHeaders(disease: $disease) {
+								  common
+								  disease
+								}
+							  }`,
+							  variables: {
+								disease: diseaseValue
+							  }
+							}),
+							success: function (response) {
+							//  console.log(response);
+							  const currentUniversal = response.data.getHeaders;
+					  
+							  // Pass the data to getUniversal
+							  getUniversal(currentUniversal.common, currentUniversal.disease);
+							},
+							error: function (xhr, status, error) {
+							  console.error("Error:", error);
+							}
+						  });
+						}
+					  
+						function getTooltipText(selectedValue) {
+						  switch (selectedValue) {
+							case 'ALS':
+							  return 'Amyotrophic Lateral Sclerosis.';
+							case 'FTD':
+							  return 'Frontotemporal Dementia.';
+							case 'OI':
+							  return 'Osteogenesis Imperfecta.';
+							case 'PSP':
+							  return 'Progressive Supranuclear Palsy.';
+							default:
+							  return 'Select a disease to see more information.';
+						  }
+						}
+						window.onload = function () {
+					//	preventReadyFunctionExecution = false
+                      setTimeout(() => { 
+						console.log('loading...')   
+                            makeRequest()
+                            .then(() => updateTooltip())
+							.then(() =>{ 
+					   	if (currentUniversal.genes.length > 1000 && currentUniversal.genes.length <= 5000) {
+                                   $('#node-modal-warning-alert').show();
+                         }
+							if ( currentUniversal.links.length > 10000 && currentUniversal.links.length <= 50000) {
+								$('#node-modal-warning-edges').show();
+							}
+											})
+                            .catch((error) => {
+                          console.error("Error during initialization:", error);
+                           });}, 3500); 
+						  
+                             };	
+						// Call `updateTooltip` on page load to initialize
+						//window.onload = updateTooltip;
+					  </script>
+					<!-- <script>
 						function updateTooltip() {
 							const selectElement = document.getElementById('diseaseMap');
 							const selectedText = selectElement.options[selectElement.selectedIndex].text;
@@ -760,7 +1306,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							const tooltipImageElement = document.getElementById('tooltipImage');
 
 							tooltipContentElement.textContent = getTooltipText(selectedText);
-							     triggerApiCall(d);
+
+					
 						}
 
 						function getTooltipText(selectedValue) {
@@ -779,96 +1326,10 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						}
 
 						window.onload = updateTooltip;
-					</script>
+					</script> -->
 					<!-- </p> -->
 				</div>
 			</div>
-
-
-			<script>
-				function triggerApiCall(d) {
-				$.ajax({
-					url: `http://api.tdp-dev.alexion.cloud/graphql`,
-					type: "POST",
-					dataType: 'json',
-					data: JSON.stringify({
-						query: `query GeneGraph($geneIDs: [String!]!, $minScore: Float!, $order: Int!, $interactionType: String!) {
-							getGeneInteractions(input: 
-							{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType }, order: $order) {
-								genes {
-									ID
-									hgnc_gene_id
-									hgnc_gene_symbol
-									Description
-									Gene_name
-									common
-									${d.disease}
-								}
-								links {
-									gene1 {
-										ID
-										index
-									}
-									gene2 {
-										ID
-										index
-									}
-									score
-								}
-									graphName
-							}
-						}`,
-						variables: {
-							"geneIDs": d.nodeNames,
-							"minScore": d.score,
-							"order": d.order,
-							"interactionType": d.type
-						}
-					}),
-					headers: {
-						'Content-Type': 'application/json',
-						'Accept': 'application/json',
-						'x-user-id':localStorage.getItem("userID") || ''
-					},
-					success: function (result) {
-						console.log("AJAX Request Successful");
-					//	console.log("New Data:", result);
-						currentUniversal = result.data?.getGeneInteractions;
-						
-						currentUniversal?.genes.forEach((gene, idx) => {
-							geneIndexMap[gene.ID] = idx;
-							geneIndexMap[gene?.Gene_name] = idx;
-							Object.keys(gene.common).forEach((key) => {
-								gene[key] = gene.common[key];
-							});
-							delete gene.common;
-							Object.keys(gene[d?.disease]).forEach((key) => {
-								gene[key] = gene[d?.disease][key];
-							});
-							delete gene[d?.disease];
-						});
-			
-						console.log("Updated Gene Index Map:", geneIndexMap);
-						
-			
-						getUniversal(currentUniversal);
-						initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-						//console.log(initialUniversal)
-						// Here you can add any specific actions with the new data
-					},
-					error: function (err) {
-						console.error("New AJAX Request Failed:", err);
-						alert(err.responseJSON ? err.responseJSON.message : "An issue occurred. Please try again.");
-					}
-				});
-			}
-			
-			</script>
-
-
-
-
-
 
 			<div class="d-inline-flex justify-content-between gap-1 w-100">
 				<!-- <div class="new d-flex justify-content-between p-3 w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -1544,7 +2005,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 	<div class="setting_wrapper" id="mysetting" style="display: none">
 		<div class="setting_close">
-			close
+			Close
 			<a href="javascript:void(0)" class="closebtn" onclick="closeSetting()" style="padding: 0px;">&times;</a>
 		</div>
 		<!-- // gravity .1
@@ -1674,7 +2135,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 		<div class="d-inline-flex justify-content-between gap-1 w-100">
 			<button class="accordion active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRightAnalysis"
-				aria-expanded="false" aria-controls="collapseRightAnalysis">Algorithmic Analysis</button>
+				aria-expanded="false" aria-controls="collapseRightAnalysis">Network Analysis</button>
 		</div>
 
 		<div class="collapse show" id="collapseRightAnalysis" >
@@ -1880,7 +2341,7 @@ function updateNodeColors(response) {
 	</div>
 	</div>
 	<div class="networksetting">
-		<h4 onclick="settingFunc()">Setting &#x2699; </h4>
+		<h4 style="font-size: 20px;" onclick="settingFunc()">Setting &#x2699; </h4>
 	</div>
 	<script>
 
@@ -1904,6 +2365,9 @@ function updateNodeColors(response) {
 
 		// Reset universal
 		function resetUniversals() {
+			// preventReadyFunctionExecution = false
+			isfileuploaded = false;
+			makeRequest()
 			resetText()
 			clearUniData()
 			$("#diseaseMap").val(JSON.parse(getItemFromStorage('pd_net_stringDB')).disease);
@@ -1953,8 +2417,11 @@ function updateNodeColors(response) {
 
 
 		let headers = [];
-
+		let isfileuploaded = false;
+		
 function universal_ext_update() {
+	isfileuploaded = true;
+	// console.log("diseas",diseaseValue);
     let file = document.getElementById('universal_ext')?.files[0];
     if (!file) {
         alert('No file found!');
@@ -1975,15 +2442,34 @@ function universal_ext_update() {
         // Set headers for confirmDetails to use
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 
+		console.log("headers responce",headers)
+
+		   // Determine the key for gene identification dynamically
+		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
+
+if (!geneKey) {
+	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
+	$('#uploading_custom_universal').css('display', 'none');
+	return;
+}
+
+console.log("Gene Key Detected:", geneKey);
         let matchedGenes = [];
         let unmatchedGenes = [];
 
         csvFormattedData.forEach((gene) => {
-            const geneId = gene.ID;
-            const geneData = headers.reduce((obj, key) => {
-                obj[key] = gene[key];
-                return obj;
-            }, {});
+            // const geneId = gene.ID;
+            // const geneData = headers.reduce((obj, key) => {
+            //     obj[key] = gene[key];
+            //     return obj;
+            // }, {});
+			//const geneId = gene.ID || gene.gene;
+			const geneId = gene[geneKey];
+			if (!geneId) return;
+            const geneData = {};
+            headers.forEach(header => {
+                geneData[`${header}-custom`] = gene[header]; 
+            });
 
             if (geneIndexMap[geneId] === undefined) {
                 unmatchedGenes.push(geneId);
@@ -1995,10 +2481,12 @@ function universal_ext_update() {
                     ...geneData,
                     ...currentUniversal.genes[geneIndexMap[geneId]]
                 };
-
                 matchedGenes.push(geneId);
+			
             }
         });
+				 console.log("current values",currentUniversal);
+
 
 		if (matchedGenes.length === 0) {
             alert('All genes provided in the custom upload do not match with the current network!');
@@ -2010,18 +2498,27 @@ function universal_ext_update() {
 			    // Populate unmatched genes in table_data-ip-4
 				const unmatchedTableBody = document.getElementById("table_data-ip-4");
         unmatchedTableBody.innerHTML = "";
-        unmatchedGenes.forEach((gene, index) => {
-            const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
-            unmatchedTableBody.innerHTML += row;
-        });
+        // unmatchedGenes.forEach((gene, index) => {
+        //     const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+        //     unmatchedTableBody.innerHTML += row;
+        // });
+		const rows = unmatchedGenes.map((gene, index) => {
+        return `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+        }).join('');
+        unmatchedTableBody.innerHTML = rows;
 
         // Populate matched genes in table_data-ip-5
         const matchedTableBody = document.getElementById("table_data-ip-5");
         matchedTableBody.innerHTML = "";
-        matchedGenes.forEach((gene, index) => {
-            const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
-            matchedTableBody.innerHTML += row;
-        });
+        // matchedGenes.forEach((gene, index) => {
+        //     const row = `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+        //     matchedTableBody.innerHTML += row;
+        // });
+
+		const rows1 = matchedGenes.map((gene, index) => {
+        return `<tr><td>${index + 1}</td><td>${gene}</td></tr>`;
+        }).join('');
+        matchedTableBody.innerHTML = rows1;
 
         showModalDetails();
 		}
@@ -2029,7 +2526,7 @@ function universal_ext_update() {
         $("#diseaseMap").append(`<option value="Custom Universal">Custom Universal</option>`);
         $("#diseaseMap").val('Custom Universal');
         document.getElementById("universal_ext").value = "";
-        clearUniData();
+        // clearUniData();
 
         $('#uploading_custom_universal').css('display', 'none');
         $('#uploaded_custom_universal').css('display', 'block');
@@ -2040,14 +2537,110 @@ function universal_ext_update() {
     reader.readAsText(file);
 }
 
+
+// let preventReadyFunctionExecution = false;
+// function confirmDetails() {
+//     if (headers.length > 0) {
+//         getUniversalTwo(currentUniversal, headers);
+//         $("#node-modal-background-4").css("display", "none");
+// 		// preventReadyFunctionExecution = true;
+//     } else {
+//         alert('No data available to confirm. Please upload a file first.');
+	
+//     }
+// }
+
+// Triggered when the "Confirm" button is clicked
 function confirmDetails() {
     if (headers.length > 0) {
-        getUniversal(currentUniversal, headers);
+		var modifiedHeaders = headers.map(function(header) {
+            return header + "-custom";
+        });
+        // appendOptionsBasedOnHeaders(headers,diseaseValue);
+        appendOptionsBasedOnHeaders(modifiedHeaders,diseaseValue);
+
+      //  appendOptionsBasedOnHeaders(headers,diseaseValue);
         $("#node-modal-background-4").css("display", "none");
+        // preventReadyFunctionExecution = true;
     } else {
         alert('No data available to confirm. Please upload a file first.');
     }
 }
+
+function appendOptionsBasedOnHeaders(headers,diseaseValue) {
+    // let uniNodeLogFC = headers.filter((header) => header.toLowerCase().includes("logfc_"));
+    // appendOptionsFromFile(uniNodeLogFC, 'logFCID4Color');
+    // appendOptionsFromFile(uniNodeLogFC, 'GlogFCID4Size');
+    
+    // let uniNodeGDA = headers.filter((header) => header.toLowerCase().includes("gda_"));
+    // appendOptionsFromFile(uniNodeGDA, 'GDAID4Color');
+    // appendOptionsFromFile(uniNodeGDA, 'GDAID4Size');
+
+		// var uniNodeGWAS = headers.filter((header) => header.toLowerCase().includes("Genetics_"));
+    // appendOptionsFromFile(uniNodeGWAS, 'GWAS4Color');
+    // appendOptionsFromFile(uniNodeGWAS, 'gwasID4Size');
+
+	let uniNodeLogFC = headers.filter(header => header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`));
+    let uniNodeGDA = headers.filter(header => header.toLowerCase().includes(`gda_${diseaseValue.toLowerCase()}`));
+    let uniNodeGWAS = headers.filter(header => header.toLowerCase().includes(`gwas_${diseaseValue.toLowerCase()}`));
+
+    // Append the relevant options for each category
+    appendOptionsFromFile(uniNodeLogFC, 'logFCID4Color');
+    appendOptionsFromFile(uniNodeLogFC, 'GlogFCID4Size');
+
+    appendOptionsFromFile(uniNodeGDA, 'GDAID4Color');
+    appendOptionsFromFile(uniNodeGDA, 'GDAID4Size');
+
+    appendOptionsFromFile(uniNodeGWAS, 'GWAS4Color');
+    appendOptionsFromFile(uniNodeGWAS, 'gwasID4Size');
+
+
+    let uniNodeDruggability = headers.filter((header) => header.toLowerCase().startsWith("druggability_"));
+    appendOptionsFromFile(uniNodeDruggability, 'druggabilityID4Color');
+    appendOptionsFromFile(uniNodeDruggability, 'druggabilityID4Size');
+    
+    // appendOptionsFromFile(headers.filter((header) => header.toLowerCase().includes("pathway_")), 'pathwayID4Color');
+		var uniNodeTE = headers.filter((header) => header.toLowerCase().startsWith("TE_"));
+    appendOptionsFromFile(uniNodeTE, 'TE4Color');
+    appendOptionsFromFile(uniNodeTE, 'TE4Size');
+
+		var uniNodeCustomColors = headers.filter((header) => header.toLowerCase().startsWith("custom_color_"));
+    appendOptionsFromFile(uniNodeCustomColors, 'custom4Color');
+
+		var uniNodePathway = headers.filter((header) => header.toLowerCase().startsWith("pathway_"));
+    appendOptionsFromFile(uniNodePathway, 'pathwayID4Color');
+
+		var uniNodeDBs = headers.filter((header) => header.toLowerCase().startsWith("database_"));
+    appendOptionsFromFile(uniNodeDBs, 'DBs4Color');
+
+		
+}
+
+function appendOptionsFromFile(headerArray, dropdownId) {
+    let dropdown = document.getElementById(dropdownId);
+    // console.log("dropdown",dropdown);
+    headerArray.forEach(header => {
+        let optionExists = false;
+        for (let i = 0; i < dropdown.options.length; i++) {
+            if (dropdown.options[i].value.toLowerCase() === header.toLowerCase()) {
+                optionExists = true;
+                break;
+            }
+        }
+
+        if (!optionExists) {
+            let option = document.createElement("option");
+            option.value = header ;
+            option.text = header ;
+            dropdown.appendChild(option);
+        }
+    });
+
+    $(dropdown).trigger("chosen:updated");
+	}
+
+
+
 
 
 
@@ -2061,6 +2654,10 @@ function confirmDetails() {
 
 		function close_Warning() {
 			$("#node-modal-warning-edges").css("display", "none");
+		}
+
+		function close_Null(){
+			$("#null-message-id").css("display","none")
 		}
 
 		function closeAlert_Stop() {
@@ -2486,8 +3083,16 @@ function confirmDetails() {
 						}
 					});
 				if (nodeDetails.length > 0) {
+					$("#gene_info").append(
+						`<button type="button" onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+					);
+					$("#gene_info").append(
+						`<button type="button" onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+					)
+					$("#gene_info").append(`<div style="float: left; margin-bottom: 10px;font-weight:bold">${nodeDetails.length} nodes selected</div>`);
+					$("#gene_info").append('<div style="clear: both;"></div>');
 					nodeDetails.forEach((i, index) => {
-						$("#gene_info").append(`<p>${i.Gene_name}</p>`)
+						$("#gene_info").append(`<p style="font-size: 13px; margin-top:10px">${i.Gene_name}</p>`)
 						$("#table_data-ip")
 							.append(`<tr>
 											<td style="width: 50px; padding: 5px;">${index + 1}.</td>
@@ -2496,13 +3101,13 @@ function confirmDetails() {
 										<td style="width: 360px">${i.Description == undefined ? 'No description found' : i.Description}</td>
 									</tr>`);
 					});
-					$("#gene_info").append(
-						`<button type="button" onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
-					);
-					$("#gene_info").append(
-						`<button type="button" onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
-					)
-					$("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
+					// $("#gene_info").append(
+					// 	`<button type="button" onclick="showModal()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Node Details</button>`
+					// );
+					// $("#gene_info").append(
+					// 	`<button type="button" onclick="clearSelectedNode()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+					// )
+					// $("#gene_info").append(`<div style="float: left; margin-bottom: 10px">${nodeDetails.length} nodes selected</div>`);
 					// }
 					// }); // NEW ADDED
 					$("#gsea_info").empty();
@@ -2532,13 +3137,20 @@ function confirmDetails() {
                              //   console.log(`Index: ${idx + 1}, Original P-value: ${val['P-value']}, Calculated P-value: ${calculatedPValue}`);
                                      });
 
-
+							$("#gsea_info").append(
+								`<button type="button" onclick="showModalGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Analysis Details</button>`
+							);
+							$("#gsea_info").append(
+								`<button type="button" onclick="clearGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+							)
+							$("#gsea_info").append(`<div style="float: left; margin-bottom: 10px;font-weight:bold">${data.length} Pathway found</div>`);
+							$("#gsea_info").append('<div style="clear: both;"></div>');
 							data.forEach((val, idx) => {
 								const formattedPValue = formatPValue(val['P-value']);
 								const formattedAdjustedPvalue = formatAdjusted(val['Adjusted P-value'])
-								$("#gsea_info").append(`<p>${val.Gene_set}</p>`);
+								$("#gsea_info").append(`<p style="font-size: 13px;">${val.Gene_set}</p>`);
 								$("#table_data-ip-3").append(`<tr>
-									<td style="width: 50px; min-width: 50px; padding: 5px;">${idx + 1}</td>
+									<td style="width: 50px; padding: 5px;">${idx + 1}</td>
 									<td>${val.Gene_set}</td>
 									<td>${val.Overlap}</td>
 									<td>${formattedPValue}</td>
@@ -2548,13 +3160,13 @@ function confirmDetails() {
 									<td style="word-break: break-all;">${val['Genes']}</td>
 								</tr>`);
 							});
-							$("#gsea_info").append(
-								`<button type="button" onclick="showModalGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Analysis Details</button>`
-							);
-							$("#gsea_info").append(
-								`<button type="button" onclick="clearGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
-							)
-							$("#gsea_info").append(`<div style="float: left; margin-bottom: 10px">${data.length} Pathway found</div>`);
+							// $("#gsea_info").append(
+							// 	`<button type="button" onclick="showModalGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Analysis Details</button>`
+							// );
+							// $("#gsea_info").append(
+							// 	`<button type="button" onclick="clearGSEA()" style=" margin: 10px 0px;padding: 5px 10px; color: black; float: left">Clear</button>`
+							// )
+							// $("#gsea_info").append(`<div style="float: left; margin-bottom: 10px">${data.length} Pathway found</div>`);
 						},
 						error: function (err) {
 							console.error(err);
@@ -2663,8 +3275,8 @@ function formatAdjusted(AdjustedPvalue){
 				ID: d?.ID,
 				Gene_name: d?.Gene_name,
 				Description: d?.Description,
-				hgnc_gene_id: d?.hgnc_gene_id,
-				hgnc_gene_symbol: d?.hgnc_gene_symbol,
+			//	hgnc_gene_id: d?.hgnc_gene_id,
+			//	hgnc_gene_symbol: d?.hgnc_gene_symbol,
 			}));
 			graphRec = JSON.parse(JSON.stringify(graph)); //Add this line			
 			var nodSize = [];
@@ -2944,54 +3556,215 @@ function formatAdjusted(AdjustedPvalue){
 
 			//Highlight connection of a node and show tooltip on mouseover event
 
+			// node.on("mouseover", function (d) {
+			// 	set_highlight(d);
+
+			// 	// document.getElementById("mysetting").style.display ="block"
+			// 	var gene_info = document.getElementById("gene_info");
+			// 	//  gene info on hover  on side tab 
+			// 	// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d.ID}"  target='_blank'>Id: ${d.ID} </a>` + "<br>"+
+			// 	//  "<p class='gene_info'>Description :</p>" + d.Description  + "<br>"+
+			// 	//  "<p class='gene_info'>label :</p>" + d.Gene_name + "<br>"+
+			// 	//  "<p class='gene_info'>weight :</p>" + d.weight
+
+			// 	gbTootip.transition().duration(500);
+			// 	gbTootip.style("top", d3.event.pageY - 5 + "px");
+			// 	gbTootip.style("left", d3.event.pageX + 5 + "px");
+			// 	gbTootip.html(function () {
+			// 		//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
+			// 		var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
+			// 		var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
+			// 		var tmp3 = d.Description ? "Description: " + d.Description + "<br>" : "";
+			// 		// var tmp6 = d.Description ? "Weight: " + d.Description + "<br>" : "";
+			// 		//################### Update on 8.05.19 #################################//
+			// 		if (nodeSize_sel != "") {
+						
+
+			// 			var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
+    
+						
+			// 		}
+			// 		// console.log("Node Size",tmp4)
+			// 		if (nodeColor_sel != "") {
+					
+			// 			var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
+			// 		}
+
+
+
+			// 		//################### End_Update on 8.05.19 #################################//
+			// 		//var tmp4 = "logFC: " + d.logFC.toExponential(2) + "<br>";
+			// 		//d.proteomics_fc == "NA" || typeof d.proteomics_fc == "undefined" ? tmp5 = "" : tmp5 = "Proteomic logFC: " + d.proteomics_fc.toExponential(2) + "<br>"
+			// 		//var tmp6 =  d.pvalue ? "P-value: " + d.pvalue.toExponential(2) : "";
+
+			// 		//console.log(d.logFC);
+			// 		//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
+			// 		//console.log("Node size")
+			// 		//console.log(nodSize)
+			// 		let result = tmp1 + tmp2 + tmp3;
+			// 		if (nodeSize_sel != "") {
+			// 			result += tmp4;
+						
+			// 		}
+			// 		if (nodeColor_sel != "") {
+			// 			result += tmp5;
+
+			// 		}
+					
+			// 		return result;
+			// 	})
+			// 	gbTootip.style("display", "block");
+			// })
+
 			node.on("mouseover", function (d) {
-				set_highlight(d);
+  set_highlight(d);
 
-				// document.getElementById("mysetting").style.display ="block"
-				var gene_info = document.getElementById("gene_info");
-				//  gene info on hover  on side tab 
-				// gene_info.innerHTML = `<a class='gene_info_link' href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=${d.ID}"  target='_blank'>Id: ${d.ID} </a>` + "<br>"+
-				//  "<p class='gene_info'>Description :</p>" + d.Description  + "<br>"+
-				//  "<p class='gene_info'>label :</p>" + d.Gene_name + "<br>"+
-				//  "<p class='gene_info'>weight :</p>" + d.weight
+  // Tooltip setup
+  gbTootip.transition().duration(500);
+  gbTootip.style("top", d3.event.pageY - 5 + "px");
+  gbTootip.style("left", d3.event.pageX + 5 + "px");
 
-				gbTootip.transition().duration(500);
-				gbTootip.style("top", d3.event.pageY - 5 + "px");
-				gbTootip.style("left", d3.event.pageX + 5 + "px");
-				gbTootip.html(function () {
-					//var tmp1 = "Gene: " + d.ID + "<br>" + "logFC: " + d.logFC.toExponential(2) + "<br>";
-					var tmp1 = d.Gene_name ? "Gene: " + d.Gene_name + "<br>" : "";
-					var tmp2 = d.ID ? "Ensemble: " + d.ID + "<br>" : "";
-					var tmp3 = d.Description ? "Description: " + d.Description + "<br>" : "";
-					// var tmp6 = d.Description ? "Weight: " + d.Description + "<br>" : "";
-					//################### Update on 8.05.19 #################################//
-					if (nodeSize_sel != "") {
+  // Determine if geneDataMap is empty
+//   const isGeneDataMapEmpty =
+//     Object.keys((geneDataMap && geneDataMapColour) || {}).length === 0; 
+const isGeneDataMapEmpty =
+    Object.keys(geneDataMap || {}).length === 0 && 
+    Object.keys(geneDataMapColour || {}).length === 0;
 
-						var tmp4 = `<b>${nodeSize_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]).toFixed(2)) : "NA") + "<br>";
-					}
-					if (nodeColor_sel != "") {
-						var tmp5 = `<b>${nodeColor_sel}</b>` + ": " + (currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel] ? (Number(currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]).toFixed(2)) : "NA") + "<br>";
-					}
-					//################### End_Update on 8.05.19 #################################//
-					//var tmp4 = "logFC: " + d.logFC.toExponential(2) + "<br>";
-					//d.proteomics_fc == "NA" || typeof d.proteomics_fc == "undefined" ? tmp5 = "" : tmp5 = "Proteomic logFC: " + d.proteomics_fc.toExponential(2) + "<br>"
-					//var tmp6 =  d.pvalue ? "P-value: " + d.pvalue.toExponential(2) : "";
+  // Function to generate content when geneDataMap is empty
+  const getDefaultGeneInfo = (nodeData) => {
+    let additionalInfo = "";
 
-					//console.log(d.logFC);
-					//return tmp1 + tmp2 + tmp3 +tmp4 +tmp5 +tmp6;
-					//console.log("Node size")
-					//console.log(nodSize)
-					let result = tmp1 + tmp2 + tmp3;
-					if (nodeSize_sel != "") {
-						result += tmp4;
-					}
-					if (nodeColor_sel != "") {
-						result += tmp5;
-					}
-					return result;
-				})
-				gbTootip.style("display", "block");
-			})
+    // Add nodeSize_sel details
+    if (nodeSize_sel) {
+      const nodeSizeValue =
+        currentUniversal?.genes[geneIndexMap[nodeData?.ID]][nodeSize_sel];
+      additionalInfo += `<b>${nodeSize_sel}</b>: ${
+        nodeSizeValue ? Number(nodeSizeValue).toFixed(2) : "NA"
+      } <br>`;
+    }
+
+    // Add nodeColor_sel details
+    if (nodeColor_sel) {
+      const nodeColorValue =
+        currentUniversal?.genes[geneIndexMap[nodeData?.ID]][nodeColor_sel];
+      additionalInfo += `<b>${nodeColor_sel}</b>: ${
+        nodeColorValue ? Number(nodeColorValue).toFixed(2) : "NA"
+      } <br>`;
+    }
+
+
+    // Combine basic info and additional details
+    return `
+      <b>ID:</b> ${nodeData.ID || "NA"} <br>
+      <b>Gene Name:</b> ${nodeData.Gene_name || "NA"} <br>
+      <b>Description:</b> ${nodeData.Description || "NA"} <br>
+      ${additionalInfo}
+    `;
+  };
+
+  // Function to generate content from geneDataMap
+  const getGeneInfoFromMap = (nodeData) => {
+    const data = geneDataMap[nodeData.ID] || {};
+    const dataTwo = geneDataMapColour[nodeData.ID] || {};
+    const geneID = data.ID || dataTwo.ID || "NA";
+    const geneName = data.Gene_name || dataTwo.Gene_name || "NA";
+    const geneDescription =
+      data.Description || dataTwo.Description || "NA";
+
+    let commonContent = "";
+    if (data.common) {
+      Object.entries(data.common).forEach(([key, value]) => {
+        commonContent += `<b>${key}:</b> ${value} <br>`;
+      });
+    }
+
+    let commonContentColour = "";
+    if (dataTwo.common) {
+      Object.entries(dataTwo.common).forEach(([key, value]) => {
+        commonContentColour += `<b>${key}:</b> ${value} <br>`;
+      });
+    }
+
+    let diseaseContent = "";
+    if (data.disease) {
+      const diseaseData = data.disease[diseaseValue];
+      if (diseaseData && typeof diseaseData === "object") {
+        Object.entries(diseaseData).forEach(([key, value]) => {
+          if (typeof value === "object") {
+            diseaseContent += `<b>${key}:</b> ${JSON.stringify(
+              value,
+              null,
+              2
+            )} <br>`;
+          } else {
+            diseaseContent += `<b>${key}:</b> ${value} <br>`;
+          }
+        });
+      } 
+	  else {
+        diseaseContent += `<b>${diseaseValue}:</b> ${
+          diseaseData || "N/A"
+        } <br>`;
+      }
+    }
+
+    let diseaseContentColour = "";
+    if (dataTwo.disease) {
+      const diseaseData = dataTwo.disease[diseaseValue];
+      if (diseaseData && typeof diseaseData === "object") {
+        Object.entries(diseaseData).forEach(([key, value]) => {
+          if (typeof value === "object") {
+            diseaseContentColour += `<b>${key}:</b> ${JSON.stringify(
+              value,
+              null,
+              2
+            )} <br>`;
+          } else {
+            diseaseContentColour += `<b>${key}:</b> ${value} <br>`;
+          }
+        });
+      } else {
+        diseaseContentColour += `<b>${diseaseValue}:</b> ${
+          diseaseData || "N/A"
+        } <br>`;
+      }
+    }
+
+if ($('input[name="nodeColor"][value="0"]').is(':checked')) {
+  commonContentColour = "";
+  diseaseContentColour = "";
+  
+}
+
+
+if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
+ commonContent = "";
+ diseaseContent = "";
+ 
+}
+
+
+    return `
+      <b>ID:</b> ${geneID} <br>
+      <b>Gene Name:</b> ${geneName} <br>
+      <b>Description:</b> ${geneDescription} <br>
+      ${commonContent}
+      ${diseaseContent}
+      ${commonContentColour}
+      ${diseaseContentColour}
+    `;
+  };
+
+  // Generate tooltip content based on geneDataMap
+  const tooltipContent = isGeneDataMapEmpty
+    ? getDefaultGeneInfo(d)
+    : getGeneInfoFromMap(d);
+
+  // Update the tooltip HTML
+  gbTootip.html(tooltipContent);
+  gbTootip.style("display", "block");
+})
 
 				//highlight connections & remove tooltip on mousedown event and get back to previous stat on mouseup
 				.on("mousedown", function (d) {
@@ -3387,10 +4160,11 @@ function formatAdjusted(AdjustedPvalue){
 
 		//Read Pathway specific JSON to create a force directed graph
 		// let l = document.getElementById('loader');
-		let thisCheck = getItemFromStorage('pd_net_stringDB');
+	//	let thisCheck = getItemFromStorage('pd_net_stringDB');
 		var currentUniversal;
 		var initialUniversal;
 		var geneIndexMap = {};
+		let isColorChangeTriggered = false;
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
@@ -3408,12 +4182,8 @@ function formatAdjusted(AdjustedPvalue){
 								{ geneIDs: $geneIDs, minScore: $minScore, interactionType: $interactionType },order: $order) {
 							    	genes {
 										ID
-										hgnc_gene_id
-										hgnc_gene_symbol
 										Description
 										Gene_name
-										common
-										${d?.disease}
 							    	}
 									links {
 										gene1 {
@@ -3446,6 +4216,28 @@ function formatAdjusted(AdjustedPvalue){
 				//	console.log(result)
 					const graphName = result.data.getGeneInteractions.graphName
 					localStorage.setItem("graphName",graphName)
+					const geneIDs = result.data.getGeneInteractions.genes.map(gene => gene.ID);
+				//	console.log("Extracted Gene IDs:", geneIDs);
+				$(document).ready(function () {
+                  $("#logFCID4Color, #GDAID4Color, #GWAS4Color, #pathwayID4Color,#druggabilityID4Color,#DBs4Color,#TE4Color").on("change", function () {
+                 //  makeSecondRequestColour(geneIDs);
+				//  if (!preventReadyFunctionExecution) {
+				
+            makeSecondRequestColour(geneIDs);
+                    //  }
+                 });
+                      });
+
+					  $(document).ready(function () {
+                  $("#GlogFCID4Size,#GDAID4Size,#druggabilityID4Size,#gwasID4Size,#TE4Size").on("change", function () {
+				 //  makeSecondRequestSize(geneIDs);
+				//  if (!preventReadyFunctionExecution) {
+					makeSecondRequestSize(geneIDs);
+					console.log("requestoapi")
+              //  }
+                 });
+                      });
+				//	makeSecondRequest(geneIDs);
 					$("#loader").css('display', 'none')
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
@@ -3459,25 +4251,35 @@ function formatAdjusted(AdjustedPvalue){
 					// }
 
 					// Handle node-related warnings and stops
-					if (totalNodes > 1000) {
-                if (totalNodes <= 5000) {
-                   $('#node-modal-warning-alert').show();
-                 } else {
-                   $('#node-modal-stop-alert').show();
-                  return;
-                 }
-               }
+			// 		if (totalNodes > 1000) {
+            //     if (totalNodes <= 5000) {
+            //        $('#node-modal-warning-alert').show();
+            //      } else {
+            //        $('#node-modal-stop-alert').show();
+            //       return;
+            //      }
+            //    }
 
 			   // Handle edges-related warnings and stops
 
-			   if (totalEdges > 10000) {
-              if (totalEdges <= 50000) {
-                 $('#node-modal-warning-edges').show();
-             } else {
-             $('#node-modal-stop-edges').show();
-               return;
-              }
-              }
+			//    if (totalEdges > 10000) {
+            //   if (totalEdges <= 50000) {
+            //      $('#node-modal-warning-edges').show();
+            //  } else {
+            //  $('#node-modal-stop-edges').show();
+            //    return;
+            //   }
+            //   }
+
+			if (totalNodes > 5000) {
+					$('#node-modal-stop-alert').show();
+					return;
+				}
+
+				if (totalEdges > 50000) {
+					$('#node-modal-stop-edges').show();
+					return;
+				}
 					
 					//code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
@@ -3486,17 +4288,18 @@ function formatAdjusted(AdjustedPvalue){
 					currentUniversal?.genes.forEach((gene, idx) => {
 						geneIndexMap[gene.ID] = idx;
 						geneIndexMap[gene?.Gene_name] = idx;
-						Object.keys(gene.common).forEach((key) => {
-							gene[key] = gene.common[key];
-						});
-						delete gene.common;
-						Object.keys(gene[d?.disease]).forEach((key) => {
-							gene[key] = gene[d?.disease][key];
-						});
-						delete gene[d?.disease];
+						// Object.keys(gene.common).forEach((key) => {
+						// 	gene[key] = gene.common[key];
+						// });
+						// delete gene.common;
+						// Object.keys(gene[d?.disease]).forEach((key) => {
+						// 	gene[key] = gene[d?.disease][key];
+						// });
+						// delete gene[d?.disease];
 					});
+ 
 					startD3(currentUniversal);
-					getUniversal(currentUniversal);
+				//	getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
 					for (let i of d.nodeNames) {
 						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
@@ -3956,120 +4759,120 @@ function formatAdjusted(AdjustedPvalue){
 		}
 
 
-		function TEdegreeFun() {
-			var degreeValTE = parseFloat(this.value) || 0;
-			TEdegreeOutput.innerHTML = degreeValTE;
-			// Function to get the score for a node
-			function getScore(d) {
-				const cutoffType = document.getElementById("nodeDegreeID4Size").value; // Get the current cutoff type
-				if (cutoffType && currentUniversal?.genes[geneIndexMap[d?.ID]]) {
-					const geneData = currentUniversal.genes[geneIndexMap[d.ID]];
-					const scoreValue = geneData[cutoffType] !== undefined ? parseFloat(geneData[cutoffType]) : 0;
-					return isNaN(scoreValue) ? 0 : scoreValue;
-				}
-				return 0; // Default to 0 if score is not available
-			}
-			// Filter nodes based on the score threshold
-			const totalNodes = d3.selectAll(".node")
-				.style("display", function (d) {
-					const score = getScore(d);
-					const isVisible = score >= degreeValTE;
-					// console.log(`Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				})
-				.filter(d => getScore(d) >= degreeValTE)
-				.size();
-			// Filter links based on the visibility of connected nodes
-			const totalEdges = d3.selectAll(".link")
-				.style("display", function (d) {
-					const sourceScore = getScore(d.source);
-					const targetScore = getScore(d.target);
-					const isVisible = sourceScore >= degreeValTE && targetScore >= degreeValTE;
-					// console.log(`Link from Node ${d.source.id} to Node ${d.target.id}: Source Score: ${sourceScore}, Target Score: ${targetScore}, Threshold: ${degreeValTE}, Link Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				})
-				.filter(d => getScore(d.source) >= degreeValTE && getScore(d.target) >= degreeValTE)
-				.size();
-			// Filter text labels based on the score threshold
-			d3.selectAll(".text")
-				.style("display", function (d) {
-					const score = getScore(d);
-					const isVisible = score >= degreeValTE;
-					// console.log(`Text for Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
-					return isVisible ? "inline" : "none";
-				});
-			// Update network details
-			$('#network_details').empty();
-			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
-			// Restart or update the graph if needed
-			restart();
-		}
-
 		// function TEdegreeFun() {
-		// 	TEdegreeOutput.innerHTML = this.value || 0;
-		// 	if (typeof this.value == "undefined") {
-		// 		this.value = 0;
+		// 	var degreeValTE = parseFloat(this.value) || 0;
+		// 	TEdegreeOutput.innerHTML = degreeValTE;
+		// 	// Function to get the score for a node
+		// 	function getScore(d) {
+		// 		const cutoffType = document.getElementById("nodeDegreeID4Size").value; // Get the current cutoff type
+		// 		if (cutoffType && currentUniversal?.genes[geneIndexMap[d?.ID]]) {
+		// 			const geneData = currentUniversal.genes[geneIndexMap[d.ID]];
+		// 			const scoreValue = geneData[cutoffType] !== undefined ? parseFloat(geneData[cutoffType]) : 0;
+		// 			return isNaN(scoreValue) ? 0 : scoreValue;
+		// 		}
+		// 		return 0; // Default to 0 if score is not available
 		// 	}
-		// 	var degreeValTE = this.value || 0;
+		// 	// Filter nodes based on the score threshold
 		// 	const totalNodes = d3.selectAll(".node")
-		// 		.filter(d => {
-		// 			return d.weight >= degreeValTE;
+		// 		.style("display", function (d) {
+		// 			const score = getScore(d);
+		// 			const isVisible = score >= degreeValTE;
+		// 			// console.log(`Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
 		// 		})
-		// 		.style("display", "inline").size();
-		// 	d3.selectAll(".node")
-		// 		.filter(d => {
-		// 			return d.weight < degreeValTE;
-		// 		})
-		// 		.style("display", "none");
+		// 		.filter(d => getScore(d) >= degreeValTE)
+		// 		.size();
+		// 	// Filter links based on the visibility of connected nodes
 		// 	const totalEdges = d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.target.weight >= degreeValTE
+		// 		.style("display", function (d) {
+		// 			const sourceScore = getScore(d.source);
+		// 			const targetScore = getScore(d.target);
+		// 			const isVisible = sourceScore >= degreeValTE && targetScore >= degreeValTE;
+		// 			// console.log(`Link from Node ${d.source.id} to Node ${d.target.id}: Source Score: ${sourceScore}, Target Score: ${targetScore}, Threshold: ${degreeValTE}, Link Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
 		// 		})
-		// 		.style("display", "inline").size();
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.source.weight >= degreeValTE
-		// 		})
-		// 		.style("display", "inline");
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.target.weight < degreeValTE
-		// 		})
-		// 		.style("display", "none");
-		// 	d3.selectAll(".link")
-		// 		.filter(d => {
-		// 			return d.source.weight < degreeValTE
-		// 		})
-		// 		.style("display", "none");
+		// 		.filter(d => getScore(d.source) >= degreeValTE && getScore(d.target) >= degreeValTE)
+		// 		.size();
+		// 	// Filter text labels based on the score threshold
 		// 	d3.selectAll(".text")
-		// 		.filter(d => {
-		// 			return d.weight >= degreeValTE;
-		// 		})
-		// 		.style("display", "inline");
-		// 	d3.selectAll(".text")
-		// 		.filter(d => {
-		// 			return d.weight < degreeValTE;
-		// 		}).style("display", "none");
+		// 		.style("display", function (d) {
+		// 			const score = getScore(d);
+		// 			const isVisible = score >= degreeValTE;
+		// 			// console.log(`Text for Node ID: ${d.id}, Score: ${score}, Threshold: ${degreeValTE}, Visible: ${isVisible}`);
+		// 			return isVisible ? "inline" : "none";
+		// 		});
+		// 	// Update network details
 		// 	$('#network_details').empty();
 		// 	$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
-		// }
-
-
-		// slider.oninput =  function() {
-		//   //var textval=10
-		//   output.innerHTML = this.value;
-		//   var myinout = this.value;
-		//   graph.links.splice(0, graph.links.length);
-
-		//   graphRec.links.forEach(function(val){
-		// 		if(val.weight > myinout){
-		// 			graph.links.push(val);
-		// 		}
-		// 	});
-
-		// 	console.log(graph.links,"kkkk",graph.nodes)
+		// 	// Restart or update the graph if needed
 		// 	restart();
 		// }
+
+		function TEdegreeFun() {
+			TEdegreeOutput.innerHTML = this.value || 0;
+			if (typeof this.value == "undefined") {
+				this.value = 0;
+			}
+			var degreeValTE = this.value || 0;
+			const totalNodes = d3.selectAll(".node")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".node")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				})
+				.style("display", "none");
+			const totalEdges = d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight >= degreeValTE
+				})
+				.style("display", "inline").size();
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight >= degreeValTE
+				})
+				.style("display", "inline");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.target.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".link")
+				.filter(d => {
+					return d.source.weight < degreeValTE
+				})
+				.style("display", "none");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight >= degreeValTE;
+				})
+				.style("display", "inline");
+			d3.selectAll(".text")
+				.filter(d => {
+					return d.weight < degreeValTE;
+				}).style("display", "none");
+			$('#network_details').empty();
+			$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`);
+		}
+
+
+		slider.oninput =  function() {
+		  //var textval=10
+		  output.innerHTML = this.value;
+		  var myinout = this.value;
+		  graph.links.splice(0, graph.links.length);
+
+		  graphRec.links.forEach(function(val){
+				if(val.weight > myinout){
+					graph.links.push(val);
+				}
+			});
+
+			console.log(graph.links,"kkkk",graph.nodes)
+			restart();
+		}
 
 		// function filternodes(){
 		// 	graph.nodes.splice(0, graph.nodes.length);
@@ -4115,7 +4918,11 @@ function formatAdjusted(AdjustedPvalue){
 
 		function getNodeSizeScale(nss) {
 			let a = [];
-			$.each(uniNode.genes, function (idx, d) {
+			console.log("nss",nss);
+			// console.log("d",d);
+			$.each(currentUniversal.genes, function (idx, d) {
+
+			//	console.log("currentUniversal.genes",currentUniversal.genes);
 				if (d[nss] != undefined || d[nss] != null || Number(d[nss]) != NaN) {
 					a.push(Math.abs(Number(d[nss])));
 				} else {
@@ -4123,10 +4930,59 @@ function formatAdjusted(AdjustedPvalue){
 				}
 			});
 			//d3.min((uniNode.genes, function(d){console.log(uniNode.genes[d][uniNode.headers[nodeSize]]);}))
+			//console.log("a",a);
 			return d3.scale.linear()
 				.domain([d3.min(a), d3.max(a)])
 				.range([min_base_node_size, max_base_node_size1]);
 		}
+
+function getNodeSizeScaleone(nss) {
+
+	// if(!preventReadyFunctionExecution){
+  let a = [];
+    // console.log("Starting to get node size scale for:", nss); 
+    $.each(geneDataMap, function (idx, gene) {
+        // console.log("Processing gene:", gene.ID); 
+        let value = gene.common[nss] || gene.disease?.[diseaseValue][nss] ;
+        // console.log("Gene value for", nss, ":", value);  
+        if (value != undefined || value != null || Number(value) != NaN) {
+            // console.log("Valid value:", value); 
+            a.push(Math.abs(Number(value)));
+        } else {
+            // console.log("Invalid value, pushing 0");  
+            a.push(0);
+        }
+    });
+
+    // console.log("Array of values for scaling:", a);  
+		
+    let scale = d3.scale.linear()
+        .domain([d3.min(a), d3.max(a)])
+        .range([min_base_node_size, max_base_node_size1]);
+
+    // console.log("Node size scale created:", scale); 
+    return scale;
+	// }
+  
+
+	// if(preventReadyFunctionExecution){
+	// 	let a = [];
+	// 		$.each(uniNode.genes, function (idx, d) {
+	// 			if (d[nss] != undefined || d[nss] != null || Number(d[nss]) != NaN) {
+	// 				a.push(Math.abs(Number(d[nss])));
+	// 			} else {
+	// 				a.push(0);
+	// 			}
+	// 		});
+	// 		//d3.min((uniNode.genes, function(d){console.log(uniNode.genes[d][uniNode.headers[nodeSize]]);}))
+	// 		return d3.scale.linear()
+	// 			.domain([d3.min(a), d3.max(a)])
+	// 			.range([min_base_node_size, max_base_node_size1]);
+	// }
+		
+	
+}
+
 
 		//find node
 		$("#geneinput").submit(function (e) {
@@ -4565,10 +5421,12 @@ function formatAdjusted(AdjustedPvalue){
 		
 		
 		document.getElementById("custom4Color").onchange = function () {
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
 			nodeColor_sel = document.getElementById("custom4Color").value;
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
-				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("custom4Color").value] ?? undefined;
+				let mks = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel] ?? undefined;
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
              if (nodeNames.includes(geneID) && isNodeColor1Checked) {
             return "blue";  
@@ -4582,7 +5440,7 @@ function formatAdjusted(AdjustedPvalue){
 		    return default_node_color;
 		});
 		}
-
+	// }
 		//on selecting Direction type, color the nodes
 
 		document.getElementById("directionID4Color").onchange = function () {
@@ -4598,11 +5456,14 @@ function formatAdjusted(AdjustedPvalue){
 			});
 		}
 
-		//on selecting logFC type, color the nodes
-document.getElementById("logFCID4Color").onchange = function () {			
-    nodeColor_sel = document.getElementById("logFCID4Color").value;
-  //  console.log("Selected Color Option:", nodeColor_sel);
+// 		//on selecting logFC type, color the nodes
+document.getElementById("logFCID4Color").onchange = function () {		
+	// if (preventReadyFunctionExecution) {
 
+    nodeColor_sel = document.getElementById("logFCID4Color").value;
+  	console.log("Selected Color Option:", nodeColor_sel);
+		// if (nodeColor_sel.endsWith('_Custom')) {
+		// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
     d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
         let geneID = d.ID;
       //  console.log("Current Gene ID:", geneID);
@@ -4619,15 +5480,23 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 				
     });
-};
+	}
+// }
+// };
+
+
 
 		//on selecting GWAS type, color the nodes
 
 		document.getElementById("GWAS4Color").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 			nodeColor_sel = document.getElementById("GWAS4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
-				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
+				let gw = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel] ?? undefined;
                 let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
                   //  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
@@ -4637,15 +5506,19 @@ document.getElementById("logFCID4Color").onchange = function () {
 				}
 			});
 		}
+	// }
+	// }
 
 
 			//on selecting Databases type, color the nodes
 
 			document.getElementById("DBs4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("DBs4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
-				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
+				let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel] ?? undefined;
 				
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
@@ -4659,6 +5532,7 @@ document.getElementById("logFCID4Color").onchange = function () {
 			
 			});
 		}
+		// }
 		//on selecting Celltype Markers, color the nodes
 
 		document.getElementById("markers4Color").onchange = function () {
@@ -4678,8 +5552,12 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 
 		//on selecting pathway name, color the nodes
+
 		document.getElementById("pathwayID4Color").onchange = function () {
+		// if (preventReadyFunctionExecution) {
 			nodeColor_sel = document.getElementById("pathwayID4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
         		let geneID = d.ID;
     			var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
@@ -4692,22 +5570,32 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 				}
 			});
-		}
+			}
+		// }
+	// }
 
 	// on selecting Druggability for color change
+	
 
 	document.getElementById("druggabilityID4Color").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+			// console.log("nodeColor_sel",nodeColor_sel);
+
 			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
+				console.log("nodeColor_sel",nodeColor_sel);
+
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
 				let geneIndex = geneIndexMap[geneID];
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("druggabilityID4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel];
                 // console.log("val ==", val)
 				//   return val ? expressionColor(Number(val)) : default_node_color;
-
+				console.log("val",val);
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
@@ -4715,19 +5603,27 @@ document.getElementById("logFCID4Color").onchange = function () {
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
-		}
+			}
+		// }
+	// }
 
 
 	// on selecting GDA for color change
 
 	document.getElementById("GDAID4Color").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+			console.log("nodeColor_sel",nodeColor_sel);
+
 			nodeColor_sel = document.getElementById("GDAID4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
+				console.log("nodeColor_sel",nodeColor_sel);
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
 				//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
 				// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
 				// 	.getElementById("druggabilityID4Color").value]])) : "black";
-				let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel];
 				// return val ? expressionColor(Number(val)) : default_node_color;
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
@@ -4736,7 +5632,9 @@ document.getElementById("logFCID4Color").onchange = function () {
 					return val ? expressionColor(Number(val)) : default_node_color;
 				}
 			});
-		}
+			}
+		// }
+		// }
 		
 		// on selecting GWAS OR for color change
 
@@ -4773,10 +5671,14 @@ document.getElementById("logFCID4Color").onchange = function () {
 		// on selecting TE Score for color change
 
 		document.getElementById("TE4Color").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 			nodeColor_sel = document.getElementById("TE4Color").value;
+			// if (nodeColor_sel.endsWith('_Custom')) {
+			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
-				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel];
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 				if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
                 // console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
@@ -4788,6 +5690,8 @@ document.getElementById("logFCID4Color").onchange = function () {
 				}
 			});
 		}
+		// }
+		// }
 
 
 		//*********************************SIZE ******************************************************
@@ -5405,24 +6309,24 @@ document.getElementById("logFCID4Color").onchange = function () {
 				}
 				let val2;
 				if (/TE/.test(cutoff_type)) {
-					var allTEvalues = [];
-					d3.selectAll(".node").select("path")
-						.attr("dTest", d3.svg.symbol()
-							.size(function (dTest) {
-								val2 = (currentUniversal?.genes[geneIndexMap[dTest.ID]][document.getElementById("nodeDegreeID4Size").value]) ?? 0;
-								allTEvalues.push(val2);
-							})
-						);
-					let newVal;
-					const minTEval = Math.min(...allTEvalues).toFixed(2);
-					const maxTEval = Math.max(...allTEvalues).toFixed(2);
-					const TErangeInput = document.getElementById('myTEvalues');
-					TErangeInput.min = minTEval;
-					TErangeInput.max = maxTEval;
-					TErangeInput.addEventListener('input', function () {
-						document.getElementById('thresh3').textContent = this.value;
-					});
-					document.getElementById('thresh3').textContent = TErangeInput.value;
+					// var allTEvalues = [];
+					// d3.selectAll(".node").select("path")
+					// 	.attr("dTest", d3.svg.symbol()
+					// 		.size(function (dTest) {
+					// 			val2 = (currentUniversal?.genes[geneIndexMap[dTest.ID]][document.getElementById("nodeDegreeID4Size").value]) ?? 0;
+					// 			allTEvalues.push(val2);
+					// 		})
+					// 	);
+					// let newVal;
+					// const minTEval = Math.min(...allTEvalues).toFixed(2);
+					// const maxTEval = Math.max(...allTEvalues).toFixed(2);
+					// const TErangeInput = document.getElementById('myTEvalues');
+					// TErangeInput.min = minTEval;
+					// TErangeInput.max = maxTEval;
+					// TErangeInput.addEventListener('input', function () {
+					// 	document.getElementById('thresh3').textContent = this.value;
+					// });
+					// document.getElementById('thresh3').textContent = TErangeInput.value;
 					$("#TERange").show()
 				} else {
 					$("#TERange").hide()
@@ -5433,12 +6337,15 @@ document.getElementById("logFCID4Color").onchange = function () {
 		//on selecting Genomic LogFC, change the size of nodes
 
 		document.getElementById("GlogFCID4Size").onchange = function () {
+		// if (preventReadyFunctionExecution) {
 
+			// console.log(" in logfc size");
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GlogFCID4Size").value;
 			nodeSize_sel = nodeSize;
 
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
+			// console.log("nodeSizeScale",nodeSizeScale)
 
 			d3.selectAll(".node").select("path")
 				.attr("d", d3.svg.symbol()
@@ -5449,7 +6356,10 @@ document.getElementById("logFCID4Color").onchange = function () {
 						//thisNodeSize = size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize])))));
 						//thisNodeSize = uniNode.genes[d.ID] ? size(nodeSizeScale(Math.pow(2,Math.abs(Number(uniNode.genes[d.ID][uniNode.headers[nodeSize]]))))) : "";
 						let val = Number(currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GlogFCID4Size").value]) ?? undefined;
+						// console.log("val",val)
+						
 						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						// console.log("thisNodeSize",thisNodeSize);
 						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
 							thisNodeSize || nominal_base_node_size, 2);
 						//return Math.PI*Math.pow(size(nodeSizeScale(Math.pow(2,Math.abs(Number(d[nodeSize]))))) || nominal_base_node_size,2);
@@ -5457,12 +6367,15 @@ document.getElementById("logFCID4Color").onchange = function () {
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-		}
+				}
+		// }
 		///=======
 
 		//on selecting GWAS score, change the size of nodes
 
 		document.getElementById("gwasID4Size").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("gwasID4Size").value;
@@ -5487,11 +6400,14 @@ document.getElementById("logFCID4Color").onchange = function () {
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-		}
+				}
+		// }
 		///=======
 
 
 		document.getElementById("GDAID4Size").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 
 			// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
 			nodeSize = document.getElementById("GDAID4Size").value;
@@ -5517,7 +6433,8 @@ document.getElementById("logFCID4Color").onchange = function () {
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-		}
+				}
+		// }
 
 
 		//on selecting Proteomic LogFC, change the size of nodes
@@ -5558,6 +6475,8 @@ document.getElementById("logFCID4Color").onchange = function () {
 		//on selecting trait name, change the size of nodes
 
 		document.getElementById("druggabilityID4Size").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 			nodeSize = document.getElementById("druggabilityID4Size").value;
 			nodeSize_sel = nodeSize;
 
@@ -5580,11 +6499,15 @@ document.getElementById("logFCID4Color").onchange = function () {
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-		}
+				}
+		// }
 
 
 		document.getElementById("TE4Size").onchange = function () {
+		// if (preventReadyFunctionExecution) {
+
 			nodeSize = document.getElementById("TE4Size").value;
+			console.log("in te size")
 			nodeSize_sel = nodeSize;
 			nodeSizeScale = getNodeSizeScale(nodeSize_sel);
 			d3.selectAll(".node").select("path")
@@ -5598,7 +6521,8 @@ document.getElementById("logFCID4Color").onchange = function () {
 					.type(function (d) {
 						return "circle"; /*d.type;*/
 					}));
-		}
+				}
+		// }
 
 		//Gradient Legend for the network
 
@@ -5887,18 +6811,7 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 				</span>
 			</div>
 
-			<!-- <div  class="size"  style="padding:10px 0; max-height:600px;" >
-				<select  name="diseaseMap" style="width:100%; position: relative;
-				left: 162px;
-				bottom: 22px;" class="chosen-select">
-						<option value="ALS">ALS</option>
-						<option value="FTD">FTD</option>
-						<option value="OI">OI</option>
-						<option value="PSP">PSP</option>	
-					</select>
-
-			</div> -->
-
+			
 		
 
 			
@@ -5984,7 +6897,933 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 	</script>
 	
 
+ <!-- <script>
+let diseaseValue = "ALS"; // Default value
+if (thisCheck !== undefined && thisCheck !== null) {
+  let parsedData = JSON.parse(thisCheck);
+  diseaseValue = parsedData?.disease ?? "ALS"; 
+}
+
+function makeRequest() {
+    $.ajax({
+      url: "https://pdnet-rnd-apis.crecientech.com/graphql",
+      type: "POST",
+      contentType: "application/json",
+      accept: "application/json",
+      data: JSON.stringify({
+        query: `query GetHeaders($disease: String) {
+          getHeaders(disease: $disease) {
+            common
+            disease
+          }
+        }`,
+        variables: {
+          disease: diseaseValue
+        }
+      }),
+      success: function (response) {
+		console.log(response)
+        // Handle the response
+        const currentUniversal = response.data.getHeaders;
+
+        // Pass the data to getUniversal
+        getUniversal(currentUniversal.common, currentUniversal.disease);
+
+       // console.log("Current Universal:", currentUniversal);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error:", error);
+      }
+    });
+  }
+
+  setTimeout(makeRequest, 5000);
+
+// Update the UI with the selected value
+//$("#diseaseMap").val(diseaseValue);
+
+ </script> -->
+
+ <script>
+let geneDataMapColour = {}
+function makeSecondRequestColour(geneIDs) {
+
+	let thisDisease = localStorage.getItem("pd_net_stringDB"); // Example of retrieving from localStorage
+let diseaseValueData = "ALS"; // Default value
+if (thisDisease !== undefined && thisDisease !== null) {
+  let parsedData = JSON.parse(thisDisease);
+  diseaseValueData = parsedData?.disease ?? "ALS";
+}
+
+  // Retrieve selected values from the dropdowns
+  const logFCValue = $("#logFCID4Color").val();
+  const GDAValue = $("#GDAID4Color").val();
+  const GWASValue = $("#GWAS4Color").val();
+  const pathwayValue = $("#pathwayID4Color").val();
+  const druggabilityValue = $("#druggabilityID4Color").val();
+  const databaseValue = $("#DBs4Color").val();
+  const TEvalue = $("#TE4Color").val();
+
+	if (logFCValue && logFCValue.toLowerCase().includes("custom")) {
+	geneDataMapColour = {};
+    return;  
+  }
+	if (GDAValue && GDAValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+	if (GWASValue && GWASValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+	if (pathwayValue && pathwayValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+	if (druggabilityValue && druggabilityValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+	if (databaseValue && databaseValue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+	if (TEvalue && TEvalue.toLowerCase().includes("custom")) {
+		geneDataMapColour = {};
+    return;  
+  }
+
+  
+
+  // Initialize properties arrays
+  const propertiesForDisease = [];
+  const propertiesForRemaining = [];
+
+  // Add selected values to their respective arrays
+  
+  //Node Color changes 
+  if (logFCValue && logFCValue !== "none") {
+    propertiesForDisease.push(logFCValue);
+  }
+  else if(logFCValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+  if (GDAValue && GDAValue !== "none") {
+    propertiesForDisease.push(GDAValue);
+  }
+  else if(GDAValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+  if (GWASValue && GWASValue !== "none") {
+    propertiesForDisease.push(GWASValue);
+  }  
+  else if(GWASValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+  
+  if (pathwayValue && pathwayValue !== "none") {
+    propertiesForRemaining.push(pathwayValue);
+  }
+  else if(pathwayValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+
+  if (druggabilityValue && druggabilityValue !== "none")
+ {
+	propertiesForRemaining.push(druggabilityValue);
+ }
+ else if(druggabilityValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+ 
+
+ if (databaseValue && databaseValue !== "none")
+ {
+	propertiesForRemaining.push(databaseValue);
+ }
+ else if(databaseValue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+ 
+ if (TEvalue && TEvalue !== "none")
+ {
+	propertiesForRemaining.push(TEvalue);
+ }
+ else if(TEvalue === "none"){
+		d3.selectAll("stop[offset='100%']").style("stop-color", function(d) {
+			let geneID = d.ID; // Get the geneID from the current node
+			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+				return "blue";
+			} else {
+				return default_node_color;
+			}
+		});
+
+	}
+
+ 
+
+  // Prepare query variables
+  const variables = {
+    config: [
+      {
+        disease: diseaseValueData,
+        properties: propertiesForDisease.length > 0 ? propertiesForDisease : []
+      },
+      {
+        properties: propertiesForRemaining.length > 0 ? propertiesForRemaining : []
+      }
+    ],
+    geneIDs: geneIDs
+  };
+
+  // Send AJAX request
+  $.ajax({
+    url: 'http://api.tdp-dev.alexion.cloud/graphql',
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      query: `
+        query GetGenes($config: [DataRequired!], $geneIDs: [String!]!) {
+          getGenes(config: $config, geneIDs: $geneIDs) {
+            ID
+            Gene_name
+            Description
+            common
+            disease
+          }
+        }
+      `,
+      variables: variables
+    }),
+    headers: {
+      "Accept": "application/json"
+    },
+    success: function (response) {
+     console.log("GraphQL Response:", response);
+			if (response.data && response.data.getGenes) {
+    
+    	// Create a map of gene data by ID for easier lookup
+				 
+				response.data.getGenes.forEach(gene => {
+					geneDataMapColour[gene.ID] = gene;  // Store gene data using the gene ID as the key
+					
+				});
+
+				let nodeColor_sel;
+				
+
+				//ON LOGFC selection 
+
+
+				// if (logFCValue && logFCValue !== "none") {
+
+				// 		nodeColor_sel = logFCValue;
+				// 		console.log("Selected Color Option:", nodeColor_sel);
+
+				// 		d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 				let geneID = d.ID;
+				// 			let geneData = geneDataMap[geneID];
+				// 			let val = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; // If 'common' or other property is found in the gene data
+				// 		//	console.log("val",val);
+				// 			let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				// 			if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+				// 				return "blue";
+				// 			} else {
+				// 				return val ? expressionColor(Number(val)) : default_node_color;
+				// 			}
+
+								
+				// 		});
+				// }
+
+				if (logFCValue && logFCValue !== "none") {
+    nodeColor_sel = logFCValue;
+    d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        let geneID = d.ID;
+        let geneData = geneDataMapColour[geneID];
+        let val = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; // Check for the property in gene data
+
+        // // Handle null value
+        // if (val === null) {
+        //     document.getElementById("null-message-id").style.display = "block";
+        // } else {
+        //     document.getElementById("null-message-id").style.display = "none";
+        // }
+
+        let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+        if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+            return "blue";
+        } else {
+            return val ? expressionColor(Number(val)) : default_node_color;
+        }
+    });
+} 
+
+
+				//ON GDA selection 
+
+				
+				if (GDAValue && GDAValue !== "none") {
+
+					nodeColor_sel = GDAValue;
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						let geneID = d.ID;
+						//return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document.getElementById("logFCID4Color").value]])) : default_node_color;
+						// return uniNode.genes[d.ID] ? expressionColor(Number(uniNode.genes[d.ID][uniNode.headers[document
+						// 	.getElementById("druggabilityID4Color").value]])) : "black";
+						
+						// let val = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GDAID4Color").value];
+						let geneData = geneDataMapColour[geneID];
+						let val = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; 
+						  // Handle null value
+					// 	  if (val === null) {
+                    //   document.getElementById("null-message-id").style.display = "block";
+                    //    } else {
+                    //     document.getElementById("null-message-id").style.display = "none";
+                    //   }
+					//	console.log("val",val);
+						// return val ? expressionColor(Number(val)) : default_node_color;
+						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+						if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+							return "blue";
+						} else {
+							return val ? expressionColor(Number(val)) : default_node_color;
+						}
+					});
+				}
+				
+				//ON GENETICS selection 
+
+
+				if (GWASValue && GWASValue !== "none") {
+
+					nodeColor_sel = GWASValue;
+					console.log("selected option",nodeColor_sel)
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						let geneID = d.ID;
+						// let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
+
+						let geneData = geneDataMapColour[geneID];
+						let gw = geneData?.disease?.[diseaseValueData]?.[nodeColor_sel]; 
+						  // Handle null value
+					// 	  if (gw === null) {
+                    //       document.getElementById("null-message-id").style.display = "block";
+                    //        } else {
+                    //       document.getElementById("null-message-id").style.display = "none";
+                    //    }
+					//	console.log("gw",gw);
+						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+						if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+							//  console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+							return "blue";
+						} else {
+							return gw && gw >= 1 ? "red" : default_node_color;
+						}
+					});
+				}
+
+				//ON PATHWAY selection 
+
+
+
+				if (pathwayValue && pathwayValue !== "none") {
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						nodeColor_sel = pathwayValue; // Use the selected value for node color
+						// console.log("Selected Color Option:", nodeColor_sel);
+								let geneID = d.ID;
+							// var pat = currentUniversal?.genes[geneIndexMap[geneID]][nodeColor_sel] ?? undefined;
+							
+							let geneData = geneDataMapColour[geneID];
+							let pat = geneData?.common?.[nodeColor_sel] ?? undefined;
+							// console.log("pat",pat);
+							let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+							if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+									return "blue";
+							} else {
+							return pat && pat == 1 ? "red" : default_node_color;
+
+						}
+					});
+				}
+
+				//ON DRUGGABILITY selection 
+
+
+				if (druggabilityValue && druggabilityValue !== "none") {
+					nodeColor_sel = druggabilityValue; // Use the selected value for node color
+					// console.log("Selected Color Option:", nodeColor_sel);
+					// Iterate over all the nodes and update the color based on the selected property
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						let geneID = d.ID;  // Get the gene ID from the node data
+						// console.log("Node Data (d):", d);
+
+						// Get the gene data for the current node from the map
+						let geneData = geneDataMapColour[geneID];
+						let val = geneData?.common?.[nodeColor_sel] ?? undefined; // If 'common' or other property is found in the gene data
+					// console.log("Gene Value:", val);
+						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+						if (nodeNames.includes(geneID) && isNodeColor1Checked) {
+							return "blue"; 
+						} else {
+							// Use the value from the gene data (if available) to determine the color
+							return val ? expressionColor(Number(val)) : default_node_color; // Use expression color or fallback
+						}
+					});
+				}
+
+				//ON TE selection 
+				
+
+				if (TEvalue && TEvalue !== "none") {
+					nodeColor_sel = TEvalue;
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						let geneID = d.ID;
+						// let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
+						let geneData = geneDataMapColour[geneID];
+					let val = geneData?.common?.[nodeColor_sel] ?? undefined; 
+					//  console.log("val",val);
+						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+						if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+										// console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+											return "blue";
+										} else {
+							return val ? d3.scale.linear()
+							.domain([0, 1])
+							.range([default_node_color, "red"])(Number(val)) : default_node_color;
+						}
+					});
+				}
+
+				//ON DATABASE selection 
+
+				if (databaseValue && databaseValue !== "none") {
+
+					nodeColor_sel = databaseValue;
+					console.log("selected option",nodeColor_sel)
+					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+						let geneID = d.ID;
+						// let dbs = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("DBs4Color").value] ?? undefined;
+						let geneData = geneDataMapColour[geneID];
+						let dbs = geneData?.common?.[nodeColor_sel] ?? undefined;
+
+						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+						if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+							// console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+							return "blue";
+						} else {
+							return dbs && dbs >= 1 ? "red" : default_node_color;
+						}
+					});
+				}
+
+			}
+		},
+			
+        
+		error: function (error) {
+			console.error("GraphQL Error:", error);
+    }
+  });
+}
+
+function resetOtherDropdowns(exceptId) {
+  const dropdowns = [
+    "#logFCID4Color",
+    "#GDAID4Color",
+    "#GWAS4Color",
+    "#pathwayID4Color",
+    "#druggabilityID4Color",
+    "#DBs4Color",
+    "#TE4Color"
+  ];
+
+  dropdowns.forEach(function (dropdown) {
+    if (dropdown !== `#${exceptId}`) {
+      $(dropdown).val("none");  
+    }
+  });
+}
+
+$("#logFCID4Color").change(function() {
+  resetOtherDropdowns("logFCID4Color");
+});
+
+$("#GDAID4Color").change(function() {
+  resetOtherDropdowns("GDAID4Color");
+});
+
+$("#GWAS4Color").change(function() {
+  resetOtherDropdowns("GWAS4Color");
+});
+
+$("#pathwayID4Color").change(function() {
+  resetOtherDropdowns("pathwayID4Color");
+});
+
+$("#druggabilityID4Color").change(function() {
+  resetOtherDropdowns("druggabilityID4Color");
+});
+
+$("#DBs4Color").change(function() {
+  resetOtherDropdowns("DBs4Color");
+});
+
+$("#TE4Color").change(function() {
+  resetOtherDropdowns("TE4Color");
+});
+
+ </script>
+
+<script>
+let geneDataMap = {};
+
+function makeSecondRequestSize(geneIDs) {
+
+	let thisDisease = localStorage.getItem("pd_net_stringDB"); // Example of retrieving from localStorage
+let diseaseValueData = "ALS"; // Default value
+if (thisDisease !== undefined && thisDisease !== null) {
+  let parsedData = JSON.parse(thisDisease);
+  diseaseValueData = parsedData?.disease ?? "ALS";
+}
+
+
+
+  const logFCValueSize = $("#GlogFCID4Size").val()
+  const GDAValueSize = $("#GDAID4Size").val()
+  const druggabilityValueSize = $("#druggabilityID4Size").val()
+  const GWASValueSize = $("#gwasID4Size").val()
+  const TEvalueSize = $("#TE4Size").val()
+
+	if (logFCValueSize && logFCValueSize.toLowerCase().includes("custom")) {
+       geneDataMap = {}
+    return;  
+  }
+	if (GDAValueSize && GDAValueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
+    return;  
+  }
+	if (druggabilityValueSize && druggabilityValueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
+    return;  
+  }
+	if ( GWASValueSize && GWASValueSize .toLowerCase().includes("custom")) {
+		geneDataMap = {}
+    return;  
+  }
+	if ( TEvalueSize && TEvalueSize.toLowerCase().includes("custom")) {
+		geneDataMap = {}
+    return;  
+  }
 
 
 
 
+  // Initialize properties arrays
+  const propertiesForDisease = [];
+  const propertiesForRemaining = [];
+
+  // Add selected values to their respective arrays
+  
+
+
+ //Node Size Changes
+ if (logFCValueSize && logFCValueSize !== "none") {
+    propertiesForDisease.push(logFCValueSize);
+  }else if(logFCValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
+  if (GDAValueSize && GDAValueSize !== "none") {
+    propertiesForDisease.push(GDAValueSize);
+  }else if(GDAValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
+  if (GWASValueSize && GWASValueSize !== "none") {
+    propertiesForDisease.push(GWASValueSize);
+  }else if(GWASValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
+  if (druggabilityValueSize && druggabilityValueSize !== "none") {
+    propertiesForRemaining.push(druggabilityValueSize);
+  }else if(druggabilityValueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
+  if (TEvalueSize && TEvalueSize !== "none") {
+    propertiesForRemaining.push(TEvalueSize);
+  }else if(TEvalueSize === "none"){
+		d3.selectAll(".node").select("path")
+		.attr("d", d3.svg.symbol()
+		.size(function (d) {
+			return Math.PI * Math.pow(nominal_base_node_size, 2);
+		})
+		.type(function (d) {
+			return "circle"; /*d.type;*/
+		}));
+
+	}
+
+
+  // Prepare query variables
+  const variables = {
+    config: [
+      {
+        disease: diseaseValueData,
+        properties: propertiesForDisease.length > 0 ? propertiesForDisease : []
+      },
+      {
+        properties: propertiesForRemaining.length > 0 ? propertiesForRemaining : []
+      }
+    ],
+    geneIDs: geneIDs
+  };
+
+  // Send AJAX request
+  $.ajax({
+    url: 'http://api.tdp-dev.alexion.cloud/graphql',
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      query: `
+        query GetGenes($config: [DataRequired!], $geneIDs: [String!]!) {
+          getGenes(config: $config, geneIDs: $geneIDs) {
+            ID
+            Gene_name
+            Description
+            common
+            disease
+          }
+        }
+      `,
+      variables: variables
+    }),
+    headers: {
+      "Accept": "application/json"
+    },
+    success: function (response) {
+     console.log("GraphQL Response:", response);
+			if (response.data && response.data.getGenes) {
+    
+    	// Create a map of gene data by ID for easier lookup
+				 
+				response.data.getGenes.forEach(gene => {
+					geneDataMap[gene.ID] = gene;  // Store gene data using the gene ID as the key
+					
+				});
+
+				
+				let nodeSize_sel;
+
+				if (druggabilityValueSize && druggabilityValueSize !== "none") {
+					nodeSize = druggabilityValueSize;
+					// console.log("nodeSize", nodeSize);
+					nodeSize_sel = nodeSize;
+					// console.log("nodeSize_sel", nodeSize_sel);
+
+					// Assuming getNodeSizeScale is a function that returns a scale function for node size
+					nodeSizeScale = getNodeSizeScaleone(nodeSize_sel);
+					// console.log("nodeSizeScale", nodeSizeScale);
+
+					d3.selectAll(".node").select("path")
+						.attr("d", d3.svg.symbol()
+						.size(function (d) {
+							// console.log("d", d);
+							let geneID = d.ID;
+							let geneData = geneDataMap[geneID];
+							
+							// Ensure that geneData and the value we access are valid
+							let val = Number(geneData?.common?.[document.getElementById("druggabilityID4Size").value]) ?? undefined;
+
+							// console.log("val", val);
+							let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+							// console.log("thisNodesize",thisNodeSize);
+							// Return the size for the node, ensuring it doesn't exceed the maximum node size
+							return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size : thisNodeSize || nominal_base_node_size, 2);
+					})
+					.type(function (d) {
+							return "circle";  // You can replace this with your logic if you want different shapes
+            })
+        );
+			}
+
+			if(TEvalueSize && TEvalueSize !== "none"){
+
+				nodeSize = TEvalueSize;
+				nodeSize_sel = nodeSize;
+
+				nodeSizeScale = getNodeSizeScaleone(nodeSize_sel);
+				d3.selectAll(".node").select("path")
+					.attr("d", d3.svg.symbol()
+						.size(function (d) {
+							let geneID = d.ID;
+							let geneData = geneDataMap[geneID];
+							let val = Number(geneData?.common?.[document.getElementById("TE4Size").value]) ?? undefined;
+							let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+							return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+								thisNodeSize || nominal_base_node_size, 2);
+						})
+						.type(function (d) {
+							return "circle"; /*d.type;*/
+						}));
+				}
+
+				if(logFCValueSize && logFCValueSize !== "none"){
+					nodeSize = document.getElementById("GlogFCID4Size").value;
+					nodeSize_sel = nodeSize;
+					nodeSizeScale = getNodeSizeScaleone(nodeSize_sel);
+					d3.selectAll(".node").select("path")
+					.attr("d", d3.svg.symbol()
+					.size(function (d) {
+						let geneID = d.ID;
+						let geneData = geneDataMap[geneID];
+						let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("GlogFCID4Size").value]) ?? undefined;
+						//console.log(val)
+						    // Handle null value
+							// if (val === 0 || val === undefined) {
+                    
+              //       document.getElementById("null-message-id").style.display = "block";
+              //   } else {
+                    
+              //       document.getElementById("null-message-id").style.display = "none";
+              //   }
+						  // Handle null value
+						let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+						return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+						thisNodeSize || nominal_base_node_size, 2);
+					})
+					.type(function (d) {
+						return "circle"; /*d.type;*/
+					}));
+				}
+
+				if(GDAValueSize && GDAValueSize !== "none"){
+					nodeSize = document.getElementById("GDAID4Size").value;
+					nodeSize_sel = nodeSize;
+
+					nodeSizeScale = getNodeSizeScaleone(nodeSize_sel);
+
+					d3.selectAll(".node").select("path")
+					.attr("d", d3.svg.symbol()
+						.size(function (d) {
+							let geneID = d.ID;
+							let geneData = geneDataMap[geneID];
+							let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("GDAID4Size").value]) ?? undefined;
+				// 			if (val === 0 || val === undefined) {
+                    
+                //     document.getElementById("null-message-id").style.display = "block";
+                // } else {
+                    
+                //     document.getElementById("null-message-id").style.display = "none";
+                // }
+							let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+							return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+								thisNodeSize || nominal_base_node_size, 2);
+							})
+							.type(function (d) {
+								return "circle"; 
+							})
+					);
+				}
+
+				if(GWASValueSize && GWASValueSize !== "none"){
+				// uniNode.genes[d.ID][uniNode.headers[nodeSize]]
+					nodeSize = document.getElementById("gwasID4Size").value;
+					nodeSize_sel = nodeSize;
+
+					nodeSizeScale = getNodeSizeScaleone(nodeSize_sel);
+
+					d3.selectAll(".node").select("path")
+					.attr("d", d3.svg.symbol()
+						.size(function (d) {
+							let geneID = d.ID;
+							let geneData = geneDataMap[geneID];
+							let val = Number(geneData?.disease?.[diseaseValueData]?.[document.getElementById("gwasID4Size").value]) ?? undefined;
+					// 		if (val === 0 || val === undefined) {
+                    
+                    //      document.getElementById("null-message-id").style.display = "block";
+                    //  } else {
+                    
+                    //        document.getElementById("null-message-id").style.display = "none";
+                    //           }
+							let thisNodeSize = val ? size(nodeSizeScale(Math.abs(val))) : 0;
+							return Math.PI * Math.pow(thisNodeSize > max_base_node_size ? max_base_node_size :
+							thisNodeSize || nominal_base_node_size, 2);
+						})
+						.type(function (d) {
+							return "circle"; /*d.type;*/
+						})
+					);
+				}
+
+			}
+		},
+			
+        
+		error: function (error) {
+			console.error("GraphQL Error:", error);
+    }
+  });
+}
+
+function resetOtherSizeFields(exceptId) {
+  const sizeFields = [
+    "#GlogFCID4Size",
+    "#GDAID4Size",
+    "#druggabilityID4Size",
+    "#gwasID4Size",
+    "#TE4Size"
+  ];
+
+  sizeFields.forEach(function (sizeField) {
+    if (sizeField !== `#${exceptId}`) {
+      $(sizeField).val("none");  
+    }
+  });
+}
+
+$("#GlogFCID4Size").change(function() {
+  resetOtherSizeFields("GlogFCID4Size");
+});
+
+$("#GDAID4Size").change(function() {
+  resetOtherSizeFields("GDAID4Size");
+});
+
+$("#druggabilityID4Size").change(function() {
+  resetOtherSizeFields("druggabilityID4Size");
+});
+
+$("#gwasID4Size").change(function() {
+  resetOtherSizeFields("gwasID4Size");
+});
+
+$("#TE4Size").change(function() {
+  resetOtherSizeFields("TE4Size");
+});
+
+
+ </script>
+
+
+<script>
+	$(document).ready(function () {
+  // Add click event listener to the radio button with value="0" and name="nodeColor"
+  $('input[name="nodeColor"][value="0"]').on("click", function () {
+    // Set the value of all dropdowns to "none"
+    $("#logFCID4Color").val("none");
+    $("#GDAID4Color").val("none");
+    $("#GWAS4Color").val("none");
+    $("#pathwayID4Color").val("none");
+    $("#druggabilityID4Color").val("none");
+    $("#DBs4Color").val("none");
+    $("#TE4Color").val("none");
+  });
+});
+
+	</script>
+
+
+<script>
+	$(document).ready(function () {
+  // Add click event listener to the radio button with value="0" and name="nodeColor"
+  $('input[name="nodeSize"][value="0"]').on("click", function () {
+    // Set the value of all dropdowns to "none"
+    $("#GlogFCID4Size").val("none");
+    $("#GDAID4Size").val("none");
+    $("#GDAID4Size").val("none");
+    $("#druggabilityID4Size").val("none");
+    $("#TE4Size").val("none");
+  });
+});
+
+	</script>
