@@ -2442,6 +2442,17 @@ function universal_ext_update() {
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 
 		console.log("headers responce",headers)
+
+		   // Determine the key for gene identification dynamically
+		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
+
+if (!geneKey) {
+	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
+	$('#uploading_custom_universal').css('display', 'none');
+	return;
+}
+
+console.log("Gene Key Detected:", geneKey);
         let matchedGenes = [];
         let unmatchedGenes = [];
 
@@ -2451,7 +2462,9 @@ function universal_ext_update() {
             //     obj[key] = gene[key];
             //     return obj;
             // }, {});
-			const geneId = gene.ID;
+			//const geneId = gene.ID || gene.gene;
+			const geneId = gene[geneKey];
+			if (!geneId) return;
             const geneData = {};
             headers.forEach(header => {
                 geneData[`${header}-custom`] = gene[header]; 
@@ -2468,7 +2481,7 @@ function universal_ext_update() {
                     ...currentUniversal.genes[geneIndexMap[geneId]]
                 };
                 matchedGenes.push(geneId);
-				
+			
             }
         });
 				 console.log("current values",currentUniversal);
@@ -2566,7 +2579,7 @@ function appendOptionsBasedOnHeaders(headers,diseaseValue) {
     // appendOptionsFromFile(uniNodeGWAS, 'GWAS4Color');
     // appendOptionsFromFile(uniNodeGWAS, 'gwasID4Size');
 
-		let uniNodeLogFC = headers.filter(header => header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`));
+	let uniNodeLogFC = headers.filter(header => header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`));
     let uniNodeGDA = headers.filter(header => header.toLowerCase().includes(`gda_${diseaseValue.toLowerCase()}`));
     let uniNodeGWAS = headers.filter(header => header.toLowerCase().includes(`gwas_${diseaseValue.toLowerCase()}`));
 
