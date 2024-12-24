@@ -137,7 +137,8 @@
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
-		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().includes("custom_".toLowerCase()));
+		//var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
 		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
@@ -472,7 +473,8 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
-		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		//var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().includes("custom_".toLowerCase()));
 		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
 		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
 		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
@@ -1200,7 +1202,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 								var modifiedHeaders = headers.map(function(header) {
             return header + "-custom";
         });
-								//console.log("headers",modifiedHeaders);
+								//console.log("Disease headers",modifiedHeaders);
 								appendOptionsBasedOnHeaders(modifiedHeaders,diseaseValue)
 
 
@@ -2418,9 +2420,75 @@ function updateNodeColors(response) {
 		let headers = [];
 		let isfileuploaded = false;
 		
+// function universal_ext_update() {
+// 	isfileuploaded = true;
+// 	// console.log("diseas",diseaseValue);
+//     let file = document.getElementById('universal_ext')?.files[0];
+//     if (!file) {
+//         alert('No file found!');
+//         return;
+//     }
+
+//     $('#uploading_custom_universal').css('display', 'block');
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//         const csvData = e.target.result;
+//         let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+//         let csvFormattedData = $.csv.toObjects(csvData);
+//         csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
+//             acc[key.trim()] = obj[key].trim();
+//             return acc;
+//         }, {}));
+
+//         // Set headers for confirmDetails to use
+//         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+
+// 		console.log("headers responce",headers)
+
+// 		   // Determine the key for gene identification dynamically
+// 		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
+
+// if (!geneKey) {
+// 	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
+// 	$('#uploading_custom_universal').css('display', 'none');
+// 	return;
+// }
+
+// console.log("Gene Key Detected:", geneKey);
+//         let matchedGenes = [];
+//         let unmatchedGenes = [];
+
+//         csvFormattedData.forEach((gene) => {
+//             // const geneId = gene.ID;
+//             // const geneData = headers.reduce((obj, key) => {
+//             //     obj[key] = gene[key];
+//             //     return obj;
+//             // }, {});
+// 			//const geneId = gene.ID || gene.gene;
+// 			const geneId = gene[geneKey];
+// 			if (!geneId) return;
+//             const geneData = {};
+//             headers.forEach(header => {
+//                 geneData[`${header}-custom`] = gene[header]; 
+//             });
+
+//             if (geneIndexMap[geneId] === undefined) {
+//                 unmatchedGenes.push(geneId);
+//             } else {
+//                 //console.log(`Updating gene with ID: ${geneId}`);
+//                // console.log(`Data to be updated:`, geneData);
+
+//                 currentUniversal.genes[geneIndexMap[geneId]] = {
+//                     ...geneData,
+//                     ...currentUniversal.genes[geneIndexMap[geneId]]
+//                 };
+//                 matchedGenes.push(geneId);
+			
+//             }
+//         });
+
 function universal_ext_update() {
-	isfileuploaded = true;
-	// console.log("diseas",diseaseValue);
+    isfileuploaded = true;
     let file = document.getElementById('universal_ext')?.files[0];
     if (!file) {
         alert('No file found!');
@@ -2431,7 +2499,7 @@ function universal_ext_update() {
     const reader = new FileReader();
     reader.onload = function (e) {
         const csvData = e.target.result;
-        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_","Genetics_","custom_"];
         let csvFormattedData = $.csv.toObjects(csvData);
         csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
             acc[key.trim()] = obj[key].trim();
@@ -2441,50 +2509,101 @@ function universal_ext_update() {
         // Set headers for confirmDetails to use
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
 
-		console.log("headers responce",headers)
+      //  console.log("Original headers response:", headers);
 
-		   // Determine the key for gene identification dynamically
-		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
+        // Determine the key for gene identification dynamically
+        const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
 
-if (!geneKey) {
-	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
-	$('#uploading_custom_universal').css('display', 'none');
-	return;
-}
+        if (!geneKey) {
+            alert("No valid gene identifier ('ID' or 'gene') found in the file.");
+            $('#uploading_custom_universal').css('display', 'none');
+            return;
+        }
 
-console.log("Gene Key Detected:", geneKey);
+      //  console.log("Gene Key Detected:", geneKey);
+
+        // Update headers based on diseaseValue
+        const diseasesToIgnore = ["ALS", "PSP", "FTD", "OI"];
+        const originalHeaders = [...headers]; // Keep track of the original headers
+
+        // headers = headers.map(header => {
+			
+        //     if (diseasesToIgnore.some(disease => header.includes(`_${disease}_`))) {
+        //         return header; // Leave the header unchanged
+        //     }
+
+        //     if (header.startsWith("LogFC_") || header.startsWith("GDA_")) {
+        //         const parts = header.split("_");
+        //         if (parts.length > 1 && !diseasesToIgnore.includes(parts[1])) {
+        //             // Insert the current disease value after 'logFC_' or 'GDA_'
+        //             parts.splice(1, 0, diseaseValue);
+        //             return parts.join("_");
+        //         }
+        //     }
+
+        //     return header; // Leave the header unchanged if no conditions match
+        // });
+
+
+		headers = headers.flatMap(header => {
+    // Normalize the header to lowercase for case-insensitive matching
+    const lowerHeader = header.toLowerCase();
+
+    // Check if the header already includes a disease name
+    if (diseasesToIgnore.some(disease => lowerHeader.includes(`_${disease.toLowerCase()}_`))) {
+        return header; // Leave the header unchanged
+    }
+
+    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") ) {
+        const parts = header.split("_");
+        if (parts.length > 1) {
+            // Generate new headers by inserting each disease into the header
+            return diseasesToIgnore.map(disease => {
+                const newParts = [...parts];
+                newParts.splice(1, 0, disease); // Insert the disease name after the prefix
+                return newParts.join("_");
+            });
+        }
+    }
+
+    return [header]; // Return the unchanged header as an array
+});
+
+
+
+      //  console.log("Updated headers response:", headers);
+
         let matchedGenes = [];
         let unmatchedGenes = [];
 
         csvFormattedData.forEach((gene) => {
-            // const geneId = gene.ID;
-            // const geneData = headers.reduce((obj, key) => {
-            //     obj[key] = gene[key];
-            //     return obj;
-            // }, {});
-			//const geneId = gene.ID || gene.gene;
-			const geneId = gene[geneKey];
-			if (!geneId) return;
+            const geneId = gene[geneKey];
+            if (!geneId) return;
+
             const geneData = {};
-            headers.forEach(header => {
-                geneData[`${header}-custom`] = gene[header]; 
+
+            headers.forEach((updatedHeader, index) => {
+                const originalHeader = originalHeaders[index]; // Map to the original header
+                if (originalHeader in gene) {
+                    // Map value from original header to the updated header
+                    geneData[`${updatedHeader}-custom`] = gene[originalHeader];
+                }
             });
 
             if (geneIndexMap[geneId] === undefined) {
                 unmatchedGenes.push(geneId);
             } else {
-                //console.log(`Updating gene with ID: ${geneId}`);
-               // console.log(`Data to be updated:`, geneData);
-
                 currentUniversal.genes[geneIndexMap[geneId]] = {
                     ...geneData,
                     ...currentUniversal.genes[geneIndexMap[geneId]]
                 };
                 matchedGenes.push(geneId);
-			
             }
         });
-				 console.log("current values",currentUniversal);
+
+	
+
+			//	 console.log("current values",currentUniversal);
 
 
 		if (matchedGenes.length === 0) {
@@ -2603,7 +2722,7 @@ function appendOptionsBasedOnHeaders(headers,diseaseValue) {
     appendOptionsFromFile(uniNodeTE, 'TE4Color');
     appendOptionsFromFile(uniNodeTE, 'TE4Size');
 
-		var uniNodeCustomColors = headers.filter((header) => header.toLowerCase().startsWith("custom_color_"));
+		var uniNodeCustomColors = headers.filter((header) => header.toLowerCase().includes("custom_"));
     appendOptionsFromFile(uniNodeCustomColors, 'custom4Color');
 
 		var uniNodePathway = headers.filter((header) => header.toLowerCase().startsWith("pathway_"));
