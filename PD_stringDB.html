@@ -5101,39 +5101,59 @@ function getNodeSizeScaleone(nss) {
 }
 
 
+function resetNodeColors() {
+	const totalData = getItemFromStorage('pd_net_stringDB');
+  const d = totalData ? JSON.parse(totalData) : {};
+  const nodeNames = Array.isArray(d.nodeNames) ? d.nodeNames : [];
+	d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+		let geneID = d.ID;
+
+		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+        			return "blue";
+    			} else {
+					return  default_node_color;
+				}
+				});
+    }
+
 		//find node
 		$("#geneinput").submit(function (e) {
+
 			e.preventDefault();
 			e.stopImmediatePropagation();
 
+           resetNodeColors()
+
 			//console.log(e)
 			//console.log("INSISE FIND NODE")
+
 			function highlight_genes(y) {
-				yed = [];
-				d3.selectAll(".node").each(function (d) {
-					if (y.indexOf(d.Gene_name) > -1 || y.indexOf(d.ID) > -1) {
-						d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," + "*[id$=_" + d.Gene_name
-							.replace(/\./g, 'DOT') + "]").select("stop[offset='100%']").style(
-								"stop-color", "#FFAA33");
-					}
-				})
+        // Map through the gene list and check each gene's presence in the graph
+        let notFoundGenes = y.map(gene => {
+            let found = false;
 
+            // Check each node in the graph
+            d3.selectAll(".node").each(function (d) {
+                if (gene === d.Gene_name || gene === d.ID) {
+                    found = true;
+                    d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," +
+                        "*[id$=_" + d.Gene_name.replace(/\./g, 'DOT') + "]")
+                        .select("stop[offset='100%']")
+                        .style("stop-color", "#FFAA33");
+                }
+            });
 
-				/*y.forEach(function(d){
-					var modgene = d.replace(/\./g, 'DOT');
-					modgene = modgene.replace(/-/g, 'HYPHEN');
-					modgene = modgene.replace("(", "LB")
-					modgene = modgene.replace(")", "RB")
-					modgene = modgene.replace(/,/, "")
-					modgene = modgene.replace(/\s/, "")
-	  
-	  
-					d3.selectAll("*[id^="+modgene+"_],"+"*[id$=_"+modgene+"]").select("stop[offset='100%']").style("stop-color",  "blue");
-					console.log("*[id^="+modgene+"_],"+"*[id$=_"+str+"]")
-					//d3.selectAll("*[id^="+d+"_],"+"*[id$=_"+d+"]").select("stop[offset='100%']").style("stop-color",  "blue");
-	  
-				})*/
-			}
+            // Return the gene if not found
+            return found ? null : gene;
+        }).filter(gene => gene !== null); // Filter out null values (genes that were found)
+
+        // Log the genes that were not found
+        if (notFoundGenes.length > 0) {
+            console.log("Genes not found in the graph:", notFoundGenes);
+        }
+    }
+		
 
 			if (document.getElementById("gene_list").value != "") {
 				var y = [];
