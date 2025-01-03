@@ -470,6 +470,19 @@ body {
     /* opacity: 1; */
     border-radius: 44px;
 }
+
+
+#nodeModal-5 {
+    margin: 5% auto;
+    background-color: white;
+    max-height: 60vh;
+    max-width: 34vw;
+    z-index: 9;
+    pointer-events: all;
+    padding: 23px;
+    /* opacity: 1; */
+    border-radius: 44px;
+}
   
   #node-modal-background {
       position: absolute;
@@ -618,6 +631,20 @@ body {
 
   
   #node-modal-background-4 {
+    position: absolute;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37, 37, 37, 0.81);
+    /* opacity: .8; */
+    height: 110%;
+    z-index: 9;
+    /* pointer-events: none; */
+}
+
+
+#node-modal-background-5 {
     position: absolute;
     top: 0;
     border: 0;
@@ -1198,4 +1225,75 @@ body {
         gap: 10px;
         justify-content: flex-end;
         margin: auto;
+    }
+
+
+    .community-popup-container {
+        position: absolute;
+        bottom: 10px;
+        left: 0px;
+        width: 200px;
+        /* height: 180px; */
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+        overflow-y: hidden;
+        border-radius: 5px;
+        transition: transform 0.4s ease-in-out;
+    }
+    .community-popup-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .community-popup-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+    .community-color {
+        width: 150px;
+        height: 30px;
+        margin-right: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .community-popup-container::-webkit-scrollbar {
+        display: none;
+    }
+    .community-popup-container {
+        overflow-y: scroll;
+    }
+    .community-item input[type=checkbox]{
+        margin:4px;
+        width: 16px;
+        height: 16px;
+    }
+    #node-detailspopup {
+        position: absolute;
+        top: 10px;
+        right: 90px;
+        border: 1px solid #ccc;
+        background-color: white;
+        padding: 10px;
+        z-index: 1000;
+        width: 250px; /* Fixed width */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: none;
+        font-size: 12px;
+        border-radius: 4px; /* Rounded corners */
+        word-wrap: break-word; /* Prevents overflow */
     }

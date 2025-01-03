@@ -133,7 +133,7 @@
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("GWAS_".toLowerCase()));
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
@@ -469,7 +469,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("GWAS_".toLowerCase()));
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
@@ -2342,6 +2342,9 @@ function updateNodeColors(response) {
 
 	</div>
 	</div>
+
+	<div id="node-detailspopup"></div>
+
 	<div class="networksetting">
 		<h4 style="font-size: 20px;" onclick="settingFunc()">Setting &#x2699; </h4>
 	</div>
@@ -2555,7 +2558,7 @@ function universal_ext_update() {
         return header; // Leave the header unchanged
     }
 
-    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") ) {
+    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") || lowerHeader.startsWith("GWAS_OR_") ||  lowerHeader.startsWith("GWAS_Beta_") ) {
         const parts = header.split("_");
         if (parts.length > 1) {
             // Generate new headers by inserting each disease into the header
@@ -2804,6 +2807,10 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 			$("#node-modal-background-4").css("display", "none");
 		}
 
+		function closeModalNotFound(){
+			$("#node-modal-background-5").css("display", "none");
+		}
+
 
 		//Open left menu function
 		function openNav() {
@@ -2820,8 +2827,12 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		// Close setting drawer
 		function closeSetting() {
 			document.getElementById("mysetting").style.display = "none";
+			const detailsDiv = document.getElementById('node-detailspopup');
+
 			$('.networksetting').css('top', '0px')
 			// document.getElementsByClassName("networksetting").style.display = "block";
+			detailsDiv.style.right = "90px"; 
+
 		}
 
 		//Capitalize first letter
@@ -3561,7 +3572,85 @@ function formatAdjusted(AdjustedPvalue){
 				vis.attr("transform", "translate(" + dcx + "," + dcy + ")scale(" + zoom.scale() + ")");
 			});
 
+			
+			node.on("click",function(d){
+				console.log("d",d);
+				const detailsDiv = document.getElementById('node-detailspopup');
+				
+    
+				let detailsContent = `
+        <strong>Ensemble ID:</strong><br> ${d.ID} <br>
+        <strong>Gene Name:</strong><br> ${d.Gene_name} <br>
+        <strong>Description:</strong> <br>${d.Description}<br>
+    `;
 
+		const selectedNodeColor = document.querySelector('input[name="nodeColor"]:checked');
+
+				if(selectedNodeColor.id === "none"){
+					detailsContent += "<strong>Node Color Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+				}else{
+		if (nodeColor_sel != "" && nodeColor_sel !== "none" ) {
+			if(nodeColor_sel.includes("custom")){
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]
+				detailsContent += `<strong>Node Color: </strong><strong>${nodeColor_sel}</strong><br>${val}<br>`;
+			}else{
+				let geneID = d.ID;
+				let gene = geneDataMapColour[geneID];
+				let val = gene.common?.[nodeColor_sel] || gene.disease?.[diseaseValue]?.[nodeColor_sel];
+				detailsContent += `<strong>Node Color: </strong><strong>${nodeColor_sel}</strong><br>${val}<br>`;
+			}
+		}else {
+			detailsContent += "<strong>Node Color Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+		}
+	}
+	
+		const selectednodesize = document.querySelector('input[name="nodeSize"]:checked');
+    
+		if(selectednodesize.id === "none"){
+			detailsContent += "<strong>Node Size Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+		}else{
+		
+		if (nodeSize_sel != "" && nodeSize_sel !== "none") {
+			
+			if(nodeSize_sel.includes("custom")){
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]
+				detailsContent += `<strong>Node Size: </strong><strong>${nodeSize_sel}</strong><br>${val}<br>`;
+			}else{
+
+			let geneID = d.ID;
+		let gene = geneDataMap[geneID];
+		let val = gene.common?.[nodeSize_sel] || gene.disease?.[diseaseValue]?.[nodeSize_sel];
+        detailsContent += `<strong>Node Size: </strong><strong>${nodeSize_sel}</strong><br>${val}<br>`;
+			}
+    } else {
+        detailsContent += "<strong>Node Size Property is not selected</strong><br>";
+				detailsContent += "null<br>"; 
+    }
+	}
+	
+		
+    // Set the innerHTML with the updated content
+    detailsDiv.innerHTML = detailsContent;
+
+    detailsDiv.style.display = 'block';
+
+
+				 detailsDiv.style.display = 'block';
+				 event.stopPropagation();
+				
+				 
+			 })
+			 document.addEventListener('click', function(event) {
+				const detailsDiv = document.getElementById('node-detailspopup');
+        if (!detailsDiv.contains(event.target) && event.target !== node) {
+            detailsDiv.style.display = 'none';
+        }
+    });
+
+			
 			var tocolor = "fill";
 			var towhite = "stroke";
 			if (outline) {
@@ -5119,18 +5208,13 @@ function resetNodeColors() {
 				});
     }
 
-		//find node
-		$("#geneinput").submit(function (e) {
+	$("#geneinput").submit(function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-			e.preventDefault();
-			e.stopImmediatePropagation();
+    resetNodeColors();
 
-           resetNodeColors()
-
-			//console.log(e)
-			//console.log("INSISE FIND NODE")
-
-			function highlight_genes(y) {
+    function highlight_genes(y) {
         // Map through the gene list and check each gene's presence in the graph
         let notFoundGenes = y.map(gene => {
             let found = false;
@@ -5150,9 +5234,23 @@ function resetNodeColors() {
             return found ? null : gene;
         }).filter(gene => gene !== null); // Filter out null values (genes that were found)
 
-        // Log the genes that were not found
+        // If there are any not found genes, populate the table and show the modal
         if (notFoundGenes.length > 0) {
-            console.log("Genes not found in the graph:", notFoundGenes);
+            const tableBody = document.getElementById("table_data-ip-6");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            notFoundGenes.forEach((gene, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${gene}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Show the modal
+            document.getElementById("node-modal-background-5").style.display = "block";
+            document.getElementById("notFoundGenes").style.display = "block";
         }
     }
 		
@@ -6766,6 +6864,8 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 
 		function settingFunc() {
 			var x = document.getElementById("mysetting");
+			const detailsDiv = document.getElementById('node-detailspopup');
+
 			// console.log(x.style.display)
 			// if (x.style.display === "none") {
 			// 	x.style.display = "block";
@@ -6775,6 +6875,8 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			if (x.style.display === "none") {
 				$('.networksetting').css('top', '-100px')
 				$('#mysetting').css('display', 'block')
+				detailsDiv.style.right = "240px"; 
+
 			} else {
 				$('.networksetting').css('top', '0')
 				$('#mysetting').css('display', 'none')
@@ -7003,6 +7105,42 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			<div class="buttons-btn">
 				<button class="confirm-btn" onclick="confirmDetails()">Confirm</button>
 				<button class="cancel-btn" onclick="closeDetails()">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div style="display: none;" id="node-modal-background-5">
+		<div id="nodeModal-5">
+			<span class="header-text">
+				List of genes  Unavailable in the current network
+			</span>
+
+			<!-- Unavailable Gene Content -->
+			<div class="modal-body"  id="notFoundGenes" style="display: none;">
+				<table class="fixed_header-1">
+					<thead>
+						<tr>
+							<th style="width: 50px;">No.</th>
+							<th>Genes</th>
+						</tr>
+					</thead>
+					<tbody id="table_data-ip-6" style="color:hwb(0 0% 0%);">
+						<tr>
+							<td>1</td>
+							<td>Gene X</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Gene Y</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div class="buttons-btn">
+				<button class="confirm-btn" onclick="closeModalNotFound()">OK</button>
+
 			</div>
 		</div>
 	</div>
