@@ -133,7 +133,7 @@
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("GWAS_".toLowerCase()));
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
@@ -469,7 +469,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
 		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
 		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("Genetics_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("GWAS_".toLowerCase()));
 		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
 		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
 		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
@@ -2554,7 +2554,7 @@ function universal_ext_update() {
         return header; // Leave the header unchanged
     }
 
-    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") ) {
+    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") || lowerHeader.startsWith("GWAS_OR_") ||  lowerHeader.startsWith("GWAS_Beta_") ) {
         const parts = header.split("_");
         if (parts.length > 1) {
             // Generate new headers by inserting each disease into the header
@@ -2801,6 +2801,10 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 
 		function closeDetails(){
 			$("#node-modal-background-4").css("display", "none");
+		}
+
+		function closeModalNotFound(){
+			$("#node-modal-background-5").css("display", "none");
 		}
 
 
@@ -5117,18 +5121,13 @@ function resetNodeColors() {
 				});
     }
 
-		//find node
-		$("#geneinput").submit(function (e) {
+	$("#geneinput").submit(function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-			e.preventDefault();
-			e.stopImmediatePropagation();
+    resetNodeColors();
 
-           resetNodeColors()
-
-			//console.log(e)
-			//console.log("INSISE FIND NODE")
-
-			function highlight_genes(y) {
+    function highlight_genes(y) {
         // Map through the gene list and check each gene's presence in the graph
         let notFoundGenes = y.map(gene => {
             let found = false;
@@ -5148,9 +5147,23 @@ function resetNodeColors() {
             return found ? null : gene;
         }).filter(gene => gene !== null); // Filter out null values (genes that were found)
 
-        // Log the genes that were not found
+        // If there are any not found genes, populate the table and show the modal
         if (notFoundGenes.length > 0) {
-            console.log("Genes not found in the graph:", notFoundGenes);
+            const tableBody = document.getElementById("table_data-ip-6");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            notFoundGenes.forEach((gene, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${gene}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Show the modal
+            document.getElementById("node-modal-background-5").style.display = "block";
+            document.getElementById("notFoundGenes").style.display = "block";
         }
     }
 		
@@ -7001,6 +7014,42 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			<div class="buttons-btn">
 				<button class="confirm-btn" onclick="confirmDetails()">Confirm</button>
 				<button class="cancel-btn" onclick="closeDetails()">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div style="display: none;" id="node-modal-background-5">
+		<div id="nodeModal-5">
+			<span class="header-text">
+				List of genes  Unavailable in the current network
+			</span>
+
+			<!-- Unavailable Gene Content -->
+			<div class="modal-body"  id="notFoundGenes" style="display: none;">
+				<table class="fixed_header-1">
+					<thead>
+						<tr>
+							<th style="width: 50px;">No.</th>
+							<th>Genes</th>
+						</tr>
+					</thead>
+					<tbody id="table_data-ip-6" style="color:hwb(0 0% 0%);">
+						<tr>
+							<td>1</td>
+							<td>Gene X</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Gene Y</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div class="buttons-btn">
+				<button class="confirm-btn" onclick="closeModalNotFound()">OK</button>
+
 			</div>
 		</div>
 	</div>
