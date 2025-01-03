@@ -2341,6 +2341,9 @@ function updateNodeColors(response) {
 
 	</div>
 	</div>
+
+	<div id="node-detailspopup"></div>
+
 	<div class="networksetting">
 		<h4 style="font-size: 20px;" onclick="settingFunc()">Setting &#x2699; </h4>
 	</div>
@@ -2823,8 +2826,12 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		// Close setting drawer
 		function closeSetting() {
 			document.getElementById("mysetting").style.display = "none";
+			const detailsDiv = document.getElementById('node-detailspopup');
+
 			$('.networksetting').css('top', '0px')
 			// document.getElementsByClassName("networksetting").style.display = "block";
+			detailsDiv.style.right = "90px"; 
+
 		}
 
 		//Capitalize first letter
@@ -3563,7 +3570,85 @@ function formatAdjusted(AdjustedPvalue){
 				vis.attr("transform", "translate(" + dcx + "," + dcy + ")scale(" + zoom.scale() + ")");
 			});
 
+			
+			node.on("click",function(d){
+				console.log("d",d);
+				const detailsDiv = document.getElementById('node-detailspopup');
+				
+    
+				let detailsContent = `
+        <strong>Ensemble ID:</strong><br> ${d.ID} <br>
+        <strong>Gene Name:</strong><br> ${d.Gene_name} <br>
+        <strong>Description:</strong> <br>${d.Description}<br>
+    `;
 
+		const selectedNodeColor = document.querySelector('input[name="nodeColor"]:checked');
+
+				if(selectedNodeColor.id === "none"){
+					detailsContent += "<strong>Node Color Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+				}else{
+		if (nodeColor_sel != "" && nodeColor_sel !== "none" ) {
+			if(nodeColor_sel.includes("custom")){
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][nodeColor_sel]
+				detailsContent += `<strong>Node Color: </strong><strong>${nodeColor_sel}</strong><br>${val}<br>`;
+			}else{
+				let geneID = d.ID;
+				let gene = geneDataMapColour[geneID];
+				let val = gene.common?.[nodeColor_sel] || gene.disease?.[diseaseValue]?.[nodeColor_sel];
+				detailsContent += `<strong>Node Color: </strong><strong>${nodeColor_sel}</strong><br>${val}<br>`;
+			}
+		}else {
+			detailsContent += "<strong>Node Color Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+		}
+	}
+	
+		const selectednodesize = document.querySelector('input[name="nodeSize"]:checked');
+    
+		if(selectednodesize.id === "none"){
+			detailsContent += "<strong>Node Size Property is not selected</strong><br>";
+			detailsContent += "null<br>"; 
+		}else{
+		
+		if (nodeSize_sel != "" && nodeSize_sel !== "none") {
+			
+			if(nodeSize_sel.includes("custom")){
+				let val = currentUniversal?.genes[geneIndexMap[d?.ID]][nodeSize_sel]
+				detailsContent += `<strong>Node Size: </strong><strong>${nodeSize_sel}</strong><br>${val}<br>`;
+			}else{
+
+			let geneID = d.ID;
+		let gene = geneDataMap[geneID];
+		let val = gene.common?.[nodeSize_sel] || gene.disease?.[diseaseValue]?.[nodeSize_sel];
+        detailsContent += `<strong>Node Size: </strong><strong>${nodeSize_sel}</strong><br>${val}<br>`;
+			}
+    } else {
+        detailsContent += "<strong>Node Size Property is not selected</strong><br>";
+				detailsContent += "null<br>"; 
+    }
+	}
+	
+		
+    // Set the innerHTML with the updated content
+    detailsDiv.innerHTML = detailsContent;
+
+    detailsDiv.style.display = 'block';
+
+
+				 detailsDiv.style.display = 'block';
+				 event.stopPropagation();
+				
+				 
+			 })
+			 document.addEventListener('click', function(event) {
+				const detailsDiv = document.getElementById('node-detailspopup');
+        if (!detailsDiv.contains(event.target) && event.target !== node) {
+            detailsDiv.style.display = 'none';
+        }
+    });
+
+			
 			var tocolor = "fill";
 			var towhite = "stroke";
 			if (outline) {
@@ -6777,6 +6862,8 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 
 		function settingFunc() {
 			var x = document.getElementById("mysetting");
+			const detailsDiv = document.getElementById('node-detailspopup');
+
 			// console.log(x.style.display)
 			// if (x.style.display === "none") {
 			// 	x.style.display = "block";
@@ -6786,6 +6873,8 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
 			if (x.style.display === "none") {
 				$('.networksetting').css('top', '-100px')
 				$('#mysetting').css('display', 'block')
+				detailsDiv.style.right = "240px"; 
+
 			} else {
 				$('.networksetting').css('top', '0')
 				$('#mysetting').css('display', 'none')
