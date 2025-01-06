@@ -7020,9 +7020,9 @@ var legendExpressionTE = svg2.append("g").attr("class", "legendExpressionTE")
         if (selectedValue === "none"){
             d3.select(".legendExpression").attr("opacity", 1);
         }
-        else if (selectedValue.startsWith("GWAS_OR_")) {
+        else if (selectedValue.includes("GWAS_OR_")) {
             d3.select(".legendExpressionTE").attr("opacity", 1);
-        } else if (selectedValue.startsWith("GWAS_Beta_")) {
+        } else if (selectedValue.includes("GWAS_Beta_")) {
             d3.select(".legendExpression").attr("opacity", 1);
         }
     });
@@ -7430,7 +7430,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
       "Accept": "application/json"
     },
     success: function (response) {
-     console.log("GraphQL Response:", response);
+  //   console.log("GraphQL Response:", response);
 			if (response.data && response.data.getGenes) {
     
     	// Create a map of gene data by ID for easier lookup
@@ -7529,7 +7529,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
 				if (GWASValue && GWASValue !== "none") {
 
 					nodeColor_sel = GWASValue;
-					console.log("selected option",nodeColor_sel)
+				//	console.log("selected option",nodeColor_sel)
 					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 						let geneID = d.ID;
 						// let gw = currentUniversal?.genes[geneIndexMap[d.ID]][document.getElementById("GWAS4Color").value] ?? undefined;
