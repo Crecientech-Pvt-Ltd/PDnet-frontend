@@ -2180,12 +2180,17 @@ $('#GlogFCID4Size').trigger("chosen:updated");
     resolutionDiv.style.display = "block";
   } else {
     resolutionDiv.style.display = "none";
+	communityPopupContainer.style.display = "none"; // Hide popup
+	islouvainchecked = false;
 
     // Reset slider values when "None" is selected
     const slider = document.getElementById("resolutionValue");
     const nRange = document.getElementById("Range");
     slider.value = "0";
     nRange.textContent = "0";
+	d3.selectAll(".node").classed("hidden", false); // Show all nodes
+        d3.selectAll(".link").classed("hidden", false); // Show all links
+        d3.selectAll("text").classed("hidden", false); // Show all texts
   }
 
   // Update node colors based on condition
@@ -2211,6 +2216,8 @@ function applyResolution() {
     const resolutionValue = document.getElementById("resolutionValue").value;
     const isWeighted = document.getElementById("weightedCheckbox").checked;
   const graphName = localStorage.getItem("graphName");
+  const communityPopupContainer = document.getElementById("communityPopupContainer");
+
     $.ajax({
         url: `https://pdnet-rnd-apis.crecientech.com/algorithm/louvain`,
         method: 'GET',
@@ -2226,12 +2233,135 @@ function applyResolution() {
         success: function(response) {
          // console.log("Response:", response);
             updateNodeColors(response);
+			updateCommunityPopup(response);
         },
         error: function(error) {
             console.error("Error:", error);
         }
     });
 }
+
+function resetNetworkAnalysis() {
+    const algoRadioButtons = document.getElementsByName('Algorithmic_Analysis');
+    
+    for (let button of algoRadioButtons) {
+        if (button.value === "0") {
+            button.checked = true;
+        }
+    }
+}
+
+document.querySelectorAll('input[name="nodeColor"]').forEach((radioButton) => {
+    radioButton.addEventListener('change', function() {
+        resetNetworkAnalysis();
+				toggleResolution();
+    });
+});
+
+
+let islouvainchecked = false;
+let communities;
+let community;
+function updateCommunityPopup(response) {
+		islouvainchecked = true;
+    const communityPopupList = document.getElementById("communityPopupList");
+    const communityPopupContainer = document.getElementById("communityPopupContainer");
+    communityPopupContainer.style.display = "block";
+    communityPopupList.innerHTML = "";
+    communities = Object.values(response).sort((a, b) => {
+        return a.name.localeCompare(b.name, undefined, { numeric: true });
+    });
+		community = communities;
+    const maxVisibleCommunities = 6;
+    const itemHeight = 40;
+
+    // Generate list items using map and join
+    const listItemsHTML = communities.map((community, index) => `
+        <li class="community-item">
+            <input type="checkbox" class="community-checkbox" checked data-community-index="${index}">
+            <div class="community-color" style="background-color: ${community.color};">
+                <span class="community-name">${community.name}</span>
+            </div>
+        </li>
+    `).join('');
+
+    communityPopupList.innerHTML = listItemsHTML;
+
+    const totalCommunities = communities.length;
+    if (totalCommunities > maxVisibleCommunities) {
+        const containerHeight = maxVisibleCommunities * itemHeight;
+        communityPopupContainer.style.height = `${containerHeight}px`;
+        communityPopupContainer.style.overflowY = "auto";
+    } else {
+        const containerHeight = totalCommunities * itemHeight;
+        communityPopupContainer.style.height = `${containerHeight}px`;
+        communityPopupContainer.style.overflowY = "hidden";
+    }
+
+    // Add event listener for checkbox changes
+    document.querySelectorAll(".community-checkbox").forEach((checkbox, index) => {
+        checkbox.addEventListener("change", (e) => {
+            const community = communities[index];
+            const isChecked = e.target.checked;
+            toggleCommunityVisibility(community, isChecked);
+        });
+    });
+}
+
+// function toggleCommunityVisibility(community, isVisible) {
+//     console.log("Toggling visibility for community:", community.name);
+//     console.log("Genes in community:", community.genes);
+
+//     d3.selectAll(".node").filter(d => {
+
+//         const isNodeInCommunity = community.genes.includes(d.ID); 
+//         return isNodeInCommunity;
+//     })
+//     .style("display", isVisible ? "inline" : "none"); 
+//     d3.selectAll(".link").filter(link => {
+//         const isSourceInCommunity = community.genes.includes(link.source.ID);
+//         const isTargetInCommunity = community.genes.include0s(link.target.ID);
+
+//         return isSourceInCommunity || isTargetInCommunity;
+//     })
+//     .style("display", isVisible ? "inline" : "none"); 
+
+// 		d3.selectAll("text").filter(d => {
+//         const isNodeInCommunity = community.genes.includes(d.ID);
+//         return isNodeInCommunity;
+//     })
+//     .style("display", isVisible ? "inline" : "none"); 
+// // }
+
+function toggleCommunityVisibility(community, isVisible) {
+    
+
+    d3.selectAll(".node").filter(d => {
+        const isNodeInCommunity = community.genes.includes(d.ID);
+        return isNodeInCommunity;
+    })
+    .classed("hidden", !isVisible);
+
+    // d3.selectAll(".link").filter(link => {
+    //     const isSourceInCommunity = community.genes.includes(link.source.ID);
+    //     const isTargetInCommunity = community.genes.includes(link.target.ID);
+    //     return isSourceInCommunity || isTargetInCommunity;
+    // })
+    // .classed("hidden", !isVisible); 
+
+
+	d3.selectAll(".link").each(function(link) {
+		const isSourceVisible = !d3.select(".node[id='" + link.source.ID + "']").classed("hidden");
+		const isTargetVisible = !d3.select(".node[id='" + link.target.ID + "']").classed("hidden");
+		d3.select(this).classed("hidden", !(isSourceVisible && isTargetVisible));
+  	});
+
+    d3.selectAll("text").filter(d => {
+        const isNodeInCommunity = community.genes.includes(d.ID);
+        return isNodeInCommunity;
+    })
+    .classed("hidden", !isVisible);
+	}
 
 
 function updateNodeColors(response) {
@@ -2340,6 +2470,13 @@ function updateNodeColors(response) {
 		</div>
 
 	</div>
+	</div>
+
+	<div id="communityPopupContainer" class="community-popup-container">
+
+		<ul id="communityPopupList" class="community-popup-list">
+				<!-- Community items will be dynamically added here -->
+		</ul>
 	</div>
 
 	<div id="node-detailspopup"></div>
@@ -2815,12 +2952,24 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "250px";
 			document.getElementById("openDraw").style.display = "none";
+			document.getElementById("communityPopupContainer").style.transform = "translateX(260px)";
+			var communityPopupContainer = document.getElementById("communityPopupContainer")
+			if (communityPopupContainer.style.display === "block" ) {
+				communityPopupContainer.style.transform = "translateX(260px)";
+						// communityPopupContainer.style.left = "250px";
+			}
 		}
 
 		//Close left menu function
 		function closeNav() {
 			document.getElementById("mySidenav").style.width = "0";
 			document.getElementById("openDraw").style.display = "block";
+			document.getElementById("communityPopupContainer").style.transform = "translateX(0px)";
+			var communityPopupContainer = document.getElementById("communityPopupContainer")
+			if (communityPopupContainer.style.display === "block") {
+				communityPopupContainer.style.transform = "translateX(10px)";
+						// communityPopupContainer.style.left = "10px";
+			}
 		}
 
 		// Close setting drawer
@@ -4856,6 +5005,19 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 			document.getElementById("myTEvalues").value = 0;
 			TEdegreeFun()
 			restart();
+			if(islouvainchecked){
+				
+				
+				d3.selectAll(".link").each(function(link) {
+        // Check if the source and target nodes are visible (i.e., not hidden)
+				const isSourceVisible = !d3.select(".node[id='" + link.source.ID + "']").classed("hidden");
+				const isTargetVisible = !d3.select(".node[id='" + link.target.ID + "']").classed("hidden");
+
+				// Link should be visible only if both the source and target nodes are visible
+				d3.select(this).classed("hidden", !(isSourceVisible && isTargetVisible));
+			});
+
+			}
 		}
 
 
@@ -5076,10 +5238,22 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 				}
 			});
 
-			console.log(graph.links,"kkkk",graph.nodes)
+		//	console.log(graph.links,"kkkk",graph.nodes)
 			restart();
-		}
+			if(islouvainchecked){
+				
+				
+				d3.selectAll(".link").each(function(link) {
+        // Check if the source and target nodes are visible (i.e., not hidden)
+		
+        const isSourceVisible = !d3.select(".node[id='" + link.source.ID + "']").classed("hidden");
+        const isTargetVisible = !d3.select(".node[id='" + link.target.ID + "']").classed("hidden");
+        d3.select(this).classed("hidden", !(isSourceVisible && isTargetVisible));
+    });
 
+			}
+		}
+		
 		// function filternodes(){
 		// 	graph.nodes.splice(0, graph.nodes.length);
 		// 	console.log(graph.links,"kkkk",graph.nodes)
@@ -5819,7 +5993,7 @@ document.getElementById("logFCID4Color").onchange = function () {
 			nodeColor_sel = document.getElementById("druggabilityID4Color").value;
 			// if (nodeColor_sel.endsWith('_Custom')) {
 			// 	nodeColor_sel = nodeColor_sel.replace('_Custom', '');
-				console.log("nodeColor_sel",nodeColor_sel);
+		//		console.log("nodeColor_sel",nodeColor_sel);
 
 			d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
 				let geneID = d.ID;
@@ -5830,7 +6004,7 @@ document.getElementById("logFCID4Color").onchange = function () {
 				let val = currentUniversal?.genes[geneIndexMap[d.ID]][nodeColor_sel];
                 // console.log("val ==", val)
 				//   return val ? expressionColor(Number(val)) : default_node_color;
-				console.log("val",val);
+			//	console.log("val",val);
 				let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
 			    if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
 					return "blue";
@@ -5847,7 +6021,7 @@ document.getElementById("logFCID4Color").onchange = function () {
 
 	document.getElementById("GDAID4Color").onchange = function () {
 		// if (preventReadyFunctionExecution) {
-			console.log("nodeColor_sel",nodeColor_sel);
+		//	console.log("nodeColor_sel",nodeColor_sel);
 
 			nodeColor_sel = document.getElementById("GDAID4Color").value;
 			// if (nodeColor_sel.endsWith('_Custom')) {
