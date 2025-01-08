@@ -1282,12 +1282,13 @@ $('#GlogFCID4Size').trigger("chosen:updated");
                             makeRequest()
                             .then(() => updateTooltip())
 							.then(() =>{ 
-					   	if (currentUniversal.genes.length > 1000 && currentUniversal.genes.length <= 5000) {
+					   	if (currentNodes > 1000 && currentNodes <= 5000) {
                                    $('#node-modal-warning-alert').show();
                          }
-							if ( currentUniversal.links.length > 10000 && currentUniversal.links.length <= 50000) {
-								$('#node-modal-warning-edges').show();
-							}
+					//	console.log("total edges",currentEdges)
+							// if ( currentEdges > 10000 && currentEdges <= 50000) {
+							// 	$('#node-modal-warning-edges').show();
+							// }
 											})
                             .catch((error) => {
                           console.error("Error during initialization:", error);
@@ -4532,6 +4533,8 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 		var initialUniversal;
 		var geneIndexMap = {};
 		let isColorChangeTriggered = false;
+		var currentEdges;
+		var currentNodes;
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
@@ -4609,6 +4612,11 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
 
+					currentEdges = totalEdges;
+					currentNodes = totalNodes;
+
+					//console.log(currentEdges)
+
 					// if (totalNodes > 5000 || totalEdges > 10000) {
 					// 	$('#node-modal-background-alert').css('display', 'block')
 					// }  //commented by Vandana.
@@ -4629,24 +4637,24 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 
 			   // Handle edges-related warnings and stops
 
-			//    if (totalEdges > 10000) {
-            //   if (totalEdges <= 50000) {
-            //      $('#node-modal-warning-edges').show();
-            //  } else {
-            //  $('#node-modal-stop-edges').show();
-            //    return;
-            //   }
-            //   }
+			   if (totalEdges > 10000) {
+              if (totalEdges <= 50000) {
+                 $('#node-modal-warning-edges').show();
+             } else {
+             $('#node-modal-stop-edges').show();
+               return;
+              }
+              }
 
 			if (totalNodes > 5000) {
 					$('#node-modal-stop-alert').show();
 					return;
 				}
 
-				if (totalEdges > 50000) {
-					$('#node-modal-stop-edges').show();
-					return;
-				}
+				// if (totalEdges > 50000) {
+				// 	$('#node-modal-stop-edges').show();
+				// 	return;
+				// }
 					
 					//code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
