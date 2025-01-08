@@ -1954,33 +1954,45 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			}
 
 
-			function svgString2Image(svgString, width, height, format, callback) {
-				var format = format ? format : 'png';
+		
+			var targetWidth = 10 * width;
+var targetHeight = 10 * height;
 
-				var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(
-					svgString))); // Convert SVG string to data URL
+			function svgString2Image(svgString, targetWidth, targetHeight, format, callback) {
+    var format = format || 'png';
 
-				var canvas = document.createElement("canvas");
-				var context = canvas.getContext("2d");
+    // Convert SVG string to data URL
+    var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
 
-				canvas.width = width;
-				canvas.height = height;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
 
-				var image = new Image();
-				image.onload = function () {
-					context.clearRect(0, 0, width, height);
-					context.drawImage(image, 0, 0, width, height);
+    var image = new Image();
+    image.onload = function () {
+        // Maintain the aspect ratio
+        var aspectRatio = image.width / image.height;
 
-					canvas.toBlob(function (blob) {
-						var filesize = Math.round(blob.length / 1024) + ' KB';
-						if (callback) callback(blob, filesize);
-					});
+        if (targetWidth / targetHeight > aspectRatio) {
+            targetWidth = targetHeight * aspectRatio; // Adjust width
+        } else {
+            targetHeight = targetWidth / aspectRatio; // Adjust height
+        }
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        context.clearRect(0, 0, targetWidth, targetHeight);
+        context.drawImage(image, 0, 0, targetWidth, targetHeight);
+
+        canvas.toBlob(function (blob) {
+            var filesize = Math.round(blob.size / 1024) + ' KB';
+            if (callback) callback(blob, filesize);
+        });
+    };
+    image.src = imgsrc;
+}
 
 
-				};
-				console.log(imgsrc);
-				image.src = imgsrc;
-			}
 			// }
 		</script>
 		<!-- <button class="reset-all-btn">Reset All</button> -->
@@ -3138,7 +3150,7 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		//Define force layout
 		// console.log(d3.layout.force().distance())
 		var force = d3.layout.force()
-			.linkDistance(15)
+			.linkDistance(30)
 			.charge(-200)
 			.size([w, h]);
 		// gravity .1
