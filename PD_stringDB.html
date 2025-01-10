@@ -1282,12 +1282,13 @@ $('#GlogFCID4Size').trigger("chosen:updated");
                             makeRequest()
                             .then(() => updateTooltip())
 							.then(() =>{ 
-					   	if (currentUniversal.genes.length > 1000 && currentUniversal.genes.length <= 5000) {
+					   	if (currentNodes > 1000 && currentNodes <= 5000) {
                                    $('#node-modal-warning-alert').show();
                          }
-							if ( currentUniversal.links.length > 10000 && currentUniversal.links.length <= 50000) {
-								$('#node-modal-warning-edges').show();
-							}
+					//	console.log("total edges",currentEdges)
+							// if ( currentEdges > 10000 && currentEdges <= 50000) {
+							// 	$('#node-modal-warning-edges').show();
+							// }
 											})
                             .catch((error) => {
                           console.error("Error during initialization:", error);
@@ -1954,33 +1955,45 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			}
 
 
-			function svgString2Image(svgString, width, height, format, callback) {
-				var format = format ? format : 'png';
+		
+			var targetWidth = 10 * width;
+var targetHeight = 10 * height;
 
-				var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(
-					svgString))); // Convert SVG string to data URL
+			function svgString2Image(svgString, targetWidth, targetHeight, format, callback) {
+    var format = format || 'png';
 
-				var canvas = document.createElement("canvas");
-				var context = canvas.getContext("2d");
+    // Convert SVG string to data URL
+    var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
 
-				canvas.width = width;
-				canvas.height = height;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
 
-				var image = new Image();
-				image.onload = function () {
-					context.clearRect(0, 0, width, height);
-					context.drawImage(image, 0, 0, width, height);
+    var image = new Image();
+    image.onload = function () {
+        // Maintain the aspect ratio
+        var aspectRatio = image.width / image.height;
 
-					canvas.toBlob(function (blob) {
-						var filesize = Math.round(blob.length / 1024) + ' KB';
-						if (callback) callback(blob, filesize);
-					});
+        if (targetWidth / targetHeight > aspectRatio) {
+            targetWidth = targetHeight * aspectRatio; // Adjust width
+        } else {
+            targetHeight = targetWidth / aspectRatio; // Adjust height
+        }
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        context.clearRect(0, 0, targetWidth, targetHeight);
+        context.drawImage(image, 0, 0, targetWidth, targetHeight);
+
+        canvas.toBlob(function (blob) {
+            var filesize = Math.round(blob.size / 1024) + ' KB';
+            if (callback) callback(blob, filesize);
+        });
+    };
+    image.src = imgsrc;
+}
 
 
-				};
-				console.log(imgsrc);
-				image.src = imgsrc;
-			}
 			// }
 		</script>
 		<!-- <button class="reset-all-btn">Reset All</button> -->
@@ -3139,7 +3152,7 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		//Define force layout
 		// console.log(d3.layout.force().distance())
 		var force = d3.layout.force()
-			.linkDistance(15)
+			.linkDistance(30)
 			.charge(-200)
 			.size([w, h]);
 		// gravity .1
@@ -3723,7 +3736,7 @@ function formatAdjusted(AdjustedPvalue){
 
 			
 			node.on("click",function(d){
-				console.log("d",d);
+			//	console.log("d",d);
 				const detailsDiv = document.getElementById('node-detailspopup');
 				
     
@@ -4522,6 +4535,8 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 		var initialUniversal;
 		var geneIndexMap = {};
 		let isColorChangeTriggered = false;
+		var currentEdges;
+		var currentNodes;
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
@@ -4599,6 +4614,11 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 					var totalEdges = result.data.getGeneInteractions.links.length;
 					var totalNodes = result.data.getGeneInteractions.genes.length;
 
+					currentEdges = totalEdges;
+					currentNodes = totalNodes;
+
+					//console.log(currentEdges)
+
 					// if (totalNodes > 5000 || totalEdges > 10000) {
 					// 	$('#node-modal-background-alert').css('display', 'block')
 					// }  //commented by Vandana.
@@ -4619,24 +4639,24 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 
 			   // Handle edges-related warnings and stops
 
-			//    if (totalEdges > 10000) {
-            //   if (totalEdges <= 50000) {
-            //      $('#node-modal-warning-edges').show();
-            //  } else {
-            //  $('#node-modal-stop-edges').show();
-            //    return;
-            //   }
-            //   }
+			   if (totalEdges > 10000) {
+              if (totalEdges <= 50000) {
+                 $('#node-modal-warning-edges').show();
+             } else {
+             $('#node-modal-stop-edges').show();
+               return;
+              }
+              }
 
 			if (totalNodes > 5000) {
 					$('#node-modal-stop-alert').show();
 					return;
 				}
 
-				if (totalEdges > 50000) {
-					$('#node-modal-stop-edges').show();
-					return;
-				}
+				// if (totalEdges > 50000) {
+				// 	$('#node-modal-stop-edges').show();
+				// 	return;
+				// }
 					
 					//code added by Vandana (End)
 					$('#network_details').append(`<div style="margin: 10px 5px; font-size: 13px; color: #FFFFFF;">Total Nodes: ${totalNodes}<br>Total Edges: ${totalEdges}</div>`)
@@ -7780,26 +7800,67 @@ if (thisDisease !== undefined && thisDisease !== null) {
 
 				//ON TE selection 
 				
+				// if (TEvalue && TEvalue !== "none") {
+				// 	nodeColor_sel = TEvalue;
+				// 	d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+				// 		let geneID = d.ID;
+				// 		// let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
+				// 		let geneData = geneDataMapColour[geneID];
+				// 	let val = geneData?.common?.[nodeColor_sel] ?? undefined; 
+				// 	//  console.log("val",val);
+				// 		let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+				// 		if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
+				// 						// console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
+				// 							return "blue";
+				// 						} else {
+				// 			return val ? d3.scale.linear()
+				// 			.domain([0, 1])
+				// 			.range([default_node_color, "red"])(Number(val)) : default_node_color;
+				// 		}
+				// 	});
+				// }
+
 
 				if (TEvalue && TEvalue !== "none") {
-					nodeColor_sel = TEvalue;
-					d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
-						let geneID = d.ID;
-						// let val = currentUniversal?.genes[geneIndexMap[d?.ID]][document.getElementById("TE4Color").value];
-						let geneData = geneDataMapColour[geneID];
-					let val = geneData?.common?.[nodeColor_sel] ?? undefined; 
-					//  console.log("val",val);
-						let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
-						if (nodeNames.includes(geneID) && isNodeColor1Checked == true) {
-										// console.log(`Gene ID ${geneID} is matched. Applying blue color.`);
-											return "blue";
-										} else {
-							return val ? d3.scale.linear()
-							.domain([0, 1])
-							.range([default_node_color, "red"])(Number(val)) : default_node_color;
-						}
-					});
-				}
+    nodeColor_sel = TEvalue;
+    d3.selectAll("stop[offset='100%']").style("stop-color", function (d) {
+        let geneID = d.ID;
+        let geneData = geneDataMapColour[geneID];
+        let val = geneData?.common?.[nodeColor_sel] ?? undefined;
+
+        // Ensure nodeColor1 is checked
+        let isNodeColor1Checked = document.getElementById('nodecolor1').checked;
+
+        // Handle case where the node is in the specified list and nodeColor1 is checked
+        if (nodeNames.includes(geneID) && isNodeColor1Checked === true) {
+            return "blue";
+        } else if (val) {
+            // Normalize the value between 0 and 1
+            let values = Object.values(geneDataMapColour)
+                .map(data => data?.common?.[nodeColor_sel])
+                .filter(v => v !== undefined)
+                .map(Number);
+            
+            let minVal = Math.min(...values);
+            let maxVal = Math.max(...values);
+
+            // Avoid division by zero in case all values are the same
+            let normalizedVal = (Number(val) - minVal) / (maxVal - minVal || 1);
+
+            // Return the color based on the normalized value
+            return d3.scale.linear()
+                .domain([0, 1])
+                .range([default_node_color, "red"])(normalizedVal);
+        } else {
+            return default_node_color;
+        }
+    });
+}
+
+
+
+
+
 
 				//ON DATABASE selection 
 

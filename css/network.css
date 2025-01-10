@@ -1271,9 +1271,9 @@ body {
         font-size: 13px;
         font-weight: bold;
     }
-    .community-popup-container::-webkit-scrollbar {
+    /* .community-popup-container::-webkit-scrollbar {
         display: none;
-    }
+    } */
     .community-popup-container {
         overflow-y: scroll;
     }
