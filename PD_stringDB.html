@@ -2660,7 +2660,7 @@ function universal_ext_update() {
         }, {}));
 
         // Set headers for confirmDetails to use
-        headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
+        headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().includes(prop.toLowerCase())));
 
       //  console.log("Original headers response:", headers);
 
@@ -2676,8 +2676,9 @@ function universal_ext_update() {
       //  console.log("Gene Key Detected:", geneKey);
 
         // Update headers based on diseaseValue
-        const diseasesToIgnore = ["ALS", "PSP", "FTD", "OI"];
+        const diseasesToIgnore = ["PSP", "ALS", "FTD", "OI"];
         const originalHeaders = [...headers]; // Keep track of the original headers
+		//console.log(originalHeaders)
 
         // headers = headers.map(header => {
 			
@@ -2724,7 +2725,7 @@ function universal_ext_update() {
 
 
 
-      //  console.log("Updated headers response:", headers);
+    //   console.log("Updated headers response:", headers);
 
         let matchedGenes = [];
         let unmatchedGenes = [];
@@ -2735,13 +2736,18 @@ function universal_ext_update() {
 
             const geneData = {};
 
+			
+
             headers.forEach((updatedHeader, index) => {
                 const originalHeader = originalHeaders[index]; // Map to the original header
                 if (originalHeader in gene) {
                     // Map value from original header to the updated header
                     geneData[`${updatedHeader}-custom`] = gene[originalHeader];
                 }
+
             });
+
+			//console.log(headers)
 
             if (geneIndexMap[geneId] === undefined) {
                 unmatchedGenes.push(geneId);
@@ -2756,7 +2762,7 @@ function universal_ext_update() {
 
 	
 
-			//	 console.log("current values",currentUniversal);
+		//	 console.log("current values",currentUniversal);
 
 
 		if (matchedGenes.length === 0) {
@@ -2851,9 +2857,23 @@ function appendOptionsBasedOnHeaders(headers,diseaseValue) {
     // appendOptionsFromFile(uniNodeGWAS, 'GWAS4Color');
     // appendOptionsFromFile(uniNodeGWAS, 'gwasID4Size');
 
-	let uniNodeLogFC = headers.filter(header => header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`));
-    let uniNodeGDA = headers.filter(header => header.toLowerCase().includes(`gda_${diseaseValue.toLowerCase()}`));
-    let uniNodeGWAS = headers.filter(header => header.toLowerCase().includes(`gwas_${diseaseValue.toLowerCase()}`));
+	//let uniNodeLogFC = headers.filter(header => header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`));
+	let uniNodeLogFC = headers.filter(header => 
+    header.toLowerCase().includes(`logfc_${diseaseValue.toLowerCase()}`) || 
+    header.toLowerCase().includes(`${diseaseValue.toLowerCase()}_logfc`)
+);
+    // let uniNodeGDA = headers.filter(header => header.toLowerCase().includes(`gda_${diseaseValue.toLowerCase()}`));
+    // let uniNodeGWAS = headers.filter(header => header.toLowerCase().includes(`gwas_${diseaseValue.toLowerCase()}`));
+
+	let uniNodeGDA = headers.filter(header => 
+    header.toLowerCase().includes(`gda_${diseaseValue.toLowerCase()}`) || 
+    header.toLowerCase().includes(`${diseaseValue.toLowerCase()}_gda`)
+);
+
+let uniNodeGWAS = headers.filter(header => 
+    header.toLowerCase().includes(`gwas_${diseaseValue.toLowerCase()}`) || 
+    header.toLowerCase().includes(`${diseaseValue.toLowerCase()}_gwas`)
+);
 
     // Append the relevant options for each category
     appendOptionsFromFile(uniNodeLogFC, 'logFCID4Color');
