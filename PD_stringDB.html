@@ -223,28 +223,36 @@ if (uniNodeGDA.length === 0) {
 			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
 		}
 
-		// Clear previous options in the dropdowns
-$('#logFCID4Color').empty();
-$('#GlogFCID4Size').empty();
+
 
 // Check if uniNodeLogFC is empty
 if (uniNodeLogFC.length === 0) {
-    // Add a default option indicating no available options
-    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#logFCID4Color');
-    $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
+
+			// Clear previous options in the dropdowns
+$('#logFCID4Color').empty();
+$('#GlogFCID4Size').empty();
+document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+	$('#logFCID4Color').trigger("chosen:updated");
+$('#GlogFCID4Size').trigger("chosen:updated");
+
 } else {
+	$('#logFCID4Color').empty();
+$('#GlogFCID4Size').empty();
     // Populate the dropdowns with logFC options
 	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     for (var key = 0; key < uniNodeLogFC.length; key++) {
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
+		$('#logFCID4Color').trigger("chosen:updated");
+
         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
+		$('#GlogFCID4Size').trigger("chosen:updated");
     }
 }
 
 // Trigger the Chosen plugin to update the dropdowns after modifications
-$('#logFCID4Color').trigger("chosen:updated");
-$('#GlogFCID4Size').trigger("chosen:updated");
+
 
 
 		// $('#logFCID4Color').empty();
@@ -581,11 +589,14 @@ if (uniNodeGDA.length === 0) {
 $('#logFCID4Color').empty();
 $('#GlogFCID4Size').empty();
 
+
+
 // Check if uniNodeLogFC is empty
 if (uniNodeLogFC.length === 0) {
     // Add a default option indicating no available options
     $('<option/>').val('').text('None').prop('disabled', true).appendTo('#logFCID4Color');
     $('<option/>').val('').text('None').prop('disabled', true).appendTo('#GlogFCID4Size');
+	
 } else {
     // Populate the dropdowns with logFC options
 	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
@@ -1202,7 +1213,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 								var modifiedHeaders = headers.map(function(header) {
             return header + "-custom";
         });
-								//console.log("Disease headers",modifiedHeaders);
+								console.log("Disease headers",modifiedHeaders);
 								appendOptionsBasedOnHeaders(modifiedHeaders,diseaseValue)
 
 
@@ -2572,76 +2583,11 @@ function updateNodeColors(response) {
 
 		let headers = [];
 		let isfileuploaded = false;
+		const diseasesToIgnore = ["PSP", "ALS", "FTD", "OI"];
 		
-// function universal_ext_update() {
-// 	isfileuploaded = true;
-// 	// console.log("diseas",diseaseValue);
-//     let file = document.getElementById('universal_ext')?.files[0];
-//     if (!file) {
-//         alert('No file found!');
-//         return;
-//     }
-
-//     $('#uploading_custom_universal').css('display', 'block');
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//         const csvData = e.target.result;
-//         let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
-//         let csvFormattedData = $.csv.toObjects(csvData);
-//         csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
-//             acc[key.trim()] = obj[key].trim();
-//             return acc;
-//         }, {}));
-
-//         // Set headers for confirmDetails to use
-//         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().startsWith(prop.toLowerCase())));
-
-// 		console.log("headers responce",headers)
-
-// 		   // Determine the key for gene identification dynamically
-// 		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
-
-// if (!geneKey) {
-// 	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
-// 	$('#uploading_custom_universal').css('display', 'none');
-// 	return;
-// }
-
-// console.log("Gene Key Detected:", geneKey);
-//         let matchedGenes = [];
-//         let unmatchedGenes = [];
-
-//         csvFormattedData.forEach((gene) => {
-//             // const geneId = gene.ID;
-//             // const geneData = headers.reduce((obj, key) => {
-//             //     obj[key] = gene[key];
-//             //     return obj;
-//             // }, {});
-// 			//const geneId = gene.ID || gene.gene;
-// 			const geneId = gene[geneKey];
-// 			if (!geneId) return;
-//             const geneData = {};
-//             headers.forEach(header => {
-//                 geneData[`${header}-custom`] = gene[header]; 
-//             });
-
-//             if (geneIndexMap[geneId] === undefined) {
-//                 unmatchedGenes.push(geneId);
-//             } else {
-//                 //console.log(`Updating gene with ID: ${geneId}`);
-//                // console.log(`Data to be updated:`, geneData);
-
-//                 currentUniversal.genes[geneIndexMap[geneId]] = {
-//                     ...geneData,
-//                     ...currentUniversal.genes[geneIndexMap[geneId]]
-//                 };
-//                 matchedGenes.push(geneId);
-			
-//             }
-//         });
-
 function universal_ext_update() {
-    isfileuploaded = true;
+	isfileuploaded = true;
+	// console.log("diseas",diseaseValue);
     let file = document.getElementById('universal_ext')?.files[0];
     if (!file) {
         alert('No file found!');
@@ -2652,7 +2598,7 @@ function universal_ext_update() {
     const reader = new FileReader();
     reader.onload = function (e) {
         const csvData = e.target.result;
-        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_","Genetics_","custom_"];
+        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
         let csvFormattedData = $.csv.toObjects(csvData);
         csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
             acc[key.trim()] = obj[key].trim();
@@ -2662,92 +2608,68 @@ function universal_ext_update() {
         // Set headers for confirmDetails to use
         headers = Object.keys(csvFormattedData[0]).filter(header => nodePropertyHeaders.some(prop => header.toLowerCase().includes(prop.toLowerCase())));
 
-      //  console.log("Original headers response:", headers);
+		console.log("headers responce",headers)
 
-        // Determine the key for gene identification dynamically
-        const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
+		   // Determine the key for gene identification dynamically
+		   const geneKey = Object.keys(csvFormattedData[0]).find(key => key.toLowerCase() === "id" || key.toLowerCase() === "gene");
 
-        if (!geneKey) {
-            alert("No valid gene identifier ('ID' or 'gene') found in the file.");
-            $('#uploading_custom_universal').css('display', 'none');
-            return;
-        }
+if (!geneKey) {
+	alert("No valid gene identifier ('ID' or 'gene') found in the file.");
+	$('#uploading_custom_universal').css('display', 'none');
+	return;
+}
 
-      //  console.log("Gene Key Detected:", geneKey);
-
-        // Update headers based on diseaseValue
-        const diseasesToIgnore = ["PSP", "ALS", "FTD", "OI"];
-        const originalHeaders = [...headers]; // Keep track of the original headers
-		//console.log(originalHeaders)
-
-        // headers = headers.map(header => {
-			
-        //     if (diseasesToIgnore.some(disease => header.includes(`_${disease}_`))) {
-        //         return header; // Leave the header unchanged
-        //     }
-
-        //     if (header.startsWith("LogFC_") || header.startsWith("GDA_")) {
-        //         const parts = header.split("_");
-        //         if (parts.length > 1 && !diseasesToIgnore.includes(parts[1])) {
-        //             // Insert the current disease value after 'logFC_' or 'GDA_'
-        //             parts.splice(1, 0, diseaseValue);
-        //             return parts.join("_");
-        //         }
-        //     }
-
-        //     return header; // Leave the header unchanged if no conditions match
-        // });
-
-
-		headers = headers.flatMap(header => {
-    // Normalize the header to lowercase for case-insensitive matching
-    const lowerHeader = header.toLowerCase();
-
-    // Check if the header already includes a disease name
-    if (diseasesToIgnore.some(disease => lowerHeader.includes(`_${disease.toLowerCase()}_`))) {
-        return header; // Leave the header unchanged
-    }
-
-    if (lowerHeader.startsWith("logfc_") || lowerHeader.startsWith("gda_") || lowerHeader.startsWith("Genetics_") || lowerHeader.startsWith("GWAS_") || lowerHeader.startsWith("GWAS_OR_") ||  lowerHeader.startsWith("GWAS_Beta_") ) {
-        const parts = header.split("_");
-        if (parts.length > 1) {
-            // Generate new headers by inserting each disease into the header
-            return diseasesToIgnore.map(disease => {
-                const newParts = [...parts];
-                newParts.splice(1, 0, disease); // Insert the disease name after the prefix
-                return newParts.join("_");
-            });
-        }
-    }
-
-    return [header]; // Return the unchanged header as an array
-});
+console.log("Gene Key Detected:", geneKey);
 
 
 
-    //   console.log("Updated headers response:", headers);
 
         let matchedGenes = [];
         let unmatchedGenes = [];
+		
+		const updatedHeaders = []; // Array to store updated headers dynamically
 
-        csvFormattedData.forEach((gene) => {
+
+		csvFormattedData.forEach((gene) => {
             const geneId = gene[geneKey];
             if (!geneId) return;
 
             const geneData = {};
+            headers.forEach((header) => {
+                const lowerHeader = header.toLowerCase();
 
-			
-
-            headers.forEach((updatedHeader, index) => {
-                const originalHeader = originalHeaders[index]; // Map to the original header
-                if (originalHeader in gene) {
-                    // Map value from original header to the updated header
-                    geneData[`${updatedHeader}-custom`] = gene[originalHeader];
+                // Check if the header already includes a disease name
+                if (diseasesToIgnore.some(disease => lowerHeader.includes(`_${disease.toLowerCase()}_`))) {
+                    geneData[`${header}-custom`] = gene[header];
+                    updatedHeaders.push(header); // Keep as-is
+                    return;
                 }
 
+                // Check if the header starts with specific prefixes and generate new headers
+                if (
+                    lowerHeader.startsWith("logfc_") ||
+                    lowerHeader.startsWith("gda_") ||
+                    lowerHeader.startsWith("genetics_") ||
+                    lowerHeader.startsWith("gwas_") ||
+                    lowerHeader.startsWith("gwas_or_") ||
+                    lowerHeader.startsWith("gwas_beta_")
+                ) {
+                    const parts = header.split("_");
+                    if (parts.length > 1) {
+                        diseasesToIgnore.forEach((disease) => {
+                            const newParts = [...parts];
+                            newParts.splice(1, 0, disease); // Insert the disease name after the prefix
+                            const newHeader = newParts.join("_");
+                            geneData[`${newHeader}-custom`] = gene[header];
+                            updatedHeaders.push(newHeader); // Add new header dynamically
+                        });
+                    }
+                } else {
+                    // For headers that don't match the special prefixes, add as-is
+                    geneData[`${header}-custom`] = gene[header];
+                    updatedHeaders.push(header);
+                }
             });
-
-			//console.log(headers)
 
             if (geneIndexMap[geneId] === undefined) {
                 unmatchedGenes.push(geneId);
@@ -2760,9 +2682,12 @@ function universal_ext_update() {
             }
         });
 
-	
+        // Deduplicate and update the `headers` array
+        headers = [...new Set([...headers, ...updatedHeaders])];
 
-		//	 console.log("current values",currentUniversal);
+        console.log("Updated Headers:", headers);
+        console.log("currentUniversal:", currentUniversal);	
+
 
 
 		if (matchedGenes.length === 0) {
@@ -5426,45 +5351,51 @@ function resetNodeColors() {
 
     resetNodeColors();
 
-    function highlight_genes(y) {
-        // Map through the gene list and check each gene's presence in the graph
-        let notFoundGenes = y.map(gene => {
-            let found = false;
+	function highlight_genes(y) {
+    // Map through the gene list and check each gene's presence in the graph
+    let notFoundGenes = y.map(gene => {
+        let found = false;
 
-            // Check each node in the graph
-            d3.selectAll(".node").each(function (d) {
-                if (gene === d.Gene_name || gene === d.ID) {
-                    found = true;
-                    d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," +
-                        "*[id$=_" + d.Gene_name.replace(/\./g, 'DOT') + "]")
-                        .select("stop[offset='100%']")
-                        .style("stop-color", "#FFAA33");
-                }
-            });
+        // Check each node in the graph
+        d3.selectAll(".node").each(function (d) {
+            // Use case-insensitive comparison
+            if (
+                gene.toLowerCase() === d.Gene_name.toLowerCase() || 
+                gene.toLowerCase() === d.ID.toLowerCase()
+            ) {
+                found = true;
 
-            // Return the gene if not found
-            return found ? null : gene;
-        }).filter(gene => gene !== null); // Filter out null values (genes that were found)
+                // Highlight the corresponding nodes
+                d3.selectAll("*[id^=" + d.ID.replace(/\./g, 'DOT') + "_]," +
+                    "*[id$=_" + d.Gene_name.replace(/\./g, 'DOT') + "]")
+                    .select("stop[offset='100%']")
+                    .style("stop-color", "#FFAA33");
+            }
+        });
 
-        // If there are any not found genes, populate the table and show the modal
-        if (notFoundGenes.length > 0) {
-            const tableBody = document.getElementById("table_data-ip-6");
-            tableBody.innerHTML = ""; // Clear existing rows
+        // Return the gene if not found
+        return found ? null : gene;
+    }).filter(gene => gene !== null); // Filter out null values (genes that were found)
 
-            notFoundGenes.forEach((gene, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${gene}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+    // If there are any not found genes, populate the table and show the modal
+    if (notFoundGenes.length > 0) {
+        const tableBody = document.getElementById("table_data-ip-6");
+        tableBody.innerHTML = ""; // Clear existing rows
 
-            // Show the modal
-            document.getElementById("node-modal-background-5").style.display = "block";
-            document.getElementById("notFoundGenes").style.display = "block";
-        }
+        notFoundGenes.forEach((gene, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${gene}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Show the modal
+        document.getElementById("node-modal-background-5").style.display = "block";
+        document.getElementById("notFoundGenes").style.display = "block";
     }
+}
 		
 
 			if (document.getElementById("gene_list").value != "") {
