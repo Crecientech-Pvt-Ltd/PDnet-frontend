@@ -2598,7 +2598,7 @@ function universal_ext_update() {
     const reader = new FileReader();
     reader.onload = function (e) {
         const csvData = e.target.result;
-        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_"];
+        let nodePropertyHeaders = ["logFC_", "direction_", "pathway_", "CellType_", "pvalue_", "Druggability_", "GWAS_", "GWAS_OR_", "GWAS_Beta_", "database_", "custom_color_", "relevence_", "GDA_", "TE_","Genetics_","custom_"];
         let csvFormattedData = $.csv.toObjects(csvData);
         csvFormattedData = csvFormattedData.map(obj => Object.keys(obj).reduce((acc, key) => {
             acc[key.trim()] = obj[key].trim();
@@ -2816,7 +2816,7 @@ let uniNodeGWAS = headers.filter(header =>
     appendOptionsFromFile(uniNodeDruggability, 'druggabilityID4Size');
     
     // appendOptionsFromFile(headers.filter((header) => header.toLowerCase().includes("pathway_")), 'pathwayID4Color');
-		var uniNodeTE = headers.filter((header) => header.toLowerCase().startsWith("TE_"));
+		var uniNodeTE = headers.filter((header) => header.toLowerCase().startsWith("te_"));
     appendOptionsFromFile(uniNodeTE, 'TE4Color');
     appendOptionsFromFile(uniNodeTE, 'TE4Size');
 
