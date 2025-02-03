@@ -2608,7 +2608,7 @@ function updateNodeColors(response) {
 		<div class="collapse show" id="collapseRightFour">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked>
+					<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked >
 					Highlight Seed Genes<br>
 					<input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show
 					Edge Color<br>
@@ -4668,7 +4668,6 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
-
 			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
@@ -4806,10 +4805,27 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 					startD3(currentUniversal);
 				//	getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-					for (let i of d.nodeNames) {
-						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-						color_input_genes2(y);
-					}
+
+					// console.log(d.order)
+					// for (let i of d.nodeNames) {
+					// 	y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+					// 	color_input_genes2(y);
+					// }
+
+
+                 // Get the checkbox element
+                const highlightSeedGenesCheckbox = document.getElementById("nodecolor1");
+
+                if (d.order === 0) {
+              highlightSeedGenesCheckbox.checked = false; // Uncheck the checkbox
+           } else {
+               highlightSeedGenesCheckbox.checked = true; // Check the checkbox
+               for (let i of d.nodeNames) {
+               y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+                color_input_genes2(y);
+             }
+}
+
 				},
 				error: function (err) {
 					$("#loader").css('display', 'none')
