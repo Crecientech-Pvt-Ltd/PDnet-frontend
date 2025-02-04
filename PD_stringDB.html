@@ -100,50 +100,68 @@
 	// 			}
 	// 		});
 	// 	}
-	function getUniversal(commonData, diseaseData) {
+// 	function getUniversal(commonData, diseaseData) {
+//   console.log("uniNode loaded");
+
+//   // Example: Handling `common` and `disease`
+//   let uniNodeHeaders = diseaseData; // Use `disease` as headers
+//   if (commonData) {
+//     commonData.forEach((item) => {
+//       if (!uniNodeHeaders.includes(item)) {
+//         uniNodeHeaders.push(item);
+//       }
+//     });
+//   }
+
+function getUniversal(commonData, diseaseData) {
   console.log("uniNode loaded");
 
-  // Example: Handling `common` and `disease`
-  let uniNodeHeaders = diseaseData; // Use `disease` as headers
+  // Merge `diseaseData` and `commonData`, avoiding duplicates
+  let uniNodeHeaders = [...diseaseData];
   if (commonData) {
     commonData.forEach((item) => {
-      if (!uniNodeHeaders.includes(item)) {
+      // Check for duplicates based on `name` field
+      if (!uniNodeHeaders.some((header) => header.name === item.name)) {
         uniNodeHeaders.push(item);
       }
     });
   }
 
+
 //console.log("Final UniNode Headers:", uniNodeHeaders);
 
 
 	   var uniNodeGDA = uniNodeHeaders.filter((header) => 
-        header.toLowerCase().includes("gda_".toLowerCase())
+        header.name.toLowerCase().includes("gda_".toLowerCase())
              );
 
-	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
-	// console.log("Filtered uniNodeGDA:", uniNodeGDA)
+
+ //console.log("Filtered uniNodeGDA:", uniNodeGDA)
 	  
 		//Seperate different headers like Pathways, Directions, etc. to populate corresponding drop-down
-		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.toLowerCase().includes("logfc_".toLowerCase()));
+		var uniNodeLogFC = uniNodeHeaders.filter((header) => header.name.toLowerCase().includes("logfc_".toLowerCase()));
+	// console.log("Filtered uniNodeLogFC:", uniNodeLogFC);
 
 		// var uniNodePLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_proteomics".toLowerCase()));
 		//var uniNodeGLogFC = uniNodeLogFC.filter((header) => header.toLowerCase().startsWith("logFC_".toLowerCase()));
-		var uniNodeDirection = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("direction_".toLowerCase()));
-		var uniNodePathway = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pathway_".toLowerCase()));
-		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("CellType_".toLowerCase()));
-		var uniNodePvalue = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("pvalue_".toLowerCase()));
-		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("Druggability_".toLowerCase()));
-		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.toLowerCase().includes("GWAS_".toLowerCase()));
-		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
-		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
-		var uniNodeDBs = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("database_".toLowerCase()));
-		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().includes("custom_".toLowerCase()));
+		var uniNodeDirection = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("direction_".toLowerCase()));
+		var uniNodePathway = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("pathway_".toLowerCase()));
+		var uniNodeMarkers = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("CellType_".toLowerCase()));
+		var uniNodePvalue = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("pvalue_".toLowerCase()));
+		var uniNodeDruggability = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("Druggability_".toLowerCase()));
+		var uniNodeGWAS = uniNodeHeaders.filter((header) => header.name.toLowerCase().includes("GWAS_".toLowerCase()));
+		var uniNodeGWAS_OR = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("GWAS_OR_".toLowerCase()));
+		var uniNodeGWAS_Beta = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("GWAS_Beta_".toLowerCase()));
+		var uniNodeDBs = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("database_".toLowerCase()));
+		var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.name.toLowerCase().includes("custom_".toLowerCase()));
 		//var uniNodeCustomColors = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("custom_color_".toLowerCase()));
-		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("relevence_".toLowerCase()));
+		var uniNodeRelevence = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("relevence_".toLowerCase()));
 		// var uniNodeGDA = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("GDA_".toLowerCase()));
-		var uniNodeTE = uniNodeHeaders.filter((header) => header.toLowerCase().startsWith("TE_".toLowerCase()));
+		var uniNodeTE = uniNodeHeaders.filter((header) => header.name.toLowerCase().startsWith("TE_".toLowerCase()));
+			
+	//	console.log("Filtered dataBase",uniNodeDBs)
 		//console.log("Filtered Druggability",uniNodeDruggability)
-		//console.log("Filtered uniNodeGWAS:", uniNodeGWAS)
+	//	console.log("Filtered uniNodeGWAS:", uniNodeGWAS)
 		
 		//************************* TO POPULATE DROP DOWNS
 		//Populate all the dropdowns (logFCID4Color, directionID4Color, etc.)  in left menu with different headers
@@ -153,7 +171,13 @@
 		// For TE Color
 		document.getElementById('TE4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 		for (var key = 0; key < uniNodeTE.length; key++) {
-			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo('#TE4Color')
+			const optionText = jsUcFirst(uniNodeTE[key].name);
+			const tooltipText =jsUcFirst(uniNodeTE[key].description);  // Replace this with dynamic tooltip content 
+			$('<option/>')
+			.val(optionText)
+			.text(optionText)
+			.attr('title',tooltipText)
+			.appendTo('#TE4Color')
 			$('#TE4Color').trigger("chosen:updated");
 		}
 		// Adding TE options to the node cut-off in Radial Analysis section
@@ -171,7 +195,13 @@
 		document.getElementById('TE4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//For TE Size
 		for (var key = 0; key < uniNodeTE.length; key++) {
-			$('<option/>').val(uniNodeTE[key]).text(jsUcFirst(uniNodeTE[key])).appendTo(
+			const optionText = jsUcFirst(uniNodeTE[key].name);
+			const tooltipText =jsUcFirst(uniNodeTE[key].description);
+			$('<option/>')
+			.val(uniNodeTE[key].name)
+			.text(jsUcFirst(uniNodeTE[key].name))
+			.attr('title',tooltipText)
+			.appendTo(
 				'#TE4Size')
 			$('#TE4Size').trigger("chosen:updated");
 
@@ -196,13 +226,29 @@ if (uniNodeGDA.length === 0) {
 	document.getElementById('GDAID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 	document.getElementById('GDAID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     // For GDA Color
-    for (var key = 0; key < uniNodeGDA.length; key++) {
-        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Color');
-        $('#GDAID4Color').trigger("chosen:updated");
+	for (var key = 0; key < uniNodeGDA.length; key++) {
+        const optionText = jsUcFirst(uniNodeGDA[key].name); // Use the 'name' field for option text
+        const tooltipText = uniNodeGDA[key].description; // Use the 'description' field for the tooltip
 
-        $('<option/>').val(uniNodeGDA[key]).text(jsUcFirst(uniNodeGDA[key])).appendTo('#GDAID4Size');
-        $('#GDAID4Size').trigger("chosen:updated");
+        // Add option to GDA Color dropdown
+        $('<option/>')
+            .val(uniNodeGDA[key].name)
+            .text(optionText)
+            .attr('title', tooltipText) // Add the description as a tooltip
+            .appendTo('#GDAID4Color');
+
+        // Add option to GDA Size dropdown
+        $('<option/>')
+            .val(uniNodeGDA[key].name)
+            .text(optionText)
+            .attr('title', tooltipText) // Add the description as a tooltip
+            .appendTo('#GDAID4Size');
     }
+
+    // Update the chosen plugin
+    $('#GDAID4Color').trigger("chosen:updated");
+    $('#GDAID4Size').trigger("chosen:updated");
+
 }
 
      $('#druggabilityID4Color').empty();
@@ -210,46 +256,93 @@ if (uniNodeGDA.length === 0) {
 
 		// Populate Druggability dropdown
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
-			$('<option/>').val(uniNodeDruggability[key]).text(jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Color')
+			const optionText = jsUcFirst(uniNodeDruggability[key].name); // Use the 'name' field for option text
+		const tooltipText = uniNodeDruggability[key].description; // Use the 'description' field for the tooltip
+	//	const  tooltipText = `Description about ${optionText}`;
+		$('<option/>')
+			//.val(uniNodeDruggability[key].name)
+			.text(optionText)
+			.attr('title', tooltipText)
+			.appendTo('#druggabilityID4Color')
 			$('#druggabilityID4Color').trigger("chosen:updated");
 		}
-		// Populate GWAS OR dropdown
-		for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
-			$('<option/>').val(uniNodeGWAS_OR[key]).text(jsUcFirst(uniNodeGWAS_OR[key])).appendTo('#GWAS_OR4Color');
-		}
+	// 	// Populate GWAS OR dropdown
+	// 	for (var key = 0; key < uniNodeGWAS_OR.length; key++) {
+	// 		$('<option/>').val(uniNodeGWAS_OR[key]).text(jsUcFirst(uniNodeGWAS_OR[key])).appendTo('#GWAS_OR4Color');
+	// 	}
 
-		// Populate GWAS Beta dropdown
-		for (var key = 0; key < uniNodeGWAS_Beta.length; key++) {
-			$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
-		}
+	// 	// Populate GWAS Beta dropdown
+	// 	for (var key = 0; key < uniNodeGWAS_Beta.length; key++) {
+	// 		$('<option/>').val(uniNodeGWAS_Beta[key]).text(jsUcFirst(uniNodeGWAS_Beta[key])).appendTo('#GWAS_Beta4Color');
+	// 	}
 
 
 
 // Check if uniNodeLogFC is empty
-if (uniNodeLogFC.length === 0) {
+// if (uniNodeLogFC.length === 0) {
 
-			// Clear previous options in the dropdowns
-$('#logFCID4Color').empty();
-$('#GlogFCID4Size').empty();
-document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
-	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
-	$('#logFCID4Color').trigger("chosen:updated");
-$('#GlogFCID4Size').trigger("chosen:updated");
+// 			// Clear previous options in the dropdowns
+// $('#logFCID4Color').empty();
+// $('#GlogFCID4Size').empty();
+// document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+// 	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+// 	$('#logFCID4Color').trigger("chosen:updated");
+// $('#GlogFCID4Size').trigger("chosen:updated");
 
+// } else {
+// 	$('#logFCID4Color').empty();
+// $('#GlogFCID4Size').empty();
+//     // Populate the dropdowns with logFC options
+// 	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+// 	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
+//     for (var key = 0; key < uniNodeLogFC.length; key++) {
+//         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
+// 		$('#logFCID4Color').trigger("chosen:updated");
+
+//         $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
+// 		$('#GlogFCID4Size').trigger("chosen:updated");
+//     }
+// }
+
+if (uniNodeLogFC.length === 0) { 
+    // Clear previous options in the dropdowns
+    $('#logFCID4Color').empty();
+    $('#GlogFCID4Size').empty();
+
+    document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected" title="No option selected">None</option>`;
+    document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected" title="No option selected">None</option>`;
+
+    $('#logFCID4Color').trigger("chosen:updated");
+    $('#GlogFCID4Size').trigger("chosen:updated");
 } else {
-	$('#logFCID4Color').empty();
-$('#GlogFCID4Size').empty();
-    // Populate the dropdowns with logFC options
-	document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
-	document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
-    for (var key = 0; key < uniNodeLogFC.length; key++) {
-        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#logFCID4Color');
-		$('#logFCID4Color').trigger("chosen:updated");
+    $('#logFCID4Color').empty();
+    $('#GlogFCID4Size').empty();
 
-        $('<option/>').val(uniNodeLogFC[key]).text(jsUcFirst(uniNodeLogFC[key])).appendTo('#GlogFCID4Size');
-		$('#GlogFCID4Size').trigger("chosen:updated");
+    // Add a default "None" option with a tooltip
+    document.getElementById('logFCID4Color').innerHTML = `<option value="none" selected="selected" title="No option selected">None</option>`;
+    document.getElementById('GlogFCID4Size').innerHTML = `<option value="none" selected="selected" title="No option selected">None</option>`;
+
+    // Populate the dropdowns with logFC options and add tooltips
+    for (var key = 0; key < uniNodeLogFC.length; key++) {
+       const  optionText = jsUcFirst(uniNodeLogFC[key].name);
+        const tooltipText = uniNodeLogFC[key].description; // Replace this with dynamic tooltip content 
+      // var tooltipText = ' Progressive Supranuclear Palsy-Test1';
+        $('<option/>')
+            .val(uniNodeLogFC[key].name)
+            .text(optionText)
+            .attr('title', tooltipText) // Add tooltip
+            .appendTo('#logFCID4Color');
+        $('#logFCID4Color').trigger("chosen:updated");
+
+        $('<option/>')
+            .val(uniNodeLogFC[key].name)
+            .text(optionText)
+            .attr('title', tooltipText) // Add tooltip
+            .appendTo('#GlogFCID4Size');
+        $('#GlogFCID4Size').trigger("chosen:updated");
     }
 }
+
 
 // Trigger the Chosen plugin to update the dropdowns after modifications
 
@@ -274,11 +367,11 @@ $('#GlogFCID4Size').empty();
 		// };
 
 		//For Direction Color
-		for (var key = 0; key < uniNodeDirection.length; key++) {
-			$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
-				'#directionID4Color')
-			$('#directionID4Color').trigger("chosen:updated");
-		};
+		// for (var key = 0; key < uniNodeDirection.length; key++) {
+		// 	$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo(
+		// 		'#directionID4Color')
+		// 	$('#directionID4Color').trigger("chosen:updated");
+		// };
 
 
 		//For Direction Shape
@@ -286,13 +379,29 @@ $('#GlogFCID4Size').empty();
 		//$('<option/>').val(uniNodeDirection[key]).text(jsUcFirst(uniNodeDirection[key])).appendTo('#directionID4Shape')
 		//};
 
+		// $('#pathwayID4Color').empty()
+		// document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		// //For Pathways color
+		// for (var key = 0; key < uniNodePathway.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+		// 		'#pathwayID4Color')
+		// 	$('#pathwayID4Color').trigger("chosen:updated");
+		// };
+
+
 		$('#pathwayID4Color').empty()
 		document.getElementById('pathwayID4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//For Pathways color
 		for (var key = 0; key < uniNodePathway.length; key++) {
+			var optionText = jsUcFirst(uniNodePathway[key].name);
+       var tooltipText = `${optionText}`; // Replace this with dynamic tooltip content 
 			//var val = sample[0]+"_"+pathwayList[key];
-			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
-				'#pathwayID4Color')
+			$('<option/>')
+			.val(uniNodePathway[key].name)
+			.text(optionText)
+			.attr('title',tooltipText)
+			.appendTo('#pathwayID4Color');
 			$('#pathwayID4Color').trigger("chosen:updated");
 		};
 
@@ -301,23 +410,23 @@ $('#GlogFCID4Size').empty();
        //$('#custom4Color').empty()
 
 		//For Custom color
-		for (var key = 0; key < uniNodeCustomColors.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			$('<option/>').val(uniNodeCustomColors[key]).text(jsUcFirst(uniNodeCustomColors[key])).appendTo(
-				'#custom4Color')
-			$('#custom4Color').trigger("chosen:updated");
-		};
+		// for (var key = 0; key < uniNodeCustomColors.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	$('<option/>').val(uniNodeCustomColors[key]).text(jsUcFirst(uniNodeCustomColors[key])).appendTo(
+		// 		'#custom4Color')
+		// 	$('#custom4Color').trigger("chosen:updated");
+		// };
 
-		$('#custom4Color').trigger("chosen:updated");
+		// $('#custom4Color').trigger("chosen:updated");
 
 
 
-		//For Pathways Shape
-		for (var key = 0; key < uniNodePathway.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
-				'#pathwayID4Shape')
-		};
+		// //For Pathways Shape
+		// for (var key = 0; key < uniNodePathway.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	$('<option/>').val(uniNodePathway[key]).text(jsUcFirst(uniNodePathway[key])).appendTo(
+		// 		'#pathwayID4Shape')
+		// };
 
 
 		// for (var key = 0; key < uniNodeGLogFC.length; key++) {
@@ -330,9 +439,14 @@ $('#GlogFCID4Size').empty();
 		document.getElementById('druggabilityID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
 		//Trait for Size
 		for (var key = 0; key < uniNodeDruggability.length; key++) {
+			const optionText = jsUcFirst(uniNodeDruggability[key].name);
+			const tooltipText =  uniNodeDruggability[key].description; // Replace this with dynamic tooltip content 
 			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeDruggability[key] != "druggability_Module_ID") $('<option/>').val(uniNodeDruggability[key]).text(
-				jsUcFirst(uniNodeDruggability[key])).appendTo('#druggabilityID4Size')
+			if (uniNodeDruggability[key].name != "druggability_Module_ID") $('<option/>')
+			.val(uniNodeDruggability[key].name)
+		.text(optionText)
+		.attr('title', tooltipText)
+		.appendTo('#druggabilityID4Size');
 			$('#druggabilityID4Size').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
@@ -349,8 +463,17 @@ $('#GlogFCID4Size').empty();
 			document.getElementById('GWAS4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
 	document.getElementById('gwasID4Size').innerHTML = `<option value="none" selected="selected">None</option>`;
     for (var key = 0; key < uniNodeGWAS.length; key++) {
-        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#GWAS4Color');
-        $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(uniNodeGWAS[key])).appendTo('#gwasID4Size');
+		const optionText = jsUcFirst(uniNodeGWAS[key].name);
+		const tooltipText = uniNodeGWAS[key].description;
+        $('<option/>')
+		.val(uniNodeGWAS[key].name)
+		.text(jsUcFirst(uniNodeGWAS[key].name))
+		.attr('title',tooltipText)
+		.appendTo('#GWAS4Color');
+        $('<option/>').val(uniNodeGWAS[key].name)
+		.text(jsUcFirst(uniNodeGWAS[key].name))
+		.attr('title',tooltipText)
+		.appendTo('#gwasID4Size');
     }
 		}
 
@@ -366,12 +489,12 @@ $('#GlogFCID4Size').empty();
 		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		// };
 		//GWAS 4 shape
-		for (var key = 0; key < uniNodeGWAS.length; key++) {
-			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
-				uniNodeGWAS[key])).appendTo('#GWAS4Shape')
-			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
-		};
+		// for (var key = 0; key < uniNodeGWAS.length; key++) {
+		// 	//var val = sample[0]+"_"+pathwayList[key];
+		// 	if (uniNodeGWAS[key] != "GWAS_Module_ID") $('<option/>').val(uniNodeGWAS[key]).text(jsUcFirst(
+		// 		uniNodeGWAS[key])).appendTo('#GWAS4Shape')
+		// 	//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
+		// };
 		//GWAS 4 Size
 		// for (var key = 0; key < uniNodeGWAS.length; key++) {
 
@@ -383,12 +506,12 @@ $('#GlogFCID4Size').empty();
 		// };
 
 		$('#DBs4Color').empty();
-		document.getElementById('DBs4Color').innerHTML = `<option value="none" selected="selected">None</option>`;
+		document.getElementById('DBs4Color').innerHTML = `<option value="none" selected="selected">None </option>`;
 		//Databases 4 color
 		for (var key = 0; key < uniNodeDBs.length; key++) {
 			//var val = sample[0]+"_"+pathwayList[key];
-			if (uniNodeDBs[key] != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key]).text(jsUcFirst(
-				uniNodeDBs[key])).appendTo('#DBs4Color')
+			if (uniNodeDBs[key].name != "DBs_Module_ID") $('<option/>').val(uniNodeDBs[key].name).text(jsUcFirst(
+				uniNodeDBs[key].name)).appendTo('#DBs4Color')
 			$('#DBs4Color').trigger("chosen:updated");
 			//$('<option/>').val("trait_" + traitList[key]).text(jsUcFirst(traitList[key])).appendTo('#druggabilityID4Size')
 		};
@@ -448,7 +571,7 @@ $('#GlogFCID4Size').empty();
 			});
 		}
 
-  console.log("Final UniNode Headers:", uniNodeHeaders);
+  //console.log("Final UniNode Headers:", uniNodeHeaders);
 		// const selectElement = document.getElementById('diseaseMap');
 		// const selectedText = selectElement.options[selectElement.selectedIndex].text;
 		
@@ -1014,7 +1137,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 			</div>
 
 			<div class="modal-body">
-				<table class="fixed_header">
+				<table class="fixed_header-2">
 					<thead>
 						<tr>
 							<th style="width: 50px;">No.</th>
@@ -1242,6 +1365,37 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 						  });
 						}
 					  
+						// function makeRequest() {
+						//   return $.ajax({
+						// 	url: "https://pdnet-rnd-apis.crecientech.com/graphql",
+						// 	type: "POST",
+						// 	contentType: "application/json",
+						// 	accept: "application/json",
+						// 	data: JSON.stringify({
+						// 	  query: `query GetHeaders($disease: String) {
+						// 		getHeaders(disease: $disease) {
+						// 		  common
+						// 		  disease
+						// 		}
+						// 	  }`,
+						// 	  variables: {
+						// 		disease: diseaseValue
+						// 	  }
+						// 	}),
+						// 	success: function (response) {
+						// 	//  console.log(response);
+						// 	  const currentUniversal = response.data.getHeaders;
+					  
+						// 	  // Pass the data to getUniversal
+						// 	  getUniversal(currentUniversal.common, currentUniversal.disease);
+						// 	},
+						// 	error: function (xhr, status, error) {
+						// 	  console.error("Error:", error);
+						// 	}
+						//   });
+						// }
+
+
 						function makeRequest() {
 						  return $.ajax({
 							url: 'http://api.tdp-dev.alexion.cloud/graphql',
@@ -1249,23 +1403,49 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 							contentType: "application/json",
 							accept: "application/json",
 							data: JSON.stringify({
-							  query: `query GetHeaders($disease: String) {
+							  query: `query GetHeaders($disease: String!) {
 								getHeaders(disease: $disease) {
-								  common
-								  disease
+								  common{name description}
+								  disease{name description}
 								}
 							  }`,
 							  variables: {
 								disease: diseaseValue
 							  }
 							}),
-							success: function (response) {
-							//  console.log(response);
-							  const currentUniversal = response.data.getHeaders;
+							// success: function (response) {
+							//   console.log("2nd api",response);
+							//   const currentUniversal = response.data.getHeaders;
+							//   console.log(currentUniversal)
 					  
-							  // Pass the data to getUniversal
-							  getUniversal(currentUniversal.common, currentUniversal.disease);
-							},
+							//   // Pass the data to getUniversal
+							//   getUniversal(currentUniversal.common, currentUniversal.disease);
+							// },
+
+							success: function (response) {
+ // console.log("2nd API response", response);
+
+  // Extract the currentUniversal data
+  const currentUniversal = response.data.getHeaders;
+ // console.log("currentUniversal:", currentUniversal);
+
+  // Extract name and description for both common and disease
+  const commonData = currentUniversal.common.map(item => ({
+    name: item.name,
+    description: item.description
+  }));
+  const diseaseData = currentUniversal.disease.map(item => ({
+    name: item.name,
+    description: item.description
+  }));
+
+  //console.log("Common Data:", commonData);
+  //console.log("Disease Data:", diseaseData);
+
+  // Pass the extracted data to getUniversal
+  getUniversal(commonData, diseaseData);
+},
+
 							error: function (xhr, status, error) {
 							  console.error("Error:", error);
 							}
@@ -1410,7 +1590,7 @@ $('#GlogFCID4Size').trigger("chosen:updated");
 
 						<div id="logFCInput" class="size" style="padding-bottom:5px;display:none;">
 							Select logFC:
-							<!-- <div class="panel1" style="max-height:300px;"></div> -->
+							
 							<select id="logFCID4Color" name="logFCID4Color" style="max-width:90%;" class="chosen-select">
 								<option value="none" selected="selected">None</option>
 							</select>
@@ -2429,7 +2609,7 @@ function updateNodeColors(response) {
 		<div class="collapse show" id="collapseRightFour">
 			<div class="b card card-body">
 				<p class="size">
-					<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked>
+					<input type="checkbox" name="highlight_seedEdge" id="nodecolor1" value="6" style="margin-top: 10px;" checked >
 					Highlight Seed Genes<br>
 					<input type="checkbox" name="highlight_seedEdge" id="linkColor1" value="7" style="margin-top: 10px;"> Show
 					Edge Color<br>
@@ -2620,7 +2800,7 @@ if (!geneKey) {
 	return;
 }
 
-console.log("Gene Key Detected:", geneKey);
+//console.log("Gene Key Detected:", geneKey);
 
 
 
@@ -2686,8 +2866,8 @@ console.log("Gene Key Detected:", geneKey);
         // Deduplicate and update the `headers` array
         headers = [...new Set([...headers, ...updatedHeaders])];
 
-        console.log("Updated Headers:", headers);
-        console.log("currentUniversal:", currentUniversal);	
+      //  console.log("Updated Headers:", headers);
+      //  console.log("currentUniversal:", currentUniversal);	
 
 
 
@@ -2943,9 +3123,14 @@ function appendOptionsFromFile(headerArray, dropdownId) {
 		}
 
 		//Capitalize first letter
-		window.jsUcFirst = function (string) {
-			return string.charAt(0).toUpperCase() + string.slice(1);
-		}
+		// window.jsUcFirst = function (string) {
+		// 	return string.charAt(0).toUpperCase() + string.slice(1);
+		// }
+
+		window.jsUcFirst = function (str) {
+    if (typeof str !== "string" || !str.length) return ""; // Handle non-string cases
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 		//Handling left menu hight
 		var acc = document.getElementsByClassName("accordion");
@@ -4485,7 +4670,6 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 
 		if (thisCheck != undefined || thisCheck != null) {
 			let d = JSON.parse(thisCheck);
-
 			$("#diseaseMap").val(d?.disease ?? "ALS");
 
 			$.ajax({
@@ -4623,10 +4807,27 @@ if ($('input[name="nodeSize"][value="0"]').is(':checked')) {
 					startD3(currentUniversal);
 				//	getUniversal(currentUniversal);
 					initialUniversal = JSON.parse(JSON.stringify(currentUniversal));
-					for (let i of d.nodeNames) {
-						y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
-						color_input_genes2(y);
-					}
+
+					// console.log(d.order)
+					// for (let i of d.nodeNames) {
+					// 	y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+					// 	color_input_genes2(y);
+					// }
+
+
+                 // Get the checkbox element
+                const highlightSeedGenesCheckbox = document.getElementById("nodecolor1");
+
+                if (d.order === 0) {
+              highlightSeedGenesCheckbox.checked = false; // Uncheck the checkbox
+           } else {
+               highlightSeedGenesCheckbox.checked = true; // Check the checkbox
+               for (let i of d.nodeNames) {
+               y = i.split(/\s*[,\n]+\s*[,\n]*\s*/);
+                color_input_genes2(y);
+             }
+}
+
 				},
 				error: function (err) {
 					$("#loader").css('display', 'none')
@@ -8054,7 +8255,7 @@ if (thisDisease !== undefined && thisDisease !== null) {
       "Accept": "application/json"
     },
     success: function (response) {
-     console.log("GraphQL Response:", response);
+  //   console.log("GraphQL Response:", response);
 			if (response.data && response.data.getGenes) {
     
     	// Create a map of gene data by ID for easier lookup
