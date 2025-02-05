@@ -455,6 +455,8 @@ body {
       max-width: 90vw;
       z-index: 9;
       pointer-events: all;
+      overflow-y: auto;
+      margin-bottom: 0px;
       /* opacity: 1; */
   }
 
@@ -626,6 +628,8 @@ body {
       /* opacity: .8; */
       height: 100%;
       z-index: 9;
+      display: flex;
+    flex-direction: column !important;
       /* pointer-events: none; */
   }
 
@@ -698,13 +702,16 @@ body {
   }
 
 
-  
+
+
+
   .fixed_header {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
     height: 65vh;
 }
+
 
 .fixed_header thead {
     display: table-header-group;
@@ -713,9 +720,22 @@ body {
     /* width: 100%; */
 }
 
+
+.fixed {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    height: 65vh;
+}
+
+.fixed thead th {
+    background: #25b0ba;
+    color: #fff;
+}
+
 .fixed_header thead  tr {
     display: block;
-    width: 100%;
+    /* width: 100%; */
 }
 
 /* .fixed_header th {
@@ -746,49 +766,31 @@ body {
     min-width: 180px;
 } */
 
-
+/* 
 .fixed_header th, .fixed_header td {
     padding: 5px;
     text-align: left;
     min-width: 180px;
-  } 
+    width: 12.5%;
+  }  */
+
+  /* .fixed_header th, .fixed_header td {
+    padding: 5px;
+    text-align: left;
+    width: 15%;
+  }  */
+
+
+   /* .fixed_header td {
+    padding: 5px;
+    text-align: left;
+    width: 15%;
+  }  */
 
 
 
-  .fixed_header-2{
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-    height: 65vh;
-}
 
-.fixed_header-2 tbody{
-  display:block;
-  width: 100%;
-  overflow: auto;
-  height: 100%;
-  font-size: 14px;
-}
-.fixed_header-2 tbody tr {
-    border-bottom: 1px solid rgba(119, 119, 119, 0.22);
-    background: #f3f3f3;
-}
-.fixed_header-2 thead tr {
-   display: block;
-}
-
-.fixed_header-2 thead {
-    background: #25b0ba;
-    color:#fff;
-}
-
-.fixed_header-2 th, .fixed_header-2 td {
-  padding: 5px;
-  text-align: left;
-  min-width: 180px;
-}
-  
-  /* .fixed_header{
+    /* .fixed_header{
       width: 100%;
       table-layout: fixed;
       border-collapse: collapse;
@@ -820,6 +822,39 @@ body {
     text-align: left;
     min-width: 180px;
   } */
+  
+  .fixed_header-2{
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      height: 65vh;
+  }
+  
+  .fixed_header-2 tbody{
+    display:block;
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+    font-size: 14px;
+  }
+  .fixed_header-2 tbody tr {
+      border-bottom: 1px solid rgba(119, 119, 119, 0.22);
+      background: #f3f3f3;
+  }
+  .fixed_header-2 thead tr {
+     display: block;
+  }
+  
+  .fixed_header-2 thead {
+      background: #25b0ba;
+      color:#fff;
+  }
+  
+  .fixed_header-2 th, .fixed_header-2 td {
+    padding: 5px;
+    text-align: left;
+    min-width: 180px;
+  }
 
   /* ===== fixed_header-1 ====== */
   .fixed_header-1{
@@ -1205,65 +1240,81 @@ body {
 
 
     #node-modal-background-3 th:nth-child(1){
-        min-width: 70px;
+        /* min-width: 70px; */
+        width: 2%;
     }
 
     #node-modal-background-3 td:nth-child(1){
-        min-width: 70px;
+        /* min-width: 70px; */
+        width: 2%;
     }
 
     #node-modal-background-3 th:nth-child(2){
-        min-width: 280px;
+        /* min-width: 280px; */
+        width: 20%;
     }
 
     #node-modal-background-3 td:nth-child(2){
-        min-width: 280px;
+        /* min-width: 280px; */
+        width: 20%;
     }
 
     #node-modal-background-3 th:nth-child(3){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 td:nth-child(3){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 th:nth-child(4){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 td:nth-child(4){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 th:nth-child(5){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 td:nth-child(5){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 th:nth-child(6){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 td:nth-child(6){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
     #node-modal-background-3 th:nth-child(7){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
 
     #node-modal-background-3 td:nth-child(7){
-        min-width: 140px;
+        /* min-width: 140px; */
+        width: 10%;
     }
     #node-modal-background-3 th:nth-child(8){
-        min-width: 300px;
+        /* min-width: 300px; */
+        width: 25%;
     }
 
     #node-modal-background-3 td:nth-child(8){
-        min-width: 300px;
+        /* min-width: 300px; */
+        width: 25%;
     }
 
     #node-modal-background-3 th , #node-modal-background th{
@@ -1315,7 +1366,8 @@ body {
         flex-wrap: wrap; 
         gap: 10px;
         justify-content: flex-end;
-        margin: auto;
+        /* margin: auto; */
+        max-width: 95vw;
     }
 
 
