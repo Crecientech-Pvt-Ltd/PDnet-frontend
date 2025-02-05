@@ -733,6 +733,10 @@ body {
     color: #fff;
 }
 
+.fixed tbody {
+    font-size: 14px;
+}
+
 .fixed_header thead  tr {
     display: block;
     /* width: 100%; */
